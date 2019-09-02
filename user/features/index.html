@@ -10,7 +10,10 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 
 <!-- OneTrust Cookies Consent Notice start -->
-<script src="https://optanon.blob.core.windows.net/consent/a14b53db-7715-45da-be81-7fd0cafc385d.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+(function(w,d,s){if(w.location.protocol!="file:"){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);
+j.async=true;j.src="https://optanon.blob.core.windows.net/consent/a14b53db-7715-45da-be81-7fd0cafc385d.js";
+j.charset="UTF-8";f.parentNode.insertBefore(j,f);}})(window,document,"script");</script>
 <!-- OneTrust Cookies Consent Notice end -->
 
 <!-- Google Tag Manager -->
@@ -64,7 +67,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="small-12 column">
 <a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
-C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg></a>
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
 <div class="title"><a href="../../.."><img src="../../images/cloudstate-horizontal-white.svg" alt="CloudState"/></a></div>
 </div>
 </header>
@@ -114,8 +118,49 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#overview" name="overview" class="anchor"><span class="anchor-link"></span></a>Overview</h1>
-<p>Provide a high level overview of CloudState, the concepts, how the proxy communicates with the user function, manages state, associates commands with entities via entity keys, etc.</p>
-<p>A general glossary of terms should be introduced, eg, what&rsquo;s a command, entity keys, etc.</p>
+<h2><a href="#high-level-concepts" name="high-level-concepts" class="anchor"><span class="anchor-link"></span></a>High level concepts</h2>
+<h3><a href="#inversion-of-state-management" name="inversion-of-state-management" class="anchor"><span class="anchor-link"></span></a>Inversion of state management</h3>
+<p>In a traditional n-tier architecture, one tier (an application tier) will invoke another tier (a database tier) to retrieve and manipulate its state. This architectural approach has some challenges that grate with the serverless philosophy:</p>
+<ul>
+  <li>The application must be aware of the location of the datastore, what technology is being used, how to talk to it etc.</li>
+  <li>The application is responsible for handling errors associated with managing state, both infrastructure level failures, as well as domain level errors such as concurrent updates and transactions.</li>
+</ul>
+<p>CloudState inverts this model. The application code does not call out to the state management system, the state management system calls out to the application code. How to access the data, what technology is being used, etc, becomes 100% the domain of the state management system. Data access errors also become the domain of the state management system - user code never has to concern itself with that. Transactional concerns, such as managing concurrent updates, caching, sharding, routing all become a concern of the state management system, not the user code.</p>
+<p>In moving state management concerns out of the domain of user code and into the domain of the infrastructure, we can simplify the code that users need to write, allowing more to be automated, and allowing more in depth monitoring to be achieved out of the box.</p>
+<p>To put it another way, when inverting state management, application code does not talk to the database, it&rsquo;s more correct to think of it as the database (or rather, the state management system) talks to the application code. The application code does not make a connection or any calls to the database, the state management system connects to the application code as necessary. The application code does not issue queries for the state it needs, the state management system passes state to the application code as needed to handle commands.</p>
+<h2><a href="#glossary-of-terms" name="glossary-of-terms" class="anchor"><span class="anchor-link"></span></a>Glossary of terms</h2>
+<p>The following diagram illustrates how the different components of a CloudState system fit together.</p>
+<p><img src="overview.svg" alt="Diagram showing how different CloudState concepts fit together" /></p>
+<h3><a href="#stateful-service" name="stateful-service" class="anchor"><span class="anchor-link"></span></a>Stateful service</h3>
+<p>A stateful service is a deployable unit. It is represented in Kubernetes as a <code>StatefulService</code> resource. It contains a <a href="index.html#user-function">User function</a>, and may reference a <a href="index.html#stateful-store">Stateful store</a>. When the CloudState operator handles it, it will transform it to a Kubernetes Deployment resource with an associated Kubernetes Service for accessing it. The deployment will be injected with the CloudState <a href="index.html#proxy">Proxy</a>. </p>
+<h3><a href="#stateful-store" name="stateful-store" class="anchor"><span class="anchor-link"></span></a>Stateful store</h3>
+<p>A stateful store is an abstraction over a datastore, typically a database. It is represented in Kubernetes as a <code>StatefulStore</code> resource. A single store may be used by multiple <a href="index.html#stateful-service">Stateful services</a> to store their data, but a stateful service may not necessarily have any store configured - if the stateful service does not have any durable state then it doesn&rsquo;t need a stateful store.</p>
+<h3><a href="#user-function" name="user-function" class="anchor"><span class="anchor-link"></span></a>User function</h3>
+<p>A user function is the code that the user writes, packaged as a Docker image, and deployed as a <a href="index.html#stateful-service">Stateful service</a>. The user function exposes a gRPC interface that speaks the CloudState <a href="index.html#protocol">Protocol</a>. The injected CloudState <a href="index.html#proxy">Proxy</a> speaks to the user function using this protocol. While the user function does implement this protocol, this implementation is not generally provided by end user developers themselves, rather, a CloudState <a href="index.html#support-library">Support library</a> is used, specific to the language that the user function is implemented in, to implement the protocol, providing a language specific idiomatic API for developers to code to.</p>
+<h3><a href="#protocol" name="protocol" class="anchor"><span class="anchor-link"></span></a>Protocol</h3>
+<p>The CloudState protocol is an open specification of a protocol for CloudState state management proxies to speak to CloudState user functions. The CloudState project itself provides a <a href="index.html#reference-implementation">Reference implementation</a> of this protocol. The protocol is built on and specified using gRPC, and provides support for multiple different <a href="index.html#entity-type">Entity types</a>. CloudState provides a TCK that can be used to verify any permutation of <a href="index.html#proxy">Proxy</a> and <a href="index.html#support-library">Support Library</a> available.</p>
+<h3><a href="#proxy" name="proxy" class="anchor"><span class="anchor-link"></span></a>Proxy</h3>
+<p>The CloudState proxy is injected as a sidecar into the deployment of each <a href="index.html#stateful-service">Stateful service</a>. It is responsible for state management, and exposing the <a href="index.html#entity-service">Entity service&rsquo;s</a> implemented by the use <a href="index.html#user-function">User function</a> as both gRPC and REST services to the rest of the system, translating the incoming calls to <a href="index.html#command">Commands</a> that are sent to the user function using the CloudState <a href="index.html#protocol">Protocol</a>. The proxy will typically form a cluster with other nodes in the same stateful service, allowing advanced state management features such as sharding, replication and addressed communication between nodes of a single stateful service.</p>
+<h3><a href="#reference-implementation" name="reference-implementation" class="anchor"><span class="anchor-link"></span></a>Reference implementation</h3>
+<p>The CloudState reference implementation implements the CloudState <a href="index.html#protocol">Protocol</a>. It is implemented using <a href="https://akka.io">Akka</a>, taking advantage of Akka&rsquo;s cluster features to provide scalable and resilient implementations of CloudState&rsquo;s stateful features.</p>
+<h3><a href="#support-library" name="support-library" class="anchor"><span class="anchor-link"></span></a>Support library</h3>
+<p>While <a href="index.html#user-function">User functions</a> can be implemented simply by implementing the gRPC interfaces in the CloudState <a href="index.html#protocol">Protocol</a>, this protocol is somewhat low level, and not particularly well suited for expressing the business logic that typically will reside in a user function. Instead, developers are encouraged to use a CloudState support library for their language of choice, if available.</p>
+<h3><a href="#command" name="command" class="anchor"><span class="anchor-link"></span></a>Command</h3>
+<p>A command is a message received by user function. Commands may come from outside of the <a href="index.html#stateful-service">Stateful service</a>, perhaps from other stateful services, other non CloudState services, or the outside world, or they may come from within the service, invoked as a side effect or to forward command handling from another command.</p>
+<h3><a href="#entity" name="entity" class="anchor"><span class="anchor-link"></span></a>Entity</h3>
+<p>A <a href="index.html#user-function">User function</a> implements one or more entities. An entity is conceptually equivalent to a class, or a type of state. An entity will have multiple <a href="index.html#entity-instance">instances</a> of it which can handle commands. For example, a user function may implement a chat room entity, encompassing the logic associated with chat rooms, and a particular chat room may be an instance of that entity, containing a list of the users currently in the room and a history of the messages sent to it. Each entity has a particular <a href="index.html#entity-type">Entity type</a>, which defines how the entities state is persisted, shared, and what its capabilities are.</p>
+<h4><a href="#entity-instance" name="entity-instance" class="anchor"><span class="anchor-link"></span></a>Entity instance</h4>
+<p>An instance of an <a href="index.html#entity">Entity</a>. Entity instances are identified by an <a href="index.html#entity-key">Entity key</a>, which is unique to a given entity. An entity holds state in the <a href="index.html#user-function">User function</a>, and depending on <a href="index.html#entity-type">Entity type</a> this state is held within the context of a gRPC stream. When a command for a particular entity instance is received, the <a href="index.html#proxy">Proxy</a> will make a new streamed gRPC call for that entity instance to the <a href="index.html#user-function">User function</a>. All subsequent commands received for that entity instance will be sent through that streamed call.</p>
+<h4><a href="#entity-service" name="entity-service" class="anchor"><span class="anchor-link"></span></a>Entity service</h4>
+<p>An entity service is a gRPC service that allows interacting with an <a href="index.html#entity">Entity</a>. The <a href="index.html#proxy">Proxy</a> makes this service available for other Kubernetes services and ingreses to consume, while the <a href="index.html#user-function">User function</a> provides the implementation of it. Note that the service is not implemented directly, by the user function like a normal gRPC service, rather, it is implemented through the CloudState <a href="index.html#protocol">Protocol</a>, which enriches the incoming and outgoing gRPC messages with state management capabilities, such as the ability to receive and update state.</p>
+<h4><a href="#entity-type" name="entity-type" class="anchor"><span class="anchor-link"></span></a>Entity type</h4>
+<p>The type of state management that an <a href="index.html#entity">Entity</a> uses. Available types include <a href="index.html#event-sourced">Event sourced</a> and <a href="index.html#conflict-free-replicated-data-type">Conflict-free replicated data type</a>. Each type has its own sub protocol as part of the CloudState <a href="index.html#protocol">Protocol</a> that it uses for state management, to convey state and updates specific to that type.</p>
+<h4><a href="#entity-key" name="entity-key" class="anchor"><span class="anchor-link"></span></a>Entity key</h4>
+<p>A key used to identify instances of an <a href="index.html#entity">Entity</a>. All <a href="index.html#command">Commands</a> must contain the entity key so that the command can be routed to the right instance of the entity that the command is from. The gRPC descriptor for the <a href="index.html#entity-service">Entity service</a> annotates the incoming message types for the entity to indicate which field(s) contain the entity key.</p>
+<h3><a href="#event-sourced" name="event-sourced" class="anchor"><span class="anchor-link"></span></a>Event sourced</h3>
+<p>A type of <a href="index.html#entity">Entity</a> that stores its state using a journal of events, and restores its state by replaying that journal. These are discussed in more detail in <a href="eventsourced.html">Event sourcing</a>.</p>
+<h3><a href="#conflict-free-replicated-data-type" name="conflict-free-replicated-data-type" class="anchor"><span class="anchor-link"></span></a>Conflict-free replicated data type</h3>
+<p>A type of <a href="index.html#entity">Entity</a> that stores its state using a Conflict-free Replicated Data Type (CRDT), which is replicated across different nodes of the service. These are discussed in more detail in <a href="crdts.html">Conflict-free Replicated Data Types</a>.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/features/index.md">here</a>.
 </div>
@@ -125,6 +170,20 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../user/features/index.html#overview" class="header">Overview</a>
+  <ul>
+    <li><a href="../../user/features/index.html#high-level-concepts" class="header">High level concepts</a></li>
+    <li><a href="../../user/features/index.html#glossary-of-terms" class="header">Glossary of terms</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
