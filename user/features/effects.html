@@ -119,12 +119,15 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#forwarding-and-effects" name="forwarding-and-effects" class="anchor"><span class="anchor-link"></span></a>Forwarding and effects</h1>
-<ul>
-  <li>Explain how commands can cause effects on other entities served in the same service.</li>
-  <li>Explain how forwards work</li>
-  <li>Explain how effects work</li>
-  <li>Explain the difference between sync/async effects</li>
-</ul>
+<p>A command may only act on one entity at a time. Sometimes however, you would like to update multiple entities in a single command. An example of this might be wanting to publish a message to a topic entity after an event sourced entity processes a command, to inform any watchers of that entity.</p>
+<h2><a href="#forwarding-control-to-another-entity" name="forwarding-control-to-another-entity" class="anchor"><span class="anchor-link"></span></a>Forwarding control to another entity</h2>
+<p>An entity may, rather than sending a reply to a command, forward it to another entity. This is done by sending a forward message back to the proxy, instructing the proxy which call on which entity should be invoked, and passing the message to invoke it with.</p>
+<p>The command won&rsquo;t be forwarded until any state actions request by the command handler have successfully completed. It is the responsibility of the forwarded action to return a reply that matches the type of the original command handler. Forwards can be chained arbitrarily long.</p>
+<h2><a href="#emitting-effects-on-another-entity" name="emitting-effects-on-another-entity" class="anchor"><span class="anchor-link"></span></a>Emitting effects on another entity</h2>
+<p>An entity may also emit one or more effects. An effect is something whose result has no impact on the result of the current command - if it fails, the current command still succeeds. The result of the effect is therefore ignored. Effects are only performed after the successful completion of any state actions requested by the command handler.</p>
+<p>Effects may be declared as synchronous or asynchronous. Asynchronous commands are fired and forgotten - command processing continues while the command is being asynchronously processed. Meanwhile, synchronous commands are processed synchronously, one at a time, and the final result of the command handler, either a reply or a forward, is not sent until all synchronous commands are completed.</p>
+<h2><a href="#transactional-concerns" name="transactional-concerns" class="anchor"><span class="anchor-link"></span></a>Transactional concerns</h2>
+<p>It&rsquo;s important to note that forwarded commands, and commands emitted as side effects, are not transactionally completed. If the user function or store fails while a forwarded command is executing, the original command that triggered it will not be rolled back. Hence, forwarding and effects should not be used to update multiple entities at once if partial updates is a problem. In such cases, it&rsquo;s best to initiate commands from an event log consumer (future CloudState functionality), which can guarantee that a sequence of operations will run through to completion.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/features/effects.md">here</a>.
 </div>
@@ -134,6 +137,21 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../user/features/effects.html#forwarding-and-effects" class="header">Forwarding and effects</a>
+  <ul>
+    <li><a href="../../user/features/effects.html#forwarding-control-to-another-entity" class="header">Forwarding control to another entity</a></li>
+    <li><a href="../../user/features/effects.html#emitting-effects-on-another-entity" class="header">Emitting effects on another entity</a></li>
+    <li><a href="../../user/features/effects.html#transactional-concerns" class="header">Transactional concerns</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 

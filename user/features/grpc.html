@@ -119,11 +119,51 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#grpc-descriptors" name="grpc-descriptors" class="anchor"><span class="anchor-link"></span></a>gRPC descriptors</h1>
-<ul>
-  <li>Explain how to write a CloudState gRPC service descriptor.</li>
-  <li>Explain how to use the <code>entity_key</code> annotation</li>
-  <li>Explain how to use the HTTP annotations for exposing HTTP services.</li>
-</ul>
+<p>CloudState entities specify their interfaces using <a href="https://grpc.io">gRPC</a> descriptors. Here is an example descriptor:</p>
+<pre class="prettyprint"><code class="language-proto">import &quot;google/protobuf/empty.proto&quot;;
+import &quot;cloudstate/entity_key.proto&quot;;
+
+package example.shoppingcart;
+
+service ShoppingCart {
+    rpc AddItem(AddLineItem) returns (google.protobuf.Empty);
+    rpc RemoveItem(RemoveLineItem) returns (google.protobuf.Empty);
+    rpc GetCart(GetShoppingCart) returns (Cart);
+}
+
+message AddLineItem {
+    string user_id = 1 [(.cloudstate.entity_key) = true];
+    string product_id = 2;
+    string name = 3;
+    int32 quantity = 4;
+}
+
+message RemoveLineItem {
+    string user_id = 1 [(.cloudstate.entity_key) = true];
+    string product_id = 2;
+}
+
+message GetShoppingCart {
+    string user_id = 1 [(.cloudstate.entity_key) = true];
+}
+
+message LineItem {
+    string product_id = 1;
+    string name = 2;
+    int32 quantity = 3;
+}
+
+message Cart {
+    repeated LineItem items = 1;
+}
+</code></pre>
+<p>This descriptor provides a shopping cart entity. It supports three different commands, <code>AddItem</code>, <code>RemoveItem</code> and <code>GetCart</code>.</p>
+<h2><a href="#specifying-the-entity-key" name="specifying-the-entity-key" class="anchor"><span class="anchor-link"></span></a>Specifying the entity key</h2>
+<p>The most important thing to note in the above descriptor is the entity key annotations. Each message that is used as the input of an rpc command has one - this is requirement of CloudState, all inbound command messages must contain an entity key.</p>
+<p>The entity key is used by CloudState to know which instance of an entity a command is for. In the above example, the entity key used is the <code>user_id</code>. This means, there will be one shopping cart entity for each <code>user_id</code> in the system. When a command is received for a given entity key, CloudState will establish a gRPC streamed call to the user function using that entity&rsquo;s type&rsquo;s protocol if one isn&rsquo;t already established, and any commands received for entity key will be sent through that call.</p>
+<p>CloudState entity keys must be strings. When a non string type is specified as the entity key, it is converted to a string in a proxy specific manner. It&rsquo;s recommended therefore, for maximum portability, that only strings are used as entity keys. If more than one field is specified as an entity key, the fields are concatenated together in a proxy specific manner.</p>
+<h2><a href="#transcoding-http" name="transcoding-http" class="anchor"><span class="anchor-link"></span></a>Transcoding HTTP</h2>
+<p>CloudState proxies support transcoding gRPC to HTTP/JSON, using the Google transcoding annotations described <a href="https://cloud.google.com/endpoints/docs/grpc/transcoding">here</a>. Using this, you can consume your entities gRPC interfaces using HTTP/JSON.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/features/grpc.md">here</a>.
 </div>
@@ -133,6 +173,20 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../user/features/grpc.html#grpc-descriptors" class="header">gRPC descriptors</a>
+  <ul>
+    <li><a href="../../user/features/grpc.html#specifying-the-entity-key" class="header">Specifying the entity key</a></li>
+    <li><a href="../../user/features/grpc.html#transcoding-http" class="header">Transcoding HTTP</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
