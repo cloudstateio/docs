@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Deploying a stateful service · CloudState</title>
+<title>Language support · CloudState</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='CloudState Documentation'/>
-<link rel="canonical" href="https://cloudstate.iouser/deployment/deploying.html"/>
+<link rel="canonical" href="https://cloudstate.iodeveloper/language-support/index.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 
 <!-- OneTrust Cookies Consent Notice start -->
@@ -57,7 +57,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li><a href="../../spec/index.html" class="page">Protocol Specification</a></li>
   <li><a href="../../developer/index.html" class="page">Content for developers of CloudState</a>
   <ul>
-    <li><a href="../../developer/language-support/index.html" class="page">Language support</a></li>
+    <li><a href="../../developer/language-support/index.html" class="active page">Language support</a></li>
   </ul></li>
 </ul>
 </div>
@@ -97,7 +97,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../../spec/index.html" class="page">Protocol Specification</a></li>
   <li><a href="../../developer/index.html" class="page">Content for developers of CloudState</a>
   <ul>
-    <li><a href="../../developer/language-support/index.html" class="page">Language support</a></li>
+    <li><a href="../../developer/language-support/index.html" class="active page">Language support</a></li>
   </ul></li>
 </ul>
 </div>
@@ -114,9 +114,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../../index.html">CloudState</a></li>
-  <li><a href="../../user/index.html">Using CloudState</a></li>
-  <li><a href="../../user/deployment/index.html">Deploying applications</a></li>
-  <li>Deploying a stateful service</li>
+  <li><a href="../../developer/index.html">Content for developers of CloudState</a></li>
+  <li>Language support</li>
 </ul>
 </div>
 </div>
@@ -124,20 +123,42 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#deploying-a-stateful-service" name="deploying-a-stateful-service" class="anchor"><span class="anchor-link"></span></a>Deploying a stateful service</h1>
+<h1><a href="#language-support" name="language-support" class="anchor"><span class="anchor-link"></span></a>Language support</h1>
+<p>CloudState is a polyglot platform for developers. This is achieved by having a gRPC based protocol between the Proxy and the User function. Since every language wants to be able to offer a language-idiomatic Application Programming Interface (API) CloudState offers Support libraries for the following languages:</p>
+<h2><a href="#current-language-support-libraries" name="current-language-support-libraries" class="anchor"><span class="anchor-link"></span></a>Current language support libraries</h2>
 <ul>
-  <li>Explain the StatefulService resource</li>
-  <li>Explain what the operator does</li>
+  <li>Java</li>
+  <li>JavaScript</li>
 </ul>
+<h2><a href="#creating-language-support-libraries" name="creating-language-support-libraries" class="anchor"><span class="anchor-link"></span></a>Creating language support libraries</h2>
+<p>In order to implement a Support Library for a language, the CloudState protocol needs to be implemented as a gRPC server which is started when a Stateful Service is started. This gRPC server will then relay state and commands to the underlying User function.</p>
+<p>When implementing a Support Library, the implementation can be verified using the TCK. In order to run the TCK, one must create an implementation of the Shopping Cart application using the newly created Support Library which is to be verified.</p>
+<p>After that, the TCK <a href="https://github.com/cloudstateio/cloudstate/blob/master/tck/src/it/resources/application.conf">application.conf</a> needs to be modified with a new section to instruct what combination of Proxy implementation will be verified against which implementation of the Shopping Cart application.</p>
+<p>Then in order to run the TCK you need to instruct sbt to run the TCK, but make sure that you have built the Shopping Cart application first.</p>
+<pre class="prettyprint"><code class="language-bash">// This means: &quot;sbt please run the integration tests for the TCK project&quot;
+sbt tck/it:test
+</code></pre>
+<p>The output of that indicates if the combination of Proxy and User Support libraries yield the expected results.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/deployment/deploying.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/developer/language-support/index.md">here</a>.
 </div>
 
-<div class="nav-next">
-<p><strong>Next:</strong> <a href="../../user/deployment/stores/index.html">Stateful stores</a></p>
-</div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../developer/language-support/index.html#language-support" class="header">Language support</a>
+  <ul>
+    <li><a href="../../developer/language-support/index.html#current-language-support-libraries" class="header">Current language support libraries</a></li>
+    <li><a href="../../developer/language-support/index.html#creating-language-support-libraries" class="header">Creating language support libraries</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
