@@ -126,12 +126,14 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#grpc-descriptors" name="grpc-descriptors" class="anchor"><span class="anchor-link"></span></a>gRPC descriptors</h1>
 <p>CloudState entities specify their interfaces using <a href="https://grpc.io">gRPC</a> descriptors. Here is an example descriptor:</p>
-<pre class="prettyprint"><code class="language-proto">import &quot;google/protobuf/empty.proto&quot;;
+<pre class="prettyprint"><code class="language-proto">syntax = &quot;proto3&quot;;
+
+import &quot;google/protobuf/empty.proto&quot;;
 import &quot;cloudstate/entity_key.proto&quot;;
 
 package example.shoppingcart;
 
-service ShoppingCart {
+service ShoppingCartService {
     rpc AddItem(AddLineItem) returns (google.protobuf.Empty);
     rpc RemoveItem(RemoveLineItem) returns (google.protobuf.Empty);
     rpc GetCart(GetShoppingCart) returns (Cart);
