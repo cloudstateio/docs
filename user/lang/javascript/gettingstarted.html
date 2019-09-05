@@ -150,7 +150,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 }
 </code></pre>
 <p>Multiple protobuf files can be passed, in addition, any arguments accepted by <code>protoc</code> can be passed, for example, if you are importing files from other directories, you can add those directories as an include path by adding <code>-Ipath/to/protobuf/dir</code>.</p>
-<p>By default, the descriptor is written to <code>user-function.desc</code>, if you wish to change this, you can set <code>--descriptor-set-out=my-descriptor.desc</code>. Note that if you output the descriptor to a different path, you will also need to pass that custom path to the constructor of the <code>CloudState</code> class when you got to instantiate it.</p>
+<p>By default, the descriptor is written to <code>user-function.desc</code>, if you wish to change this, you can set <code>--descriptor_set_out=my-descriptor.desc</code>. Note that if you output the descriptor to a different path, you will also need to pass that custom path to the constructor of the <code>CloudState</code> class when you got to instantiate it.</p>
 <h2><a href="#package-json-example" name="package-json-example" class="anchor"><span class="anchor-link"></span></a>package.json example</h2>
 <p>A minimal <code>package.json</code> for a shopping cart example is shown below:</p>
 <pre class="prettyprint"><code class="language-json">{
@@ -169,15 +169,15 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>You can place protobuf files in your project wherever you like, for example, in the root directory, or in a directory named <code>protos</code>. In the <code>package.json</code> above we&rsquo;ve placed the shopping cart application example shown earlier in <a href="../../features/grpc.html">gRPC descriptors</a> in a file in the root folder called <code>shoppingcart.proto</code>.</p>
 <h2><a href="#creating-and-starting-a-server" name="creating-and-starting-a-server" class="anchor"><span class="anchor-link"></span></a>Creating and starting a server</h2>
 <p>There are two ways to create and start a CloudState gRPC server. The first is to create an <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html"><code>Entity</code></a>, and invoke <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html#start"><code>start</code></a> on it. This allows creating a server that serves a single entity, with the default options. We&rsquo;ll look at this more in the subsequent pages. Alternatively, you can use the <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html"><code>CloudState</code></a> class, add one or more entities to it, and then invoke <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html#start"><code>start</code></a>, like so:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/gettingstarted/index.js#L5-L10" target="_blank" title="Go to snippet source"></a><code class="language-js">const cloudstate = require(&quot;cloudstate&quot;);
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/gettingstarted/index.js#L9-L14" target="_blank" title="Go to snippet source"></a><code class="language-js">const cloudstate = require(&quot;cloudstate&quot;);
 const shoppingcart = require(&quot;./shoppingcart&quot;);
 
 const server = new cloudstate.CloudState();
 server.addEntity(shoppingcart);
 server.start();</code></pre>
 <p>If you created your protobuf file descriptor set at a different location to the default of <code>user-function.desc</code>, you can configure that here:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/gettingstarted/index.js#L18-L20" target="_blank" title="Go to snippet source"></a><code class="language-js">const server = new cloudstate.CloudState({
-   descriptorSetPath: &quot;my-descriptor.desc&quot;
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/gettingstarted/index.js#L24-L26" target="_blank" title="Go to snippet source"></a><code class="language-js">const server = new cloudstate.CloudState({
+    descriptorSetPath: &quot;my-descriptor.desc&quot;
 });</code></pre>
 <p>For the full range of options available on the <code>CloudState</code> class, see <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html#~options"><code>CloudState~options</code></a>.</p>
 <div class="source-github">
