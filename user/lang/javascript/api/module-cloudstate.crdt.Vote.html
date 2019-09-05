@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Class: Flag</title>
+	<title>CloudState Class: Vote</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,19 +86,19 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Flag</h1>
+	<h1 class="page-title">Class: Vote</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a><a href="cloudstate.crdt.html">.crdt</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a><a href="module-cloudstate.crdt.html">.crdt</a>.</span>
         
-        Flag
+        Vote
         </h2>
         
-            <div class="class-description"><p>A flag CRDT.</p>
-<p>A flag starts out as being false (disabled), and then can be set to true (enabled). Once set to true, it stays true.</p></div>
+            <div class="class-description"><p>A Vote CRDT.</p>
+<p>A Vote CRDT allows all nodes an a cluster to vote on a condition, such as whether a user is online.</p></div>
         
     
 </header>
@@ -103,7 +110,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Flag"><span class="type-signature"></span>new Flag()</h4>
+    <h4 class="name" id="Vote"><span class="type-signature"></span>new Vote()</h4>
     
     
 </dt>
@@ -132,13 +139,6 @@
 
     
 
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li>
-        
-    </ul></dd>
     
 
     
@@ -184,6 +184,17 @@
     </div>
 
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></li>
+    </ul>
+
+
+    
 
     
 
@@ -199,15 +210,15 @@
         <dl>
             
 <hr>
-<dt class="name" id="value">
-    <h4 id="value"><span class="type-signature">&lt;readonly> </span>value<span class="type-signature"> :boolean</span></h4>
+<dt class="name" id="all">
+    <h4 id="all"><span class="type-signature">&lt;readonly> </span>all<span class="type-signature"> :boolean</span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Whether this flag is enabled or not.</p>
+        <p>Whether all of nodes have voted for this condition.</p>
     </div>
     
 
@@ -267,33 +278,32 @@
     
 </dd>
 
-        </dl>
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        <dl>
+        
             
 <hr>
-<dt>
-    <h4 class="name" id="enable"><span class="type-signature"></span>enable()</h4>
-    
+<dt class="name" id="atLeastOne">
+    <h4 id="atLeastOne"><span class="type-signature">&lt;readonly> </span>atLeastOne<span class="type-signature"> :boolean</span></h4>
+
     
 </dt>
 <dd>
-
     
     <div class="description">
-        <p>Enable this flag.</p>
+        <p>Whether at least one node has voted for this condition.</p>
     </div>
     
 
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
 
-    
 
-    
+
+            </li>
+        </ul>
     
 
     
@@ -337,45 +347,296 @@
 
 
     
+</dd>
 
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>This flag.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
         
-<span class="param-type"><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></span>
+            
+<hr>
+<dt class="name" id="majority">
+    <h4 id="majority"><span class="type-signature">&lt;readonly> </span>majority<span class="type-signature"> :boolean</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Whether a majority of nodes have voted for this condition.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
 
 
 
-    </dd>
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
 </dl>
 
 
+    
+</dd>
+
         
+            
+<hr>
+<dt class="name" id="totalVoters">
+    <h4 id="totalVoters"><span class="type-signature">&lt;readonly> </span>totalVoters<span class="type-signature"> :number</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The total number of nodes that have voted.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="vote">
+    <h4 id="vote"><span class="type-signature"></span>vote<span class="type-signature"> :boolean</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The current nodes vote.</p>
+<p>Setting this will update the current nodes vote accordingly.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="votesFor">
+    <h4 id="votesFor"><span class="type-signature">&lt;readonly> </span>votesFor<span class="type-signature"> :number</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The number of nodes that have voted for this condition.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
 
     
 </dd>
 
         </dl>
+    
+
     
 
     

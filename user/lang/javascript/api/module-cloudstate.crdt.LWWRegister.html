@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Interface: StateChangedContext</title>
+	<title>CloudState Class: LWWRegister</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,16 +86,21 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Interface: StateChangedContext</h1>
+	<h1 class="page-title">Class: LWWRegister</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a><a href="cloudstate.crdt.html">.crdt</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a><a href="module-cloudstate.crdt.html">.crdt</a>.</span>
         
-        StateChangedContext
+        LWWRegister
         </h2>
+        
+            <div class="class-description"><p>A Last-Write-Wins Register CRDT.</p>
+<p>A last write wins register uses a clock to determine which of two concurrent updates should win. The clock is
+represented as a number. The default clock uses the proxies system time, custom clocks can supply a custom number
+to be used. If two clock values are equal, the write from the node with the lowest address wins.</p></div>
         
     
 </header>
@@ -98,10 +110,170 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Context passed to <a href="cloudstate.crdt.CrdtCommandContext.html#onStateChange"><code>cloudstate.crdt.CrdtCommandContext#onStateChange</code></a> handlers.</p></div>
+<hr>
+<dt>
+    <h4 class="name" id="LWWRegister"><span class="type-signature"></span>new LWWRegister(value [, clock] [, customClockValue])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
         
 
         
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>A value to hold in the register.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>clock</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.crdt.html#.Clock">module:cloudstate.crdt.Clock</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    Clocks.DEFAULT
+                
+                </td>
+            
+
+            <td class="description last"><p>The clock to use.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>customClockValue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>The custom clock value, if using a custom clock.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
 <dl class="details">
     
 
@@ -115,6 +287,13 @@
 
     
 
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></li>
+        
+    </ul></dd>
     
 
     
@@ -141,20 +320,23 @@
 </dl>
 
 
-        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
     
     </div>
-
-    
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li>
-    </ul>
-
 
     
 
@@ -172,15 +354,16 @@
         <dl>
             
 <hr>
-<dt class="name" id="state">
-    <h4 id="state"><span class="type-signature">&lt;readonly> </span>state<span class="type-signature"> :<a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></span></h4>
+<dt class="name" id="value">
+    <h4 id="value"><span class="type-signature"></span>value<span class="type-signature"> :<a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The CRDT.</p>
+        <p>The value of this register.</p>
+<p>Setting it will cause it to be set with the default clock.</p>
     </div>
     
 
@@ -189,7 +372,7 @@
         <ul>
             <li>
                 
-<span class="param-type"><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></span>
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
 
 
 
@@ -250,7 +433,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="effect"><span class="type-signature"></span>effect(method, message, synchronous)</h4>
+    <h4 class="name" id="setWithClock"><span class="type-signature"></span>setWithClock(value [, clock] [, customClockValue])</h4>
     
     
 </dt>
@@ -258,7 +441,7 @@
 
     
     <div class="description">
-        <p>Emit an effect after processing this command.</p>
+        <p>Set the the value using a custom clock.</p>
     </div>
     
 
@@ -281,7 +464,11 @@
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -293,31 +480,49 @@
 
         <tr>
             
-                <td class="name"><code>method</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
+                
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
+
+
+
+            
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last"><p>The entity service method to invoke.</p></td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The value to set.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>clock</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type"><a href="module-cloudstate.crdt.html#.Clock">module:cloudstate.crdt.Clock</a></span>
 
 
 
@@ -325,23 +530,39 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last"><p>The message to send to that service.</p></td>
+            
+                <td class="default">
+                
+                    Clocks.DEFAULT
+                
+                </td>
+            
+
+            <td class="description last"><p>The clock.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>synchronous</code></td>
+                <td class="name"><code>customClockValue</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">number</span>
 
 
 
@@ -349,10 +570,26 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last"><p>Whether the effect should be execute synchronously or not.</p></td>
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>Ignored if a custom clock isn't specified.</p></td>
         </tr>
 
     
@@ -369,392 +606,6 @@
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="cloudstate.EffectContext.html#effect">cloudstate.EffectContext#effect</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="end"><span class="type-signature"></span>end()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>End this stream.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="fail"><span class="type-signature"></span>fail(msg)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Fail handling this command.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>msg</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The failure message.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="cloudstate.EffectContext.html#fail">cloudstate.EffectContext#fail</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Throws:</h5>
-    
-            
-
-    <div class="param-desc">
-    
-        <p>An error that captures the failure message. Note that even if you catch the error thrown by this
-method, the command will still be failed with the given message.</p>
-    
-    </div>
-
-
-        
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="thenForward"><span class="type-signature"></span>thenForward(method, message)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Forward this command to another entity service call.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>method</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The entity service method to invoke.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The message to send to that service.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="cloudstate.CommandContext.html#thenForward">cloudstate.CommandContext#thenForward</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     

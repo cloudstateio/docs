@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Class: CloudState</title>
+	<title>CloudState Class: ORSet</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,18 +86,19 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: CloudState</h1>
+	<h1 class="page-title">Class: ORSet</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a>~</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a><a href="module-cloudstate.crdt.html">.crdt</a>.</span>
         
-        CloudState
+        ORSet
         </h2>
         
-            <div class="class-description"><p>A CloudState server.</p></div>
+            <div class="class-description"><p>An Observed-Removed Set CRDT.</p>
+<p>Observed-Removed-Set's are a set of <a href="module-cloudstate.html#.Serializable"><code>module:cloudstate.Serializable</code></a> values. Elements can be added and removed.</p></div>
         
     
 </header>
@@ -102,85 +110,19 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="CloudState"><span class="type-signature"></span>new CloudState( [options])</h4>
+    <h4 class="name" id="ORSet"><span class="type-signature"></span>new ORSet()</h4>
     
     
 </dt>
 <dd>
 
     
-    <div class="description">
-        <p>Create a new cloudstate server.</p>
-    </div>
-    
 
     
 
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="cloudstate.CloudState.html#~options">cloudstate.CloudState~options</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>The options for this server.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -197,6 +139,13 @@
 
     
 
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></li>
+        
+    </ul></dd>
     
 
     
@@ -252,6 +201,81 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id="size">
+    <h4 id="size"><span class="type-signature">&lt;readonly> </span>size<span class="type-signature"> :number</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The number of elements in this set.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -260,7 +284,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="addEntity"><span class="type-signature"></span>addEntity(entities)</h4>
+    <h4 class="name" id="@@iterator"><span class="type-signature"></span>@@iterator()</h4>
     
     
 </dt>
@@ -268,7 +292,7 @@
 
     
     <div class="description">
-        <p>Add an entity to this server.</p>
+        <p>Create an iterator for this set.</p>
     </div>
     
 
@@ -277,68 +301,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>entities</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="cloudstate.Entity.html">cloudstate.Entity</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>The entities to add.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -395,10 +357,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>This server.</p>
-</div>
-
 
 
 <dl>
@@ -407,7 +365,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></span>
+<span class="param-type">iterator.&lt;<a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a>></span>
 
 
 
@@ -424,7 +382,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="shutdown"><span class="type-signature"></span>shutdown()</h4>
+    <h4 class="name" id="add"><span class="type-signature"></span>add(element)</h4>
     
     
 </dt>
@@ -432,85 +390,7 @@
 
     
     <div class="description">
-        <p>Shutdown this server.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="start"><span class="type-signature"></span>start( [options])</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Start this server.</p>
+        <p>Add an element to this set.</p>
     </div>
     
 
@@ -533,8 +413,6 @@
         <th>Type</th>
 
         
-        <th>Argument</th>
-        
 
         
 
@@ -547,13 +425,13 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>element</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="cloudstate.CloudState.html#~startOptions">cloudstate.CloudState~startOptions</a></span>
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
 
 
 
@@ -561,20 +439,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>The options for starting.</p></td>
+            <td class="description last"><p>The element to add.</p></td>
         </tr>
 
     
@@ -638,7 +506,7 @@
     
             
 <div class="param-desc">
-    <p>The port that was bound to, useful for when a random ephemeral port was requested.</p>
+    <p>This set.</p>
 </div>
 
 
@@ -649,7 +517,541 @@
     </dt>
     <dd>
         
-<span class="param-type">number</span>
+<span class="param-type"><a href="module-cloudstate.crdt.ORSet.html">module:cloudstate.crdt.ORSet</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="clear"><span class="type-signature"></span>clear()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Remove all elements from this set.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>This set.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-cloudstate.crdt.ORSet.html">module:cloudstate.crdt.ORSet</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="delete"><span class="type-signature"></span>delete(element)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Remove an element from this set.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The element to delete.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>This set.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-cloudstate.crdt.ORSet.html">module:cloudstate.crdt.ORSet</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="forEach"><span class="type-signature"></span>forEach(callback)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Execute the given callback for each element.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.crdt.ORSet.html#~forEachCallback">module:cloudstate.crdt.ORSet~forEachCallback</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback to handle each element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="has"><span class="type-signature"></span>has(element)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Does this set contain the given element?</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The element to check.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>True if the set contains the element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
 
 
 
@@ -671,194 +1073,29 @@
         <dl>
                 
 <hr>
-<dt class="name" id="~options">
-    <h4 id="~options">options</h4>
-
+<dt>
+    <h4 class="name" id="~forEachCallback"><span class="type-signature"></span>forEachCallback(element)</h4>
+    
     
 </dt>
 <dd>
-    
 
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>serviceName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    &lt;name from package.json>
-                
-                </td>
-            
-
-            <td class="description last"><p>The name of this service.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>serviceVersion</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    &lt;version from package.json>
-                
-                </td>
-            
-
-            <td class="description last"><p>The version of this service.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="~startOptions">
-    <h4 id="~startOptions">startOptions</h4>
-
-    
-</dt>
-<dd>
     
     <div class="description">
-        <p>Options for starting a server.</p>
+        <p>Callback for handling elements iterated through by <a href="module-cloudstate.crdt.ORSet.html#forEach"><code>module:cloudstate.crdt.ORSet#forEach</code></a>.</p>
     </div>
     
 
     
 
     
-<dl class="details">
+
     
+    
+        <h5>Parameters:</h5>
+        
 
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -868,11 +1105,7 @@
         <th>Type</th>
 
         
-        <th>Argument</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -884,13 +1117,13 @@
 
         <tr>
             
-                <td class="name"><code>bindAddress</code></td>
+                <td class="name"><code>element</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="module-cloudstate.html#.Serializable">module:cloudstate.Serializable</a></span>
 
 
 
@@ -898,69 +1131,20 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    "0.0.0.0"
-                
-                </td>
-            
 
-            <td class="description last"><p>The address to bind to.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>bindPort</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    8080
-                
-                </td>
-            
-
-            <td class="description last"><p>The port to bind to, specify zero for a random ephemeral port.</p></td>
+            <td class="description last"><p>The element.</p></td>
         </tr>
 
     
     </tbody>
 </table>
-</dl>
 
+    
+
+    
+<dl class="details">
     
 
 	
@@ -998,6 +1182,18 @@
 	
 </dl>
 
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 </dd>

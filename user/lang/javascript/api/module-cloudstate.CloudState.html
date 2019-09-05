@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Class: LWWRegister</title>
+	<title>CloudState Class: CloudState</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,21 +86,18 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: LWWRegister</h1>
+	<h1 class="page-title">Class: CloudState</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a><a href="cloudstate.crdt.html">.crdt</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a>~</span>
         
-        LWWRegister
+        CloudState
         </h2>
         
-            <div class="class-description"><p>A Last-Write-Wins Register CRDT.</p>
-<p>A last write wins register uses a clock to determine which of two concurrent updates should win. The clock is
-represented as a number. The default clock uses the proxies system time, custom clocks can supply a custom number
-to be used. If two clock values are equal, the write from the node with the lowest address wins.</p></div>
+            <div class="class-description"><p>A CloudState root server.</p></div>
         
     
 </header>
@@ -105,12 +109,16 @@ to be used. If two clock values are equal, the write from the node with the lowe
         
 <hr>
 <dt>
-    <h4 class="name" id="LWWRegister"><span class="type-signature"></span>new LWWRegister(value [, clock] [, customClockValue])</h4>
+    <h4 class="name" id="CloudState"><span class="type-signature"></span>new CloudState( [options])</h4>
     
     
 </dt>
 <dd>
 
+    
+    <div class="description">
+        <p>Create a new cloudstate server.</p>
+    </div>
     
 
     
@@ -136,8 +144,6 @@ to be used. If two clock values are equal, the write from the node with the lowe
         
 
         
-        <th>Default</th>
-        
 
         <th class="last">Description</th>
     </tr>
@@ -148,49 +154,13 @@ to be used. If two clock values are equal, the write from the node with the lowe
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="cloudstate.html#.Serializable">cloudstate.Serializable</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>A value to hold in the register.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>clock</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="cloudstate.crdt.html#.Clock">cloudstate.crdt.Clock</a></span>
+<span class="param-type"><a href="module-cloudstate.CloudState.html#~options">module:cloudstate.CloudState~options</a></span>
 
 
 
@@ -210,54 +180,8 @@ to be used. If two clock values are equal, the write from the node with the lowe
             
 
             
-                <td class="default">
-                
-                    Clocks.DEFAULT
-                
-                </td>
-            
 
-            <td class="description last"><p>The clock to use.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>customClockValue</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>The custom clock value, if using a custom clock.</p></td>
+            <td class="description last"><p>The options for this server.</p></td>
         </tr>
 
     
@@ -281,13 +205,6 @@ to be used. If two clock values are equal, the write from the node with the lowe
     
 
     
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li>
-        
-    </ul></dd>
-    
 
     
 
@@ -332,6 +249,17 @@ to be used. If two clock values are equal, the write from the node with the lowe
     </div>
 
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="module-cloudstate.Server.html">module:cloudstate.Server</a></li>
+    </ul>
+
+
+    
 
     
 
@@ -341,82 +269,6 @@ to be used. If two clock values are equal, the write from the node with the lowe
 
     
 
-    
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
-<hr>
-<dt class="name" id="value">
-    <h4 id="value"><span class="type-signature"></span>value<span class="type-signature"> :<a href="cloudstate.html#.Serializable">cloudstate.Serializable</a></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The value of this register.</p>
-<p>Setting it will cause it to be set with the default clock.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type"><a href="cloudstate.html#.Serializable">cloudstate.Serializable</a></span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        </dl>
     
 
     
@@ -426,7 +278,7 @@ to be used. If two clock values are equal, the write from the node with the lowe
             
 <hr>
 <dt>
-    <h4 class="name" id="setWithClock"><span class="type-signature"></span>setWithClock(value [, clock] [, customClockValue])</h4>
+    <h4 class="name" id="addEntity"><span class="type-signature"></span>addEntity(entities)</h4>
     
     
 </dt>
@@ -434,7 +286,7 @@ to be used. If two clock values are equal, the write from the node with the lowe
 
     
     <div class="description">
-        <p>Set the the value using a custom clock.</p>
+        <p>Add an entity to this server.</p>
     </div>
     
 
@@ -461,8 +313,6 @@ to be used. If two clock values are equal, the write from the node with the lowe
         
 
         
-        <th>Default</th>
-        
 
         <th class="last">Description</th>
     </tr>
@@ -473,13 +323,13 @@ to be used. If two clock values are equal, the write from the node with the lowe
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>entities</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="cloudstate.html#.Serializable">cloudstate.Serializable</a></span>
+<span class="param-type"><a href="module-cloudstate.Entity.html">module:cloudstate.Entity</a></span>
 
 
 
@@ -493,96 +343,14 @@ to be used. If two clock values are equal, the write from the node with the lowe
                 
 
                 
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>The value to set.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>clock</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="cloudstate.crdt.html#.Clock">cloudstate.crdt.Clock</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
+                    &lt;repeatable><br>
                 
                 </td>
             
 
             
-                <td class="default">
-                
-                    Clocks.DEFAULT
-                
-                </td>
-            
 
-            <td class="description last"><p>The clock.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>customClockValue</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>Ignored if a custom clock isn't specified.</p></td>
+            <td class="description last"><p>The entities to add.</p></td>
         </tr>
 
     
@@ -642,6 +410,291 @@ to be used. If two clock values are equal, the write from the node with the lowe
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>This server.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-cloudstate.CloudState.html">module:cloudstate.CloudState</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="shutdown"><span class="type-signature"></span>shutdown()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Shutdown the server</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.Server.html#shutdown">module:cloudstate.Server#shutdown</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="module-cloudstate.Server.html#shutdown">module:cloudstate.Server#shutdown</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="start"><span class="type-signature"></span>start( [options])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Start this server.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module:cloudstate.CloudState~startOptions</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The options for starting.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="module-cloudstate.Server.html#start">module:cloudstate.Server#start</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The port that was bound to, useful for when a random ephemeral port was requested.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
 
     
 </dd>
@@ -649,6 +702,215 @@ to be used. If two clock values are equal, the write from the node with the lowe
         </dl>
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        <dl>
+                
+<hr>
+<dt class="name" id="~options">
+    <h4 id="~options">options</h4>
+
+    
+</dt>
+<dd>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>serviceName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    &lt;name from package.json>
+                
+                </td>
+            
+
+            <td class="description last"><p>The name of this service.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>serviceVersion</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    &lt;version from package.json>
+                
+                </td>
+            
+
+            <td class="description last"><p>The version of this service.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>descriptorSetPath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "user-function.desc"
+                
+                </td>
+            
+
+            <td class="description last"><p>A path to a compiled Protobuf FileDescriptor set,
+as output by protoc --descriptor_set_out=somefile.desc. This file must contain all of the entity services that
+this user function serves.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+            </dl>
     
 
     

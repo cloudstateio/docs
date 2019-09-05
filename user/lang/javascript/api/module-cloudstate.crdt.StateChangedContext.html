@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Class: PNCounter</title>
+	<title>CloudState Interface: StateChangedContext</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,20 +86,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: PNCounter</h1>
+	<h1 class="page-title">Interface: StateChangedContext</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a><a href="cloudstate.crdt.html">.crdt</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a><a href="module-cloudstate.crdt.html">.crdt</a>.</span>
         
-        PNCounter
+        StateChangedContext
         </h2>
-        
-            <div class="class-description"><p>A Positive-Negative Counter CRDT.</p>
-<p>A counter that can be incremented and decremented.</p>
-<p>The value is stored as a 64-bit signed long, hence values over <code>2^63 - 1</code> and less than <code>2^63</code> can't be represented.</p></div>
         
     
 </header>
@@ -102,24 +105,10 @@
     <div class="container-overview">
     
         
-<hr>
-<dt>
-    <h4 class="name" id="PNCounter"><span class="type-signature"></span>new PNCounter()</h4>
-    
-    
-</dt>
-<dd>
+            <div class="description"><p>Context passed to <a href="module-cloudstate.crdt.CrdtCommandContext.html#onStateChange"><code>module:cloudstate.crdt.CrdtCommandContext#onStateChange</code></a> handlers.</p></div>
+        
 
-    
-
-    
-
-    
-
-    
-    
-
-    
+        
 <dl class="details">
     
 
@@ -133,13 +122,6 @@
 
     
 
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li>
-        
-    </ul></dd>
     
 
     
@@ -166,23 +148,20 @@
 </dl>
 
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
+        
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="module-cloudstate.CommandContext.html">module:cloudstate.CommandContext</a></li>
+    </ul>
+
 
     
 
@@ -200,15 +179,15 @@
         <dl>
             
 <hr>
-<dt class="name" id="longValue">
-    <h4 id="longValue"><span class="type-signature">&lt;readonly> </span>longValue<span class="type-signature"> :Long</span></h4>
+<dt class="name" id="state">
+    <h4 id="state"><span class="type-signature">&lt;readonly> </span>state<span class="type-signature"> :<a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The value as a long.</p>
+        <p>The CRDT.</p>
     </div>
     
 
@@ -217,80 +196,7 @@
         <ul>
             <li>
                 
-<span class="param-type">Long</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="value">
-    <h4 id="value"><span class="type-signature">&lt;readonly> </span>value<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The value as a number. Note that once the value exceeds <code>2^53</code>, this will not be an accurate
-representation of the value. If you expect it to exceed <code>2^53</code>, <a href="cloudstate.crdt.PNCounter.html#longValue"><code>cloudstate.crdt.PNCounter#longValue</code></a>
-should be used instead.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
+<span class="param-type"><a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></span>
 
 
 
@@ -351,7 +257,7 @@ should be used instead.</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="decrement"><span class="type-signature"></span>decrement(decrement)</h4>
+    <h4 class="name" id="effect"><span class="type-signature"></span>effect(method, message, synchronous)</h4>
     
     
 </dt>
@@ -359,7 +265,7 @@ should be used instead.</p>
 
     
     <div class="description">
-        <p>Decrement the counter by the given number.</p>
+        <p>Emit an effect after processing this command.</p>
     </div>
     
 
@@ -394,16 +300,31 @@ should be used instead.</p>
 
         <tr>
             
-                <td class="name"><code>decrement</code></td>
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The entity service method to invoke.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Long</span>
-|
-
-<span class="param-type">number</span>
+<span class="param-type">object</span>
 
 
 
@@ -414,7 +335,31 @@ should be used instead.</p>
 
             
 
-            <td class="description last"><p>The amount to decrement the counter by. If negative, it will be incremented instead.</p></td>
+            <td class="description last"><p>The message to send to that service.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>synchronous</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Whether the effect should be execute synchronously or not.</p></td>
         </tr>
 
     
@@ -432,6 +377,15 @@ should be used instead.</p>
 	
 
 	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.EffectContext.html#effect">module:cloudstate.EffectContext#effect</a>
+			</li>
+		</ul>
+	</dd>
+	
 
     
 
@@ -474,30 +428,6 @@ should be used instead.</p>
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>This counter.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -506,7 +436,7 @@ should be used instead.</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="increment"><span class="type-signature"></span>increment(increment)</h4>
+    <h4 class="name" id="end"><span class="type-signature"></span>end()</h4>
     
     
 </dt>
@@ -514,7 +444,7 @@ should be used instead.</p>
 
     
     <div class="description">
-        <p>Increment the counter by the given number.</p>
+        <p>End this stream.</p>
     </div>
     
 
@@ -523,59 +453,6 @@ should be used instead.</p>
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>increment</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Long</span>
-|
-
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The amount to increment the counter by. If negative, it will be decremented instead.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -629,30 +506,305 @@ should be used instead.</p>
     
 
     
-    <h5>Returns:</h5>
+
     
-            
-<div class="param-desc">
-    <p>This counter.</p>
-</div>
+</dd>
 
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
         
-<span class="param-type"><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></span>
+            
+<hr>
+<dt>
+    <h4 class="name" id="fail"><span class="type-signature"></span>fail(msg)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Fail handling this command.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The failure message.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.EffectContext.html#fail">module:cloudstate.EffectContext#fail</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
-    </dd>
+	
+
+	
+
+	
+
+	
 </dl>
 
 
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        <p>An error that captures the failure message. Note that even if you catch the error thrown by this
+method, the command will still be failed with the given message.</p>
+    
+    </div>
+
+
         
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="thenForward"><span class="type-signature"></span>thenForward(method, message)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Forward this command to another entity service call.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The entity service method to invoke.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The message to send to that service.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.CommandContext.html#thenForward">module:cloudstate.CommandContext#thenForward</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 </dd>

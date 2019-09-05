@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Interface: Entity</title>
+	<title>CloudState Class: GCounter</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,16 +86,20 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Interface: Entity</h1>
+	<h1 class="page-title">Class: GCounter</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a><a href="module-cloudstate.crdt.html">.crdt</a>.</span>
         
-        Entity
+        GCounter
         </h2>
+        
+            <div class="class-description"><p>A Grow-only counter CRDT.</p>
+<p>As the name suggests, a grow only counter can be incremented, but not decremented.</p>
+<p>The value is stored as a 64-bit unsigned long, hence values over <code>2^64</code> can't be represented.</p></div>
         
     
 </header>
@@ -98,10 +109,130 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A CloudState entity.</p></div>
-        
+<hr>
+<dt>
+    <h4 class="name" id="GCounter"><span class="type-signature"></span>new GCounter()</h4>
+    
+    
+</dt>
+<dd>
 
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
         
+            <li><a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id="longValue">
+    <h4 id="longValue"><span class="type-signature">&lt;readonly> </span>longValue<span class="type-signature"> :Long</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The value as a long.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Long</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
 <dl class="details">
     
 
@@ -141,9 +272,48 @@
 </dl>
 
 
+    
+</dd>
+
         
+            
+<hr>
+<dt class="name" id="value">
+    <h4 id="value"><span class="type-signature">&lt;readonly> </span>value<span class="type-signature"> :number</span></h4>
+
     
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The value as a number. Note that once the value exceeds <code>2^53</code>, this will not be an accurate
+representation of the value. If you expect it to exceed <code>2^53</code>, <a href="module-cloudstate.crdt.GCounter.html#longValue"><code>module:cloudstate.crdt.GCounter#longValue</code></a> should be
+used instead.</p>
     </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -153,8 +323,32 @@
 
     
 
-    
+	
 
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -164,7 +358,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="start"><span class="type-signature"></span>start( [options])</h4>
+    <h4 class="name" id="increment"><span class="type-signature"></span>increment(increment)</h4>
     
     
 </dt>
@@ -172,7 +366,7 @@
 
     
     <div class="description">
-        <p>Start a user function server with just this entity.</p>
+        <p>Increment the counter by the given number.</p>
     </div>
     
 
@@ -195,8 +389,6 @@
         <th>Type</th>
 
         
-        <th>Argument</th>
-        
 
         
 
@@ -209,13 +401,16 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>increment</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="cloudstate.CloudState.html#~startOptions">cloudstate.CloudState~startOptions</a></span>
+<span class="param-type">Long</span>
+|
+
+<span class="param-type">number</span>
 
 
 
@@ -223,20 +418,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>The options for starting the server.</p></td>
+            <td class="description last"><p>The amount to increment the counter by.</p></td>
         </tr>
 
     
@@ -294,13 +479,25 @@
     
 
     
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        <p>If the increment is less than zero.</p>
+    
+    </div>
+
+
+        
 
     
     <h5>Returns:</h5>
     
             
 <div class="param-desc">
-    <p>The port number that the server bound to.</p>
+    <p>This counter.</p>
 </div>
 
 
@@ -311,7 +508,7 @@
     </dt>
     <dd>
         
-<span class="param-type">number</span>
+<span class="param-type"><a href="module-cloudstate.crdt.GCounter.html">module:cloudstate.crdt.GCounter</a></span>
 
 
 

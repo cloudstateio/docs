@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Namespaces</title>
+	<title>CloudState Interface: CommandContext</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -86,13 +86,15 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Namespaces</h1>
+	<h1 class="page-title">Interface: CommandContext</h1>
 <section>
 
 <header>
     
         <h2>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a>.</span>
         
+        CommandContext
         </h2>
         
     
@@ -102,6 +104,8 @@
 <article>
     <div class="container-overview">
     
+        
+            <div class="description"><p>Context for a command.</p></div>
         
 
         
@@ -149,61 +153,501 @@
     </div>
 
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="module-cloudstate.EffectContext.html">module:cloudstate.EffectContext</a></li>
+    </ul>
+
 
     
 
     
-        <h3 class="subsection-title">Classes</h3>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         <dl>
-            <dt><a href="module-cloudstate.CloudState.html">CloudState</a></dt>
-            <dd></dd>
+            
+<hr>
+<dt>
+    <h4 class="name" id="effect"><span class="type-signature"></span>effect(method, message, synchronous)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Emit an effect after processing this command.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
         
-            <dt><a href="module-cloudstate.crdt.Crdt.html">Crdt</a></dt>
-            <dd></dd>
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
         
-            <dt><a href="module-cloudstate.crdt.Flag.html">Flag</a></dt>
-            <dd></dd>
+        <th>Name</th>
         
-            <dt><a href="module-cloudstate.crdt.GCounter.html">GCounter</a></dt>
-            <dd></dd>
+
+        <th>Type</th>
+
         
-            <dt><a href="module-cloudstate.crdt.GSet.html">GSet</a></dt>
-            <dd></dd>
+
         
-            <dt><a href="module-cloudstate.crdt.LWWRegister.html">LWWRegister</a></dt>
-            <dd></dd>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The entity service method to invoke.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The message to send to that service.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>synchronous</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Whether the effect should be execute synchronously or not.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.EffectContext.html#effect">module:cloudstate.EffectContext#effect</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
         
-            <dt><a href="module-cloudstate.crdt.ORMap.html">ORMap</a></dt>
-            <dd></dd>
+            
+<hr>
+<dt>
+    <h4 class="name" id="fail"><span class="type-signature"></span>fail(msg)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Fail handling this command.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
         
-            <dt><a href="module-cloudstate.crdt.ORSet.html">ORSet</a></dt>
-            <dd></dd>
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
         
-            <dt><a href="module-cloudstate.crdt.PNCounter.html">PNCounter</a></dt>
-            <dd></dd>
+        <th>Name</th>
         
-            <dt><a href="module-cloudstate.crdt.Vote.html">Vote</a></dt>
-            <dd></dd>
+
+        <th>Type</th>
+
         
-            <dt><a href="module-cloudstate.EventSourced.html">EventSourced</a></dt>
-            <dd></dd>
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The failure message.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.EffectContext.html#fail">module:cloudstate.EffectContext#fail</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        <p>An error that captures the failure message. Note that even if you catch the error thrown by this
+method, the command will still be failed with the given message.</p>
+    
+    </div>
+
+
+        
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="thenForward"><span class="type-signature"></span>thenForward(method, message)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Forward this command to another entity service call.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The entity service method to invoke.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The message to send to that service.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
         </dl>
-    
-
-    
-
-    
-        <h3 class="subsection-title">Namespaces</h3>
-
-        <dl>
-            <dt><a href="namespaces.html#module:cloudstate.crdt"><a href="module-cloudstate.crdt.html">crdt</a></a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
     
 
     

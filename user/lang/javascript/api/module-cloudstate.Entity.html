@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Namespace: crdt</title>
+	<title>CloudState Interface: Entity</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,21 +33,28 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.html">cloudstate</a></li><li><a href="cloudstate.crdt.html">cloudstate.crdt</a></li>
+					<li><a href="module-cloudstate.crdt.html">cloudstate.crdt</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-cloudstate.html">cloudstate</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
+					<li><a href="module-cloudstate.CloudState.html">cloudstate.CloudState</a></li><li><a href="module-cloudstate.crdt.Crdt.html">cloudstate.crdt.Crdt</a></li><li><a href="module-cloudstate.crdt.Flag.html">cloudstate.crdt.Flag</a></li><li><a href="module-cloudstate.crdt.GCounter.html">cloudstate.crdt.GCounter</a></li><li><a href="module-cloudstate.crdt.GSet.html">cloudstate.crdt.GSet</a></li><li><a href="module-cloudstate.crdt.LWWRegister.html">cloudstate.crdt.LWWRegister</a></li><li><a href="module-cloudstate.crdt.ORMap.html">cloudstate.crdt.ORMap</a></li><li><a href="module-cloudstate.crdt.ORSet.html">cloudstate.crdt.ORSet</a></li><li><a href="module-cloudstate.crdt.PNCounter.html">cloudstate.crdt.PNCounter</a></li><li><a href="module-cloudstate.crdt.Vote.html">cloudstate.crdt.Vote</a></li><li><a href="module-cloudstate.EventSourced.html">cloudstate.EventSourced</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li>
+					<li><a href="module-cloudstate.CommandContext.html">cloudstate.CommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtCommandContext.html">cloudstate.crdt.CrdtCommandContext</a></li><li><a href="module-cloudstate.crdt.CrdtState.html">cloudstate.crdt.CrdtState</a></li><li><a href="module-cloudstate.crdt.StateChangedContext.html">cloudstate.crdt.StateChangedContext</a></li><li><a href="module-cloudstate.crdt.StateManagementContext.html">cloudstate.crdt.StateManagementContext</a></li><li><a href="module-cloudstate.crdt.StreamCancelledContext.html">cloudstate.crdt.StreamCancelledContext</a></li><li><a href="module-cloudstate.EffectContext.html">cloudstate.EffectContext</a></li><li><a href="module-cloudstate.Entity.html">cloudstate.Entity</a></li><li><a href="module-cloudstate.EventSourced.EventSourcedCommandContext.html">cloudstate.EventSourced.EventSourcedCommandContext</a></li><li><a href="module-cloudstate.Server.html">cloudstate.Server</a></li>
 				</ul>
 			</li>
 			
@@ -79,15 +86,15 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Namespace: crdt</h1>
+	<h1 class="page-title">Interface: Entity</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="cloudstate.html">cloudstate</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a>.</span>
         
-        crdt
+        Entity
         </h2>
         
     
@@ -98,7 +105,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>All CRDTs and CRDT support classes.</p></div>
+            <div class="description"><p>A CloudState entity.</p></div>
         
 
         
@@ -146,40 +153,20 @@
     </div>
 
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="module-cloudstate.Server.html">module:cloudstate.Server</a></li>
+    </ul>
+
 
     
 
     
-        <h3 class="subsection-title">Classes</h3>
 
-        <dl>
-            <dt><a href="cloudstate.crdt.Crdt.html">Crdt</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.Flag.html">Flag</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.GCounter.html">GCounter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.GSet.html">GSet</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.LWWRegister.html">LWWRegister</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.ORMap.html">ORMap</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.ORSet.html">ORSet</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.PNCounter.html">PNCounter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="cloudstate.crdt.Vote.html">Vote</a></dt>
-            <dd></dd>
-        </dl>
     
 
     
@@ -187,45 +174,123 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         <dl>
             
 <hr>
-<dt class="name" id=".Clocks">
-    <h4 id=".Clocks"><span class="type-signature">&lt;static> </span>Clocks<span class="type-signature"> :<a href="cloudstate.crdt.html#.Clock">cloudstate.crdt.Clock</a></span></h4>
-
+<dt>
+    <h4 class="name" id="shutdown"><span class="type-signature"></span>shutdown()</h4>
+    
     
 </dt>
 <dd>
+
     
     <div class="description">
-        <p>An enum of all clocks that can be used by <a href="cloudstate.crdt.LWWRegister.html"><code>cloudstate.crdt.LWWRegister</code></a>.</p>
+        <p>Shutdown the server</p>
     </div>
     
 
     
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type"><a href="cloudstate.crdt.html#.Clock">cloudstate.crdt.Clock</a></span>
 
+    
 
-
-            </li>
-        </ul>
+    
     
 
     
 <dl class="details">
     
 
-    <h5 class="subsection-title">Properties:</h5>
+	
 
-    <dl>
+	
 
-<table class="props table table-striped">
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.Server.html#shutdown">module:cloudstate.Server#shutdown</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="start"><span class="type-signature"></span>start( [options])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Start the server.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -234,6 +299,8 @@
 
         <th>Type</th>
 
+        
+        <th>Argument</th>
         
 
         
@@ -247,143 +314,39 @@
 
         <tr>
             
-                <td class="name"><code>DEFAULT</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
             
-            </td>
+                
+<span class="param-type"><a href="module-cloudstate.Server.html#~startOptions">module:cloudstate.Server~startOptions</a></span>
 
-            
 
-            
 
-            <td class="description last"><p>The default clock, uses the machines system time.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>REVERSE</code></td>
-            
-
-            <td class="type">
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
-            
+                
 
-            <td class="description last"><p>A reverse clock, for achieving first-write-wins semantics.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>CUSTOM</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
+                
+                </td>
             
 
             
 
-            <td class="description last"><p>A custom clock.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>CUSTOM_AUTO_INCREMENT</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A custom clock that automatically increments if the current clock value
-is less than the existing clock value.</p></td>
+            <td class="description last"><p>The options for starting the server.</p></td>
         </tr>
 
     
     </tbody>
 </table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        </dl>
-    
-
-    
-
-    
-        <h3 class="subsection-title">Type Definitions</h3>
-
-        <dl>
-                
-<hr>
-<dt class="name" id=".Clock">
-    <h4 id=".Clock">Clock</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>A clock that may be used by <a href="cloudstate.crdt.LWWRegister.html"><code>cloudstate.crdt.LWWRegister</code></a>.</p>
-    </div>
-    
 
     
 
@@ -396,6 +359,15 @@ is less than the existing clock value.</p></td>
 	
 
 	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="module-cloudstate.Server.html#start">module:cloudstate.Server#start</a>
+			</li>
+		</ul>
+	</dd>
+	
 
     
 
@@ -428,9 +400,47 @@ is less than the existing clock value.</p></td>
 
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The port number that the server bound to.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
 </dd>
 
-            </dl>
+        </dl>
+    
+
     
 
     
