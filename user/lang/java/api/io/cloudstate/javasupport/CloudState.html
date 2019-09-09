@@ -133,9 +133,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public final class <span class="typeNameLabel">CloudState</span>
 extends java.lang.Object</pre>
-<div class="block">The CloudState class is the main interface to configuring entities to deploy,
- and subsequently starting a local server which will expose these entities to
- the CloudState Proxy Sidecar.</div>
+<div class="block">The CloudState class is the main interface to configuring entities to deploy, and subsequently
+ starting a local server which will expose these entities to the CloudState Proxy Sidecar.</div>
 </li>
 </ul>
 </div>
@@ -181,16 +180,16 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#preferJavaProtobufs()">preferJavaProtobufs</a></span>()</code></th>
 <td class="colLast">
-<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the classpath,
- this specifies that Java should be preferred.</div>
+<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the
+ classpath, this specifies that Java should be preferred.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#preferScalaProtobufs()">preferScalaProtobufs</a></span>()</code></th>
 <td class="colLast">
-<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the classpath,
- this specifies that Scala should be preferred.</div>
+<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the
+ classpath, this specifies that Scala should be preferred.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -242,16 +241,16 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withClassLoader(java.lang.ClassLoader)">withClassLoader</a></span>&#8203;(java.lang.ClassLoader&nbsp;classLoader)</code></th>
 <td class="colLast">
-<div class="block">Sets the ClassLoader to be used for reflective access,
- the default value is the ClassLoader of the CloudState class.</div>
+<div class="block">Sets the ClassLoader to be used for reflective access, the default value is the ClassLoader of
+ the CloudState class.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withTypeUrlPrefix(java.lang.String)">withTypeUrlPrefix</a></span>&#8203;(java.lang.String&nbsp;prefix)</code></th>
 <td class="colLast">
-<div class="block">Sets the type URL prefix to be used when serializing and deserializing
- types from and to Protobyf Any values.</div>
+<div class="block">Sets the type URL prefix to be used when serializing and deserializing types from and to
+ Protobyf Any values.</div>
 </td>
 </tr>
 </table>
@@ -304,8 +303,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>withClassLoader</h4>
 <pre class="methodSignature">public&nbsp;<a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a>&nbsp;withClassLoader&#8203;(java.lang.ClassLoader&nbsp;classLoader)</pre>
-<div class="block">Sets the ClassLoader to be used for reflective access,
- the default value is the ClassLoader of the CloudState class.</div>
+<div class="block">Sets the ClassLoader to be used for reflective access, the default value is the ClassLoader of
+ the CloudState class.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>classLoader</code> - A non-null ClassLoader to be used for reflective access.</dd>
@@ -321,8 +320,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>withTypeUrlPrefix</h4>
 <pre class="methodSignature">public&nbsp;<a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a>&nbsp;withTypeUrlPrefix&#8203;(java.lang.String&nbsp;prefix)</pre>
-<div class="block">Sets the type URL prefix to be used when serializing and deserializing
- types from and to Protobyf Any values. Defaults to "type.googleapis.com".</div>
+<div class="block">Sets the type URL prefix to be used when serializing and deserializing types from and to
+ Protobyf Any values. Defaults to "type.googleapis.com".</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>prefix</code> - the type URL prefix to be used.</dd>
@@ -338,8 +337,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>preferJavaProtobufs</h4>
 <pre class="methodSignature">public&nbsp;<a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a>&nbsp;preferJavaProtobufs()</pre>
-<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the classpath,
- this specifies that Java should be preferred.</div>
+<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the
+ classpath, this specifies that Java should be preferred.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This CloudState instance.</dd>
@@ -353,8 +352,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>preferScalaProtobufs</h4>
 <pre class="methodSignature">public&nbsp;<a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a>&nbsp;preferScalaProtobufs()</pre>
-<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the classpath,
- this specifies that Scala should be preferred.</div>
+<div class="block">When locating protobufs, if both a Java and a ScalaPB generated class is found on the
+ classpath, this specifies that Scala should be preferred.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This CloudState instance.</dd>
@@ -371,13 +370,14 @@ extends java.lang.Object</pre>
                                              com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
                                              com.google.protobuf.Descriptors.FileDescriptor...&nbsp;additionalDescriptors)</pre>
 <div class="block">Register an annotated event sourced entity.
- <p>
- The entity class must be annotated with <a href="eventsourced/EventSourcedEntity.html" title="annotation in io.cloudstate.javasupport.eventsourced"><code>EventSourcedEntity</code></a>.</div>
+
+ <p>The entity class must be annotated with <a href="eventsourced/EventSourcedEntity.html" title="annotation in io.cloudstate.javasupport.eventsourced"><code>EventSourcedEntity</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>entityClass</code> - The entity class.</dd>
 <dd><code>descriptor</code> - The descriptor for the service that this entity implements.</dd>
-<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf types when needed.</dd>
+<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf
+     types when needed.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This stateful service builder.</dd>
 </dl>
@@ -395,15 +395,19 @@ extends java.lang.Object</pre>
                                              int&nbsp;snapshotEvery,
                                              com.google.protobuf.Descriptors.FileDescriptor...&nbsp;additionalDescriptors)</pre>
 <div class="block">Register an event sourced entity factor.
- <p>
- This is a low level API intended for custom (eg, non reflection based) mechanisms for implementing the entity.</div>
+
+ <p>This is a low level API intended for custom (eg, non reflection based) mechanisms for
+ implementing the entity.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>factory</code> - The event sourced factory.</dd>
 <dd><code>descriptor</code> - The descriptor for the service that this entity implements.</dd>
 <dd><code>persistenceId</code> - The persistence id for this entity.</dd>
-<dd><code>snapshotEvery</code> - Specifies how snapshots of the entity state should be made: Zero means use default from configuration file. (Default) Any negative value means never snapshot. Any positive value means snapshot at-or-after that number of events.</dd>
-<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf types when needed.</dd>
+<dd><code>snapshotEvery</code> - Specifies how snapshots of the entity state should be made: Zero means use
+     default from configuration file. (Default) Any negative value means never snapshot. Any
+     positive value means snapshot at-or-after that number of events.</dd>
+<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf
+     types when needed.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This stateful service builder.</dd>
 </dl>
@@ -419,13 +423,14 @@ extends java.lang.Object</pre>
                                      com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
                                      com.google.protobuf.Descriptors.FileDescriptor...&nbsp;additionalDescriptors)</pre>
 <div class="block">Register an annotated CRDT entity.
- <p>
- The entity class must be annotated with <a href="crdt/CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CrdtEntity</code></a>.</div>
+
+ <p>The entity class must be annotated with <a href="crdt/CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CrdtEntity</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>entityClass</code> - The entity class.</dd>
 <dd><code>descriptor</code> - The descriptor for the service that this entity implements.</dd>
-<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf types when needed.</dd>
+<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf
+     types when needed.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This stateful service builder.</dd>
 </dl>
@@ -441,13 +446,15 @@ extends java.lang.Object</pre>
                                      com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
                                      com.google.protobuf.Descriptors.FileDescriptor...&nbsp;additionalDescriptors)</pre>
 <div class="block">Register an CRDt entity factory.
- <p>
- This is a low level API intended for custom (eg, non reflection based) mechanisms for implementing the entity.</div>
+
+ <p>This is a low level API intended for custom (eg, non reflection based) mechanisms for
+ implementing the entity.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>factory</code> - The CRDT factory.</dd>
 <dd><code>descriptor</code> - The descriptor for the service that this entity implements.</dd>
-<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf types when needed.</dd>
+<dd><code>additionalDescriptors</code> - Any additional descriptors that should be used to look up protobuf
+     types when needed.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This stateful service builder.</dd>
 </dl>

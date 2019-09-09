@@ -129,11 +129,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public interface <span class="typeNameLabel">CrdtFactory</span></pre>
 <div class="block">Factory for creating CRDTs.
- <p>
- This is used both by CRDT contexts that allow creating CRDTs, as well as by CRDTs that allow nesting other CRDTs.
- <p>
- CRDTs may only be created by a supplied CRDT factory, CRDTs created any other way will not be known by the
- library and so won't have their deltas synced to and from the proxy.</div>
+
+ <p>This is used both by CRDT contexts that allow creating CRDTs, as well as by CRDTs that allow
+ nesting other CRDTs.
+
+ <p>CRDTs may only be created by a supplied CRDT factory, CRDTs created any other way will not be
+ known by the library and so won't have their deltas synced to and from the proxy.</div>
 </li>
 </ul>
 </div>

@@ -134,8 +134,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public interface <span class="typeNameLabel">ClientActionContext</span>
 extends <a href="Context.html" title="interface in io.cloudstate.javasupport">Context</a></pre>
 <div class="block">Context that provides client actions, which include failing and forwarding.
- <p>
- These contexts are typically made available in response to commands.</div>
+
+ <p>These contexts are typically made available in response to commands.</div>
 </li>
 </ul>
 </div>
@@ -167,7 +167,8 @@ extends <a href="Context.html" title="interface in io.cloudstate.javasupport">Co
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#forward(io.cloudstate.javasupport.ServiceCall)">forward</a></span>&#8203;(<a href="ServiceCall.html" title="interface in io.cloudstate.javasupport">ServiceCall</a>&nbsp;to)</code></th>
 <td class="colLast">
-<div class="block">Instruct the proxy to forward handling of this command to another entity served by this stateful function.</div>
+<div class="block">Instruct the proxy to forward handling of this command to another entity served by this
+ stateful function.</div>
 </td>
 </tr>
 </table>
@@ -215,13 +216,14 @@ extends <a href="Context.html" title="interface in io.cloudstate.javasupport">Co
 <li class="blockList">
 <h4>forward</h4>
 <pre class="methodSignature">void&nbsp;forward&#8203;(<a href="ServiceCall.html" title="interface in io.cloudstate.javasupport">ServiceCall</a>&nbsp;to)</pre>
-<div class="block">Instruct the proxy to forward handling of this command to another entity served by this stateful function.
- <p>
- The command will be forwarded after successful completion of handling this command, including any persistence
- that this command does.
- <p>
- <a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a> instances can be created using the <a href="ServiceCallFactory.html" title="interface in io.cloudstate.javasupport"><code>ServiceCallFactory</code></a> obtained from any (including
- this) contexts <a href="Context.html#serviceCallFactory()"><code>Context.serviceCallFactory()</code></a> method.</div>
+<div class="block">Instruct the proxy to forward handling of this command to another entity served by this
+ stateful function.
+
+ <p>The command will be forwarded after successful completion of handling this command,
+ including any persistence that this command does.
+
+ <p><a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a> instances can be created using the <a href="ServiceCallFactory.html" title="interface in io.cloudstate.javasupport"><code>ServiceCallFactory</code></a> obtained
+ from any (including this) contexts <a href="Context.html#serviceCallFactory()"><code>Context.serviceCallFactory()</code></a> method.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>to</code> - The service call to forward command processing to.</dd>

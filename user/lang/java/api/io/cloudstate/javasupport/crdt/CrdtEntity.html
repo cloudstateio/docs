@@ -119,15 +119,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 @Retention(RUNTIME)
 public @interface <span class="memberNameLabel">CrdtEntity</span></pre>
 <div class="block">A CRDT backed entity.
- <p>
- CRDT entities store their state in a subclass <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt"><code>Crdt</code></a>. These may be created using a <a href="CrdtFactory.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtFactory</code></a>, which
- can be injected into the constructor or as a parameter to any <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CommandHandler</code></a> annotated method.
- <p>
- Only one CRDT may be created, it is important that before creating a CRDT, the entity should check whether the CRDT
- has already been created, for example, it may have been created on another node and replicated to this node. To
- check, either use the <a href="CrdtContext.html#state(java.lang.Class)"><code>CrdtContext.state(Class)</code></a> method, which can be injected into the constructor or any
- <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CommandHandler</code></a> method, or have an instance of the CRDT wrapped in <code>Optional</code> injected into
- the constructor or command handler methods.</div>
+
+ <p>CRDT entities store their state in a subclass <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt"><code>Crdt</code></a>. These may be created using a
+ <a href="CrdtFactory.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtFactory</code></a>, which can be injected into the constructor or as a parameter to any <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CommandHandler</code></a> annotated method.
+
+ <p>Only one CRDT may be created, it is important that before creating a CRDT, the entity should
+ check whether the CRDT has already been created, for example, it may have been created on another
+ node and replicated to this node. To check, either use the <a href="CrdtContext.html#state(java.lang.Class)"><code>CrdtContext.state(Class)</code></a>
+ method, which can be injected into the constructor or any <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CommandHandler</code></a> method, or have
+ an instance of the CRDT wrapped in <code>Optional</code> injected into the constructor or
+ command handler methods.</div>
 </li>
 </ul>
 </div>

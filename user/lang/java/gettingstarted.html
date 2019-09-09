@@ -266,16 +266,17 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>Now if you run <code>mvn compile</code>, you&rsquo;ll find your generated protobuf files in <code>target/generated-sources/protobuf/java</code>.</p>
 <h2><a href="#creating-a-main-class" name="creating-a-main-class" class="anchor"><span class="anchor-link"></span></a>Creating a main class</h2>
 <p>Your main class will be responsible for creating the CloudState gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/CloudState.html"><code>CloudState</code></a> server builder, for example:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/gettingstarted/ShoppingCartMain.java#L4-L15" target="_blank" title="Go to snippet source"></a><code class="language-java">import com.example.Shoppingcart;
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/gettingstarted/ShoppingCartMain.java#L4-L16" target="_blank" title="Go to snippet source"></a><code class="language-java">import com.example.Shoppingcart;
 import io.cloudstate.javasupport.CloudState;
 
 public class ShoppingCartMain {
 
   public static void main(String... args) {
-    new CloudState().registerEventSourcedEntity(
-        ShoppingCartEntity.class,
-        Shoppingcart.getDescriptor().findServiceByName(&quot;ShoppingCart&quot;)
-    ).start();
+    new CloudState()
+        .registerEventSourcedEntity(
+            ShoppingCartEntity.class,
+            Shoppingcart.getDescriptor().findServiceByName(&quot;ShoppingCart&quot;))
+        .start();
   }
 }</code></pre>
 <p>We will see more details on registering entities in the coming pages.</p>

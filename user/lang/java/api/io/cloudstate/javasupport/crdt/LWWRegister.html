@@ -134,13 +134,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public interface <span class="typeNameLabel">LWWRegister&lt;T&gt;</span>
 extends <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt">Crdt</a></pre>
 <div class="block">A Last-Write-Wins Register.
- <p>
- This uses a clock value to determine which of two concurrent writes should win. When both clock values are the same,
- an ordering defined over the node addresses is used to break the tie.
- <p>
- By default, the clock used is the clock of the node that set the value. This can be affected by clock skew, which
- means two successive writes delegated to two separate nodes could result in the first one winning. This can be
- avoided by using a custom clock with a domain specific clock value, if such a causally ordered value is available.</div>
+
+ <p>This uses a clock value to determine which of two concurrent writes should win. When both
+ clock values are the same, an ordering defined over the node addresses is used to break the tie.
+
+ <p>By default, the clock used is the clock of the node that set the value. This can be affected
+ by clock skew, which means two successive writes delegated to two separate nodes could result in
+ the first one winning. This can be avoided by using a custom clock with a domain specific clock
+ value, if such a causally ordered value is available.</div>
 </li>
 </ul>
 </div>
@@ -206,7 +207,8 @@ extends <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt">
    <a href="LWWRegister.Clock.html" title="enum in io.cloudstate.javasupport.crdt">LWWRegister.Clock</a>&nbsp;clock,
    long&nbsp;customClockValue)</code></th>
 <td class="colLast">
-<div class="block">Set the current value of the register, using the given custom clock and clock value if required.</div>
+<div class="block">Set the current value of the register, using the given custom clock and clock value if
+ required.</div>
 </td>
 </tr>
 </table>
@@ -269,13 +271,14 @@ extends <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt">
 <pre class="methodSignature"><a href="LWWRegister.html" title="type parameter in LWWRegister">T</a>&nbsp;set&#8203;(<a href="LWWRegister.html" title="type parameter in LWWRegister">T</a>&nbsp;value,
       <a href="LWWRegister.Clock.html" title="enum in io.cloudstate.javasupport.crdt">LWWRegister.Clock</a>&nbsp;clock,
       long&nbsp;customClockValue)</pre>
-<div class="block">Set the current value of the register, using the given custom clock and clock value if required.</div>
+<div class="block">Set the current value of the register, using the given custom clock and clock value if
+ required.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>value</code> - The value of the register to set.</dd>
 <dd><code>clock</code> - The clock to use.</dd>
-<dd><code>customClockValue</code> - The custom clock value to use if the clock selected is a custom clock. This is ignored
-                         if the clock is not a custom clock.</dd>
+<dd><code>customClockValue</code> - The custom clock value to use if the clock selected is a custom clock.
+     This is ignored if the clock is not a custom clock.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The old value of the register.</dd>
 </dl>

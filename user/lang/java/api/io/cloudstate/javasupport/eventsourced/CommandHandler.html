@@ -119,15 +119,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 @Retention(RUNTIME)
 public @interface <span class="memberNameLabel">CommandHandler</span></pre>
 <div class="block">Marks a method as a command handler.
- <p>
- This method will be invoked whenever the service call with name that matches this command handlers name is invoked.
- <p>
- The method may take the command object as a parameter, its type must match the gRPC service input type.
- <p>
- The return type of the method must match the gRPC services output type.
- <p>
- The method may also take a <a href="CommandContext.html" title="interface in io.cloudstate.javasupport.eventsourced"><code>CommandContext</code></a>, and/or a <a href="../EntityId.html" title="annotation in io.cloudstate.javasupport"><code>EntityId</code></a> annotated
- <code>String</code> parameter.</div>
+
+ <p>This method will be invoked whenever the service call with name that matches this command
+ handlers name is invoked.
+
+ <p>The method may take the command object as a parameter, its type must match the gRPC service
+ input type.
+
+ <p>The return type of the method must match the gRPC services output type.
+
+ <p>The method may also take a <a href="CommandContext.html" title="interface in io.cloudstate.javasupport.eventsourced"><code>CommandContext</code></a>, and/or a <a href="../EntityId.html" title="annotation in io.cloudstate.javasupport"><code>EntityId</code></a> annotated <code>String</code> parameter.</div>
 </li>
 </ul>
 </div>
@@ -180,9 +181,9 @@ public @interface <span class="memberNameLabel">CommandHandler</span></pre>
 <h4>name</h4>
 <pre>java.lang.String&nbsp;name</pre>
 <div class="block">The name of the command to handle.
- <p>
- If not specified, the name of the method will be used as the command name, with the first letter capitalized to
- match the gRPC convention of capitalizing rpc method names.</div>
+
+ <p>If not specified, the name of the method will be used as the command name, with the first
+ letter capitalized to match the gRPC convention of capitalizing rpc method names.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The command name.</dd>

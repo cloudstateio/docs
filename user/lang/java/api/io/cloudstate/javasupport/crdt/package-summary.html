@@ -100,16 +100,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!--   -->
 </a>
 <div class="block">Conflict-free Replicated Data Type support.
- <p>
- CRDT entities can be annotated with the <a href="CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>@CrdtEntity</code></a> annotation,
- and supply command handlers using the <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>@CommandHandler</code></a>
- annotation.
- <p>
- The data stored by a CRDT entity can be stored in a subtype of <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt"><code>Crdt</code></a>. These
- can be created using a <a href="CrdtFactory.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtFactory</code></a>, which is a super-interface of both the
- <a href="CrdtCreationContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtCreationContext</code></a>, available for injection constructors, and of the
- <a href="CommandContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>CommandContext</code></a>, available for injection in <code>@CommandHandler</code> annotated
- methods.</div>
+
+ <p>CRDT entities can be annotated with the <a href="CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>@CrdtEntity</code></a> annotation, and supply command handlers
+ using the <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>@CommandHandler</code></a> annotation.
+
+ <p>The data stored by a CRDT entity can be stored in a subtype of <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt"><code>Crdt</code></a>. These can be created using a <a href="CrdtFactory.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtFactory</code></a>, which is a super-interface of both the <a href="CrdtCreationContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtCreationContext</code></a>, available for injection constructors, and of
+ the <a href="CommandContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>CommandContext</code></a>, available for injection in
+ <code>@CommandHandler</code> annotated methods.</div>
 </section>
 <ul class="blockList">
 <li class="blockList">
@@ -219,8 +216,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr class="altColor">
 <th class="colFirst" scope="row"><a href="SubscriptionContext.html" title="interface in io.cloudstate.javasupport.crdt">SubscriptionContext</a></th>
 <td class="colLast">
-<div class="block">The context for a subscription, passed with every invocation of a <a href="StreamedCommandContext.html#onChange(java.util.function.Function)"><code>StreamedCommandContext.onChange(Function)</code></a>
- callback.</div>
+<div class="block">The context for a subscription, passed with every invocation of a <a href="StreamedCommandContext.html#onChange(java.util.function.Function)"><code>StreamedCommandContext.onChange(Function)</code></a> callback.</div>
 </td>
 </tr>
 <tr class="rowColor">

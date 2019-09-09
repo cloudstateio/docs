@@ -119,14 +119,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 @Retention(RUNTIME)
 public @interface <span class="memberNameLabel">Snapshot</span></pre>
 <div class="block">Marks a method as a snapshot method.
- <p>
- An event sourced behavior may have at most one of these. When provided, it will be periodically (every
- <em>n</em> events emitted) be invoked to retrieve a snapshot of the current state, to be persisted, so that the
- event log can be loaded without replaying the entire history.
- <p>
- The method must return the current state of the entity.
- <p>
- The method may accept a <a href="SnapshotContext.html" title="interface in io.cloudstate.javasupport.eventsourced"><code>SnapshotContext</code></a> parameter.</div>
+
+ <p>An event sourced behavior may have at most one of these. When provided, it will be
+ periodically (every <em>n</em> events emitted) be invoked to retrieve a snapshot of the current
+ state, to be persisted, so that the event log can be loaded without replaying the entire history.
+
+ <p>The method must return the current state of the entity.
+
+ <p>The method may accept a <a href="SnapshotContext.html" title="interface in io.cloudstate.javasupport.eventsourced"><code>SnapshotContext</code></a> parameter.</div>
 </li>
 </ul>
 </div>

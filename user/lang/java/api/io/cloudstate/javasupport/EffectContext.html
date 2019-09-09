@@ -201,12 +201,12 @@ extends <a href="Context.html" title="interface in io.cloudstate.javasupport">Co
 <h4>effect</h4>
 <pre class="methodSignature">default&nbsp;void&nbsp;effect&#8203;(<a href="ServiceCall.html" title="interface in io.cloudstate.javasupport">ServiceCall</a>&nbsp;effect)</pre>
 <div class="block">Invoke the referenced service call as an effect once this action is completed.
- <p>
- The effect will be performed asynchronously, ie, the proxy won't wait for the effect to finish before sending
- the reply.
- <p>
- <a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a> instances can be created using the <a href="ServiceCallFactory.html" title="interface in io.cloudstate.javasupport"><code>ServiceCallFactory</code></a> obtained from any (including
- this) contexts <a href="Context.html#serviceCallFactory()"><code>Context.serviceCallFactory()</code></a> method.</div>
+
+ <p>The effect will be performed asynchronously, ie, the proxy won't wait for the effect to
+ finish before sending the reply.
+
+ <p><a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a> instances can be created using the <a href="ServiceCallFactory.html" title="interface in io.cloudstate.javasupport"><code>ServiceCallFactory</code></a> obtained
+ from any (including this) contexts <a href="Context.html#serviceCallFactory()"><code>Context.serviceCallFactory()</code></a> method.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>effect</code> - The service call to make as an effect effect.</dd>
@@ -222,14 +222,14 @@ extends <a href="Context.html" title="interface in io.cloudstate.javasupport">Co
 <pre class="methodSignature">void&nbsp;effect&#8203;(<a href="ServiceCall.html" title="interface in io.cloudstate.javasupport">ServiceCall</a>&nbsp;effect,
             boolean&nbsp;synchronous)</pre>
 <div class="block">Invoke the referenced service call as an effect once this action is completed.
- <p>
- <a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a> instances can be created using the <a href="ServiceCallFactory.html" title="interface in io.cloudstate.javasupport"><code>ServiceCallFactory</code></a> obtained from any (including
- this) contexts <a href="Context.html#serviceCallFactory()"><code>Context.serviceCallFactory()</code></a> method.</div>
+
+ <p><a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a> instances can be created using the <a href="ServiceCallFactory.html" title="interface in io.cloudstate.javasupport"><code>ServiceCallFactory</code></a> obtained
+ from any (including this) contexts <a href="Context.html#serviceCallFactory()"><code>Context.serviceCallFactory()</code></a> method.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>effect</code> - The service call to make as an effect effect.</dd>
-<dd><code>synchronous</code> - Whether the effect should be performed synchronously (ie, wait till it has finished before
-                    sending a reply) or asynchronously.</dd>
+<dd><code>synchronous</code> - Whether the effect should be performed synchronously (ie, wait till it has
+     finished before sending a reply) or asynchronously.</dd>
 </dl>
 </li>
 </ul>

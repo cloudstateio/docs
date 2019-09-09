@@ -150,8 +150,8 @@ public @interface <span class="memberNameLabel">EventSourcedEntity</span></pre>
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#snapshotEvery()">snapshotEvery</a></span></code></th>
 <td class="colLast">
-<div class="block">Specifies how snapshots of the entity state should be made:
- Zero means use default from configuration file.</div>
+<div class="block">Specifies how snapshots of the entity state should be made: Zero means use default from
+ configuration file.</div>
 </td>
 </tr>
 </table>
@@ -179,9 +179,9 @@ public @interface <span class="memberNameLabel">EventSourcedEntity</span></pre>
 <h4>persistenceId</h4>
 <pre>java.lang.String&nbsp;persistenceId</pre>
 <div class="block">The name of the persistence id.
- <p>
- If not specifed, defaults to the entities unqualified classname. It's strongly recommended that you specify it
- explicitly.</div>
+
+ <p>If not specifed, defaults to the entities unqualified classname. It's strongly recommended
+ that you specify it explicitly.</div>
 <dl>
 <dt>Default:</dt>
 <dd>""</dd>
@@ -200,10 +200,9 @@ public @interface <span class="memberNameLabel">EventSourcedEntity</span></pre>
 <li class="blockList">
 <h4>snapshotEvery</h4>
 <pre>int&nbsp;snapshotEvery</pre>
-<div class="block">Specifies how snapshots of the entity state should be made:
- Zero means use default from configuration file. (Default)
- Any negative value means never snapshot.
- Any positive value means snapshot at-or-after that number of events.</div>
+<div class="block">Specifies how snapshots of the entity state should be made: Zero means use default from
+ configuration file. (Default) Any negative value means never snapshot. Any positive value means
+ snapshot at-or-after that number of events.</div>
 <dl>
 <dt>Default:</dt>
 <dd>0</dd>

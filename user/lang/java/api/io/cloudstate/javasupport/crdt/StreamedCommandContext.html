@@ -130,9 +130,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public interface <span class="typeNameLabel">StreamedCommandContext&lt;Output&gt;</span>
 extends <a href="CommandContext.html" title="interface in io.cloudstate.javasupport.crdt">CommandContext</a></pre>
 <div class="block">Context for handling a streamed command.
- <p>
- This may be passed to any <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CommandHandler</code></a> annotated element that corresponds to a command whose output is
- streamed.</div>
+
+ <p>This may be passed to any <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CommandHandler</code></a> annotated element that corresponds to a
+ command whose output is streamed.</div>
 </li>
 </ul>
 </div>
@@ -248,11 +248,10 @@ extends <a href="CommandContext.html" title="interface in io.cloudstate.javasupp
 <h4>isStreamed</h4>
 <pre class="methodSignature">boolean&nbsp;isStreamed()</pre>
 <div class="block">Whether the call is actually streamed.
- <p>
- When a command is handled via the HTTP adapter, the command will not be streamed since the HTTP adapter does not
- support streaming, and this will return <code>false</code>. In that case, calls to
- <a href="#onChange(java.util.function.Function)"><code>onChange(Function)</code></a> and <a href="#onCancel(java.util.function.Consumer)"><code>onCancel(Consumer)</code></a> will
- fail.</div>
+
+ <p>When a command is handled via the HTTP adapter, the command will not be streamed since the
+ HTTP adapter does not support streaming, and this will return <code>false</code>. In that case,
+ calls to <a href="#onChange(java.util.function.Function)"><code>onChange(Function)</code></a> and <a href="#onCancel(java.util.function.Consumer)"><code>onCancel(Consumer)</code></a> will fail.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>True if the command is actually streamed.</dd>
@@ -267,13 +266,13 @@ extends <a href="CommandContext.html" title="interface in io.cloudstate.javasupp
 <h4>onChange</h4>
 <pre class="methodSignature">void&nbsp;onChange&#8203;(java.util.function.Function&lt;<a href="SubscriptionContext.html" title="interface in io.cloudstate.javasupport.crdt">SubscriptionContext</a>,&#8203;java.util.Optional&lt;<a href="StreamedCommandContext.html" title="type parameter in StreamedCommandContext">Output</a>&gt;&gt;&nbsp;subscriber)</pre>
 <div class="block">Register an on change callback for this command.
- <p>
- The callback will be invoked any time the CRDT changes. The callback may inspect the CRDT, but any attempt
- to modify the CRDT will be ignored and the CRDT will crash.
- <p>
- If the callback returns a value, that value will be sent down the stream. Alternatively, the callback may forward
- messages to other entities via the passed in <a href="SubscriptionContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>SubscriptionContext</code></a>. The callback may also emit side effects
- to other entities via that context.</div>
+
+ <p>The callback will be invoked any time the CRDT changes. The callback may inspect the CRDT,
+ but any attempt to modify the CRDT will be ignored and the CRDT will crash.
+
+ <p>If the callback returns a value, that value will be sent down the stream. Alternatively, the
+ callback may forward messages to other entities via the passed in <a href="SubscriptionContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>SubscriptionContext</code></a>.
+ The callback may also emit side effects to other entities via that context.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>subscriber</code> - The subscriber callback.</dd>
@@ -288,12 +287,11 @@ extends <a href="CommandContext.html" title="interface in io.cloudstate.javasupp
 <h4>onCancel</h4>
 <pre class="methodSignature">void&nbsp;onCancel&#8203;(java.util.function.Consumer&lt;<a href="StreamCancelledContext.html" title="interface in io.cloudstate.javasupport.crdt">StreamCancelledContext</a>&gt;&nbsp;effect)</pre>
 <div class="block">Register an on cancel callback for this command.
- <p>
- This will be invoked if the client initiates a stream cancel. It will not be invoked if the entity cancels the
- stream itself via <a href="SubscriptionContext.html#endStream()"><code>SubscriptionContext.endStream()</code></a> from an
- <a href="#onChange(java.util.function.Function)"><code>onChange(Function)</code></a> callback.
- <p>
- An on cancel callback may update the CRDT, and may emit side effects via the passed in
+
+ <p>This will be invoked if the client initiates a stream cancel. It will not be invoked if the
+ entity cancels the stream itself via <a href="SubscriptionContext.html#endStream()"><code>SubscriptionContext.endStream()</code></a> from an <a href="#onChange(java.util.function.Function)"><code>onChange(Function)</code></a> callback.
+
+ <p>An on cancel callback may update the CRDT, and may emit side effects via the passed in
  <a href="StreamCancelledContext.html" title="interface in io.cloudstate.javasupport.crdt"><code>StreamCancelledContext</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

@@ -125,10 +125,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public interface <span class="typeNameLabel">CrdtEntityHandler</span></pre>
 <div class="block">Low level interface for handling CRDT commands.
- <p>
- These are instantiated by a <a href="CrdtEntityFactory.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtEntityFactory</code></a>.
- <p>
- Generally, this should not be used, rather, a <a href="CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CrdtEntity</code></a> annotated class should be used.</div>
+
+ <p>These are instantiated by a <a href="CrdtEntityFactory.html" title="interface in io.cloudstate.javasupport.crdt"><code>CrdtEntityFactory</code></a>.
+
+ <p>Generally, this should not be used, rather, a <a href="CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CrdtEntity</code></a> annotated class should be
+ used.</div>
 </li>
 </ul>
 </div>
@@ -190,8 +191,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h4>handleCommand</h4>
 <pre class="methodSignature">java.util.Optional&lt;com.google.protobuf.Any&gt;&nbsp;handleCommand&#8203;(com.google.protobuf.Any&nbsp;command,
                                                           <a href="CommandContext.html" title="interface in io.cloudstate.javasupport.crdt">CommandContext</a>&nbsp;context)</pre>
-<div class="block">Handle the given command. During the handling of a command, a CRDT may be created (if not already created) and
- updated.</div>
+<div class="block">Handle the given command. During the handling of a command, a CRDT may be created (if not
+ already created) and updated.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>command</code> - The command to handle.</dd>
@@ -209,8 +210,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h4>handleStreamedCommand</h4>
 <pre class="methodSignature">java.util.Optional&lt;com.google.protobuf.Any&gt;&nbsp;handleStreamedCommand&#8203;(com.google.protobuf.Any&nbsp;command,
                                                                   <a href="StreamedCommandContext.html" title="interface in io.cloudstate.javasupport.crdt">StreamedCommandContext</a>&lt;com.google.protobuf.Any&gt;&nbsp;context)</pre>
-<div class="block">Handle the given stream command. During the handling of a command, a CRDT may be created (if not already created)
- and updated.</div>
+<div class="block">Handle the given stream command. During the handling of a command, a CRDT may be created (if
+ not already created) and updated.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>command</code> - The command to handle.</dd>

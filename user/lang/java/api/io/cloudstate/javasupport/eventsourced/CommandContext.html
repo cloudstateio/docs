@@ -130,9 +130,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public interface <span class="typeNameLabel">CommandContext</span>
 extends <a href="EventSourcedContext.html" title="interface in io.cloudstate.javasupport.eventsourced">EventSourcedContext</a>, <a href="../ClientActionContext.html" title="interface in io.cloudstate.javasupport">ClientActionContext</a>, <a href="../EffectContext.html" title="interface in io.cloudstate.javasupport">EffectContext</a></pre>
 <div class="block">An event sourced command context.
- <p>
- Methods annotated with <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.eventsourced"><code>CommandHandler</code></a> may take this is a parameter. It allows emitting new events in response
- to a command, along with forwarding the result to other entities, and performing side effects on other entities.</div>
+
+ <p>Methods annotated with <a href="CommandHandler.html" title="annotation in io.cloudstate.javasupport.eventsourced"><code>CommandHandler</code></a> may take this is a parameter. It allows emitting
+ new events in response to a command, along with forwarding the result to other entities, and
+ performing side effects on other entities.</div>
 </li>
 </ul>
 </div>
@@ -275,8 +276,8 @@ extends <a href="EventSourcedContext.html" title="interface in io.cloudstate.jav
 <li class="blockList">
 <h4>emit</h4>
 <pre class="methodSignature">void&nbsp;emit&#8203;(java.lang.Object&nbsp;event)</pre>
-<div class="block">Emit the given event. The event will be persisted, and the handler of the event defined in the current behavior
- will immediately be executed to pick it up.</div>
+<div class="block">Emit the given event. The event will be persisted, and the handler of the event defined in the
+ current behavior will immediately be executed to pick it up.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>event</code> - The event to emit.</dd>

@@ -125,8 +125,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public interface <span class="typeNameLabel">CrdtEntityFactory</span></pre>
 <div class="block">Low level interface for handling commands for CRDTs.
- <p>
- Generally, this should not be used, rather, a <a href="CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CrdtEntity</code></a> annotated class should be used.</div>
+
+ <p>Generally, this should not be used, rather, a <a href="CrdtEntity.html" title="annotation in io.cloudstate.javasupport.crdt"><code>CrdtEntity</code></a> annotated class should be
+ used.</div>
 </li>
 </ul>
 </div>
@@ -179,9 +180,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h4>create</h4>
 <pre class="methodSignature"><a href="CrdtEntityHandler.html" title="interface in io.cloudstate.javasupport.crdt">CrdtEntityHandler</a>&nbsp;create&#8203;(<a href="CrdtCreationContext.html" title="interface in io.cloudstate.javasupport.crdt">CrdtCreationContext</a>&nbsp;context)</pre>
 <div class="block">Create a CRDT entity handler for the given context.
- <p>
- This will be invoked each time a new CRDT entity stream from the proxy is established, for handling commands\
- for a single CRDT.</div>
+
+ <p>This will be invoked each time a new CRDT entity stream from the proxy is established, for
+ handling commands\ for a single CRDT.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>context</code> - The creation context.</dd>

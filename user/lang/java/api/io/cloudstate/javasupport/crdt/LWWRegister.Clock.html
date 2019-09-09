@@ -175,7 +175,8 @@ extends java.lang.Enum&lt;<a href="LWWRegister.Clock.html" title="enum in io.clo
 <tr class="rowColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#CUSTOM_AUTO_INCREMENT">CUSTOM_AUTO_INCREMENT</a></span></code></th>
 <td class="colLast">
-<div class="block">A custom clock, that automatically increments the custom value if the local clock value is greater than it.</div>
+<div class="block">A custom clock, that automatically increments the custom value if the local clock value is
+ greater than it.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -272,10 +273,10 @@ the order they are declared.</div>
 <h4>REVERSE</h4>
 <pre>public static final&nbsp;<a href="LWWRegister.Clock.html" title="enum in io.cloudstate.javasupport.crdt">LWWRegister.Clock</a> REVERSE</pre>
 <div class="block">A reverse clock, based on the system clock.
- <p>
- Using this effectively achieves First-Write-Wins semantics.
- <p>
- This is susceptible to the same clock skew problems as the default clock.</div>
+
+ <p>Using this effectively achieves First-Write-Wins semantics.
+
+ <p>This is susceptible to the same clock skew problems as the default clock.</div>
 </li>
 </ul>
 <a id="CUSTOM">
@@ -286,12 +287,13 @@ the order they are declared.</div>
 <h4>CUSTOM</h4>
 <pre>public static final&nbsp;<a href="LWWRegister.Clock.html" title="enum in io.cloudstate.javasupport.crdt">LWWRegister.Clock</a> CUSTOM</pre>
 <div class="block">A custom clock.
- <p>
- The custom clock value is passed by using the <code>customClockValue</code> parameter on the
- <a href="LWWRegister.html#set(T,io.cloudstate.javasupport.crdt.LWWRegister.Clock,long)"><code>LWWRegister.set(Object, Clock, long)</code></a> method. The value should be a domain specific monotonically
- increasing value. For example, if the source of the value for this register is a single device, that device
- may attach a sequence number to each update, that sequence number can be used to guarantee that the register
- will converge to the last update emitted by that device.</div>
+
+ <p>The custom clock value is passed by using the <code>customClockValue</code> parameter on
+ the <a href="LWWRegister.html#set(T,io.cloudstate.javasupport.crdt.LWWRegister.Clock,long)"><code>LWWRegister.set(Object, Clock, long)</code></a> method. The value should be a domain
+ specific monotonically increasing value. For example, if the source of the value for this
+ register is a single device, that device may attach a sequence number to each update, that
+ sequence number can be used to guarantee that the register will converge to the last update
+ emitted by that device.</div>
 </li>
 </ul>
 <a id="CUSTOM_AUTO_INCREMENT">
@@ -301,15 +303,17 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>CUSTOM_AUTO_INCREMENT</h4>
 <pre>public static final&nbsp;<a href="LWWRegister.Clock.html" title="enum in io.cloudstate.javasupport.crdt">LWWRegister.Clock</a> CUSTOM_AUTO_INCREMENT</pre>
-<div class="block">A custom clock, that automatically increments the custom value if the local clock value is greater than it.
- <p>
- This is like <a href="#CUSTOM"><code>CUSTOM</code></a>, however if when performing the update in the proxy, it's found that the
- clock value of the register is greater than the specified clock value for the update, the proxy will instead
- use the current clock value of the register plus one.
- <p>
- This can guarantee that updates done on the same node will be causally ordered (addressing problems caused by
- the system clock being adjusted), but will not guarantee causal ordering for updates on different nodes,
- since it's possible that an update on a different node has not yet been replicated to this node.</div>
+<div class="block">A custom clock, that automatically increments the custom value if the local clock value is
+ greater than it.
+
+ <p>This is like <a href="#CUSTOM"><code>CUSTOM</code></a>, however if when performing the update in the proxy,
+ it's found that the clock value of the register is greater than the specified clock value for
+ the update, the proxy will instead use the current clock value of the register plus one.
+
+ <p>This can guarantee that updates done on the same node will be causally ordered (addressing
+ problems caused by the system clock being adjusted), but will not guarantee causal ordering
+ for updates on different nodes, since it's possible that an update on a different node has
+ not yet been replicated to this node.</div>
 </li>
 </ul>
 </li>

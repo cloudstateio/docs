@@ -125,9 +125,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public interface <span class="typeNameLabel">ServiceCallFactory</span></pre>
 <div class="block">A service call factory.
- <p>
- This is used to create <a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a>'s that can be passed to <a href="EffectContext.html#effect(io.cloudstate.javasupport.ServiceCall)"><code>EffectContext.effect(ServiceCall)</code></a> and
- <a href="ClientActionContext.html#forward(io.cloudstate.javasupport.ServiceCall)"><code>ClientActionContext.forward(ServiceCall)</code></a> f}.</div>
+
+ <p>This is used to create <a href="ServiceCall.html" title="interface in io.cloudstate.javasupport"><code>ServiceCall</code></a>'s that can be passed to <a href="EffectContext.html#effect(io.cloudstate.javasupport.ServiceCall)"><code>EffectContext.effect(ServiceCall)</code></a> and <a href="ClientActionContext.html#forward(io.cloudstate.javasupport.ServiceCall)"><code>ClientActionContext.forward(ServiceCall)</code></a> f}.</div>
 </li>
 </ul>
 </div>
@@ -188,15 +187,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - The type of the parameter that it accepts.</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>serviceName</code> - The fully qualified name of a gRPC service that this stateful service serves.</dd>
+<dd><code>serviceName</code> - The fully qualified name of a gRPC service that this stateful service
+     serves.</dd>
 <dd><code>methodName</code> - The name of a method on the gRPC service.</dd>
 <dd><code>messageType</code> - The expected type of the input message to the method.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A reference to the service call.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.util.NoSuchElementException</code> - if the service or method is not found.</dd>
-<dd><code>java.lang.IllegalArgumentException</code> - if the accepted input type for the method doesn't match
- <code>messageType</code>.</dd>
+<dd><code>java.lang.IllegalArgumentException</code> - if the accepted input type for the method doesn't match <code>
+     messageType</code>.</dd>
 </dl>
 </li>
 </ul>

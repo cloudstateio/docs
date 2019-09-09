@@ -130,11 +130,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public interface <span class="typeNameLabel">PNCounter</span>
 extends <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt">Crdt</a></pre>
 <div class="block">A Positive-Negative Counter.
- <p>
- A Positive-Negative Counter is a counter that allows both incrementing, and decrementing. It is based on two
- <a href="GCounter.html" title="interface in io.cloudstate.javasupport.crdt"><code>GCounter</code></a>'s, a positive one that is incremented for every increment, and a negative one that is incremented
- for every decrement. The current value of the counter is calculated by subtracting the negative counter from the
- positive counter.</div>
+
+ <p>A Positive-Negative Counter is a counter that allows both incrementing, and decrementing. It
+ is based on two <a href="GCounter.html" title="interface in io.cloudstate.javasupport.crdt"><code>GCounter</code></a>'s, a positive one that is incremented for every increment, and a
+ negative one that is incremented for every decrement. The current value of the counter is
+ calculated by subtracting the negative counter from the positive counter.</div>
 </li>
 </ul>
 </div>
@@ -215,8 +215,8 @@ extends <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt">
 <h4>increment</h4>
 <pre class="methodSignature">long&nbsp;increment&#8203;(long&nbsp;by)</pre>
 <div class="block">Increment the counter.
- <p>
- If <code>by</code> is negative, then the counter will be decremented by that much instead.</div>
+
+ <p>If <code>by</code> is negative, then the counter will be decremented by that much instead.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>by</code> - The amount to increment the counter by.</dd>
@@ -233,8 +233,8 @@ extends <a href="Crdt.html" title="interface in io.cloudstate.javasupport.crdt">
 <h4>decrement</h4>
 <pre class="methodSignature">long&nbsp;decrement&#8203;(long&nbsp;by)</pre>
 <div class="block">Decrement the counter.
- <p>
- If <code>by</code> is negative, then the counter will be incremented by that much instead.</div>
+
+ <p>If <code>by</code> is negative, then the counter will be incremented by that much instead.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>by</code> - The amount to decrement the counter by.</dd>
