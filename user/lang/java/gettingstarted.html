@@ -265,7 +265,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </code></pre>
 <p>Now if you run <code>mvn compile</code>, you&rsquo;ll find your generated protobuf files in <code>target/generated-sources/protobuf/java</code>.</p>
 <h2><a href="#creating-a-main-class" name="creating-a-main-class" class="anchor"><span class="anchor-link"></span></a>Creating a main class</h2>
-<p>Your main class will be responsible for creating the CloudState gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <a href="../../../user/lang/java/api/index.html/io/cloudstate/javasupport/CloudState.html"><code>CloudState</code></a> server builder, for example:</p>
+<p>Your main class will be responsible for creating the CloudState gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/CloudState.html"><code>CloudState</code></a> server builder, for example:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/gettingstarted/ShoppingCartMain.java#L4-L15" target="_blank" title="Go to snippet source"></a><code class="language-java">import com.example.Shoppingcart;
 import io.cloudstate.javasupport.CloudState;
 
@@ -292,13 +292,13 @@ public class ShoppingCartMain {
   </thead>
   <tbody>
     <tr>
-      <td><a href="../../../user/lang/java/api/index.html/io/cloudstate/javasupport/Context.html"><code>Context</code></a> </td>
+      <td><a href="../../../user/lang/java/api/io/cloudstate/javasupport/Context.html"><code>Context</code></a> </td>
       <td> </td>
       <td>The super type of all CloudState contexts. Every invoker makes a subtype of this available for injection, and method or constructor may accept that sub type, or any super type of that subtype that is a subtype of <code>Context</code>. </td>
     </tr>
     <tr>
       <td><code>java.lang.String</code> </td>
-      <td><a href="../../../user/lang/java/api/index.html/io/cloudstate/javasupport/EntityId.html"><code>@EntityId</code></a> </td>
+      <td><a href="../../../user/lang/java/api/io/cloudstate/javasupport/EntityId.html"><code>@EntityId</code></a> </td>
       <td>The ID of the entity. </td>
     </tr>
   </tbody>

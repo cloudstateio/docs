@@ -126,10 +126,183 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#event-sourcing" name="event-sourcing" class="anchor"><span class="anchor-link"></span></a>Event sourcing</h1>
-<ul>
-  <li>Explain how to use the event sourcing API</li>
-  <li>Explain how to implement different behaviors</li>
-</ul>
+<p>This page documents how to implement CloudState event sourced entities in JavaScript. For information on what CloudState event sourced entities are, please read the general <a href="../../features/eventsourced.html">Event sourcing</a> documentation first.</p>
+<h2><a href="#persistence-types-and-serialization" name="persistence-types-and-serialization" class="anchor"><span class="anchor-link"></span></a>Persistence types and serialization</h2>
+<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. A snapshot is the current state of the entity, and so the entities state must be serializable. The most straight forward way to persist events and the state is to use protobufs. CloudState will automatically detect if an emitted event or snapshot is a protobuf, and serialize it as such. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
+<p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your services protobuf messages, rather, you should create new messages, even if they are identical to the services. While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the services public interface to evolve independently from its data storage format, which should be private.</p>
+<p>For our shopping cart example, we&rsquo;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my applications domain objects:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/domain.proto" target="_blank" title="Go to snippet source"></a><code class="language-proto">syntax = &quot;proto3&quot;;
+
+package example.shoppingcart.domain;
+
+message LineItem {
+    string productId = 1;
+    string name = 2;
+    int32 quantity = 3;
+}
+
+message ItemAdded {
+    LineItem item = 1;
+}
+
+message ItemRemoved {
+    string productId = 1;
+}
+
+message CheckedOut {}
+
+message Cart {
+    repeated LineItem items = 1;
+    bool checkedout = 2;
+}</code></pre>
+<p>In this file, the <code>Cart</code> message is the state, while <code>ItemAdded</code> and <code>ItemRemoved</code> are events. Note that the events are in past tense - events are facts, indisputable things that happened in the past. A fact never becomes false, once you&rsquo;ve added an item to a shopping cart, it never becomes untrue that that item was added to the cart. It may be removed later, but that doesn&rsquo;t change the fact that it was added, it only changes the current state of the cart, not what happened in the past. The names of your events should always be in past tense, communicating the indisputable fact that they represent.</p>
+<h2><a href="#creating-an-entity" name="creating-an-entity" class="anchor"><span class="anchor-link"></span></a>Creating an entity</h2>
+<p>An event sourced entity can be created using the <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html">EventSourced</a> class.</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L18-L27" target="_blank" title="Go to snippet source"></a><code class="language-js">const EventSourced = require(&quot;cloudstate&quot;).EventSourced;
+
+const entity = new EventSourced(
+    [&quot;shoppingcart.proto&quot;, &quot;domain.proto&quot;],
+    &quot;example.shoppingcart.ShoppingCartService&quot;,
+    {
+        persistenceId: &quot;shopping-cart&quot;,
+        snapshotEvery: 100
+    }
+);</code></pre>
+<p>Here we pass in the protobuf files that contain our service and our domain protocol, <code>shoppingcart.proto</code> and <code>domain.proto</code>. CloudState needs the protobuf file that your service lives in so that it can load it and read it. It also needs the protobuf file that your domain events and snapshots are in so that when it receives these events and snapshots from the proxy, and can know how to deserialize them.</p>
+<p>We also pass in the fully qualified name of the service our event sourced entity implements, <code>example.shoppingcart.ShoppingCartService</code>. We also are specifying some options.</p>
+<p>The <code>persistenceId</code> is used to namespace events in the journal, useful for when you share the same database between multiple entities. It defaults to <code>entity</code>, so it&rsquo;s a good idea to select one explicitly.</p>
+<p>The <code>snapshotEvery</code> parameter controls how often snapshots are taken, so that the entity doesn&rsquo;t need to be recovered from the whole journal each time it&rsquo;s loaded. If left unset, it defaults to 100. Setting it to a negative number will result in snapshots never being taken. Typically, leaving it at the default is good enough, we only recommend changing it if you have specific data from performance tests to justify a change.</p>
+<h2><a href="#using-protobuf-types" name="using-protobuf-types" class="anchor"><span class="anchor-link"></span></a>Using protobuf types</h2>
+<p>When you pass an event or snapshot to CloudState to persist, it needs to know how to serialize that. Simply passing a regular object does not provide enough information to know how protobuf should serialize the objects. Hence, any event or snapshot types that you want to use, you have to lookup the protobuf type for, and then use the <code>create</code> method to create it.</p>
+<p>The <code>EventSourced</code> class provides a helper method called <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#lookupType"><code>lookupType</code></a> to facilitate this. So before implementing anything, we&rsquo;ll look up these types so we can use them later.</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L31-L34" target="_blank" title="Go to snippet source"></a><code class="language-js">const pkg = &quot;example.shoppingcart.domain.&quot;;
+const ItemAdded = entity.lookupType(pkg + &quot;ItemAdded&quot;);
+const ItemRemoved = entity.lookupType(pkg + &quot;ItemRemoved&quot;);
+const Cart = entity.lookupType(pkg + &quot;Cart&quot;);</code></pre>
+<h2><a href="#initial-state" name="initial-state" class="anchor"><span class="anchor-link"></span></a>Initial state</h2>
+<p>When there are no snapshots persisted for an entity (such as when the entity is first created), the entity needs to have an initial state. Note that event sourced entities are not explicitly created, they are implicitly created when a command arrives for them. Additionally, creating an entity doesn&rsquo;t mean anything is persisted, nothing is persisted until an event is created for that entity. So, if user &ldquo;X&rdquo; opens their shopping cart for the first time, an entity will be created, but it will have no events in the log yet, and just be in the initial state.</p>
+<p>To create the initial state, we set the <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#initial"><code>initial</code></a> callback. This takes the id of the entity being created, and returns a new empty state, in this case, an empty shopping cart:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L38" target="_blank" title="Go to snippet source"></a><code class="language-js">entity.initial = entityId =&gt; Cart.create({items: []});</code></pre>
+<p>Note the use of <code>Cart.create()</code>, this creates a protobuf message using the <code>Cart</code> protobuf message type that we looked up earlier.</p>
+<h2><a href="#behavior" name="behavior" class="anchor"><span class="anchor-link"></span></a>Behavior</h2>
+<p>Now we need to define the behavior for our entity. The behavior consists of two parts, command handlers, and event handlers.</p>
+<h3><a href="#command-handlers" name="command-handlers" class="anchor"><span class="anchor-link"></span></a>Command handlers</h3>
+<p>A <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#~commandHandler">command handler</a> is a function that takes a command, the current state, and an <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.EventSourcedCommandContext.html"><code>EventSourcedCommandContext</code></a>. It implements a service call on the entities gRPC interface.</p>
+<p>The command is the input message type for the gRPC service call. For example, the <code>GetCart</code> service call has an input type of <code>GetShoppingCart</code>, while the <code>AddItem</code> service call has an input type of <code>AddLineItem</code>. The command will be an object that matches the structure of these protobuf types.</p>
+<p>The command handler must return a message of the same type as the output type of the gRPC service call, in the case of our <code>GetCart</code> command, this must be a <code>Cart</code> message. Note that unlike for the state and events, this message does not need to be created using a looked up protobuf message type - CloudState already knows the output type of the gRPC service call and so can infer it itself. It only has to be a plain JavaScript object that matches the structure of the protobuf type.</p>
+<p>The following shows the implementation of the <code>GetCart</code> command handler. This command handler is a read-only command handler, it doesn&rsquo;t emit any events, it just returns some state:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L42-L44" target="_blank" title="Go to snippet source"></a><code class="language-js">function getCart(request, cart) {
+    return cart;
+}</code></pre>
+<h4><a href="#emitting-events" name="emitting-events" class="anchor"><span class="anchor-link"></span></a>Emitting events</h4>
+<p>Commands that modify the state MUST do so by emitting events.</p><div class="callout warning "><div class="callout-title">Warning</div>
+<p>The <strong>only</strong> way a command handler may modify its state is by emitting an event. Any modifications made directly to the state from the command handler will not be persisted, and will be lost as soon as the command handler finishes executing.</p></div>
+<p>A command handler may emit an event by using the <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.EventSourcedCommandContext.html#emit"><code>emit</code></a> method on the <code>EventSourcedCommandContext</code>.</p>
+<p>Here&rsquo;s an example of a command handler that emits an event:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L48-L62" target="_blank" title="Go to snippet source"></a><code class="language-js">function addItem(addItem, cart, ctx) {
+    if (addItem.quantity &lt; 1) {
+        ctx.fail(&quot;Cannot add negative quantity to item &quot; + addItem.productId);
+    } else {
+        const itemAdded = ItemAdded.create({
+            item: {
+                productId: addItem.productId,
+                name: addItem.name,
+                quantity: addItem.quantity
+            }
+        });
+        ctx.emit(itemAdded);
+        return {};
+    }
+}</code></pre>
+<p>This command handler also validates the command, ensuring the quantity items added is greater than zero. Invoking <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.EventSourcedCommandContext.html#fail"><code>fail</code></a> fails the command - this method throws so there&rsquo;s no need to explicitly throw an exception.</p>
+<h3><a href="#event-handlers" name="event-handlers" class="anchor"><span class="anchor-link"></span></a>Event handlers</h3>
+<p>An <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#~eventHandler">event handler</a> is invoked at two points, when restoring entities from the journal, before any commands are handled, and each time a new event is emitted. An event handlers responsibility is to update the state of the entity according to the event. Event handlers are the only place where its safe to mutate the state of the entity at all.</p>
+<p>An event handler must be declared for each type of event that gets emitted. The type is defined by the protobuf message type in the case of protobuf events, or the <code>type</code> property on a JSON object in the case of JSON events. The mapping for these type names to functions will be discussed later, for now we&rsquo;ll just look at the functions.</p>
+<p>Event handlers take the event they are handling, and the state, and must return the new state. The handler may update the existing state passed in, but it still has to return that state as its return value.</p>
+<p>Here&rsquo;s an example event handler for the <code>ItemAdded</code> event:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L68-L80" target="_blank" title="Go to snippet source"></a><code class="language-js">function itemAdded(added, cart) {
+    const existing = cart.items.find(item =&gt; {
+        return item.productId === added.item.productId;
+    });
+
+    if (existing) {
+        existing.quantity = existing.quantity + added.item.quantity;
+    } else {
+        cart.items.push(added.item);
+    }
+
+    return cart;
+}</code></pre>
+<h3><a href="#setting-the-behavior" name="setting-the-behavior" class="anchor"><span class="anchor-link"></span></a>Setting the behavior</h3>
+<p>Once you have your command handler and event handler functions implemented, you can now set your behavior. The <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#~behaviorCallback">behavior callback</a> takes the current state of the entity, and returns an object with two properties, <code>commandHandlers</code> and <code>eventHandlers</code>. The callback may return different sets of handlers according to the current state, this will be explored more <a href="eventsourced.html#multiple-behaviors">a little later</a>, for now we&rsquo;ll just implement an entity with one set of handlers.</p>
+<p>The behavior callback can be set by setting the <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#behavior"><code>behavior</code></a> property on the entity:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L86-L98" target="_blank" title="Go to snippet source"></a><code class="language-js">entity.behavior = cart =&gt; {
+    return {
+        commandHandlers: {
+            AddItem: addItem,
+            RemoveItem: removeItem,
+            GetCart: getCart
+        },
+        eventHandlers: {
+            ItemAdded: itemAdded,
+            ItemRemoved: itemRemoved
+        }
+    };
+};</code></pre>
+<p>The command handlers are a mapping of the gRPC service call names to the command handler functions we implemented. Note the names, as in the gRPC convention for service call names, are upper cased.</p>
+<p>The event handlers are a mapping of event names to the event handler functions that we implemented. The event names must match the type of the events that are being persisted. In the case of protobuf messages, this is either the fully qualified name of the protobuf message, or the unqualified name of the protobuf message. For JSON messages, this is the value of the <code>type</code> property in the message.</p>
+<h4><a href="#multiple-behaviors" name="multiple-behaviors" class="anchor"><span class="anchor-link"></span></a>Multiple behaviors</h4>
+<p>In the examples above, our shopping cart entity only has one behavior. An entity may have different states, where command and event handling may differ according to the state it is currently in. While this could be implemented using if statements in the handlers, CloudState also provides multiple behavior support, so that an entity can change its behavior. This multiple behavior support allows implementing entities as finite state machines.</p>
+<p>The entities behavior can be changed by returning different sets of handlers from the <code>behavior</code> callback after inspecting the state. This callback is invoked each time a handler is needed, so there&rsquo;s no need to explicitly transition behaviors.</p>
+<p>In the example below, we show a shopping cart that also has a checkout command. Once checked out, the shopping cart no longer accepts any commands to add or remove items, its state and therefore behavior changes:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L104-L144" target="_blank" title="Go to snippet source"></a><code class="language-js">function checkout(checkout, cart, ctx) {
+    ctx.emit(CheckedOut.create({}));
+    return {};
+}
+
+function checkedOut(checkedOut, cart) {
+    cart.checkedOut = true;
+    return cart;
+}
+
+function alreadyCheckedOut(cmd, state, ctx) {
+    ctx.fail(&quot;Cart is already checked out!&quot;);
+}
+
+entity.behavior = cart =&gt; {
+    if (cart.checkedout) {
+        return {
+            commandHandlers: {
+                AddItem: alreadyCheckedOut,
+                RemoveItem: alreadyCheckedOut,
+                Checkout: alreadyCheckedOut,
+                GetCart: getCart
+            },
+            eventHandlers : {}
+        };
+    } else {
+        return {
+            commandHandlers: {
+                AddItem: addItem,
+                RemoveItem: removeItem,
+                Checkout: checkout,
+                GetCart: getCart
+            },
+            eventHandlers: {
+                ItemAdded: itemAdded,
+                ItemRemoved: itemRemoved,
+                CheckedOut: checkedOut
+            }
+        };
+    }
+};</code></pre>
+<h2><a href="#starting-the-entity" name="starting-the-entity" class="anchor"><span class="anchor-link"></span></a>Starting the entity</h2>
+<p>If you only have a single entity, as a convenience, you can start it directly, by invoking the <a href="../../../user/lang/javascript/api/module-cloudstate.EventSourced.html#start"><code>start</code></a> method, like so:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L150" target="_blank" title="Go to snippet source"></a><code class="language-js">entity.start();</code></pre>
+<p>Alternatively, you can add it to the <code>CloudState</code> server explicitly:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/eventsourced/shoppingcart.js#L156-L158" target="_blank" title="Go to snippet source"></a><code class="language-js">const CloudState = require(&quot;cloudstate&quot;).CloudState;
+const server = new CloudState();
+server.addEntity(entity);</code></pre>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/javascript/eventsourced.md">here</a>.
 </div>
@@ -139,6 +312,24 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../../user/lang/javascript/eventsourced.html#event-sourcing" class="header">Event sourcing</a>
+  <ul>
+    <li><a href="../../../user/lang/javascript/eventsourced.html#persistence-types-and-serialization" class="header">Persistence types and serialization</a></li>
+    <li><a href="../../../user/lang/javascript/eventsourced.html#creating-an-entity" class="header">Creating an entity</a></li>
+    <li><a href="../../../user/lang/javascript/eventsourced.html#using-protobuf-types" class="header">Using protobuf types</a></li>
+    <li><a href="../../../user/lang/javascript/eventsourced.html#initial-state" class="header">Initial state</a></li>
+    <li><a href="../../../user/lang/javascript/eventsourced.html#behavior" class="header">Behavior</a></li>
+    <li><a href="../../../user/lang/javascript/eventsourced.html#starting-the-entity" class="header">Starting the entity</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
