@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Using CloudState · CloudState</title>
+<title>The CloudState Build · CloudState</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='CloudState Documentation'/>
-<link rel="canonical" href="https://cloudstate.io/docs/user/index.html"/>
+<link rel="canonical" href="https://cloudstate.io/docs/developer/thebuild.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 
 <!-- OneTrust Cookies Consent Notice start -->
@@ -47,7 +47,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../user/index.html" class="active page">Using CloudState</a>
+  <li><a href="../user/index.html" class="page">Using CloudState</a>
   <ul>
     <li><a href="../user/quickstart.html" class="page">Quickstart</a></li>
     <li><a href="../user/features/index.html" class="page">Overview</a></li>
@@ -57,7 +57,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li><a href="../spec/index.html" class="page">Protocol Specification</a></li>
   <li><a href="../developer/index.html" class="page">Content for developers of CloudState</a>
   <ul>
-    <li><a href="../developer/thebuild.html" class="page">The CloudState Build</a></li>
+    <li><a href="../developer/thebuild.html" class="active page">The CloudState Build</a></li>
     <li><a href="../developer/language-support/index.html" class="page">Language support</a></li>
   </ul></li>
 </ul>
@@ -88,7 +88,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../user/index.html" class="active page">Using CloudState</a>
+  <li><a href="../user/index.html" class="page">Using CloudState</a>
   <ul>
     <li><a href="../user/quickstart.html" class="page">Quickstart</a></li>
     <li><a href="../user/features/index.html" class="page">Overview</a></li>
@@ -98,7 +98,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../spec/index.html" class="page">Protocol Specification</a></li>
   <li><a href="../developer/index.html" class="page">Content for developers of CloudState</a>
   <ul>
-    <li><a href="../developer/thebuild.html" class="page">The CloudState Build</a></li>
+    <li><a href="../developer/thebuild.html" class="active page">The CloudState Build</a></li>
     <li><a href="../developer/language-support/index.html" class="page">Language support</a></li>
   </ul></li>
 </ul>
@@ -116,7 +116,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../index.html">CloudState</a></li>
-  <li>Using CloudState</li>
+  <li><a href="../developer/index.html">Content for developers of CloudState</a></li>
+  <li>The CloudState Build</li>
 </ul>
 </div>
 </div>
@@ -124,45 +125,83 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#using-cloudstate" name="using-cloudstate" class="anchor"><span class="anchor-link"></span></a>Using CloudState</h1>
-<p>Documentation for CloudState users.</p>
-<div class="toc ">
+<h1><a href="#the-cloudstate-build" name="the-cloudstate-build" class="anchor"><span class="anchor-link"></span></a>The CloudState Build</h1>
+<p>The CloudState Build uses <code>sbt</code> as its build tool.</p>
+<h2><a href="#installation-instructions" name="installation-instructions" class="anchor"><span class="anchor-link"></span></a>Installation instructions</h2>
 <ul>
-  <li><a href="../user/quickstart.html" class="page">Quickstart</a></li>
-  <li><a href="../user/features/index.html" class="page">Overview</a>
-  <ul>
-    <li><a href="../user/features/index.html#high-level-concepts" class="header">High level concepts</a></li>
-    <li><a href="../user/features/index.html#glossary-of-terms" class="header">Glossary of terms</a></li>
-    <li><a href="../user/features/grpc.html" class="page">gRPC descriptors</a></li>
-    <li><a href="../user/features/eventsourced.html" class="page">Event sourcing</a></li>
-    <li><a href="../user/features/crdts.html" class="page">Conflict-free Replicated Data Types</a></li>
-    <li><a href="../user/features/effects.html" class="page">Forwarding and effects</a></li>
-  </ul></li>
-  <li><a href="../user/lang/index.html" class="page">Languages</a>
-  <ul>
-    <li><a href="../user/lang/javascript/index.html" class="page">JavaScript</a></li>
-    <li><a href="../user/lang/java/index.html" class="page">Java</a></li>
-  </ul></li>
-  <li><a href="../user/deployment/index.html" class="page">Deploying applications</a>
-  <ul>
-    <li><a href="../user/deployment/installing.html" class="page">Installing</a></li>
-    <li><a href="../user/deployment/deploying.html" class="page">Deploying a stateful service</a></li>
-    <li><a href="../user/deployment/stores/index.html" class="page">Stateful stores</a></li>
-    <li><a href="../user/deployment/monitoring.html" class="page">Monitoring</a></li>
-    <li><a href="../user/deployment/autoscaling.html" class="page">Autoscaling</a></li>
-    <li><a href="../user/deployment/security.html" class="page">Security</a></li>
-  </ul></li>
+  <li>Install the <code>git</code> source code manager from <a href="https://git-scm.com/">here</a>.</li>
+  <li>Clone the CloudState repository using <code>git</code>: <code>git clone git@github.com:cloudstateio/cloudstate.git</code></li>
+  <li>Install <code>sbt</code>, follow <a href="https://www.scala-sbt.org/download.html">these instructions</a>.</li>
 </ul>
-</div>
+<h2><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting started</h2>
+<p>It is possible to run <code>sbt</code> either on a command-by-command basis by running <code>sbt &lt;command&gt; parameters</code>. It is also possible to run <code>sbt</code> in interactive mode by running <code>sbt</code>, then you can interact with the build interactively by typing in commands and having them executed by pressing RETURN.</p>
+<p>The following is a list of sbt commands and use-cases:</p>
+<table>
+  <thead>
+    <tr>
+      <th align="right">Command </th>
+      <th>Use-case </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="right">projects </td>
+      <td>Prints a list of all projects in the build </td>
+    </tr>
+    <tr>
+      <td align="right">project <NAME> </td>
+      <td>Makes <NAME> the current project </td>
+    </tr>
+    <tr>
+      <td align="right">clean </td>
+      <td>Deletes all generated files and compilation results for the current project and the projects it depends on </td>
+    </tr>
+    <tr>
+      <td align="right">compile </td>
+      <td>Compiles all non-test sources for the current project and the projects it depends on </td>
+    </tr>
+    <tr>
+      <td align="right">test:compile </td>
+      <td>Compiles all sources for the current project and the projects it depends on </td>
+    </tr>
+    <tr>
+      <td align="right">test </td>
+      <td>Executes all &ldquo;regular&rdquo; tests for the current project and the projects it depends on </td>
+    </tr>
+    <tr>
+      <td align="right">it:test </td>
+      <td>Executes all integration tests for the current project and the projects it depends on </td>
+    </tr>
+    <tr>
+      <td align="right">exit </td>
+      <td>Exits the interactive mode of <code>sbt</code> </td>
+    </tr>
+  </tbody>
+</table>
+<p>For more documentation about <code>sbt</code>, see <a href="https://www.scala-sbt.org/1.x/docs/index.html">this page</a>.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/developer/thebuild.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../user/quickstart.html">Quickstart</a></p>
+<p><strong>Next:</strong> <a href="../developer/language-support/index.html">Language support</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../developer/thebuild.html#the-cloudstate-build" class="header">The CloudState Build</a>
+  <ul>
+    <li><a href="../developer/thebuild.html#installation-instructions" class="header">Installation instructions</a></li>
+    <li><a href="../developer/thebuild.html#getting-started" class="header">Getting started</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
