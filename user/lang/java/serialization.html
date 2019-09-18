@@ -128,12 +128,57 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#serialization" name="serialization" class="anchor"><span class="anchor-link"></span></a>Serialization</h1>
+<p>CloudState functions serve gRPC interfaces, and naturally the input messages and output messages are protobuf messages that get serialized to the protobuf wire format. However, in addition to these messages, there are a number of places where CloudState needs to serialize other objects, for persistence and replication. This includes:</p>
 <ul>
-  <li>Explain what serialization is provided, what types can be serialized etc.</li>
-  <li>Explain how to use protobufs for serialization.</li>
-  <li>Explain how to use primitive values for serialization.</li>
-  <li>Explain how to use JSON for serialization.</li>
+  <li>Event sourced <a href="eventsourced.html#persistence-types-and-serialization">events and snapshots</a>.</li>
+  <li>CRDT <a href="crdt.html#sets-and-maps">map keys and set elements</a>, and <a href="crdt.html#registers">LWWRegister values</a>.</li>
 </ul>
+<p>CloudState supports a number of types and serialization options for these values.</p>
+<h2><a href="#primitive-types" name="primitive-types" class="anchor"><span class="anchor-link"></span></a>Primitive types</h2>
+<p>CloudState supports serializing the following primitive types:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Protobuf type </th>
+      <th>Java type </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>string </td>
+      <td>java.lang.String </td>
+    </tr>
+    <tr>
+      <td>bytes </td>
+      <td>com.google.protobuf.ByteString </td>
+    </tr>
+    <tr>
+      <td>int32 </td>
+      <td>java.lang.Integer </td>
+    </tr>
+    <tr>
+      <td>int64 </td>
+      <td>java.lang.Long </td>
+    </tr>
+    <tr>
+      <td>float </td>
+      <td>java.lang.Float </td>
+    </tr>
+    <tr>
+      <td>double </td>
+      <td>java.lang.Double </td>
+    </tr>
+    <tr>
+      <td>bool </td>
+      <td>java.lang.Boolean </td>
+    </tr>
+  </tbody>
+</table>
+<p>The details of how these are serialized can be found <a href="../../../developer/language-support/serialization.html#primitive-values">here</a>.</p>
+<h2><a href="#json" name="json" class="anchor"><span class="anchor-link"></span></a>JSON</h2>
+<p>CloudState uses <a href="https://github.com/FasterXML/jackson">Jackson</a> to serialize JSON. Any classes that are annotated with <a href="../../../user/lang/java/api/io/cloudstate/javasupport/Jsonable.html"><code>@Jsonable</code></a> will be serialized to and from JSON using Jackson.</p>
+<p>The details of how these are serialized can be found <a href="../../../developer/language-support/serialization.html#json-values">here</a>.</p>
+<p>Note that if you are using JSON values in CRDT sets or maps, the serialization of these values <strong>must</strong> be stable. This means you must not use maps or sets in your value, and you should define an explicit ordering for the fields in your objects, using the <a href="http://fasterxml.github.io/jackson-annotations/javadoc/2.9/com/fasterxml/jackson/annotation/JsonPropertyOrder.html"><code>@JsonPropertyOrder</code></a> annotation.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/java/serialization.md">here</a>.
 </div>
@@ -143,6 +188,20 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../../user/lang/java/serialization.html#serialization" class="header">Serialization</a>
+  <ul>
+    <li><a href="../../../user/lang/java/serialization.html#primitive-types" class="header">Primitive types</a></li>
+    <li><a href="../../../user/lang/java/serialization.html#json" class="header">JSON</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
