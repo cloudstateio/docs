@@ -50,15 +50,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li><a href="../../user/index.html" class="page">Using CloudState</a>
   <ul>
     <li><a href="../../user/quickstart.html" class="page">Quickstart</a></li>
-    <li><a href="../../user/features/index.html" class="page">Overview</a></li>
-    <li><a href="../../user/lang/index.html" class="page">Languages</a></li>
-    <li><a href="../../user/deployment/index.html" class="page">Deploying applications</a></li>
+    <li><a href="../../user/features/index.html" class="page">Overview</a>
+    <ul>
+      <li><a href="../../user/features/grpc.html" class="page">gRPC descriptors</a></li>
+      <li><a href="../../user/features/eventsourced.html" class="page">Event sourcing</a></li>
+      <li><a href="../../user/features/crdts.html" class="page">Conflict-free Replicated Data Types</a></li>
+      <li><a href="../../user/features/effects.html" class="page">Forwarding and effects</a></li>
+    </ul></li>
+    <li><a href="../../user/lang/index.html" class="page">Languages</a>
+    <ul>
+      <li><a href="../../user/lang/javascript/index.html" class="page">JavaScript</a></li>
+      <li><a href="../../user/lang/java/index.html" class="page">Java</a></li>
+    </ul></li>
+    <li><a href="../../user/deployment/index.html" class="page">Deploying applications</a>
+    <ul>
+      <li><a href="../../user/deployment/installing.html" class="active page">Installing</a></li>
+      <li><a href="../../user/deployment/deploying.html" class="page">Deploying a stateful service</a></li>
+      <li><a href="../../user/deployment/stores/index.html" class="page">Stateful stores</a></li>
+      <li><a href="../../user/deployment/monitoring.html" class="page">Monitoring</a></li>
+      <li><a href="../../user/deployment/autoscaling.html" class="page">Autoscaling</a></li>
+      <li><a href="../../user/deployment/security.html" class="page">Security</a></li>
+    </ul></li>
   </ul></li>
   <li><a href="../../spec/index.html" class="page">Protocol Specification</a></li>
   <li><a href="../../developer/index.html" class="page">Content for developers of CloudState</a>
   <ul>
     <li><a href="../../developer/thebuild.html" class="page">The CloudState Build</a></li>
-    <li><a href="../../developer/language-support/index.html" class="page">Language support</a></li>
+    <li><a href="../../developer/language-support/index.html" class="page">Language support</a>
+    <ul>
+      <li><a href="../../developer/language-support/serialization.html" class="page">CloudState serialization convention</a></li>
+    </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -91,15 +112,36 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../../user/index.html" class="page">Using CloudState</a>
   <ul>
     <li><a href="../../user/quickstart.html" class="page">Quickstart</a></li>
-    <li><a href="../../user/features/index.html" class="page">Overview</a></li>
-    <li><a href="../../user/lang/index.html" class="page">Languages</a></li>
-    <li><a href="../../user/deployment/index.html" class="page">Deploying applications</a></li>
+    <li><a href="../../user/features/index.html" class="page">Overview</a>
+    <ul>
+      <li><a href="../../user/features/grpc.html" class="page">gRPC descriptors</a></li>
+      <li><a href="../../user/features/eventsourced.html" class="page">Event sourcing</a></li>
+      <li><a href="../../user/features/crdts.html" class="page">Conflict-free Replicated Data Types</a></li>
+      <li><a href="../../user/features/effects.html" class="page">Forwarding and effects</a></li>
+    </ul></li>
+    <li><a href="../../user/lang/index.html" class="page">Languages</a>
+    <ul>
+      <li><a href="../../user/lang/javascript/index.html" class="page">JavaScript</a></li>
+      <li><a href="../../user/lang/java/index.html" class="page">Java</a></li>
+    </ul></li>
+    <li><a href="../../user/deployment/index.html" class="page">Deploying applications</a>
+    <ul>
+      <li><a href="../../user/deployment/installing.html" class="active page">Installing</a></li>
+      <li><a href="../../user/deployment/deploying.html" class="page">Deploying a stateful service</a></li>
+      <li><a href="../../user/deployment/stores/index.html" class="page">Stateful stores</a></li>
+      <li><a href="../../user/deployment/monitoring.html" class="page">Monitoring</a></li>
+      <li><a href="../../user/deployment/autoscaling.html" class="page">Autoscaling</a></li>
+      <li><a href="../../user/deployment/security.html" class="page">Security</a></li>
+    </ul></li>
   </ul></li>
   <li><a href="../../spec/index.html" class="page">Protocol Specification</a></li>
   <li><a href="../../developer/index.html" class="page">Content for developers of CloudState</a>
   <ul>
     <li><a href="../../developer/thebuild.html" class="page">The CloudState Build</a></li>
-    <li><a href="../../developer/language-support/index.html" class="page">Language support</a></li>
+    <li><a href="../../developer/language-support/index.html" class="page">Language support</a>
+    <ul>
+      <li><a href="../../developer/language-support/serialization.html" class="page">CloudState serialization convention</a></li>
+    </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -178,7 +220,11 @@ The source code for this page can be found <a href="https://github.com/cloudstat
     <li><a href="../../user/deployment/installing.html#prerequisites" class="header">Prerequisites</a></li>
     <li><a href="../../user/deployment/installing.html#installation-requirements" class="header">Installation requirements</a></li>
     <li><a href="../../user/deployment/installing.html#operator-requirements" class="header">Operator requirements</a></li>
-    <li><a href="../../user/deployment/installing.html#operator-configuration" class="header">Operator configuration</a></li>
+    <li><a href="../../user/deployment/installing.html#operator-configuration" class="header">Operator configuration</a>
+    <ul>
+      <li><a href="../../user/deployment/installing.html#configuring-namespaces-to-watch" class="header">Configuring namespaces to watch</a></li>
+      <li><a href="../../user/deployment/installing.html#configuring-proxy-images" class="header">Configuring proxy images</a></li>
+    </ul></li>
     <li><a href="../../user/deployment/installing.html#installing-the-operator" class="header">Installing the operator</a></li>
   </ul></li>
 </ul>
