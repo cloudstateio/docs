@@ -169,10 +169,43 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#deploying-a-stateful-service" name="deploying-a-stateful-service" class="anchor"><span class="anchor-link"></span></a>Deploying a stateful service</h1>
+<p>CloudState services are deployed to Kubernetes using the <code>StatefulService</code> resource. Here is a minimal example:</p>
+<pre class="prettyprint"><code class="language-yaml">apiVersion: cloudstate.io/v1alpha1
+kind: StatefulService
+metadata:
+  name: shopping-cart
+spec:
+  containers:
+  - image: my-docker-hub-username/shopping-cart:latest
+</code></pre>
+<p>Upon deploying this, the CloudState operator will create a Kubernetes <code>Deployment</code> that contains the container configured in the descriptor, along with a sidecar container for the CloudState proxy. The operator will also deploy a Kubernetes <code>Service</code> to allow other services to consume the CloudState service.</p>
+<h2><a href="#customizing-the-container" name="customizing-the-container" class="anchor"><span class="anchor-link"></span></a>Customizing the container</h2>
+<p>The container specification is modeled off the container specification in the <code>Pod</code> resource. CloudState will inject some additional configuration:</p>
 <ul>
-  <li>Explain the StatefulService resource</li>
-  <li>Explain what the operator does</li>
+  <li>If no ports are specified, in the container, a port of <code>8080</code> will be created, otherwise, the first declared port will be taken and assumed to be the port that the proxy should use to communicate with the user function.</li>
+  <li>The port that the user function should use will be available in the environment variable <code>PORT</code>.</li>
+  <li>The name of the container will be ignored, and is hardcoded to <code>user-container</code>.</li>
 </ul>
+<h2><a href="#customizing-the-stateful-service" name="customizing-the-stateful-service" class="anchor"><span class="anchor-link"></span></a>Customizing the stateful service</h2>
+<p>The following additional fields are available to customize the service:</p>
+<dl>
+  <dt><code>datastore</code></dt>
+  <dd>Configures the datastore. This is discussed in detail in <a href="stores/index.html">Stateful stores</a>. If not configured, no store will be used, and support for any entity types that require a store will not be available on the proxy.</dd>
+  <dt><code>autoscaling</code></dt>
+  <dd>Configures autoscaling. This is discussed in detail in <a href="autoscaling.html">Autoscaling</a>. This field is likely to change.</dd>
+  <dt><code>serviceAccountName</code></dt>
+  <dd>The name of the service account that the pod should run using. Defaults to the default service account.</dd>
+  <dt><code>volumes</code></dt>
+  <dd>A list of <a href="https://kubernetes.io/docs/concepts/storage/volumes/">volumes to configure for pods</a>.</dd>
+  <dt><code>sidecarResources</code></dt>
+  <dd>Resource requirements to set for the sidecar. Uses the same structure as a container resources field. This field is likely to change.</dd>
+  <dt><code>sidecarJvmMemory</code></dt>
+  <dd>Heap space to allocate for the sidecar, using the <code>-Xmx</code> option. This currently has <a href="https://github.com/cloudstateio/cloudstate/issues/112">no effect for native images</a>, and is likely to change.</dd>
+  <dt><code>nodeSelector</code></dt>
+  <dd>Used to specify the <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">Pod nodeSelector</a>. This field is likely to change.</dd>
+  <dt><code>tolerations</code></dt>
+  <dd>Used to specify the <a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">Pod tolerations</a>. This field is likely to change.</dd>
+</dl>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/deployment/deploying.md">here</a>.
 </div>
@@ -182,6 +215,20 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../user/deployment/deploying.html#deploying-a-stateful-service" class="header">Deploying a stateful service</a>
+  <ul>
+    <li><a href="../../user/deployment/deploying.html#customizing-the-container" class="header">Customizing the container</a></li>
+    <li><a href="../../user/deployment/deploying.html#customizing-the-stateful-service" class="header">Customizing the stateful service</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
