@@ -126,10 +126,11 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#deploying-applications" name="deploying-applications" class="anchor"><span class="anchor-link"></span></a>Deploying applications</h1>
-<ul>
-  <li>Explain the supported platforms</li>
-  <li>Explain integration with Istio and/or Knative</li>
-</ul>
+<p>CloudState currently has support for Kubernetes, and provides an operator that allows deploying CloudState services.</p>
+<h2><a href="#istio" name="istio" class="anchor"><span class="anchor-link"></span></a>Istio</h2>
+<p>While CloudState doesn&rsquo;t require Istio, a service mesh is recommended. The reason for this is to support load balancing - Kubernetes ClusterIP based load balancing balances at the TCP connection level, and so works when load is spread across many connections, however HTTP/2 clients, such as those used by most gRPC clients, typically only make a single TCP connection and then use HTTP/2 multiplexing to make concurrent requests. The result is that all the load will go to whichever node the client connects to first.</p>
+<p>Service meshes that can do HTTP/2 stream load balancing overcome this by fanning out HTTP/2 streams in a single connection to multiple connections to different nodes. Istio is one such service mesh that supports this. Other service meshes may be possible to use with CloudState, but haven&rsquo;t been tested, one challenge with the CloudState Reference Implementation that service meshes present is that to form a cluster, the nodes must be allowed to communicate with each other without going through the service mesh. Istio provides some annotations that allow bypassing the service mesh to be configured, which CloudState uses. Other service meshes may or may not support this.</p>
+<p>CloudState requires a minimum Istio version of 1.2.0, versions prior to 1.2.0 don&rsquo;t offer the necessary annotations to bypass the service mesh, hence cluster formation is not possible.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/deployment/index.md">here</a>.
 </div>
@@ -139,6 +140,19 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../user/deployment/index.html#deploying-applications" class="header">Deploying applications</a>
+  <ul>
+    <li><a href="../../user/deployment/index.html#istio" class="header">Istio</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
