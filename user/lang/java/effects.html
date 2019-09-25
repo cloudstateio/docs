@@ -128,11 +128,49 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#forwarding-and-effects" name="forwarding-and-effects" class="anchor"><span class="anchor-link"></span></a>Forwarding and effects</h1>
-<ul>
-  <li>Explain the ServiceCallFactory interface</li>
-  <li>Explain how to forward replies to another service.</li>
-  <li>Explain how to emit effects.</li>
-</ul>
+<p>This page documents how to use CloudState CRDT effects and forwarding in Java. For high level information on what CloudState effects and forwarding is, please read the general <a href="../../features/effects.html">Forwarding and effects</a> documentation first.</p>
+<h2><a href="#looking-up-service-call-references" name="looking-up-service-call-references" class="anchor"><span class="anchor-link"></span></a>Looking up service call references</h2>
+<p>To forward a command or emit an effect, a reference to the service call that will be invoked needs to be looked up. This can be done using the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/ServiceCallFactory.html">ServiceCallFactory</a> interface, which is accessible on any context object via the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/Context.html#serviceCallFactory--"><code>serviceCallFactory()</code></a> method.</p>
+<p>For example, if a user function serves two entity types, a shopping cart, and a CRDT that tracks which items are currently in hot demand, it might want to invoke the <code>ItemAddedToCart</code> command on <code>example.shoppingcart.HotItems</code> as a side effect of the <code>AddItem</code> shopping cart command. This reference can be looked up like so:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/effects/ShoppingCartEntity.java#L14-L21" target="_blank" title="Go to snippet source"></a><code class="language-java">private final ServiceCallRef&lt;Hotitems.Item&gt; itemAddedToCartRef;
+
+public ShoppingCartEntity(Context ctx) {
+  itemAddedToCartRef =
+      ctx.serviceCallFactory()
+          .lookup(
+              &quot;example.shoppingcart.ShoppingCartService&quot;, &quot;ItemAddedToCart&quot;, Hotitems.Item.class);
+}</code></pre>
+<p>This could be looked up in the constructor of the entity, for later use, so it doesn&rsquo;t have to be looked up each time it&rsquo;s needed.</p>
+<h2><a href="#forwarding-command" name="forwarding-command" class="anchor"><span class="anchor-link"></span></a>Forwarding command</h2>
+<p>To forward a command, <a href="../../../user/lang/java/api/io/cloudstate/javasupport/ClientActionContext.html#forward-io.cloudstate.javasupport.ServiceCall-"><code>ClientActionContext.forward()</code></a> may be invoked. The <code>CommandContext</code> for each entity type implements <code>ClientActionContext</code> and so offers this function. If the hot items effect service call above were to be invoked as a forward, it would might look like this:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/effects/ShoppingCartEntity.java#L26-L37" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
+public void addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+  // ... Validate and emit event
+
+  ctx.forward(
+      itemAddedToCartRef.createCall(
+          Hotitems.Item.newBuilder()
+              .setProductId(item.getProductId())
+              .setName(item.getName())
+              .setQuantity(item.getQuantity())
+              .build()));
+}</code></pre>
+<h2><a href="#emitting-an-effect" name="emitting-an-effect" class="anchor"><span class="anchor-link"></span></a>Emitting an effect</h2>
+<p>To emit an effect, <a href="../../../user/lang/java/api/io/cloudstate/javasupport/EffectContext.html#effect-io.cloudstate.javasupport.ServiceCall-boolean-"><code>EffectContext.effect()</code></a> may be invoked. The <code>CommandContext</code> for each entity type implements <code>EffectContext</code> and so offers this function. If the hot items effect service call above were to be invoked as an effect, it would might look like this:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/effects/ShoppingCartEntity.java#L43-L56" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
+public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+  // ... Validate and emit event
+
+  ctx.effect(
+      itemAddedToCartRef.createCall(
+          Hotitems.Item.newBuilder()
+              .setProductId(item.getProductId())
+              .setName(item.getName())
+              .setQuantity(item.getQuantity())
+              .build()));
+
+  return Empty.getDefaultInstance();
+}</code></pre>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/java/effects.md">here</a>.
 </div>
@@ -142,6 +180,21 @@ The source code for this page can be found <a href="https://github.com/cloudstat
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../../user/lang/java/effects.html#forwarding-and-effects" class="header">Forwarding and effects</a>
+  <ul>
+    <li><a href="../../../user/lang/java/effects.html#looking-up-service-call-references" class="header">Looking up service call references</a></li>
+    <li><a href="../../../user/lang/java/effects.html#forwarding-command" class="header">Forwarding command</a></li>
+    <li><a href="../../../user/lang/java/effects.html#emitting-an-effect" class="header">Emitting an effect</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 
