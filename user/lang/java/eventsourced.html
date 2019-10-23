@@ -291,113 +291,13 @@ private Domain.LineItem convert(Shoppingcart.LineItem item) {
       .setQuantity(item.getQuantity())
       .build();
 }</code></pre>
-<p>When the entity is loaded again, the snapshot will first be loaded before any other events are received, and passed to a snapshot handler. Snapshot handlers are declare by annotating a method with <a href="../../../user/lang/java/api/io/cloudstate/javasupport/eventsourced/SnapshotHandler.html"><code>@SnapshotHandler</code></a>, and it can take a context class of type <a href="../../../user/lang/java/api/io/cloudstate/javasupport/eventsourced/SnapshotBehaviorContext.html"><code>SnapshotBehaviorContext</code></a>.</p>
+<p>When the entity is loaded again, the snapshot will first be loaded before any other events are received, and passed to a snapshot handler. Snapshot handlers are declare by annotating a method with <a href="../../../user/lang/java/api/io/cloudstate/javasupport/eventsourced/SnapshotHandler.html"><code>@SnapshotHandler</code></a>, and it can take a context class of type <a href="../../../user/lang/java/api/io/cloudstate/javasupport/eventsourced/SnapshotContext.html"><code>SnapshotContext</code></a>.</p>
 <p>Multiple snapshot handlers may be defined to handle multiple different types of snapshots, the type matching is done in the same way as for events.</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/eventsourced/ShoppingCartEntity.java#L99-L105" target="_blank" title="Go to snippet source"></a><code class="language-java">@SnapshotHandler
 public void handleSnapshot(Domain.Cart cart) {
   this.cart.clear();
   for (Domain.LineItem item : cart.getItemsList()) {
     this.cart.put(item.getProductId(), convert(item));
-  }
-}</code></pre>
-<h2><a href="#multiple-behaviors" name="multiple-behaviors" class="anchor"><span class="anchor-link"></span></a>Multiple behaviors</h2>
-<p>In the examples above, our shopping cart entity only has one behavior, and that is declared through the annotations on the entity class. An entity may have different states, where command and event handling may differ according to the state it is currently in. While this could be implemented using if statements in the handlers, CloudState also provides multiple behavior support, so that an entity can change its behavior. This multiple behavior support allows implementing entities as finite state machines.</p>
-<p>Entity behavior can be changed when the entity is created, when it handles a snapshot, and when it handles an event, using the <code>become</code> method on their respective contexts. The become method accepts an array of objects. Each object declares event handlers and command handlers for that particular behavior, and the handlers on that object will be used going forward for all subsequent commands and events.</p>
-<p>Behaviors can also be composed by supplying multiple behavior objects to the <code>become</code> method. Behavior objects are checked in order for a behavior, the first behavior that has a matching command or event handler will be invoked.</p>
-<p>Typically, behaviors will be implemented as inner classes of the entity, so that they can access the entities state. Alternatively, they can be implemented independently, and can in fact even hold the state immutably themselves - such that behaviors can be used to update the state of the entity.</p>
-<p>In the example below, we show a shopping cart that also has a checkout command. Once checked out, the shopping cart no longer accepts any commands to add or remove items, its behavior changes. Handlers that are shared between behaviors are declared on the entity itself, and it is passed as one of the behaviors on each call to change the behavior:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/eventsourced/behavior/ShoppingCartEntity.java#L14-L107" target="_blank" title="Go to snippet source"></a><code class="language-java">@EventSourcedEntity
-public class ShoppingCartEntity {
-  private final Map&lt;String, Shoppingcart.LineItem&gt; cart = new LinkedHashMap&lt;&gt;();
-  private boolean checkedout = false;
-
-  public ShoppingCartEntity(EventSourcedEntityCreationContext ctx) {}
-
-  @CommandHandler
-  public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
-    if (!checkedout) {
-      if (item.getQuantity() &lt;= 0) {
-        ctx.fail(&quot;Cannot add negative quantity of to item&quot; + item.getProductId());
-      }
-      ctx.emit(
-          Domain.ItemAdded.newBuilder()
-              .setItem(
-                  Domain.LineItem.newBuilder()
-                      .setProductId(item.getProductId())
-                      .setName(item.getName())
-                      .setQuantity(item.getQuantity())
-                      .build())
-              .build());
-      return Empty.getDefaultInstance();
-    } else {
-      throw ctx.fail(&quot;Can&#39;t add more items to an already checked out shopping cart&quot;);
-    }
-  }
-
-  @CommandHandler
-  public Empty checkout(CommandContext ctx) {
-    if (!checkedout) {
-      ctx.emit(Domain.CheckedOut.getDefaultInstance());
-      return Empty.getDefaultInstance();
-    } else {
-      throw ctx.fail(&quot;Shopping cart is already checked out&quot;);
-    }
-  }
-
-  @EventHandler
-  public void itemAdded(Domain.ItemAdded itemAdded) {
-    Shoppingcart.LineItem item = cart.get(itemAdded.getItem().getProductId());
-    if (item == null) {
-      item = convert(itemAdded.getItem());
-    } else {
-      item =
-          item.toBuilder()
-              .setQuantity(item.getQuantity() + itemAdded.getItem().getQuantity())
-              .build();
-    }
-    cart.put(item.getProductId(), item);
-  }
-
-  @EventHandler(eventClass = Domain.CheckedOut.class)
-  public void checkedOut(EventContext ctx) {
-    checkedout = true;
-  }
-
-  @CommandHandler
-  public Shoppingcart.Cart getCart() {
-    return Shoppingcart.Cart.newBuilder().addAllItems(cart.values()).build();
-  }
-
-  @Snapshot
-  public Domain.Cart snapshot() {
-    return Domain.Cart.newBuilder()
-        .addAllItems(cart.values().stream().map(this::convert).collect(Collectors.toList()))
-        .build();
-  }
-
-  @SnapshotHandler
-  public void handleSnapshot(Domain.Cart cart, SnapshotContext ctx) {
-    this.cart.clear();
-    for (Domain.LineItem item : cart.getItemsList()) {
-      this.cart.put(item.getProductId(), convert(item));
-    }
-    this.checkedout = cart.getCheckedout();
-  }
-
-  private Shoppingcart.LineItem convert(Domain.LineItem item) {
-    return Shoppingcart.LineItem.newBuilder()
-        .setProductId(item.getProductId())
-        .setName(item.getName())
-        .setQuantity(item.getQuantity())
-        .build();
-  }
-
-  private Domain.LineItem convert(Shoppingcart.LineItem item) {
-    return Domain.LineItem.newBuilder()
-        .setProductId(item.getProductId())
-        .setName(item.getName())
-        .setQuantity(item.getQuantity())
-        .build();
   }
 }</code></pre>
 <h2><a href="#registering-the-entity" name="registering-the-entity" class="anchor"><span class="anchor-link"></span></a>Registering the entity</h2>
@@ -435,7 +335,6 @@ The source code for this page can be found <a href="https://github.com/cloudstat
     </ul></li>
     <li><a href="../../../user/lang/java/eventsourced.html#handling-events" class="header">Handling events</a></li>
     <li><a href="../../../user/lang/java/eventsourced.html#producing-and-handling-snapshots" class="header">Producing and handling snapshots</a></li>
-    <li><a href="../../../user/lang/java/eventsourced.html#multiple-behaviors" class="header">Multiple behaviors</a></li>
     <li><a href="../../../user/lang/java/eventsourced.html#registering-the-entity" class="header">Registering the entity</a></li>
   </ul></li>
 </ul>
