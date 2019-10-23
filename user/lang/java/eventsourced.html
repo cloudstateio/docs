@@ -306,18 +306,16 @@ public void handleSnapshot(Domain.Cart cart) {
 <p>Behaviors can also be composed by supplying multiple behavior objects to the <code>become</code> method. Behavior objects are checked in order for a behavior, the first behavior that has a matching command or event handler will be invoked.</p>
 <p>Typically, behaviors will be implemented as inner classes of the entity, so that they can access the entities state. Alternatively, they can be implemented independently, and can in fact even hold the state immutably themselves - such that behaviors can be used to update the state of the entity.</p>
 <p>In the example below, we show a shopping cart that also has a checkout command. Once checked out, the shopping cart no longer accepts any commands to add or remove items, its behavior changes. Handlers that are shared between behaviors are declared on the entity itself, and it is passed as one of the behaviors on each call to change the behavior:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/eventsourced/behavior/ShoppingCartEntity.java#L14-L119" target="_blank" title="Go to snippet source"></a><code class="language-java">@EventSourcedEntity
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/eventsourced/behavior/ShoppingCartEntity.java#L14-L107" target="_blank" title="Go to snippet source"></a><code class="language-java">@EventSourcedEntity
 public class ShoppingCartEntity {
   private final Map&lt;String, Shoppingcart.LineItem&gt; cart = new LinkedHashMap&lt;&gt;();
   private boolean checkedout = false;
 
-  public ShoppingCartEntity(EventSourcedEntityCreationContext ctx) {
-    ctx.become(new Open(), this);
-  }
+  public ShoppingCartEntity(EventSourcedEntityCreationContext ctx) {}
 
-  class Open {
-    @CommandHandler
-    public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+  @CommandHandler
+  public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+    if (!checkedout) {
       if (item.getQuantity() &lt;= 0) {
         ctx.fail(&quot;Cannot add negative quantity of to item&quot; + item.getProductId());
       }
@@ -331,45 +329,38 @@ public class ShoppingCartEntity {
                       .build())
               .build());
       return Empty.getDefaultInstance();
-    }
-
-    @CommandHandler
-    public Empty checkout(CommandContext ctx) {
-      ctx.emit(Domain.CheckedOut.getDefaultInstance());
-      return Empty.getDefaultInstance();
-    }
-
-    @EventHandler
-    public void itemAdded(Domain.ItemAdded itemAdded) {
-      Shoppingcart.LineItem item = cart.get(itemAdded.getItem().getProductId());
-      if (item == null) {
-        item = convert(itemAdded.getItem());
-      } else {
-        item =
-            item.toBuilder()
-                .setQuantity(item.getQuantity() + itemAdded.getItem().getQuantity())
-                .build();
-      }
-      cart.put(item.getProductId(), item);
-    }
-
-    @EventHandler(eventClass = Domain.CheckedOut.class)
-    public void checkedOut(EventBehaviorContext ctx) {
-      checkedout = true;
-      ctx.become(new CheckedOut(), this);
+    } else {
+      throw ctx.fail(&quot;Can&#39;t add more items to an already checked out shopping cart&quot;);
     }
   }
 
-  class CheckedOut {
-    @CommandHandler
-    public Empty addItem(CommandContext ctx) {
-      throw ctx.fail(&quot;Can&#39;t add more items to an already checked out shopping cart&quot;);
-    }
-
-    @CommandHandler
-    public Empty checkout(CommandContext ctx) {
+  @CommandHandler
+  public Empty checkout(CommandContext ctx) {
+    if (!checkedout) {
+      ctx.emit(Domain.CheckedOut.getDefaultInstance());
+      return Empty.getDefaultInstance();
+    } else {
       throw ctx.fail(&quot;Shopping cart is already checked out&quot;);
     }
+  }
+
+  @EventHandler
+  public void itemAdded(Domain.ItemAdded itemAdded) {
+    Shoppingcart.LineItem item = cart.get(itemAdded.getItem().getProductId());
+    if (item == null) {
+      item = convert(itemAdded.getItem());
+    } else {
+      item =
+          item.toBuilder()
+              .setQuantity(item.getQuantity() + itemAdded.getItem().getQuantity())
+              .build();
+    }
+    cart.put(item.getProductId(), item);
+  }
+
+  @EventHandler(eventClass = Domain.CheckedOut.class)
+  public void checkedOut(EventContext ctx) {
+    checkedout = true;
   }
 
   @CommandHandler
@@ -385,15 +376,12 @@ public class ShoppingCartEntity {
   }
 
   @SnapshotHandler
-  public void handleSnapshot(Domain.Cart cart, SnapshotBehaviorContext ctx) {
+  public void handleSnapshot(Domain.Cart cart, SnapshotContext ctx) {
     this.cart.clear();
     for (Domain.LineItem item : cart.getItemsList()) {
       this.cart.put(item.getProductId(), convert(item));
     }
     this.checkedout = cart.getCheckedout();
-    if (this.checkedout) {
-      ctx.become(new CheckedOut(), this);
-    }
   }
 
   private Shoppingcart.LineItem convert(Domain.LineItem item) {
