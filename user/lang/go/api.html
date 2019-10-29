@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Getting started with stateful services in JavaScript · CloudState</title>
+<title>Go API docs · CloudState</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='CloudState Documentation'/>
-<link rel="canonical" href="https://cloudstate.io/docs/user/lang/javascript/gettingstarted.html"/>
+<link rel="canonical" href="https://cloudstate.io/docs/user/lang/go/api.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 
 <!-- OneTrust Cookies Consent Notice start -->
@@ -162,8 +162,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../../../index.html">CloudState</a></li>
   <li><a href="../../../user/index.html">Using CloudState</a></li>
   <li><a href="../../../user/lang/index.html">Languages</a></li>
-  <li><a href="../../../user/lang/javascript/index.html">JavaScript</a></li>
-  <li>Getting started with stateful services in JavaScript</li>
+  <li><a href="../../../user/lang/go/index.html">Go</a></li>
+  <li>Go API docs</li>
 </ul>
 </div>
 </div>
@@ -171,87 +171,17 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#getting-started-with-stateful-services-in-javascript" name="getting-started-with-stateful-services-in-javascript" class="anchor"><span class="anchor-link"></span></a>Getting started with stateful services in JavaScript</h1>
-<h2><a href="#prerequisites" name="prerequisites" class="anchor"><span class="anchor-link"></span></a>Prerequisites</h2>
-<dl>
-  <dt>Node version</dt>
-  <dd>CloudState uses the <a href="https://github.com/grpc/grpc-node">grpc node package</a>, which compiles a native gRPC implementation using node-gyp. It requires a minimum of node 4.0.</dd>
-  <dt>Build tool</dt>
-  <dd>CloudState doesn&rsquo;t require any particular build tool, though npm install scripts do need to be run.</dd>
-  <dt>protoc</dt>
-  <dd>CloudState requires using the protoc compiler to serialize your protobuf definitions into the protobuf binary descriptor format. Helper scripts are provided to automatically download the protoc compiler for your platform and do this compilation.</dd>
-  <dt>docker</dt>
-  <dd>CloudState runs in Kubernetes with [Docker], hence you will need Docker to build a container that you can deploy to Kubernetes.</dd>
-</dl>
-<p>Once you have the above, you need to add the <code>cloudstate</code> package to your project, which can be done by running:</p>
-<pre><code>npm install cloudstate --save
-</code></pre>
-<h2><a href="#generating-the-protobuf-descriptor-set" name="generating-the-protobuf-descriptor-set" class="anchor"><span class="anchor-link"></span></a>Generating the protobuf descriptor set</h2>
-<p>A CloudState user function needs to report to the CloudState proxy the gRPC descriptor that its serving, serialized to binary using the Protobuf <a href="https://developers.google.com/protocol-buffers/docs/techniques#self-description"><code>FileDescriptorSet</code> message type</a>. While there is some support for this in the <a href="https://www.npmjs.com/package/protobufjs">protobufjs</a> library that is used by CloudState to load descriptors, it is somewhat incomplete and buggy. Hence, CloudState requires that you precompile this descriptor using <code>protoc</code> instead.</p>
-<p>CloudState provides a utility that does this for you, downloading the <code>protoc</code> binary for your platform, and running it with the necessary arguments and include paths. This can be run manually by running <code>node_modules/cloudstate/bin/compile-descriptor.js</code>, or we recommend adding it as a <code>prestart</code> script to your npm build:</p>
-<pre class="prettyprint"><code class="language-json">{
-  &quot;scripts&quot;: {
-    &quot;prestart&quot;: &quot;compile-descriptor my-descriptor.proto&quot;
-  }
-}
-</code></pre>
-<p>Multiple protobuf files can be passed, in addition, any arguments accepted by <code>protoc</code> can be passed, for example, if you are importing files from other directories, you can add those directories as an include path by adding <code>-Ipath/to/protobuf/dir</code>.</p>
-<p>By default, the descriptor is written to <code>user-function.desc</code>, if you wish to change this, you can set <code>--descriptor_set_out=my-descriptor.desc</code>. Note that if you output the descriptor to a different path, you will also need to pass that custom path to the constructor of the <code>CloudState</code> class when you got to instantiate it.</p>
-<h2><a href="#package-json-example" name="package-json-example" class="anchor"><span class="anchor-link"></span></a>package.json example</h2>
-<p>A minimal <code>package.json</code> for a shopping cart example is shown below:</p>
-<pre class="prettyprint"><code class="language-json">{
-  &quot;name&quot;: &quot;shopping-cart&quot;,
-  &quot;version&quot;: &quot;0.1.0&quot;,
-  &quot;dependencies&quot;: {
-    &quot;cloudstate&quot;: &quot;^0.0.1&quot;
-  },
-  &quot;scripts&quot;: {
-    &quot;prestart&quot;: &quot;compile-descriptor shoppingcart.proto&quot;,
-    &quot;start&quot;: &quot;node index.js&quot;
-  }
-}
-</code></pre>
-<h2><a href="#protobuf-files" name="protobuf-files" class="anchor"><span class="anchor-link"></span></a>Protobuf files</h2>
-<p>You can place protobuf files in your project wherever you like, for example, in the root directory, or in a directory named <code>protos</code>. In the <code>package.json</code> above we&rsquo;ve placed the shopping cart application example shown earlier in <a href="../../features/grpc.html">gRPC descriptors</a> in a file in the root folder called <code>shoppingcart.proto</code>.</p>
-<h2><a href="#creating-and-starting-a-server" name="creating-and-starting-a-server" class="anchor"><span class="anchor-link"></span></a>Creating and starting a server</h2>
-<p>There are two ways to create and start a CloudState gRPC server. The first is to create an <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html"><code>Entity</code></a>, and invoke <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html#start"><code>start</code></a> on it. This allows creating a server that serves a single entity, with the default options. We&rsquo;ll look at this more in the subsequent pages. Alternatively, you can use the <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html"><code>CloudState</code></a> class, add one or more entities to it, and then invoke <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html#start"><code>start</code></a>, like so:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/gettingstarted/index.js#L9-L14" target="_blank" title="Go to snippet source"></a><code class="language-js">const cloudstate = require(&quot;cloudstate&quot;);
-const shoppingcart = require(&quot;./shoppingcart&quot;);
-
-const server = new cloudstate.CloudState();
-server.addEntity(shoppingcart);
-server.start();</code></pre>
-<p>If you created your protobuf file descriptor set at a different location to the default of <code>user-function.desc</code>, you can configure that here:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/gettingstarted/index.js#L24-L26" target="_blank" title="Go to snippet source"></a><code class="language-js">const server = new cloudstate.CloudState({
-    descriptorSetPath: &quot;my-descriptor.desc&quot;
-});</code></pre>
-<p>For the full range of options available on the <code>CloudState</code> class, see <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html#~options"><code>CloudState~options</code></a>.</p>
+<h1><a href="#go-api-docs" name="go-api-docs" class="anchor"><span class="anchor-link"></span></a>Go API docs</h1>
+<p>The Go API docs can be found <a href="https://godoc.org/github.com/cloudstateio/go-support/cloudstate">here</a>.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/javascript/gettingstarted.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/api.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../../../user/lang/javascript/eventsourced.html">Event sourcing</a></p>
+<p><strong>Next:</strong> <a href="../../../user/deployment/index.html">Deploying applications</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
-<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
-<div class="page-nav">
-<div class="nav-title">On this page:</div>
-<div class="nav-toc">
-<ul>
-  <li><a href="../../../user/lang/javascript/gettingstarted.html#getting-started-with-stateful-services-in-javascript" class="header">Getting started with stateful services in JavaScript</a>
-  <ul>
-    <li><a href="../../../user/lang/javascript/gettingstarted.html#prerequisites" class="header">Prerequisites</a></li>
-    <li><a href="../../../user/lang/javascript/gettingstarted.html#generating-the-protobuf-descriptor-set" class="header">Generating the protobuf descriptor set</a></li>
-    <li><a href="../../../user/lang/javascript/gettingstarted.html#package-json-example" class="header">package.json example</a></li>
-    <li><a href="../../../user/lang/javascript/gettingstarted.html#protobuf-files" class="header">Protobuf files</a></li>
-    <li><a href="../../../user/lang/javascript/gettingstarted.html#creating-and-starting-a-server" class="header">Creating and starting a server</a></li>
-  </ul></li>
-</ul>
-</div>
-</div>
-</nav>
 </div>
 </div>
 
