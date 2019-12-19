@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -177,6 +177,21 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>io.cloudstate.javasupport.CloudStateRunner</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createRunner()">createRunner</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Creates a CloudStateRunner using the currently configured services.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>io.cloudstate.javasupport.CloudStateRunner</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createRunner(com.typesafe.config.Config)">createRunner</a></span>&#8203;(com.typesafe.config.Config&nbsp;config)</code></th>
+<td class="colLast">
+<div class="block">Creates a CloudStateRunner using the currently configured services, using the supplied
+ configuration.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#preferJavaProtobufs()">preferJavaProtobufs</a></span>()</code></th>
 <td class="colLast">
@@ -184,7 +199,7 @@ extends java.lang.Object</pre>
  classpath, this specifies that Java should be preferred.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#preferScalaProtobufs()">preferScalaProtobufs</a></span>()</code></th>
 <td class="colLast">
@@ -192,7 +207,7 @@ extends java.lang.Object</pre>
  classpath, this specifies that Scala should be preferred.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerCrdtEntity(io.cloudstate.javasupport.crdt.CrdtEntityFactory,com.google.protobuf.Descriptors.ServiceDescriptor,com.google.protobuf.Descriptors.FileDescriptor...)">registerCrdtEntity</a></span>&#8203;(<a href="crdt/CrdtEntityFactory.html" title="interface in io.cloudstate.javasupport.crdt">CrdtEntityFactory</a>&nbsp;factory,
                   com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
@@ -201,7 +216,7 @@ extends java.lang.Object</pre>
 <div class="block">Register an CRDt entity factory.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerCrdtEntity(java.lang.Class,com.google.protobuf.Descriptors.ServiceDescriptor,com.google.protobuf.Descriptors.FileDescriptor...)">registerCrdtEntity</a></span>&#8203;(java.lang.Class&lt;?&gt;&nbsp;entityClass,
                   com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
@@ -210,7 +225,7 @@ extends java.lang.Object</pre>
 <div class="block">Register an annotated CRDT entity.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerEventSourcedEntity(io.cloudstate.javasupport.eventsourced.EventSourcedEntityFactory,com.google.protobuf.Descriptors.ServiceDescriptor,java.lang.String,int,com.google.protobuf.Descriptors.FileDescriptor...)">registerEventSourcedEntity</a></span>&#8203;(<a href="eventsourced/EventSourcedEntityFactory.html" title="interface in io.cloudstate.javasupport.eventsourced">EventSourcedEntityFactory</a>&nbsp;factory,
                           com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
@@ -221,7 +236,7 @@ extends java.lang.Object</pre>
 <div class="block">Register an event sourced entity factor.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerEventSourcedEntity(java.lang.Class,com.google.protobuf.Descriptors.ServiceDescriptor,com.google.protobuf.Descriptors.FileDescriptor...)">registerEventSourcedEntity</a></span>&#8203;(java.lang.Class&lt;?&gt;&nbsp;entityClass,
                           com.google.protobuf.Descriptors.ServiceDescriptor&nbsp;descriptor,
@@ -230,14 +245,21 @@ extends java.lang.Object</pre>
 <div class="block">Register an annotated event sourced entity.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletionStage&lt;akka.Done&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start()">start</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Starts a server with the configured entities.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>java.util.concurrent.CompletionStage&lt;akka.Done&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start(com.typesafe.config.Config)">start</a></span>&#8203;(com.typesafe.config.Config&nbsp;config)</code></th>
+<td class="colLast">
+<div class="block">Starts a server with the configured entities, using the supplied configuration.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withClassLoader(java.lang.ClassLoader)">withClassLoader</a></span>&#8203;(java.lang.ClassLoader&nbsp;classLoader)</code></th>
 <td class="colLast">
@@ -245,7 +267,7 @@ extends java.lang.Object</pre>
  the CloudState class.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="CloudState.html" title="class in io.cloudstate.javasupport">CloudState</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withTypeUrlPrefix(java.lang.String)">withTypeUrlPrefix</a></span>&#8203;(java.lang.String&nbsp;prefix)</code></th>
 <td class="colLast">
@@ -463,7 +485,7 @@ extends java.lang.Object</pre>
 <a id="start()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>start</h4>
 <pre class="methodSignature">public&nbsp;java.util.concurrent.CompletionStage&lt;akka.Done&gt;&nbsp;start()</pre>
@@ -471,6 +493,51 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a CompletionStage which will be completed when the server has shut down.</dd>
+</dl>
+</li>
+</ul>
+<a id="start(com.typesafe.config.Config)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>start</h4>
+<pre class="methodSignature">public&nbsp;java.util.concurrent.CompletionStage&lt;akka.Done&gt;&nbsp;start&#8203;(com.typesafe.config.Config&nbsp;config)</pre>
+<div class="block">Starts a server with the configured entities, using the supplied configuration.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a CompletionStage which will be completed when the server has shut down.</dd>
+</dl>
+</li>
+</ul>
+<a id="createRunner()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createRunner</h4>
+<pre class="methodSignature">public&nbsp;io.cloudstate.javasupport.CloudStateRunner&nbsp;createRunner()</pre>
+<div class="block">Creates a CloudStateRunner using the currently configured services. In order to start the
+ server, `run()` must be invoked on the returned CloudStateRunner.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a CloudStateRunner</dd>
+</dl>
+</li>
+</ul>
+<a id="createRunner(com.typesafe.config.Config)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>createRunner</h4>
+<pre class="methodSignature">public&nbsp;io.cloudstate.javasupport.CloudStateRunner&nbsp;createRunner&#8203;(com.typesafe.config.Config&nbsp;config)</pre>
+<div class="block">Creates a CloudStateRunner using the currently configured services, using the supplied
+ configuration. In order to start the server, `run()` must be invoked on the returned
+ CloudStateRunner.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a CloudStateRunner</dd>
 </dl>
 </li>
 </ul>
