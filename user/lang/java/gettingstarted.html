@@ -175,15 +175,15 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h2><a href="#prerequisites" name="prerequisites" class="anchor"><span class="anchor-link"></span></a>Prerequisites</h2>
 <dl>
   <dt>Java version</dt>
-  <dd>CloudState Java support requires at least Java 8, though we recommend using Java 11, which has better support for running in containers. While it is possible to build a GraalVM native image for CloudState Java user functions, at this stage CloudState offers no specific assistance or configuration to aid in doing that.</dd>
+  <dd>Cloudstate Java support requires at least Java 8, though we recommend using Java 11, which has better support for running in containers. While it is possible to build a GraalVM native image for Cloudstate Java user functions, at this stage Cloudstate offers no specific assistance or configuration to aid in doing that.</dd>
   <dt>Build tool</dt>
-  <dd>CloudState does not require any particular build tool, you can select your own.</dd>
+  <dd>Cloudstate does not require any particular build tool, you can select your own.</dd>
   <dt>protoc</dt>
-  <dd>Since CloudState is based on gRPC, you need a protoc compiler to compile gRPC protobuf descriptors. While this can be done by downloading, installing and running protoc manually, most popular build tools have a protoc plugin which will automatically compile protobuf descriptors during your build for you.</dd>
+  <dd>Since Cloudstate is based on gRPC, you need a protoc compiler to compile gRPC protobuf descriptors. While this can be done by downloading, installing and running protoc manually, most popular build tools have a protoc plugin which will automatically compile protobuf descriptors during your build for you.</dd>
   <dt>docker</dt>
-  <dd>CloudState runs in Kubernetes with [Docker], hence you will need Docker to build a container that you can deploy to Kubernetes. Most popular build tools have plugins that assist in building Docker images.</dd>
+  <dd>Cloudstate runs in Kubernetes with [Docker], hence you will need Docker to build a container that you can deploy to Kubernetes. Most popular build tools have plugins that assist in building Docker images.</dd>
 </dl>
-<p>In addition to the above, you will need to install the CloudState java support library, which can be done as follows:</p>
+<p>In addition to the above, you will need to install the Cloudstate java support library, which can be done as follows:</p>
 <dl>
   <dt>Maven</dt>
   <dd>
@@ -305,13 +305,13 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </code></pre>
 <p>Subsequent source locations and build commands will assume the above Maven project, and may need to be adapted to your particular build tool and setup.</p>
 <h2><a href="#protobuf-files" name="protobuf-files" class="anchor"><span class="anchor-link"></span></a>Protobuf files</h2>
-<p>The Xolstice Maven plugin assumes a location of <code>src/main/proto</code> for your protobuf files. In addition, it includes any protobuf files from your Java dependencies in the protoc include path, so there&rsquo;s nothing you need to do to pull in either the CloudState protobuf types, or any of the Google standard protobuf types, they are all automatically available for import.</p>
+<p>The Xolstice Maven plugin assumes a location of <code>src/main/proto</code> for your protobuf files. In addition, it includes any protobuf files from your Java dependencies in the protoc include path, so there&rsquo;s nothing you need to do to pull in either the Cloudstate protobuf types, or any of the Google standard protobuf types, they are all automatically available for import.</p>
 <p>So, if you were to build the example shopping cart application shown earlier in <a href="../../features/grpc.html">gRPC descriptors</a>, you could simply paste that protobuf into <code>src/main/proto/shoppingcart.proto</code>. You may wish to also define the Java package, to ensure the package name used conforms to Java package naming conventions:</p>
 <pre class="prettyprint"><code class="language-proto">option java_package = &quot;com.example&quot;;
 </code></pre>
 <p>Now if you run <code>mvn compile</code>, you&rsquo;ll find your generated protobuf files in <code>target/generated-sources/protobuf/java</code>.</p>
 <h2><a href="#creating-a-main-class" name="creating-a-main-class" class="anchor"><span class="anchor-link"></span></a>Creating a main class</h2>
-<p>Your main class will be responsible for creating the CloudState gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/CloudState.html"><code>CloudState</code></a> server builder, for example:</p>
+<p>Your main class will be responsible for creating the Cloudstate gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/CloudState.html"><code>CloudState</code></a> server builder, for example:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/gettingstarted/ShoppingCartMain.java#L4-L16" target="_blank" title="Go to snippet source"></a><code class="language-java">import com.example.Shoppingcart;
 import io.cloudstate.javasupport.CloudState;
 
@@ -327,7 +327,7 @@ public class ShoppingCartMain {
 }</code></pre>
 <p>We will see more details on registering entities in the coming pages.</p>
 <h2><a href="#parameter-injection" name="parameter-injection" class="anchor"><span class="anchor-link"></span></a>Parameter injection</h2>
-<p>CloudState entities work by annotating classes and methods to be instantiated and invoked by the CloudState server. The methods and constructors invoked by the server can be injected with parameters of various types from the context of the invocation. For example, an <code>@CommandHandler</code> annotated method may take an argument for the message type for that gRPC service call, in addition it may take a <code>CommandContext</code> parameter.</p>
+<p>Cloudstate entities work by annotating classes and methods to be instantiated and invoked by the Cloudstate server. The methods and constructors invoked by the server can be injected with parameters of various types from the context of the invocation. For example, an <code>@CommandHandler</code> annotated method may take an argument for the message type for that gRPC service call, in addition it may take a <code>CommandContext</code> parameter.</p>
 <p>Exactly which context parameters are available depend on the type of entity and the type of handler, in subsequent pages we&rsquo;ll detail which parameters are available in which circumstances. The order of the parameters in the method signature can be anything, parameters are matched by type and sometimes by annotation. The following context parameters are available in every context:</p>
 <table>
   <thead>
@@ -341,7 +341,7 @@ public class ShoppingCartMain {
     <tr>
       <td><a href="../../../user/lang/java/api/io/cloudstate/javasupport/Context.html"><code>Context</code></a> </td>
       <td> </td>
-      <td>The super type of all CloudState contexts. Every invoker makes a subtype of this available for injection, and method or constructor may accept that sub type, or any super type of that subtype that is a subtype of <code>Context</code>. </td>
+      <td>The super type of all Cloudstate contexts. Every invoker makes a subtype of this available for injection, and method or constructor may accept that sub type, or any super type of that subtype that is a subtype of <code>Context</code>. </td>
     </tr>
     <tr>
       <td><code>java.lang.String</code> </td>

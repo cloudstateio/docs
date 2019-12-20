@@ -175,20 +175,20 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h2><a href="#prerequisites" name="prerequisites" class="anchor"><span class="anchor-link"></span></a>Prerequisites</h2>
 <dl>
   <dt>Node version</dt>
-  <dd>CloudState uses the <a href="https://github.com/grpc/grpc-node">grpc node package</a>, which compiles a native gRPC implementation using node-gyp. It requires a minimum of node 4.0.</dd>
+  <dd>Cloudstate uses the <a href="https://github.com/grpc/grpc-node">grpc node package</a>, which compiles a native gRPC implementation using node-gyp. It requires a minimum of node 4.0.</dd>
   <dt>Build tool</dt>
-  <dd>CloudState doesn&rsquo;t require any particular build tool, though npm install scripts do need to be run.</dd>
+  <dd>Cloudstate doesn&rsquo;t require any particular build tool, though npm install scripts do need to be run.</dd>
   <dt>protoc</dt>
-  <dd>CloudState requires using the protoc compiler to serialize your protobuf definitions into the protobuf binary descriptor format. Helper scripts are provided to automatically download the protoc compiler for your platform and do this compilation.</dd>
+  <dd>Cloudstate requires using the protoc compiler to serialize your protobuf definitions into the protobuf binary descriptor format. Helper scripts are provided to automatically download the protoc compiler for your platform and do this compilation.</dd>
   <dt>docker</dt>
-  <dd>CloudState runs in Kubernetes with [Docker], hence you will need Docker to build a container that you can deploy to Kubernetes.</dd>
+  <dd>Cloudstate runs in Kubernetes with [Docker], hence you will need Docker to build a container that you can deploy to Kubernetes.</dd>
 </dl>
 <p>Once you have the above, you need to add the <code>cloudstate</code> package to your project, which can be done by running:</p>
 <pre><code>npm install cloudstate --save
 </code></pre>
 <h2><a href="#generating-the-protobuf-descriptor-set" name="generating-the-protobuf-descriptor-set" class="anchor"><span class="anchor-link"></span></a>Generating the protobuf descriptor set</h2>
-<p>A CloudState user function needs to report to the CloudState proxy the gRPC descriptor that its serving, serialized to binary using the Protobuf <a href="https://developers.google.com/protocol-buffers/docs/techniques#self-description"><code>FileDescriptorSet</code> message type</a>. While there is some support for this in the <a href="https://www.npmjs.com/package/protobufjs">protobufjs</a> library that is used by CloudState to load descriptors, it is somewhat incomplete and buggy. Hence, CloudState requires that you precompile this descriptor using <code>protoc</code> instead.</p>
-<p>CloudState provides a utility that does this for you, downloading the <code>protoc</code> binary for your platform, and running it with the necessary arguments and include paths. This can be run manually by running <code>node_modules/cloudstate/bin/compile-descriptor.js</code>, or we recommend adding it as a <code>prestart</code> script to your npm build:</p>
+<p>A Cloudstate user function needs to report to the Cloudstate proxy the gRPC descriptor that its serving, serialized to binary using the Protobuf <a href="https://developers.google.com/protocol-buffers/docs/techniques#self-description"><code>FileDescriptorSet</code> message type</a>. While there is some support for this in the <a href="https://www.npmjs.com/package/protobufjs">protobufjs</a> library that is used by Cloudstate to load descriptors, it is somewhat incomplete and buggy. Hence, Cloudstate requires that you precompile this descriptor using <code>protoc</code> instead.</p>
+<p>Cloudstate provides a utility that does this for you, downloading the <code>protoc</code> binary for your platform, and running it with the necessary arguments and include paths. This can be run manually by running <code>node_modules/cloudstate/bin/compile-descriptor.js</code>, or we recommend adding it as a <code>prestart</code> script to your npm build:</p>
 <pre class="prettyprint"><code class="language-json">{
   &quot;scripts&quot;: {
     &quot;prestart&quot;: &quot;compile-descriptor my-descriptor.proto&quot;
@@ -214,7 +214,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h2><a href="#protobuf-files" name="protobuf-files" class="anchor"><span class="anchor-link"></span></a>Protobuf files</h2>
 <p>You can place protobuf files in your project wherever you like, for example, in the root directory, or in a directory named <code>protos</code>. In the <code>package.json</code> above we&rsquo;ve placed the shopping cart application example shown earlier in <a href="../../features/grpc.html">gRPC descriptors</a> in a file in the root folder called <code>shoppingcart.proto</code>.</p>
 <h2><a href="#creating-and-starting-a-server" name="creating-and-starting-a-server" class="anchor"><span class="anchor-link"></span></a>Creating and starting a server</h2>
-<p>There are two ways to create and start a CloudState gRPC server. The first is to create an <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html"><code>Entity</code></a>, and invoke <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html#start"><code>start</code></a> on it. This allows creating a server that serves a single entity, with the default options. We&rsquo;ll look at this more in the subsequent pages. Alternatively, you can use the <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html"><code>CloudState</code></a> class, add one or more entities to it, and then invoke <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html#start"><code>start</code></a>, like so:</p>
+<p>There are two ways to create and start a Cloudstate gRPC server. The first is to create an <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html"><code>Entity</code></a>, and invoke <a href="../../../user/lang/javascript/api/module-cloudstate.Entity.html#start"><code>start</code></a> on it. This allows creating a server that serves a single entity, with the default options. We&rsquo;ll look at this more in the subsequent pages. Alternatively, you can use the <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html"><code>CloudState</code></a> class, add one or more entities to it, and then invoke <a href="../../../user/lang/javascript/api/module-cloudstate.CloudState.html#start"><code>start</code></a>, like so:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/js/test/gettingstarted/index.js#L9-L14" target="_blank" title="Go to snippet source"></a><code class="language-js">const cloudstate = require(&quot;cloudstate&quot;);
 const shoppingcart = require(&quot;./shoppingcart&quot;);
 
