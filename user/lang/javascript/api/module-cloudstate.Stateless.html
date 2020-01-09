@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Interface: StateChangedContext</title>
+	<title>CloudState Class: Stateless</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -86,16 +86,18 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Interface: StateChangedContext</h1>
+	<h1 class="page-title">Class: Stateless</h1>
 <section>
 
 <header>
     
         <h2>
-            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a><a href="module-cloudstate.crdt.html">.crdt</a>.</span>
+            <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a>~</span>
         
-        StateChangedContext
+        Stateless
         </h2>
+        
+            <div class="class-description"><p>A Stateless.</p></div>
         
     
 </header>
@@ -105,10 +107,157 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Context passed to <a href="module-cloudstate.crdt.CrdtCommandContext.html#onStateChange"><code>module:cloudstate.crdt.CrdtCommandContext#onStateChange</code></a> handlers.</p></div>
+<hr>
+<dt>
+    <h4 class="name" id="Stateless"><span class="type-signature"></span>new Stateless(desc, serviceName [, options])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Create a new stateless entity.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
         
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>desc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A descriptor or list of descriptors to parse, containing the service to serve.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>serviceName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The fully qualified name of the service that provides this entities interface.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.EventSourced.html#~options">module:cloudstate.EventSourced~options</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The options for this event sourced entity</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
 <dl class="details">
     
 
@@ -148,20 +297,23 @@
 </dl>
 
 
-        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
     
     </div>
-
-    
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li><a href="module-cloudstate.CommandContext.html">module:cloudstate.CommandContext</a></li>
-    </ul>
-
 
     
 
@@ -179,15 +331,16 @@
         <dl>
             
 <hr>
-<dt class="name" id="state">
-    <h4 id="state"><span class="type-signature">&lt;readonly> </span>state<span class="type-signature"> :<a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></span></h4>
+<dt class="name" id="commandHandlers">
+    <h4 id="commandHandlers"><span class="type-signature"></span>commandHandlers<span class="type-signature"> :Object.&lt;string, <a href="module-cloudstate.crdt.Crdt.html#~commandHandler">module:cloudstate.crdt.Crdt~commandHandler</a>></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The CRDT.</p>
+        <p>The command handlers.</p>
+<p>The names of the properties must match the names of the service calls specified in the gRPC descriptor</p>
     </div>
     
 
@@ -196,7 +349,7 @@
         <ul>
             <li>
                 
-<span class="param-type"><a href="module-cloudstate.crdt.CrdtState.html">module:cloudstate.crdt.CrdtState</a></span>
+<span class="param-type">Object.&lt;string, <a href="module-cloudstate.crdt.Crdt.html#~commandHandler">module:cloudstate.crdt.Crdt~commandHandler</a>></span>
 
 
 
@@ -257,7 +410,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="effect"><span class="type-signature"></span>effect(method, message, synchronous)</h4>
+    <h4 class="name" id="lookupType"><span class="type-signature"></span>lookupType(messageType)</h4>
     
     
 </dt>
@@ -265,7 +418,8 @@
 
     
     <div class="description">
-        <p>Emit an effect after processing this command.</p>
+        <p>Lookup a protobuf message type.</p>
+<p>This is provided as a convenience to lookup protobuf message types for use with events and snapshots.</p>
     </div>
     
 
@@ -300,31 +454,13 @@
 
         <tr>
             
-                <td class="name"><code>method</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The entity service method to invoke.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>messageType</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
 
@@ -335,124 +471,13 @@
 
             
 
-            <td class="description last"><p>The message to send to that service.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>synchronous</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Whether the effect should be execute synchronously or not.</p></td>
+            <td class="description last"><p>The fully qualified name of the type to lookup.</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="module-cloudstate.EffectContext.html#effect">module:cloudstate.EffectContext#effect</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="end"><span class="type-signature"></span>end()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>End this stream.</p>
-    </div>
-    
-
-    
-
-    
-
-    
     
 
     
@@ -514,7 +539,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="fail"><span class="type-signature"></span>fail(msg)</h4>
+    <h4 class="name" id="setBehavior"><span class="type-signature"></span>setBehavior(callback)</h4>
     
     
 </dt>
@@ -522,7 +547,7 @@
 
     
     <div class="description">
-        <p>Fail handling this command.</p>
+        <p>Set the behavior callback.</p>
     </div>
     
 
@@ -557,10 +582,16 @@
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>callback</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type"><a href="module-cloudstate.EventSourced.html#~behaviorCallback">module:cloudstate.EventSourced~behaviorCallback</a></span>
+
+
+
             
             </td>
 
@@ -568,7 +599,7 @@
 
             
 
-            <td class="description last"><p>The failure message.</p></td>
+            <td class="description last"><p>The behavior callback.</p></td>
         </tr>
 
     
@@ -585,15 +616,6 @@
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="module-cloudstate.EffectContext.html#fail">module:cloudstate.EffectContext#fail</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -635,21 +657,32 @@
     
 
     
-    <h5>Throws:</h5>
+
+    
+    <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    <p>This entity.</p>
+</div>
 
-    <div class="param-desc">
-    
-        <p>An error that captures the failure message. Note that even if you catch the error thrown by this
-method, the command will still be failed with the given message.</p>
-    
-    </div>
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-cloudstate.EventSourced.html">module:cloudstate.EventSourced</a></span>
+
+
+
+    </dd>
+</dl>
 
 
         
-
-    
 
     
 </dd>
@@ -658,7 +691,7 @@ method, the command will still be failed with the given message.</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="thenForward"><span class="type-signature"></span>thenForward(method, message)</h4>
+    <h4 class="name" id="setInitial"><span class="type-signature"></span>setInitial(callback)</h4>
     
     
 </dt>
@@ -666,7 +699,7 @@ method, the command will still be failed with the given message.</p>
 
     
     <div class="description">
-        <p>Forward this command to another entity service call.</p>
+        <p>Set the initial state callback.</p>
     </div>
     
 
@@ -701,31 +734,13 @@ method, the command will still be failed with the given message.</p>
 
         <tr>
             
-                <td class="name"><code>method</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The entity service method to invoke.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>callback</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type"><a href="module-cloudstate.EventSourced.html#~initialCallback">module:cloudstate.EventSourced~initialCallback</a></span>
 
 
 
@@ -736,7 +751,7 @@ method, the command will still be failed with the given message.</p>
 
             
 
-            <td class="description last"><p>The message to send to that service.</p></td>
+            <td class="description last"><p>The initial state callback.</p></td>
         </tr>
 
     
@@ -753,15 +768,6 @@ method, the command will still be failed with the given message.</p>
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="module-cloudstate.CommandContext.html#thenForward">module:cloudstate.CommandContext#thenForward</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -805,6 +811,30 @@ method, the command will still be failed with the given message.</p>
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>This entity.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-cloudstate.EventSourced.html">module:cloudstate.EventSourced</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
 
     
 </dd>
