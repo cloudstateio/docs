@@ -182,9 +182,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <dt>Build tool</dt>
   <dd>Cloudstate does not require any particular build tool, you can select your own. Or use the <a href="https://github.com/sleipnir/cloudstate-cli">Cloudstate CLI</a></dd>
   <dt>protoc</dt>
-  <dd>Since Cloudstate is based on gRPC, you need a protoc compiler to compile gRPC protobuf descriptors. While this can be done by downloading, installing and running protoc manually, most popular build tools have a protoc plugin which will automatically compile protobuf descriptors during your build for you.</dd>
+  <dd>Since Cloudstate is based on gRPC, you need a protoc compiler to compile gRPC protobuf descriptors. While this can be done by downloading, <a href="https://github.com/protocolbuffers/protobuf#protocol-compiler-installation">installing and running protoc manually</a>, most popular build tools have a protoc plugin which will automatically compile protobuf descriptors during your build for you.</dd>
   <dt>docker</dt>
-  <dd>Cloudstate runs in Kubernetes with [Docker], hence you will need Docker to build a container that you can deploy to Kubernetes. Most popular build tools have plugins that assist in building Docker images.</dd>
+  <dd>Cloudstate runs in Kubernetes with <a href="https://www.docker.com/">Docker</a>, hence you will need Docker to build a container that you can deploy to Kubernetes. Most popular build tools have plugins that assist in building Docker images.</dd>
 </dl>
 <p>In addition to the above, you will need to install the Cloudstate Kotlin support library, which can be done as follows:</p>
 <dl>
@@ -207,7 +207,6 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </dl>
 <h2><a href="#maven-example" name="maven-example" class="anchor"><span class="anchor-link"></span></a>Maven example</h2>
 <p>A minimal Maven example pom file, which uses the <a href="https://www.xolstice.org/protobuf-maven-plugin/">Xolstice Maven Protocol Buffers Plugin</a> and the <a href="https://github.com/GoogleContainerTools/jib/">Google Jib Docker Maven Plugin</a>, for a shopping cart service, is shown below:</p>
-<p>@@@ note {title = Important} Remember to change the values of the <strong>main.class</strong>, <strong>repo.name</strong>, and <strong>version</strong> tags to their respective values @@@</p>
 <pre class="prettyprint"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -387,7 +386,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     &lt;/build&gt;
     
 &lt;/project&gt;
-</code></pre>
+</code></pre><div class="callout note "><div class="callout-title">Important</div>
+<p>Remember to change the values of the <strong>main.class</strong>, <strong>repo.name</strong>, and <strong>version</strong> tags to their respective values</p></div>
 <p>Subsequent source locations and build commands will assume the above Maven project, and may need to be adapted to your particular build tool and setup.</p>
 <h2><a href="#protobuf-files" name="protobuf-files" class="anchor"><span class="anchor-link"></span></a>Protobuf files</h2>
 <p>The Xolstice Maven plugin assumes a location of <code>src/main/proto</code> for your protobuf files. In addition, it includes any protobuf files from your Kotlin dependencies in the protoc include path, so there&rsquo;s nothing you need to do to pull in either the Cloudstate protobuf types, or any of the Google standard protobuf types, they are all automatically available for import.</p>
@@ -396,7 +396,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </code></pre>
 <p>Now if you run <code>mvn compile</code>, you&rsquo;ll find your generated protobuf files in <code>target/generated-sources/protobuf/java</code>.</p>
 <h2><a href="#creating-a-main-function" name="creating-a-main-function" class="anchor"><span class="anchor-link"></span></a>Creating a main function</h2>
-<p>Your main class will be responsible for creating the Cloudstate gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <code>CloudState</code> function server builder, for example:</p>
+<p>Your main class will be responsible for creating the Cloudstate gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the <code>cloudstate</code> function server builder, for example:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/gettingstarted/Main.kt#L4-L18" target="_blank" title="Go to snippet source"></a><code class="language-kt">import ShoppingCartEntity
 import io.cloudstate.kotlinsupport.cloudstate
 import com.example.shoppingcart.persistence.Domain
@@ -428,14 +428,12 @@ fun main() {
     <tr>
       <td><code>io.cloudstate.javasupport.Context</code> </td>
       <td> </td>
-      <td> </td>
-      <td>The super type of all Cloudstate contexts. Every invoker makes a subtype of this available for injection, and function or constructor may accept that sub type, or any super type of that subtype that is a subtype of <code>Context</code>. </td>
+      <td>The super type of all Cloudstate contexts. Every invoker makes a subtype of this available for injection, and method or constructor may accept that sub type, or any super type of that subtype that is a subtype of <code>Context</code>. </td>
     </tr>
     <tr>
       <td><code>java.lang.String</code> </td>
       <td><code>@EntityId</code> </td>
       <td>The ID of the entity. </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
