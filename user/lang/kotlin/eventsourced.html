@@ -297,8 +297,8 @@ fun handleSnapshot(cart: Domain.Cart) {
 <p>Once you&rsquo;ve created your entity, you can register it with the <code>cloudState</code> (io.cloudstate.kotlinsupport.cloudState) server, by invoking the <code>registerEventSourcedEntity</code> function. In addition to passing your entity class and service descriptor, you also need to pass any descriptors that you use for persisting events, for example, the <code>domain.proto</code> descriptor.</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L120-L130" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
     cloudstate {
-        registerEventSourcedEntity {
-            entityService = ShoppingCartEntity::class.java
+        eventsourced {
+            entityService = ShoppingCartEntity::class
             descriptor = Shoppingcart.getDescriptor().findServiceByName(&quot;ShoppingCart&quot;)
             additionalDescriptors = arrayOf( Domain.getDescriptor() )
         }
@@ -307,15 +307,17 @@ fun handleSnapshot(cart: Domain.Cart) {
             .get()
 }</code></pre>
 <p>Additionally you can define some properties of the server or the execution environment:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L134-L152" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L134-L154" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
     cloudstate {
 
-        host = &quot;0.0.0.0&quot;
-        port = 8080
-        loglevel = &quot;DEBUG&quot;
+        config {
+            host = &quot;0.0.0.0&quot;
+            port = 8080
+            loglevel = &quot;INFO&quot;
+        }
 
-        registerEventSourcedEntity {
-            entityService = ShoppingCartEntity::class.java
+        eventsourced {
+            entityService = ShoppingCartEntity::class
             descriptor = Shoppingcart.getDescriptor().findServiceByName(&quot;ShoppingCart&quot;)
             additionalDescriptors = arrayOf( Domain.getDescriptor() )
 
