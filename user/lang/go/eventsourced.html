@@ -292,7 +292,7 @@ message Cart {
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L67" target="_blank" title="Go to snippet source"></a><code class="language-go">	cart []*domain.LineItem</code></pre>
 <h2><a href="#constructing" name="constructing" class="anchor"><span class="anchor-link"></span></a>Constructing</h2>
 <p>The Cloudstate Go Support Library needs to know how to construct and initialize entities. For this, an entity has to provide a factory function, <code>EntityFunc</code>, which is set during registration of the event sourced entity.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L40-L49" target="_blank" title="Go to snippet source"></a><code class="language-go">	err := server.Register(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L40-L49" target="_blank" title="Go to snippet source"></a><code class="language-go">	err = server.RegisterEventSourcedEntity(
 		&amp;cloudstate.EventSourcedEntity{
 			ServiceName:   &quot;com.example.shoppingcart.ShoppingCart&quot;,
 			PersistenceID: &quot;ShoppingCart&quot;,
@@ -416,7 +416,7 @@ message Cart {
 <h2><a href="#registering-the-entity" name="registering-the-entity" class="anchor"><span class="anchor-link"></span></a>Registering the entity</h2>
 <p>Once you&rsquo;ve created your entity, you can register it with the <code>cloudstate.Cloudstate</code> server, by invoking the <code>Register</code> method of an Cloudstate instance. In addition to passing your entity type and service name, you also need to pass any descriptors that you use for persisting events, for example, the <code>domain.proto</code> descriptor.</p>
 <p>During registration the optional ServiceName and the ServiceVersion can be configured. (TODO: give an example on how to pick values for these after the spec defines semantics )</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L40-L49" target="_blank" title="Go to snippet source"></a><code class="language-go">	err := server.Register(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L40-L49" target="_blank" title="Go to snippet source"></a><code class="language-go">	err = server.RegisterEventSourcedEntity(
 		&amp;cloudstate.EventSourcedEntity{
 			ServiceName:   &quot;com.example.shoppingcart.ShoppingCart&quot;,
 			PersistenceID: &quot;ShoppingCart&quot;,
