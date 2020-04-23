@@ -240,7 +240,7 @@ Cloudstate Documentation
 </code></pre>
 <p>Changes to the config map will be picked up immediately by the operator, and if necessary, will be applied to all Cloudstate stateful service deployments immediately.</p>
 <h3><a href="#configuring-namespaces-to-watch" name="configuring-namespaces-to-watch" class="anchor"><span class="anchor-link"></span></a>Configuring namespaces to watch</h3>
-<p>The namespaces that the operator should watch are configured using the <code>cloudstate.operator.watch.namespaces</code> list. If any of the namespaces in the list is <code>*</code>, then all namespaces will be watched. Otherwise, just the namespaces specified in the list are watched. To watch the namespaces <code>my-namespcae-1</code> and <code>my-namespace-2</code>, it can be configured like so:</p>
+<p>The namespaces that the operator should watch are configured using the <code>cloudstate.operator.watch.namespaces</code> list. If any of the namespaces in the list is <code>*</code>, then all namespaces will be watched. Otherwise, just the namespaces specified in the list are watched. To watch the namespaces <code>my-namespace-1</code> and <code>my-namespace-2</code>, it can be configured like so:</p>
 <pre class="prettyprint"><code class="language-hocon">cloudstate.operator.watch.namespaces = [&quot;my-namespace-1&quot;, &quot;my-namespace-2&quot;]
 </code></pre>
 <h3><a href="#configuring-proxy-images" name="configuring-proxy-images" class="anchor"><span class="anchor-link"></span></a>Configuring proxy images</h3>
