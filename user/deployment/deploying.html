@@ -245,21 +245,14 @@ spec:
 <dl>
   <dt><code>datastore</code></dt>
   <dd>Configures the datastore. This is discussed in detail in <a href="stores/index.html">Stateful stores</a>. If not configured, no store will be used, and support for any entity types that require a store will not be available on the proxy.</dd>
-  <dt><code>autoscaling</code></dt>
-  <dd>Configures autoscaling. This is discussed in detail in <a href="autoscaling.html">Autoscaling</a>. This field is likely to change.</dd>
-  <dt><code>serviceAccountName</code></dt>
-  <dd>The name of the service account that the pod should run using. Defaults to the default service account.</dd>
-  <dt><code>volumes</code></dt>
-  <dd>A list of <a href="https://kubernetes.io/docs/concepts/storage/volumes/">volumes to configure for pods</a>.</dd>
-  <dt><code>sidecarResources</code></dt>
-  <dd>Resource requirements to set for the sidecar. Uses the same structure as a container resources field. This field is likely to change.</dd>
-  <dt><code>sidecarJvmMemory</code></dt>
-  <dd>Heap space to allocate for the sidecar, using the <code>-Xmx</code> option. This currently has <a href="https://github.com/cloudstateio/cloudstate/issues/112">no effect for native images</a>, and is likely to change.</dd>
-  <dt><code>nodeSelector</code></dt>
-  <dd>Used to specify the <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">Pod nodeSelector</a>. This field is likely to change.</dd>
-  <dt><code>tolerations</code></dt>
-  <dd>Used to specify the <a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">Pod tolerations</a>. This field is likely to change.</dd>
 </dl>
+<p><code>autoscaling</code>: Configures autoscaling. This is discussed in detail in <a href="autoscaling.html">Autoscaling</a>. This field is likely to change.</p>
+<p><code>serviceAccountName</code>: The name of the service account that the pod should run using. Defaults to the default service account.</p>
+<p><code>volumes</code>: A list of <a href="https://kubernetes.io/docs/concepts/storage/volumes/">volumes to configure for pods</a>.</p>
+<p><code>sidecarResources</code>: Resource requirements to set for the sidecar. Uses the same structure as a container resources field. This field is likely to change.</p>
+<p><code>sidecarJvmMemory</code>: Heap space to allocate for the sidecar, using the <code>-Xmx</code> option. This currently has <a href="https://github.com/cloudstateio/cloudstate/issues/112">no effect for native images</a>, and is likely to change.</p>
+<p><code>nodeSelector</code>: Used to specify the <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">Pod nodeSelector</a>. This field is likely to change.</p>
+<p><code>tolerations</code>: Used to specify the <a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">Pod tolerations</a>. This field is likely to change.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/deployment/deploying.md">here</a>.
 </div>
