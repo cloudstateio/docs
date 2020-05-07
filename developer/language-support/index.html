@@ -224,7 +224,7 @@ Cloudstate Documentation
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#language-support" name="language-support" class="anchor"><span class="anchor-link"></span></a>Language support</h1>
-<p>Cloudstate is a polyglot platform for developers. This is achieved by having a gRPC based protocol between the Proxy and the User function. Since every language wants to be able to offer a language-idiomatic Application Programming Interface (API) Cloudstate offers Support libraries for the following languages:</p>
+<p>Cloudstate is a polyglot platform for developers. This is achieved by having a gRPC based protocol between the Proxy and the User function. Since every language wants to be able to offer a language-idiomatic Application Programming Interface (API) Cloudstate offers Support Libraries for the following languages:</p>
 <h2><a href="#current-language-support-libraries" name="current-language-support-libraries" class="anchor"><span class="anchor-link"></span></a>Current language support libraries</h2>
 <ul>
   <li>Java</li>
@@ -234,7 +234,7 @@ Cloudstate Documentation
 </ul>
 <h2><a href="#creating-language-support-libraries" name="creating-language-support-libraries" class="anchor"><span class="anchor-link"></span></a>Creating language support libraries</h2>
 <p>In order to implement a <a href="https://cloudstate.io/docs/user/features/index.html#support-library">Support Library</a> for a language, the Cloudstate protocol needs to be implemented as a gRPC server which is started when a Stateful Service is started. This gRPC server will then relay state and commands to the underlying User function.</p>
-<p>To obtain the necessary Cloudstate Protobuf descriptors which needs to be implemented, your build can be set up to fetch the following compressed archives and extract the contents. The archives are available from version <code>v0.6.0</code> and forwards.</p>
+<p>To obtain the necessary Cloudstate Protobuf descriptors that need to be implemented, your build can be set up to fetch the following compressed archives and extract the contents. The archives are available from version <code>v0.6.0</code> and forwards.</p>
 <ul>
   <li>The Cloudstate protocols
     <ul>
@@ -247,7 +247,7 @@ Cloudstate Documentation
     </ul>
   </li>
 </ul>
-<p>It is also possible to take a look at the various protobuf messages available in the <a href="https://github.com/cloudstateio/cloudstate/tree/master/protocols">project&rsquo;s <code>protocols</code> folder</a>. In this folder, you will see 4 sub-folders divided as follow: </p>
+<p>It is also possible to take a look at the various protobuf messages available in the <a href="https://github.com/cloudstateio/cloudstate/tree/master/protocols">project&rsquo;s <code>protocols</code> folder</a>. In this folder, you will see four sub-folders divided as follows:</p>
 <ul>
   <li><code>example</code> is for implementing the example application, which is also used by the TCK for third-party language (and proxy implementation) validation.</li>
   <li><code>frontend</code> is what is used by developers of services when they define their proto interfaces. The <code>cloudstate</code> subfolder in particular contains the definition of two protobuf options:
@@ -255,25 +255,25 @@ Cloudstate Documentation
       <li>
       <p><code>.cloudstate.entity_key</code>: used to indicate the String to be used as an entity key in a given protobuf object.</p></li>
     </ul><div class="callout note "><div class="callout-title">Example of an Event where the entity id is defined</div>
-    <pre class="prettyprint"><code class="language-proto">  message PongSent {
-  string id = 1 [(.cloudstate.entity_key) = true];
-  int32 sequence_number = 2;
-  }  
+    <pre class="prettyprint"><code class="language-proto">message PongSent {
+    string id = 1 [(.cloudstate.entity_key) = true];
+    int32 sequence_number = 2;
+}
 </code></pre></div>
     <ul>
       <li><code>.cloudstate.eventing</code>: used to indicate the name of the topic/queue to use for data input or output.</li>
     </ul><div class="callout note "><div class="callout-title">Example of topic/queue definition for the function output</div>
-    <pre class="prettyprint"><code class="language-proto">  rpc Ping(PongSent) returns (PingSent) {
-  option (.cloudstate.eventing) = {
-    out: &quot;pings&quot;,
-};
-  }  
+    <pre class="prettyprint"><code class="language-proto">rpc Ping(PongSent) returns (PingSent) {
+    option (.cloudstate.eventing) = {
+      out: &quot;pings&quot;,
+  };
+}
 </code></pre></div><div class="callout note "><div class="callout-title">Example of topic/queue definition for the function input</div>
-    <pre class="prettyprint"><code class="language-proto">  rpc SeenPing(PingSent) returns (google.protobuf.Empty) {
-  option (.cloudstate.eventing) = {
-    in: &quot;pings&quot;,
-};
-  }
+    <pre class="prettyprint"><code class="language-proto">rpc SeenPing(PingSent) returns (google.protobuf.Empty) {
+    option (.cloudstate.eventing) = {
+      in: &quot;pings&quot;,
+  };
+}
 </code></pre></div>
   </li>
   <li>
