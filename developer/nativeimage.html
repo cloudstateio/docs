@@ -290,7 +290,7 @@ proxy-postgres/docker:publish
 <pre class="prettyprint"><code class="language-bash">GCP_AGENT_ENABLED=true sbt -Dconfig.resource=native-image.conf
 </code></pre>
 <p>Now after building the dev mode native image, you can run the integration tests:</p>
-<pre><code>buildDockerNativeDevMode publishLocalPull
+<pre><code>dockerBuildNativeDevMode publishLocalPull
 tck/it:test
 </code></pre>
 <h2><a href="#dealing-with-preemptible-issues" name="dealing-with-preemptible-issues" class="anchor"><span class="anchor-link"></span></a>Dealing with preemptible issues</h2>
