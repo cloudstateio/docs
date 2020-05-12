@@ -228,8 +228,8 @@ Cloudstate Documentation
 <h1><a href="#event-sourcing" name="event-sourcing" class="anchor"><span class="anchor-link"></span></a>Event sourcing</h1>
 <p>This page documents how to implement Cloudstate event sourced entities in Kotlin. For information on what Cloudstate event sourced entities are, please read the general <a href="../../features/eventsourced.html">Event sourcing</a> documentation first.</p>
 <p>An event sourced entity can be created by annotating it with the <code>@EventSourcedEntity</code> (io.cloudstate.kotlinsupport.api.eventsourced.EventSourcedEntity) annotation.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L18-L19" target="_blank" title="Go to snippet source"></a><code class="language-kt">@EventSourcedEntity
-class ShoppingCartEntity(@param:EntityId private val entityId: String) {</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L20-L21" target="_blank" title="Go to snippet source"></a><code class="language-kt">@EventSourcedEntity
+class ShoppingCartEntity(@EntityId private val entityId: String) {</code></pre>
 <p>The <code>persistenceId</code> is used to namespace events in the journal, useful for when you share the same database between multiple entities. It defaults to the simple name for the entity class (in this case, <code>ShoppingCartEntity</code>), it&rsquo;s good practice to select one explicitly, this means your database isn&rsquo;t depend on classnames in your code.</p>
 <p>The <code>snapshotEvery</code> parameter controls how often snapshots are taken, so that the entity doesn&rsquo;t need to be recovered from the whole journal each time it&rsquo;s loaded. If left unset, it defaults to 100. Setting it to a negative number will result in snapshots never being taken.</p>
 <h2><a href="#persistence-types-and-serialization" name="persistence-types-and-serialization" class="anchor"><span class="anchor-link"></span></a>Persistence types and serialization</h2>
@@ -264,37 +264,38 @@ message Cart {
 }</code></pre>
 <h2><a href="#state" name="state" class="anchor"><span class="anchor-link"></span></a>State</h2>
 <p>Each entity should store its state locally in a mutable variable, either a mutable field or a multiple structure such as a collection. For our shopping cart, the state is a map of product ids to products, so we&rsquo;ll create a map to contain that:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L23" target="_blank" title="Go to snippet source"></a><code class="language-kt">private val cart: MutableMap&lt;String, Shoppingcart.LineItem?&gt; = mutableMapOf&lt;String, Shoppingcart.LineItem?&gt;()</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L25" target="_blank" title="Go to snippet source"></a><code class="language-kt">private val cart: MutableMap&lt;String, Shoppingcart.LineItem?&gt; = mutableMapOf&lt;String, Shoppingcart.LineItem?&gt;()</code></pre>
 <h2><a href="#constructing" name="constructing" class="anchor"><span class="anchor-link"></span></a>Constructing</h2>
 <p>The context available for injection into the constructor is a <code>EventSourcedEntityCreationContext</code>. While you don&rsquo;t necessarily need to define a constructor, you can define one and have that context injected in. The constructor below shows having the entity id injected:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L14" target="_blank" title="Go to snippet source"></a><code class="language-kt">class ShoppingCartEntity(@param:EntityId private val entityId: String)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L15-L16" target="_blank" title="Go to snippet source"></a><code class="language-kt">class ShoppingCartEntity(@EntityId private val entityId: String,
+                         context: EventSourcedEntityCreationContext)</code></pre>
 <h2><a href="#handling-commands" name="handling-commands" class="anchor"><span class="anchor-link"></span></a>Handling commands</h2>
 <p>Command handlers can be declared by annotating a method with <code>@CommandHandler</code> (io.cloudstate.kotlinsupport.api.eventsourced.CommandHandler). They take a context class of type <code>CommandContext</code>.</p>
 <p>By default, the name of the command that the method handles will be the name of the method with the first letter capitalized. So, a method called <code>getCart</code> will handle gRPC service call command named <code>GetCart</code>. This can be overridden by setting the <code>name</code> parameter on the <code>@CommandHandler</code> annotation.</p>
 <p>The command handler also can take the gRPC service call input type as a parameter, to receive the command message. This is optional, sometimes it&rsquo;s not needed, for example, our <code>GetCart</code> service call doesn&rsquo;t need any information from the message, since it&rsquo;s just returning the current state as is. Meanwhile, the <code>AddItem</code> service call does need information from the message, since it needs to know the product id, description and quantity to add to the cart.</p>
 <p>The return type of the command handler must be the output type for the gRPC service call, this will be sent as the reply.</p>
 <p>The following shows the implementation of the <code>GetCart</code> command handler. This command handler is a read-only command handler, it doesn&rsquo;t emit any events, it just returns some state:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L84-L85" target="_blank" title="Go to snippet source"></a><code class="language-kt">@CommandHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L86-L87" target="_blank" title="Go to snippet source"></a><code class="language-kt">@CommandHandler
 fun getCart(): Shoppingcart.Cart = Shoppingcart.Cart.newBuilder().addAllItems(cart.values).build()</code></pre>
 <h3><a href="#emitting-events" name="emitting-events" class="anchor"><span class="anchor-link"></span></a>Emitting events</h3>
 <p>Commands that modify the state may do so by emitting events.</p><div class="callout warning "><div class="callout-title">Warning</div>
 <p>The <strong>only</strong> way a command handler may modify its state is by emitting an event. Any modifications made directly to the state from the command handler will not be persisted, and when the entity is passivated and next reloaded, those modifications will not be present.</p></div>
 <p>A command handler may emit an event by taking in a <code>CommandContext</code> parameter, and invoking the <code>emit</code> method on it. Invoking <code>emit</code> will immediately invoke the associated event handler for that event - this both validates that the event can be applied to the current state, as well as updates the state so that subsequent processing in the command handler can use it.</p>
 <p>Here&rsquo;s an example of a command handler that emits an event:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L89-L104" target="_blank" title="Go to snippet source"></a><code class="language-kt">@CommandHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L91-L106" target="_blank" title="Go to snippet source"></a><code class="language-kt">@CommandHandler
 fun addItem(item: Shoppingcart.AddLineItem, ctx: CommandContext): Empty {
     if (item.quantity &lt;= 0) {
         ctx.fail(&quot;Cannot add negative quantity of to item ${item.productId}&quot; )
     }
     ctx.emit(
-            Domain.ItemAdded.newBuilder()
-                    .setItem(
-                            Domain.LineItem.newBuilder()
-                                    .setProductId(item.productId)
-                                    .setName(item.name)
-                                    .setQuantity(item.quantity)
-                                    .build())
+        Domain.ItemAdded.newBuilder()
+            .setItem(
+                Domain.LineItem.newBuilder()
+                    .setProductId(item.productId)
+                    .setName(item.name)
+                    .setQuantity(item.quantity)
                     .build())
+            .build())
     return Empty.getDefaultInstance()
 }</code></pre>
 <p>This command handler also validates the command, ensuring the quantity items added is greater than zero. Invoking <code>ctx.fail</code> fails the command - this method throws so there&rsquo;s no need to explicitly throw an exception.</p>
@@ -304,7 +305,7 @@ fun addItem(item: Shoppingcart.AddLineItem, ctx: CommandContext): Empty {
 <p>Event handlers are differentiated by the type of event they handle. By default, the type of event an event handler handles will be determined by looking for a single non context parameter that the event handler takes. If for any reason this needs to be overridden, or if the event handler method doesn&rsquo;t take any non context parameter (because the event type may be all that needs to be known to handle the event), the type of event the handler handles can be specified using the <code>eventClass</code> parameter on the <code>@EventHandler</code> annotation.</p>
 <p>Event handlers may be declared for a superclass or interface of the types they handle, for example an event handler that declares an <code>Object</code> parameter will handle all events. In the case where multiple event handlers match, Cloudstate will match the most specific event handler, which is decided by walking up the superclass tree, and matching all interfaces along the way.</p>
 <p>Here&rsquo;s an example event handler for the <code>ItemAdded</code> event. A utility method, <code>convert</code> is also defined to assist it.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L56-L68" target="_blank" title="Go to snippet source"></a><code class="language-kt">@EventHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L58-L70" target="_blank" title="Go to snippet source"></a><code class="language-kt">@EventHandler
 fun itemAdded(itemAdded: Domain.ItemAdded) {
     var item = cart[itemAdded.item.productId]
 
@@ -319,15 +320,15 @@ fun itemAdded(itemAdded: Domain.ItemAdded) {
 }</code></pre>
 <h2><a href="#producing-and-handling-snapshots" name="producing-and-handling-snapshots" class="anchor"><span class="anchor-link"></span></a>Producing and handling snapshots</h2>
 <p>Snapshots are an important optimisation for event sourced entities that may contain many events, to ensure that they can be loaded quickly even when they have very long journals. To produce a snapshot, a method annotated with <code>@Snapshot</code> (io.cloudstate.kotlinsupport.api.eventsourced.Snapshot) must be declared. It takes a context class of type <code>SnapshotContext</code> (io.cloudstate.javasupport.eventsourced.SnapshotContext), and must return a snapshot of the current state in serializable form. </p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L27-L42" target="_blank" title="Go to snippet source"></a><code class="language-kt">@Snapshot
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L29-L44" target="_blank" title="Go to snippet source"></a><code class="language-kt">@Snapshot
 fun snapshot(): Domain.Cart =
-        Domain.Cart.newBuilder()
-                .addAllItems(
-                        cart.values.stream()
-                                .map { item: Shoppingcart.LineItem? -&gt; this.convert(item) }
-                                .collect(Collectors.toList())
-                )
-                .build()
+    Domain.Cart.newBuilder()
+        .addAllItems(
+            cart.values.stream()
+                .map { item: Shoppingcart.LineItem? -&gt; this.convert(item) }
+                .collect(Collectors.toList())
+        )
+        .build()
 
 private fun convert(item: Shoppingcart.LineItem?): Domain.LineItem =
         Domain.LineItem.newBuilder()
@@ -337,7 +338,7 @@ private fun convert(item: Shoppingcart.LineItem?): Domain.LineItem =
                 .build()</code></pre>
 <p>When the entity is loaded again, the snapshot will first be loaded before any other events are received, and passed to a snapshot handler. Snapshot handlers are declare by annotating a method with <code>@SnapshotHandler</code> (io.cloudstate.kotlinsupport.api.eventsourced.SnapshotHandler), and it can take a context class of type <code>SnapshotContext</code> (io.cloudstate.javasupport.eventsourced.SnapshotContext).</p>
 <p>Multiple snapshot handlers may be defined to handle multiple different types of snapshots, the type matching is done in the same way as for events.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L46-L52" target="_blank" title="Go to snippet source"></a><code class="language-kt">@SnapshotHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L48-L54" target="_blank" title="Go to snippet source"></a><code class="language-kt">@SnapshotHandler
 fun handleSnapshot(cart: Domain.Cart) {
     this.cart.clear()
     for (item in cart.itemsList) {
@@ -346,21 +347,20 @@ fun handleSnapshot(cart: Domain.Cart) {
 }</code></pre>
 <h2><a href="#registering-the-entity" name="registering-the-entity" class="anchor"><span class="anchor-link"></span></a>Registering the entity</h2>
 <p>Once you&rsquo;ve created your entity, you can register it with the <code>cloudState</code> (io.cloudstate.kotlinsupport.cloudState) server, by invoking the <code>registerEventSourcedEntity</code> function. In addition to passing your entity class and service descriptor, you also need to pass any descriptors that you use for persisting events, for example, the <code>domain.proto</code> descriptor.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L120-L130" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L122-L132" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
     cloudstate {
         eventsourced {
             entityService = ShoppingCartEntity::class
             descriptor = Shoppingcart.getDescriptor().findServiceByName(&quot;ShoppingCart&quot;)
-            additionalDescriptors = arrayOf( Domain.getDescriptor() )
+            additionalDescriptors = mutableListOf(Shoppingcart.getDescriptor(), Domain.getDescriptor() )
         }
     }.start()
             .toCompletableFuture()
             .get()
 }</code></pre>
 <p>Additionally you can define some properties of the server or the execution environment:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L134-L154" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L136-L154" target="_blank" title="Go to snippet source"></a><code class="language-kt">fun main() {
     cloudstate {
-
         config {
             host = &quot;0.0.0.0&quot;
             port = 8080
@@ -370,8 +370,7 @@ fun handleSnapshot(cart: Domain.Cart) {
         eventsourced {
             entityService = ShoppingCartEntity::class
             descriptor = Shoppingcart.getDescriptor().findServiceByName(&quot;ShoppingCart&quot;)
-            additionalDescriptors = arrayOf( Domain.getDescriptor() )
-
+            additionalDescriptors = mutableListOf(Shoppingcart.getDescriptor(), Domain.getDescriptor() )
             snapshotEvery = 1
             persistenceId = &quot;shopping-cart&quot;
         }
@@ -381,18 +380,18 @@ fun handleSnapshot(cart: Domain.Cart) {
 }</code></pre>
 <p>The complete code for our entity class would look like this:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/kotlin/docs/user/eventsourced/behavior/ShoppingCartEntity.kt#L13-L99" target="_blank" title="Go to snippet source"></a><code class="language-kt">@EventSourcedEntity
-class ShoppingCartEntity(@param:EntityId private val entityId: String) {
+class ShoppingCartEntity(@EntityId private val entityId: String) {
     private val cart: MutableMap&lt;String, Shoppingcart.LineItem?&gt; = mutableMapOf&lt;String, Shoppingcart.LineItem?&gt;()
 
     @Snapshot
     fun snapshot(): Domain.Cart =
-            Domain.Cart.newBuilder()
-                    .addAllItems(
-                            cart.values.stream()
-                                    .map { item: Shoppingcart.LineItem? -&gt; this.convert(item) }
-                                    .collect(Collectors.toList())
-                    )
-                    .build()
+        Domain.Cart.newBuilder()
+            .addAllItems(
+                cart.values.stream()
+                    .map { item: Shoppingcart.LineItem? -&gt; this.convert(item) }
+                    .collect(Collectors.toList())
+            )
+            .build()
 
     @SnapshotHandler
     fun handleSnapshot(cart: Domain.Cart) {
@@ -428,14 +427,14 @@ class ShoppingCartEntity(@param:EntityId private val entityId: String) {
             ctx.fail(&quot;Cannot add negative quantity of to item ${item.productId}&quot; )
         }
         ctx.emit(
-                Domain.ItemAdded.newBuilder()
-                        .setItem(
-                                Domain.LineItem.newBuilder()
-                                        .setProductId(item.productId)
-                                        .setName(item.name)
-                                        .setQuantity(item.quantity)
-                                        .build())
+            Domain.ItemAdded.newBuilder()
+                .setItem(
+                    Domain.LineItem.newBuilder()
+                        .setProductId(item.productId)
+                        .setName(item.name)
+                        .setQuantity(item.quantity)
                         .build())
+                .build())
         return Empty.getDefaultInstance()
     }
 
@@ -445,26 +444,26 @@ class ShoppingCartEntity(@param:EntityId private val entityId: String) {
             ctx.fail(&quot;Cannot remove item ${item.productId} because it is not in the cart.&quot;)
         }
         ctx.emit(
-                Domain.ItemRemoved.newBuilder()
-                        .setProductId(item.productId)
-                        .build())
+            Domain.ItemRemoved.newBuilder()
+                .setProductId(item.productId)
+                .build())
         return Empty.getDefaultInstance()
     }
 
     private fun convert(item: Domain.LineItem): Shoppingcart.LineItem =
-            Shoppingcart.LineItem.newBuilder()
-                    .setProductId(item.productId)
-                    .setName(item.name)
-                    .setQuantity(item.quantity)
-                    .build()
+        Shoppingcart.LineItem.newBuilder()
+            .setProductId(item.productId)
+            .setName(item.name)
+            .setQuantity(item.quantity)
+            .build()
 
 
     private fun convert(item: Shoppingcart.LineItem?): Domain.LineItem =
-            Domain.LineItem.newBuilder()
-                    .setProductId(item!!.productId)
-                    .setName(item.name)
-                    .setQuantity(item.quantity)
-                    .build()
+        Domain.LineItem.newBuilder()
+            .setProductId(item!!.productId)
+            .setName(item.name)
+            .setQuantity(item.quantity)
+            .build()
 
 }</code></pre>
 <div class="source-github">
