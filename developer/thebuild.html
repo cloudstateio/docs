@@ -234,7 +234,8 @@ Cloudstate Documentation
   <li>Install <code>sbt</code>, follow <a href="https://www.scala-sbt.org/download.html">these instructions</a>.</li>
 </ul>
 <p>To build Native Images, you&rsquo;ll need the GraalVM CE as your JRE and <a href="https://clang.llvm.org/"><code>clang</code></a> as your <code>cc</code>. The GraalVM CE provides the <code>native-image</code> command, which must be on the $PATH when building Native Images. See <a href="https://github.com/cloudstateio/cloudstate/blob/master/README.md#graal-integration">GraalVM Integration</a> in the project README for further info.</p>
-<p>To build the documentation using the <code>paradox</code> target, you&rsquo;ll need to use <code>npm</code> to install required modules from the <code>node-support</code> folder with <code>cd node-support &amp;&amp; npm install &amp;&amp; cd ..</code></p>
+<p>To build node.js related samples, you&rsquo;ll need <code>nvm</code> to install the corresponding node.js version by running command <code>nvm install</code> and <code>nvm use</code>, then run <code>npm install</code> to install required modules.</p>
+<p>To build the documentation using the <code>paradox</code> target, you&rsquo;ll need to use <code>npm</code> to install required modules from the <code>node-support</code> folder with <code>cd node-support &amp;&amp; nvm install &amp;&amp; nvm use &amp;&amp; npm install &amp;&amp; cd ..</code></p>
 <h2><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting started</h2>
 <p>It is possible to run <code>sbt</code> either on a command-by-command basis by running <code>sbt &lt;command&gt; parameters</code>. It is also possible to run <code>sbt</code> in interactive mode by running <code>sbt</code>, then you can interact with the build interactively by typing in commands and having them executed by pressing RETURN.</p>
 <p>The following is a list of sbt commands and use-cases:</p>

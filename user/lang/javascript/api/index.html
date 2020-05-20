@@ -201,7 +201,11 @@ function itemRemoved(removed, cart) {
 
 entity.start();
 </code></pre>
-<p>For more information see https://cloudstate.io/docs/user/lang/javascript/index.html.</p></article>
+<p>For more information see https://cloudstate.io/docs/user/lang/javascript/index.html.</p>
+<h1>Node.js version support</h1>
+<p>In this repo, we set default node.js version to 12 in package.json. Based on <a href="https://nodejs.org/en/">Node.js website</a>, version 12 is recommended for most user currently.
+If the node.js version does not match, <code>npm install</code> raises error. If you want to use a different version, please modify &quot;engines.node&quot; field in package.json file.
+We recommend you use <a href="https://github.com/nvm-sh/nvm">nvm</a> to control node version. You can run <code>nvm install</code> and <code>nvm use</code> to pick up the right node.js version from <code>.nvmrc</code> file.</p></article>
     </section>
 
 
