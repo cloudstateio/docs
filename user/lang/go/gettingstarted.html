@@ -262,11 +262,11 @@ go 1.13
 </dl>
 <h2><a href="#protobuf-files" name="protobuf-files" class="anchor"><span class="anchor-link"></span></a>Protobuf files</h2>
 <p>The Cloudstate Go Support Library provides no dedicated tool beside the protoc compiler to build your protobuf files. The Cloudstate protocol protobuf files as well as the shopping cart example application protobuf files are provided by the Cloudstate Repository.</p>
-<p>In addition to the <code>protoc</code> compiler, the gRPC Go plugin is needed to compile the protobuf file to *.pb.go files. Please follow the instructions at the <a href="https://github.com/golang/protobuf">Go support for Protocol Buffers</a> project page to install the protoc compiler as well as the <code>protoc-gen-go</code> plugin which also includes the Google standard protobuf types.</p>
-<p>To build the example shopping cart application shown earlier in <a href="../../features/grpc.html">gRPC descriptors</a>, you could simply paste that protobuf into <code>protos/shoppingcart.proto</code>. You may wish to also define the Go package using the <code>go_package</code> proto option, to ensure the package name used conforms to Go package naming conventions</p>
+<p>In addition to the <code>protoc</code> compiler, the gRPC Go plugin is needed to compile the protobuf file to <code>*.pb.go</code> files. Please follow the instructions at the <a href="https://github.com/golang/protobuf">Go support for Protocol Buffers</a> project page to install the protoc compiler as well as the <code>protoc-gen-go</code> plugin which also includes the Google standard protobuf types.</p>
+<p>To build the example shopping cart application shown earlier in <a href="../../features/grpc.html">gRPC descriptors</a>, you could simply paste that protobuf into <code>protos/shoppingcart.proto</code>. You may wish to also define the Go package using the <code>go_package</code> proto option, to ensure the package name used conforms to Go package naming conventions.</p>
 <pre class="prettyprint"><code class="language-proto">option go_package = &quot;example/shoppingcart&quot;;
 </code></pre>
-<p>Now if you place your protobuf files under protobuf/ and run <code>protoc --go_out=. --proto_path=protobuf ./protobuf/*.proto</code>, you&rsquo;ll find your generated protobuf files in <code>example/shoppingcart</code>.</p>
+<p>Now if you place your protobuf files under <code>protobuf/</code> and run <code>protoc --go_out=. --proto_path=protobuf ./protobuf/*.proto</code>, you&rsquo;ll find your generated protobuf files in <code>example/shoppingcart</code>.</p>
 <h2><a href="#creating-a-main-package" name="creating-a-main-package" class="anchor"><span class="anchor-link"></span></a>Creating a main package</h2>
 <p>Your main package will be responsible for creating the Cloudstate gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the CloudState server type, for example:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L34-L58" target="_blank" title="Go to snippet source"></a><code class="language-go">func main() {
@@ -299,7 +299,7 @@ go 1.13
 <p>Second, during registration of the entity, an entity factory function has to be provided so Cloudstate gets to know how to create and initialize an event sourced entity. </p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/eventsourced.go#L62-L63" target="_blank" title="Go to snippet source"></a><code class="language-go">	// EntityFactory is a factory method which generates a new Entity.
 	EntityFunc func() Entity</code></pre>
-<p>This entity factory function returns an <code>cloudstate.Entity</code> which itself is a composite interface of a <code>cloudstate.CommandHandler</code> and a <code>cloudstate.EventHandler</code>. Every event sourced entity has to implement these two interfaces.</p>
+<p>This entity factory function returns a <code>cloudstate.Entity</code> which itself is a composite interface of a <code>cloudstate.CommandHandler</code> and a <code>cloudstate.EventHandler</code>. Every event sourced entity has to implement these two interfaces.</p>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/gettingstarted.md">here</a>.
 </div>

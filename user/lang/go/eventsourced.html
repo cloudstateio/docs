@@ -236,16 +236,16 @@ Cloudstate Documentation
 	// as an Emitter we can emit events
 	cloudstate.EventEmitter
 }</code></pre>
-<p>Then by composing the Cloudstate entity with an <code>cloudstate.EventSourcedEntity</code> and register it with <code>CloudState.Register()</code>, your entity gets configured to be an event sourced entity and handled by the Cloudstate instance for now on.</p>
+<p>Then by composing the Cloudstate entity with a <code>cloudstate.EventSourcedEntity</code> and register it with <code>CloudState.Register()</code>, your entity gets configured to be an event sourced entity and handled by the Cloudstate instance from now on.</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/eventsourced.go#L44-L65" target="_blank" title="Go to snippet source"></a><code class="language-go">type EventSourcedEntity struct {
-	// ServiceName is the fully qualified name of the gRPC service that implements this entities interface.
+	// ServiceName is the fully qualified name of the gRPC service that implements this entity&#39;s interface.
 	// Setting it is mandatory.
 	ServiceName string
 	// PersistenceID is used to namespace events in the journal, useful for
 	// when you share the same database between multiple entities. It defaults to
 	// the simple name for the entity type.
 	// It’s good practice to select one explicitly, this means your database
-	// isn’t depend on type names in your code.
+	// isn’t dependent on type names in your code.
 	// Setting it is mandatory.
 	PersistenceID string
 	// The snapshotEvery parameter controls how often snapshots are taken,
@@ -257,14 +257,14 @@ Cloudstate Documentation
 	// EntityFactory is a factory method which generates a new Entity.
 	EntityFunc func() Entity
 }</code></pre>
-<p>The <code>ServiceName</code> is the fully qualified name of the gRPC service that implements this entities interface. Setting it is mandatory.</p>
-<p>The <code>PersistenceID</code> is used to namespace events in the journal, useful for when you share the same database between multiple entities. It is recommended to be the name for the entity type (in this case, <code>ShoppingCart</code>) and is set to be mandatory.</p>
+<p>The <code>ServiceName</code> is the fully qualified name of the gRPC service that implements this entity&rsquo;s interface. Setting it is mandatory.</p>
+<p>The <code>PersistenceID</code> is used to namespace events in the journal, useful for when you share the same database between multiple entities. It is recommended to be the name for the entity type (in this case, <code>ShoppingCart</code>). Setting it is mandatory.</p>
 <p>The <code>SnapshotEvery</code> parameter controls how often snapshots are taken, so that the entity doesn&rsquo;t need to be recovered from the whole journal each time it&rsquo;s loaded. If left unset, it defaults to 100. Setting it to a negative number will result in snapshots never being taken.</p>
 <p>The <code>EntityFunc</code> is a factory method which generates a new Entity whenever Cloudstate has to initialize a new entity. </p>
 <h2><a href="#persistence-types-and-serialization" name="persistence-types-and-serialization" class="anchor"><span class="anchor-link"></span></a>Persistence types and serialization</h2>
-<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. The most straight forward way to persist events and snapshots is to use protobufs. Cloudstate will automatically detect if an emitted event is a protobuf, and serialize it as such. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
-<p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your services protobuf messages, rather, you should create new messages, even if they are identical to the services. While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the services public interface to evolve independently from its data storage format, which should be private.</p>
-<p>For our shopping cart example, we&rsquo;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my applications domain objects:</p>
+<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. The most straightforward way to persist events and snapshots is to use protobufs. Cloudstate will automatically detect if an emitted event is a protobuf, and serialize it as such. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
+<p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your service&rsquo;s protobuf messages, rather, you should create new messages, even if they are identical to the service&rsquo;s. While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the service&rsquo;s public interface to evolve independently from its data storage format, which should be private.</p>
+<p>For our shopping cart example, we&rsquo;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my application&rsquo;s domain objects:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/proto/domain.proto" target="_blank" title="Go to snippet source"></a><code class="language-proto">syntax = &quot;proto3&quot;;
 
 package example.shoppingcart.domain;
@@ -314,7 +314,7 @@ message Cart {
 	}
 }</code></pre>
 <h2><a href="#handling-commands" name="handling-commands" class="anchor"><span class="anchor-link"></span></a>Handling commands</h2>
-<p>An event sourced entity implements the composed <code>cloudstate.Entity</code> interface. <code>cloudstate.Entity</code> embeds the <code>cloudstate.EventHandler</code> interface and therefore entities implementing it get commands from Cloudstate through the event handlers <code>HandleCommand</code> method.</p>
+<p>An event sourced entity implements the composed <code>cloudstate.Entity</code> interface. <code>cloudstate.Entity</code> embeds the <code>cloudstate.EventHandler</code> interface and therefore entities implementing it get commands from Cloudstate through the event handler&rsquo;s <code>HandleCommand</code> method.</p>
 <p>The command types received by an event sourced entity are declared by the gRPC Server interface which is generated from the protobuf definitions. The Cloudstate Go Support library together with the registered <code>cloudstate.EventSourcedEntity</code> is then able to dispatch commands it gets from the Cloudstate proxy to the event sourced entity.</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L168-L182" target="_blank" title="Go to snippet source"></a><code class="language-go">func (sc *ShoppingCart) HandleCommand(ctx context.Context, command interface{}) (handled bool, reply interface{}, err error) {
 	switch cmd := command.(type) {
@@ -351,7 +351,7 @@ message Cart {
 <p>Here&rsquo;s an example of a command handler that emits an event:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L129-L140" target="_blank" title="Go to snippet source"></a><code class="language-go">func (sc *ShoppingCart) AddItem(_ context.Context, li *shoppingcart.AddLineItem) (*empty.Empty, error) {
 	if li.GetQuantity() &lt;= 0 {
-		return nil, fmt.Errorf(&quot;cannot add negative quantity of to item %s&quot;, li.GetProductId())
+		return nil, fmt.Errorf(&quot;cannot add negative quantity to item %s&quot;, li.GetProductId())
 	}
 	sc.Emit(&amp;domain.ItemAdded{
 		Item: &amp;domain.LineItem{
@@ -361,14 +361,14 @@ message Cart {
 		}})
 	return &amp;empty.Empty{}, nil
 }</code></pre>
-<p>This command handler also validates the command, ensuring the quantity items added is greater than zero. Returning a <code>error</code> fails the command and the support library takes care of signaling that back to the requesting proxy as a <code>Failure</code> reply. </p>
+<p>This command handler also validates the command, ensuring the quantity of items added is greater than zero. Returning an <code>error</code> fails the command and the support library takes care of signaling that back to the requesting proxy as a <code>Failure</code> reply. </p>
 <h2><a href="#handling-events" name="handling-events" class="anchor"><span class="anchor-link"></span></a>Handling events</h2>
-<p>Event handlers are invoked at two points, when restoring entities from the journal, before any commands are handled, and each time a new event is emitted. An event handlers responsibility is to update the state of the entity according to the event. Event handlers are the only place where its safe to mutate the state of the entity at all.</p>
+<p>Event handlers are invoked at two points, when restoring entities from the journal, before any commands are handled, and each time a new event is emitted. An event handler&rsquo;s responsibility is to update the state of the entity according to the event. Event handlers are the only place where it&rsquo;s safe to mutate the state of the entity at all.</p>
 <p>Event handlers are declared by implementing the <code>cloudstate.EventHandler</code> interface.</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/event.go#L90-L92" target="_blank" title="Go to snippet source"></a><code class="language-go">type EventHandler interface {
 	HandleEvent(event interface{}) (handled bool, err error)
 }</code></pre>
-<p>Emitted events by command handlers get dispatched to the implemented event handler which then decides how to proceed with the event. </p>
+<p>Events emitted by command handlers get dispatched to the implemented event handler which then decides how to proceed with the event. </p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L115-L124" target="_blank" title="Go to snippet source"></a><code class="language-go">func (sc *ShoppingCart) HandleEvent(_ context.Context, event interface{}) (handled bool, err error) {
 	switch e := event.(type) {
 	case *domain.ItemAdded:
@@ -418,7 +418,7 @@ message Cart {
 	}
 }</code></pre>
 <h2><a href="#registering-the-entity" name="registering-the-entity" class="anchor"><span class="anchor-link"></span></a>Registering the entity</h2>
-<p>Once you&rsquo;ve created your entity, you can register it with the <code>cloudstate.Cloudstate</code> server, by invoking the <code>Register</code> method of an Cloudstate instance. In addition to passing your entity type and service name, you also need to pass any descriptors that you use for persisting events, for example, the <code>domain.proto</code> descriptor.</p>
+<p>Once you&rsquo;ve created your entity, you can register it with the <code>cloudstate.Cloudstate</code> server, by invoking the <code>Register</code> method of a Cloudstate instance. In addition to passing your entity type and service name, you also need to pass any descriptors that you use for persisting events, for example, the <code>domain.proto</code> descriptor.</p>
 <p>During registration the optional ServiceName and the ServiceVersion can be configured. (TODO: give an example on how to pick values for these after the spec defines semantics )</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L40-L49" target="_blank" title="Go to snippet source"></a><code class="language-go">	err = server.RegisterEventSourcedEntity(
 		&amp;cloudstate.EventSourcedEntity{
