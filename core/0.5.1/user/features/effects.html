@@ -47,7 +47,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -166,7 +166,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -246,7 +246,7 @@ Version 0.5.1-8-5384c8fe
 <p>It&rsquo;s important to note that forwarded commands, and commands emitted as side effects, are <strong>non</strong>-atomic, ie. there is no guarantee that the transactions either all succeeded or none. If the user function or store fails while a forwarded command is executing, the original command that triggered it will not be rolled back.</p>
 <p>Hence, forwarding and effects should not be used to update multiple entities at once if partial updates is a problem. In such cases, it&rsquo;s best to initiate commands from an event log consumer (future Cloudstate functionality), which can guarantee that a sequence of operations will run through to completion.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/features/effects.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/features/effects.md">here</a>.
 </div>
 
 <div class="nav-next">

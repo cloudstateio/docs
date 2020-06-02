@@ -47,7 +47,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -166,7 +166,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -277,7 +277,7 @@ go 1.13
 <p>Now if you place your protobuf files under <code>protobuf/</code> and run <code>protoc --go_out=. --proto_path=protobuf ./protobuf/*.proto</code>, you&rsquo;ll find your generated protobuf files in <code>example/shoppingcart</code>.</p>
 <h2><a href="#creating-a-main-package" name="creating-a-main-package" class="anchor"><span class="anchor-link"></span></a>Creating a main package</h2>
 <p>Your main package will be responsible for creating the Cloudstate gRPC server, registering the entities for it to serve, and starting it. To do this, you can use the CloudState server type, for example:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L34-L58" target="_blank" title="Go to snippet source"></a><code class="language-go">func main() {
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/go/src/shoppingcart.go#L34-L58" target="_blank" title="Go to snippet source"></a><code class="language-go">func main() {
 	server, err := cloudstate.New(cloudstate.Config{
 		ServiceName:    &quot;shopping-cart&quot;,
 		ServiceVersion: &quot;0.1.0&quot;,
@@ -305,11 +305,11 @@ go 1.13
 <p>Cloudstate entities in Go work by implementing interfaces and composing types. </p>
 <p>To get support for the Cloudstate event emission the Cloudstate entity should embed the <code>cloudstate.EventEmitter</code> type. The EventEmitter allows the entity to emit events during the handling of commands.</p>
 <p>Second, during registration of the entity, an entity factory function has to be provided so Cloudstate gets to know how to create and initialize an event sourced entity. </p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/src/eventsourced.go#L62-L63" target="_blank" title="Go to snippet source"></a><code class="language-go">	// EntityFactory is a factory method which generates a new Entity.
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/go/src/eventsourced.go#L62-L63" target="_blank" title="Go to snippet source"></a><code class="language-go">	// EntityFactory is a factory method which generates a new Entity.
 	EntityFunc func() Entity</code></pre>
 <p>This entity factory function returns a <code>cloudstate.Entity</code> which itself is a composite interface of a <code>cloudstate.CommandHandler</code> and a <code>cloudstate.EventHandler</code>. Every event sourced entity has to implement these two interfaces.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/go/gettingstarted.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/go/gettingstarted.md">here</a>.
 </div>
 
 <div class="nav-next">

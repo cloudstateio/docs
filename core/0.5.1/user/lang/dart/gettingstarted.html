@@ -47,7 +47,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -166,7 +166,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -282,7 +282,7 @@ ENTRYPOINT [&quot;/usr/bin/dart&quot;, &quot;--enable-asserts&quot;,  &quot;--en
 <p>Using the <code>descriptor_set_out = user-function.desc</code> option exactly as presented is mandatory since the Dart library will look for the <code>user-function.desc</code> file at the root of your project during the startup phase.</p></div>
 <h2><a href="#creating-a-main-function" name="creating-a-main-function" class="anchor"><span class="anchor-link"></span></a>Creating a main function</h2>
 <p>Your main class will be responsible for creating the Cloudstate gRPC server, registering the entities for your placement and starting it. To do this, you can use the <code>Cloudstate</code> class server builder, for example, in the <code>bin/</code> folder create a file called <code>main.dart</code> with the following content:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/dart/docs/user/gettingstarted/main.dart#L2-L12" target="_blank" title="Go to snippet source"></a><code class="language-dart">import &#39;package:cloudstate/cloudstate.dart&#39;;
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/test/dart/docs/user/gettingstarted/main.dart#L2-L12" target="_blank" title="Go to snippet source"></a><code class="language-dart">import &#39;package:cloudstate/cloudstate.dart&#39;;
 import &#39;package:shopping_cart/src/eventsourced_entity.dart&#39;;
 
 void main() {
@@ -295,7 +295,7 @@ void main() {
 }</code></pre>
 <p>We will see more details on registering entities in the coming pages.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/dart/gettingstarted.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/dart/gettingstarted.md">here</a>.
 </div>
 
 <div class="nav-next">

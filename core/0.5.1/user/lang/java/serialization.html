@@ -47,7 +47,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -166,7 +166,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-8-5384c8fe
+Version 0.5.1
 </div>
 <div class="nav-toc">
 <ul>
@@ -287,7 +287,7 @@ Version 0.5.1-8-5384c8fe
 <p>Cloudstate uses <a href="https://github.com/FasterXML/jackson">Jackson</a> to serialize JSON. Any classes that are annotated with <a href="../../../user/lang/java/api/io/cloudstate/javasupport/Jsonable.html" title="io.cloudstate.javasupport.Jsonable"><code>`@Jsonable`</code></a> will be serialized to and from JSON using Jackson. The serialization of JSON values is described in <a href="../../../developer/language-support/serialization.html#json-values">Language support / Cloudstate serialization convention</a>.</p>
 <p>Note that if you are using JSON values in CRDT sets or maps, the serialization of these values <strong>must</strong> be stable. This means you must not use maps or sets in your value, and you should define an explicit ordering for the fields in your objects, using the <a href="http://fasterxml.github.io/jackson-annotations/javadoc/2.9/com/fasterxml/jackson/annotation/JsonPropertyOrder.html"><code>@JsonPropertyOrder</code></a> annotation. This constraint is explained in <a href="crdt.html#sets-and-maps">CRDTs / Sets and Maps</a></p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/main/paradox/user/lang/java/serialization.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/java/serialization.md">here</a>.
 </div>
 
 <div class="nav-next">
