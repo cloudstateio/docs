@@ -47,7 +47,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-21-eabf2dca
+Version 0.5.1-23-4275270e
 </div>
 <div class="nav-toc">
 <ul>
@@ -168,7 +168,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-21-eabf2dca
+Version 0.5.1-23-4275270e
 </div>
 <div class="nav-toc">
 <ul>
@@ -242,14 +242,14 @@ Version 0.5.1-21-eabf2dca
 <h1><a href="#conflict-free-replicated-data-types" name="conflict-free-replicated-data-types" class="anchor"><span class="anchor-link"></span></a>Conflict-free Replicated Data Types</h1>
 <p>This page documents how to implement Cloudstate CRDT entities in Java. For information on what Cloudstate CRDT entities are, please read the general <a href="../../features/crdts.html">Conflict-free Replicated Data Type</a> documentation first.</p>
 <p>A CRDT can be created by annotating it with the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/CrdtEntity.html" title="io.cloudstate.javasupport.crdt.CrdtEntity"><code>`@CrdtEntity`</code></a> annotation.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L11-L12" target="_blank" title="Go to snippet source"></a><code class="language-java">@CrdtEntity
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L27-L28" target="_blank" title="Go to snippet source"></a><code class="language-java">@CrdtEntity
 public class ShoppingCartEntity {</code></pre>
 <h2><a href="#accessing-and-creating-an-entitys-crdt" name="accessing-and-creating-an-entitys-crdt" class="anchor"><span class="anchor-link"></span></a>Accessing and creating an entity&rsquo;s CRDT</h2>
 <p>Each CRDT entity manages one root CRDT. That CRDT will either be supplied to the entity by the proxy when it is started, or, if no CRDT exists for the entity when it is started, it can be created by the entity using a <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/CrdtFactory.html" title="io.cloudstate.javasupport.crdt.CrdtFactory"><code>`CrdtFactory`</code></a> extending context.</p>
 <p>There are multiple ways that a CRDT entity may access its CRDT. It may have the CRDT injected directly into its constructor or a command handler - the value can be wrapped in an <code>Optional</code> to distinguish between entities that have been created and CRDTs that have not yet been created. If not wrapped in <code>Optional</code>, the CRDT will be created automatically, according to its type. The CRDT can also be read from any <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/CrdtContext.html" title="io.cloudstate.javasupport.crdt.CrdtContext"><code>`CrdtContext`</code></a> via the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/CrdtContext.html#state-java.lang.Class-" title="io.cloudstate.javasupport.crdt.CrdtContext"><code>`state`</code></a> method.</p>
 <p>An entity&rsquo;s CRDT can be created from the entity&rsquo;s constructor using the <code>CrdtFactory</code> methods on <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/CrdtCreationContext.html" title="io.cloudstate.javasupport.crdt.CrdtCreationContext"><code>`CrdtCreationContext`</code></a>, or using the same methods in a command handler using the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/CommandContext.html" title="io.cloudstate.javasupport.crdt.CommandContext"><code>`CommandContext`</code></a>. Note that the CRDT may only be created once, and only if it hasn&rsquo;t been provided by the CloudState proxy already. Any attempt to create a CRDT when one already exists will throw an <code>IllegalStateException</code>.</p>
 <p>For most use cases, simply injecting the CRDT directly into the constructor, and storing in a local field, will be the most convenient and straightforward method of using a CRDT. In our shopping cart example, we&rsquo;re going to use an <a href="../../../user/lang/java/api/io/cloudstate/javasupport/crdt/LWWRegisterMap.html" title="io.cloudstate.javasupport.crdt.LWWRegisterMap"><code>`LWWRegisterMap`</code></a>, this shows how it may be injected:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L16-L20" target="_blank" title="Go to snippet source"></a><code class="language-java">private final LWWRegisterMap&lt;String, Shoppingcart.LineItem&gt; items;
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L32-L36" target="_blank" title="Go to snippet source"></a><code class="language-java">private final LWWRegisterMap&lt;String, Shoppingcart.LineItem&gt; items;
 
 public ShoppingCartEntity(LWWRegisterMap&lt;String, Shoppingcart.LineItem&gt; items) {
   this.items = items;
@@ -261,14 +261,14 @@ public ShoppingCartEntity(LWWRegisterMap&lt;String, Shoppingcart.LineItem&gt; it
 <p>The command handler also can take the gRPC service call input type as a parameter, to receive the command message. This is optional, sometimes it&rsquo;s not needed. For example, our <code>GetCart</code> service call doesn&rsquo;t need any information from the message, since it&rsquo;s just returning the current state as is. Meanwhile, the <code>AddItem</code> service call does need information from the message, since it needs to know the product id, description and quantity to add to the cart.</p>
 <p>The return type of the command handler must be the output type for the gRPC service call, this will be sent as the reply.</p>
 <p>The following shows the implementation of the <code>GetCart</code> command handler. This command handler is a read-only command handler, it doesn&rsquo;t update the CRDT, it just returns some state:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L24-L27" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L40-L43" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
 public Shoppingcart.Cart getCart() {
   return Shoppingcart.Cart.newBuilder().addAllItems(items.values()).build();
 }</code></pre>
 <h2><a href="#updating-a-crdt" name="updating-a-crdt" class="anchor"><span class="anchor-link"></span></a>Updating a CRDT</h2>
 <p>Due to CloudState&rsquo;s <a href="../../features/crdts.html#approach-to-crdts-in-cloudstate">take in turns approach</a>, CRDTs may only be updated in command handlers and <a href="crdt.html#responding-to-stream-cancellation">stream cancellation callbacks</a>.</p>
 <p>Here&rsquo;s a command handler for the <code>AddItem</code> command that adds the item to the shopping cart:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L31-L50" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L47-L66" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
 public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
   if (item.getQuantity() &lt;= 0) {
     ctx.fail(&quot;Cannot add a negative quantity of items.&quot;);
@@ -300,7 +300,7 @@ public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
 <pre class="prettyprint"><code class="language-proto">rpc WatchCart(GetShoppingCart) returns (stream Cart);
 </code></pre>
 <p>that could be implemented like this:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L54-L60" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L70-L76" target="_blank" title="Go to snippet source"></a><code class="language-java">@CommandHandler
 public Shoppingcart.Cart watchCart(StreamedCommandContext&lt;Shoppingcart.Cart&gt; ctx) {
 
   ctx.onChange(subscription -&gt; Optional.of(getCart()));
@@ -344,7 +344,7 @@ myLwwRegister.set(myValue);
 </dl>
 <h2><a href="#registering-the-entity" name="registering-the-entity" class="anchor"><span class="anchor-link"></span></a>Registering the entity</h2>
 <p>Once you&rsquo;ve created your entity, you can register it with the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/CloudState.html" title="io.cloudstate.javasupport.CloudState"><code>`CloudState`</code></a> server, by invoking the <a href="../../../user/lang/java/api/io/cloudstate/javasupport/CloudState.html#registerCrdtEntity-java.lang.Class-com.google.protobuf.Descriptors.ServiceDescriptor-com.google.protobuf.Descriptors.FileDescriptor...-" title="io.cloudstate.javasupport.CloudState"><code>`registerCrdtEntity`</code></a> method. In addition to passing your entity class and service descriptor, if you use protobuf for serialization and any protobuf message definitions are missing from your service descriptor (they are not declared directly in the file, nor as dependencies), then you&rsquo;ll need to pass those protobuf descriptors as well.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L64-L70" target="_blank" title="Go to snippet source"></a><code class="language-java">public static void main(String... args) {
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/master/docs/src/test/java/docs/user/crdt/ShoppingCartEntity.java#L80-L86" target="_blank" title="Go to snippet source"></a><code class="language-java">public static void main(String... args) {
   new CloudState()
       .registerCrdtEntity(
           ShoppingCartEntity.class,
