@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CloudState Interface: CommandContext</title>
+	<title>CloudState Interface: Metadata</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -86,7 +86,7 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Interface: CommandContext</h1>
+	<h1 class="page-title">Interface: Metadata</h1>
 <section>
 
 <header>
@@ -94,8 +94,15 @@
         <h2>
             <span class="ancestors"><a href="module-cloudstate.html">cloudstate</a>.</span>
         
-        CommandContext
+        Metadata
         </h2>
+        
+            <div class="class-description"><p>Cloudstate metadata.</p>
+<p>Metadata is treated as case insensitive on lookup, and case sensitive on set. Multiple values per key are supported,
+setting a value will add it to the current values for that key. You should delete first if you wish to replace a
+value.</p>
+<p>Values can either be strings or byte buffers. If a non string or byte buffer value is set, it will be converted to
+a string using toString.</p></div>
         
     
 </header>
@@ -105,8 +112,6 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Context for a command.</p></div>
-        
 
         
 <dl class="details">
@@ -153,15 +158,129 @@
     </div>
 
     
-        <h3 class="subsection-title">Extends</h3>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id="cloudevent">
+    <h4 id="cloudevent"><span class="type-signature"></span>cloudevent<span class="type-signature"> :<a href="module-cloudstate.CloudEvent.html">module:cloudstate.CloudEvent</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The metadata, expressed as a CloudEvent.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="module-cloudstate.CloudEvent.html">module:cloudstate.CloudEvent</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
 
         
+            
+<hr>
+<dt class="name" id="getMap">
+    <h4 id="getMap"><span class="type-signature"></span>getMap<span class="type-signature"> :Object.&lt;String, <a href="module-cloudstate.html#.MetadataValue">module:cloudstate.MetadataValue</a>></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The metadata expressed as an object.</p>
+<p>The object keys are case insensitive, ie, <code>metadata.foo</code> and <code>metadata.Foo</code> both return the same value. If there
+are multiple values for a given key, the first one set for that key will be returned. Setting a value will add it
+to the list of existing values for that key.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object.&lt;String, <a href="module-cloudstate.html#.MetadataValue">module:cloudstate.MetadataValue</a>></span>
 
 
-    <ul>
-        <li><a href="module-cloudstate.EffectContext.html">module:cloudstate.EffectContext</a></li>
-    </ul>
 
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -171,8 +290,32 @@
 
     
 
-    
+	
 
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -182,7 +325,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="effect"><span class="type-signature"></span>effect(method, message, synchronous, metadata)</h4>
+    <h4 class="name" id="clear"><span class="type-signature"></span>clear()</h4>
     
     
 </dt>
@@ -190,7 +333,7 @@
 
     
     <div class="description">
-        <p>Emit an effect after processing this command.</p>
+        <p>Clear the metadata.</p>
     </div>
     
 
@@ -199,122 +342,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>method</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The entity service method to invoke.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The message to send to that service.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>synchronous</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Whether the effect should be execute synchronously or not.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>metadata</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="module-cloudstate.Metadata.html">module:cloudstate.Metadata</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Metadata to send with the effect.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -325,15 +352,6 @@
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="module-cloudstate.EffectContext.html#effect">module:cloudstate.EffectContext#effect</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -385,7 +403,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="fail"><span class="type-signature"></span>fail(msg)</h4>
+    <h4 class="name" id="delete"><span class="type-signature"></span>delete(key)</h4>
     
     
 </dt>
@@ -393,7 +411,8 @@
 
     
     <div class="description">
-        <p>Fail handling this command.</p>
+        <p>Delete all values with the given key.</p>
+<p>The key is case insensitive.</p>
     </div>
     
 
@@ -428,10 +447,16 @@
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>key</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
             
             </td>
 
@@ -439,7 +464,7 @@
 
             
 
-            <td class="description last"><p>The failure message.</p></td>
+            <td class="description last"><p>The key to delete.</p></td>
         </tr>
 
     
@@ -456,15 +481,6 @@
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="module-cloudstate.EffectContext.html#fail">module:cloudstate.EffectContext#fail</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -506,19 +522,6 @@
     
 
     
-    <h5>Throws:</h5>
-    
-            
-
-    <div class="param-desc">
-    
-        <p>An error that captures the failure message. Note that even if you catch the error thrown by this
-method, the command will still be failed with the given message.</p>
-    
-    </div>
-
-
-        
 
     
 
@@ -529,7 +532,7 @@ method, the command will still be failed with the given message.</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="thenForward"><span class="type-signature"></span>thenForward(method, message, metadata)</h4>
+    <h4 class="name" id="get"><span class="type-signature"></span>get(key)</h4>
     
     
 </dt>
@@ -537,7 +540,8 @@ method, the command will still be failed with the given message.</p>
 
     
     <div class="description">
-        <p>Forward this command to another entity service call.</p>
+        <p>Get all the values for the given key.</p>
+<p>The key is case insensitive.</p>
     </div>
     
 
@@ -572,10 +576,16 @@ method, the command will still be failed with the given message.</p>
 
         <tr>
             
-                <td class="name"><code>method</code></td>
+                <td class="name"><code>key</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
             
             </td>
 
@@ -583,20 +593,302 @@ method, the command will still be failed with the given message.</p>
 
             
 
-            <td class="description last"><p>The entity service method to invoke.</p></td>
+            <td class="description last"><p>The key to get.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>All the values, or an empty array if no values exist for the key.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="module-cloudstate.html#.MetadataValue">module:cloudstate.MetadataValue</a>></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="has"><span class="type-signature"></span>has(key)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Whether there exists a metadata value for the given key.</p>
+<p>The key is case insensitive.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key to check.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="set"><span class="type-signature"></span>set(key, value)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Set a given key value.</p>
+<p>This will append the key value to the metadata, it won't replace any existing values for existing keys.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key to set.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type"><a href="module-cloudstate.html#.MetadataValue">module:cloudstate.MetadataValue</a></span>
 
 
 
@@ -607,31 +899,7 @@ method, the command will still be failed with the given message.</p>
 
             
 
-            <td class="description last"><p>The message to send to that service.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>metadata</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="module-cloudstate.Metadata.html">module:cloudstate.Metadata</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Metadata to send with the forward.</p></td>
+            <td class="description last"><p>The value to set.</p></td>
         </tr>
 
     
