@@ -47,7 +47,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-49-c394d25c
+Version 0.0.0
 </div>
 <div class="nav-toc">
 <ul>
@@ -168,7 +168,7 @@ Cloudstate Documentation
 </a>
 </div>
 <div class="nav-version">
-Version 0.5.1-49-c394d25c
+Version 0.0.0
 </div>
 <div class="nav-toc">
 <ul>
@@ -261,14 +261,14 @@ Version 0.5.1-49-c394d25c
 </code></pre>
 <h3><a href="#configuring-proxy-images" name="configuring-proxy-images" class="anchor"><span class="anchor-link"></span></a>Configuring proxy images</h3>
 <p>Cloudstate selects a proxy image based on what type of store is being used, if any. To customize the image used for a particular store, for example, to use a custom build, or a different version, these can be modified using <code>cloudstate.operator.proxy.image.&lt;store-name&gt;</code>. For example, to use the non-native build of the Cassandra proxy:</p>
-<pre class="prettyprint"><code class="language-hocon">cloudstate.operator.proxy.image.cassandra = &quot;cloudstateio/cloudstate-proxy-cassandra:0.5.1&quot;
+<pre class="prettyprint"><code class="language-hocon">cloudstate.operator.proxy.image.cassandra = &quot;cloudstateio/cloudstate-proxy-cassandra:0.0.0&quot;
 </code></pre>
 <h2><a href="#installing-the-operator" name="installing-the-operator" class="anchor"><span class="anchor-link"></span></a>Installing the operator</h2>
 <p>To install the operator, first create the namespace it is to be deployed to:</p>
 <pre><code>kubectl create namespace cloudstate
 </code></pre>
 <p>Now install Cloudstate into that namespace:</p>
-<pre><code>kubectl apply -n cloudstate -f https://github.com/cloudstateio/cloudstate/releases/download/v0.5.1/cloudstate-0.5.1.yaml
+<pre><code>kubectl apply -n cloudstate -f https://github.com/cloudstateio/cloudstate/releases/download/v0.0.0/cloudstate-0.0.0.yaml
 </code></pre>
 <p>You should now be ready to start using Cloudstate.</p>
 <div class="source-github">
