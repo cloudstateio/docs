@@ -68,6 +68,8 @@ Version 0.5.1
       <li><a href="../../../user/lang/go/index.html" class="page">Go</a></li>
       <li><a href="../../../user/lang/kotlin/index.html" class="page">Kotlin</a></li>
       <li><a href="../../../user/lang/dart/index.html" class="page">Dart</a></li>
+      <li><a href="../../../user/lang/springboot/index.html" class="page">Spring Boot</a></li>
+      <li><a href="../../../user/lang/dotnet/index.html" class="page">.Net</a></li>
     </ul></li>
     <li><a href="../../../user/deployment/index.html" class="page">Deploying applications</a>
     <ul>
@@ -104,8 +106,8 @@ Version 0.5.1
 </a>
 </div>
 <div class="nav">
-<a class="banner-btn oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Enhance your Cloudstate app with Lightbend [Button] - Cloudstate Banner" href="https://www.lightbend.com/cloudstate-by-lightbend?r=oss-banner-cloudstate" target="_blank">
-<span>Enhance your Cloudstate app with</span>
+<a class="banner-btn oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Enhance your apps with Lightbend [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">
+<span>Enhance your apps with</span>
 <img class="lightbend-logo" src="../../../images/banner-logos/lightbend-reverse.svg" alt="Lightbend" title="Lightbend">
 </a>
 <div class="drop-down">
@@ -135,8 +137,8 @@ C18.354,14.614,14.613,18.354,10,18.354z" />
 </a>
 <div class="cloudstate current">
 <img class="cloudstate-full-color-logo" src="../../../images/banner-logos/cloudstate-full-color.svg" alt="Cloudstate by Lightbend" title="Cloudstate by Lightbend">
-<span>From the creators of <strong>Cloudstate</strong>, get developer assistance and expert support from Lightbend.</span>
-<a class="oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Learn More [Button] - Cloudstate Banner" href="https://www.lightbend.com/cloudstate-by-lightbend?r=oss-banner-cloudstate" target="_blank">Learn More</a>
+<span>Get developer assistance and expert support from Lightbend.</span>
+<a class="oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Learn More [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">Learn More</a>
 </div>
 </div>
 <div class="title">The Lightbend Family</div>
@@ -187,6 +189,8 @@ Version 0.5.1
       <li><a href="../../../user/lang/go/index.html" class="page">Go</a></li>
       <li><a href="../../../user/lang/kotlin/index.html" class="page">Kotlin</a></li>
       <li><a href="../../../user/lang/dart/index.html" class="page">Dart</a></li>
+      <li><a href="../../../user/lang/springboot/index.html" class="page">Spring Boot</a></li>
+      <li><a href="../../../user/lang/dotnet/index.html" class="page">.Net</a></li>
     </ul></li>
     <li><a href="../../../user/deployment/index.html" class="page">Deploying applications</a>
     <ul>
@@ -238,7 +242,7 @@ Version 0.5.1
 <h1><a href="#event-sourcing" name="event-sourcing" class="anchor"><span class="anchor-link"></span></a>Event sourcing</h1>
 <p>This page documents how to implement Cloudstate event sourced entities in JavaScript. For information on what Cloudstate event sourced entities are, please read the general <a href="../../features/eventsourced.html">Event sourcing</a> documentation first.</p>
 <h2><a href="#persistence-types-and-serialization" name="persistence-types-and-serialization" class="anchor"><span class="anchor-link"></span></a>Persistence types and serialization</h2>
-<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. A snapshot is the current state of the entity, and so the entities state must be serializable. The most straight forward way to persist events and the state is to use protobufs. Cloudstate will automatically detect if an emitted event or snapshot is a protobuf, and serialize it as such. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
+<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. A snapshot is the current state of the entity, and so the entities state must be serializable. The most straightforward way to persist events and the state is to use protobufs. Cloudstate will automatically detect if an emitted event or snapshot is a protobuf, and serialize it as such using <code>protobufjs</code>. See <a href="https://www.npmjs.com/package/protobufjs">https://www.npmjs.com/package/protobufjs</a> for more information on <code>protobufjs</code>. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
 <p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your services protobuf messages, rather, you should create new messages, even if they are identical to the services. While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the services public interface to evolve independently from its data storage format, which should be private.</p>
 <p>For our shopping cart example, we&rsquo;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my applications domain objects:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/test/js/domain.proto" target="_blank" title="Go to snippet source"></a><code class="language-proto">syntax = &quot;proto3&quot;;

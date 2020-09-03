@@ -68,6 +68,8 @@ Version 0.5.1
       <li><a href="../../../user/lang/go/index.html" class="page">Go</a></li>
       <li><a href="../../../user/lang/kotlin/index.html" class="page">Kotlin</a></li>
       <li><a href="../../../user/lang/dart/index.html" class="page">Dart</a></li>
+      <li><a href="../../../user/lang/springboot/index.html" class="page">Spring Boot</a></li>
+      <li><a href="../../../user/lang/dotnet/index.html" class="page">.Net</a></li>
     </ul></li>
     <li><a href="../../../user/deployment/index.html" class="page">Deploying applications</a>
     <ul>
@@ -104,8 +106,8 @@ Version 0.5.1
 </a>
 </div>
 <div class="nav">
-<a class="banner-btn oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Enhance your Cloudstate app with Lightbend [Button] - Cloudstate Banner" href="https://www.lightbend.com/cloudstate-by-lightbend?r=oss-banner-cloudstate" target="_blank">
-<span>Enhance your Cloudstate app with</span>
+<a class="banner-btn oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Enhance your apps with Lightbend [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">
+<span>Enhance your apps with</span>
 <img class="lightbend-logo" src="../../../images/banner-logos/lightbend-reverse.svg" alt="Lightbend" title="Lightbend">
 </a>
 <div class="drop-down">
@@ -135,8 +137,8 @@ C18.354,14.614,14.613,18.354,10,18.354z" />
 </a>
 <div class="cloudstate current">
 <img class="cloudstate-full-color-logo" src="../../../images/banner-logos/cloudstate-full-color.svg" alt="Cloudstate by Lightbend" title="Cloudstate by Lightbend">
-<span>From the creators of <strong>Cloudstate</strong>, get developer assistance and expert support from Lightbend.</span>
-<a class="oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Learn More [Button] - Cloudstate Banner" href="https://www.lightbend.com/cloudstate-by-lightbend?r=oss-banner-cloudstate" target="_blank">Learn More</a>
+<span>Get developer assistance and expert support from Lightbend.</span>
+<a class="oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Learn More [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">Learn More</a>
 </div>
 </div>
 <div class="title">The Lightbend Family</div>
@@ -187,6 +189,8 @@ Version 0.5.1
       <li><a href="../../../user/lang/go/index.html" class="page">Go</a></li>
       <li><a href="../../../user/lang/kotlin/index.html" class="page">Kotlin</a></li>
       <li><a href="../../../user/lang/dart/index.html" class="page">Dart</a></li>
+      <li><a href="../../../user/lang/springboot/index.html" class="page">Spring Boot</a></li>
+      <li><a href="../../../user/lang/dotnet/index.html" class="page">.Net</a></li>
     </ul></li>
     <li><a href="../../../user/deployment/index.html" class="page">Deploying applications</a>
     <ul>
@@ -243,7 +247,7 @@ class ShoppingCartEntity(@EntityId private val entityId: String) {</code></pre>
 <p>The <code>persistenceId</code> is used to namespace events in the journal, useful for when you share the same database between multiple entities. It defaults to the simple name for the entity class (in this case, <code>ShoppingCartEntity</code>), it&rsquo;s good practice to select one explicitly, this means your database isn&rsquo;t depend on classnames in your code.</p>
 <p>The <code>snapshotEvery</code> parameter controls how often snapshots are taken, so that the entity doesn&rsquo;t need to be recovered from the whole journal each time it&rsquo;s loaded. If left unset, it defaults to 100. Setting it to a negative number will result in snapshots never being taken.</p>
 <h2><a href="#persistence-types-and-serialization" name="persistence-types-and-serialization" class="anchor"><span class="anchor-link"></span></a>Persistence types and serialization</h2>
-<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. The most straight forward way to persist events and snapshots is to use protobufs. Cloudstate will automatically detect if an emitted event is a protobuf, and serialize it as such. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
+<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted. The most straightforward way to persist events and snapshots is to use protobufs. Cloudstate will automatically detect if an emitted event is a protobuf, and serialize it as such. For other serialization options, including JSON, see <a href="serialization.html">Serialization</a>.</p>
 <p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your services protobuf messages, rather, you should create new messages, even if they are identical to the services. While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the services public interface to evolve independently from its data storage format, which should be private.</p>
 <p>For our shopping cart example, we&rsquo;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my applications domain objects:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/test/proto/domain.proto" target="_blank" title="Go to snippet source"></a><code class="language-proto">syntax = &quot;proto3&quot;;
@@ -329,7 +333,7 @@ fun itemAdded(itemAdded: Domain.ItemAdded) {
     cart[item!!.productId] = item
 }</code></pre>
 <h2><a href="#producing-and-handling-snapshots" name="producing-and-handling-snapshots" class="anchor"><span class="anchor-link"></span></a>Producing and handling snapshots</h2>
-<p>Snapshots are an important optimisation for event sourced entities that may contain many events, to ensure that they can be loaded quickly even when they have very long journals. To produce a snapshot, a method annotated with <code>@Snapshot</code> (io.cloudstate.kotlinsupport.api.eventsourced.Snapshot) must be declared. It takes a context class of type <code>SnapshotContext</code> (io.cloudstate.javasupport.eventsourced.SnapshotContext), and must return a snapshot of the current state in serializable form. </p>
+<p>Snapshots are an important optimisation for event sourced entities that may contain many events, to ensure that they can be loaded quickly even when they have very long journals. To produce a snapshot, a method annotated with <code>@Snapshot</code> (io.cloudstate.kotlinsupport.api.eventsourced.Snapshot) must be declared. It takes a context class of type <code>SnapshotContext</code> (io.cloudstate.javasupport.eventsourced.SnapshotContext), and must return a snapshot of the current state in serializable form.</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/test/kotlin/docs/user/eventsourced/ShoppingCartEntity.kt#L29-L44" target="_blank" title="Go to snippet source"></a><code class="language-kt">@Snapshot
 fun snapshot(): Domain.Cart =
     Domain.Cart.newBuilder()

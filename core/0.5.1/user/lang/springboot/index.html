@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Serialization · Cloudstate</title>
+<title>Spring Boot · Cloudstate</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='Cloudstate Documentation'/>
-<link rel="canonical" href="https://cloudstate.io/docs/core/current/user/lang/java/serialization.html"/>
+<link rel="canonical" href="https://cloudstate.io/docs/core/current/user/lang/springboot/index.html"/>
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 
@@ -68,7 +68,7 @@ Version 0.5.1
       <li><a href="../../../user/lang/go/index.html" class="page">Go</a></li>
       <li><a href="../../../user/lang/kotlin/index.html" class="page">Kotlin</a></li>
       <li><a href="../../../user/lang/dart/index.html" class="page">Dart</a></li>
-      <li><a href="../../../user/lang/springboot/index.html" class="page">Spring Boot</a></li>
+      <li><a href="../../../user/lang/springboot/index.html" class="active page">Spring Boot</a></li>
       <li><a href="../../../user/lang/dotnet/index.html" class="page">.Net</a></li>
     </ul></li>
     <li><a href="../../../user/deployment/index.html" class="page">Deploying applications</a>
@@ -189,7 +189,7 @@ Version 0.5.1
       <li><a href="../../../user/lang/go/index.html" class="page">Go</a></li>
       <li><a href="../../../user/lang/kotlin/index.html" class="page">Kotlin</a></li>
       <li><a href="../../../user/lang/dart/index.html" class="page">Dart</a></li>
-      <li><a href="../../../user/lang/springboot/index.html" class="page">Spring Boot</a></li>
+      <li><a href="../../../user/lang/springboot/index.html" class="active page">Spring Boot</a></li>
       <li><a href="../../../user/lang/dotnet/index.html" class="page">.Net</a></li>
     </ul></li>
     <li><a href="../../../user/deployment/index.html" class="page">Deploying applications</a>
@@ -230,8 +230,7 @@ Version 0.5.1
   <li><a href="../../../index.html">Cloudstate</a></li>
   <li><a href="../../../user/index.html">Using Cloudstate</a></li>
   <li><a href="../../../user/lang/index.html">Languages</a></li>
-  <li><a href="../../../user/lang/java/index.html">Java</a></li>
-  <li>Serialization</li>
+  <li>Spring Boot</li>
 </ul>
 </div>
 </div>
@@ -239,80 +238,17 @@ Version 0.5.1
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#serialization" name="serialization" class="anchor"><span class="anchor-link"></span></a>Serialization</h1>
-<p>Cloudstate functions serve gRPC interfaces, and naturally the input and output messages are protobuf messages that get serialized to the protobuf wire format. However, in addition to these messages, there are a number of places where Cloudstate needs to serialize other objects, for persistence and replication. This includes:</p>
-<ul>
-  <li>Event sourced <a href="eventsourced.html#persistence-types-and-serialization">events and snapshots</a>.</li>
-  <li>CRDT <a href="crdt.html#sets-and-maps">map keys and set elements</a>, and <a href="crdt.html#registers">LWWRegister values</a>.</li>
-</ul>
-<p>Cloudstate supports a number of types and serialization options for these values.</p>
-<h2><a href="#primitive-types" name="primitive-types" class="anchor"><span class="anchor-link"></span></a>Primitive types</h2>
-<p>Cloudstate supports serializing the following primitive types:</p>
-<table>
-  <thead>
-    <tr>
-      <th>Protobuf type </th>
-      <th>Java type </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>string </td>
-      <td>java.lang.String </td>
-    </tr>
-    <tr>
-      <td>bytes </td>
-      <td>com.google.protobuf.ByteString </td>
-    </tr>
-    <tr>
-      <td>int32 </td>
-      <td>java.lang.Integer </td>
-    </tr>
-    <tr>
-      <td>int64 </td>
-      <td>java.lang.Long </td>
-    </tr>
-    <tr>
-      <td>float </td>
-      <td>java.lang.Float </td>
-    </tr>
-    <tr>
-      <td>double </td>
-      <td>java.lang.Double </td>
-    </tr>
-    <tr>
-      <td>bool </td>
-      <td>java.lang.Boolean </td>
-    </tr>
-  </tbody>
-</table>
-<p>The details of how these are serialized can be found <a href="../../../developer/language-support/serialization.html#primitive-values">here</a>.</p>
-<h2><a href="#json" name="json" class="anchor"><span class="anchor-link"></span></a>JSON</h2>
-<p>Cloudstate uses <a href="https://github.com/FasterXML/jackson">Jackson</a> to serialize JSON. Any classes that are annotated with <a href="../../../user/lang/java/api/io/cloudstate/javasupport/Jsonable.html" title="io.cloudstate.javasupport.Jsonable"><code>`@Jsonable`</code></a> will be serialized to and from JSON using Jackson. The serialization of JSON values is described in <a href="../../../developer/language-support/serialization.html#json-values">Language support / Cloudstate serialization convention</a>.</p>
-<p>Note that if you are using JSON values in CRDT sets or maps, the serialization of these values <strong>must</strong> be stable. This means you must not use maps or sets in your value, and you should define an explicit ordering for the fields in your objects, using the <a href="http://fasterxml.github.io/jackson-annotations/javadoc/2.9/com/fasterxml/jackson/annotation/JsonPropertyOrder.html"><code>@JsonPropertyOrder</code></a> annotation. This constraint is explained in <a href="crdt.html#sets-and-maps">CRDTs / Sets and Maps</a></p>
+<h1><a href="#spring-boot" name="spring-boot" class="anchor"><span class="anchor-link"></span></a>Spring Boot</h1>
+<p><a href="https://cloudstate.io/docs/springboot/current/index.html">Cloudstate Spring Boot</a> offers an idiomatic Spring Boot support library for writing stateful services.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/java/serialization.md">here</a>.
+The source code for this page can be found <a href="https://github.com/cloudstateio/cloudstate/tree/v0.5.1/docs/src/main/paradox/user/lang/springboot/index.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../../../user/lang/java/api.html">Java API docs</a></p>
+<p><strong>Next:</strong> <a href="../../../user/lang/dotnet/index.html">.Net</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
-<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
-<div class="page-nav">
-<div class="nav-title">On this page:</div>
-<div class="nav-toc">
-<ul>
-  <li><a href="../../../user/lang/java/serialization.html#serialization" class="header">Serialization</a>
-  <ul>
-    <li><a href="../../../user/lang/java/serialization.html#primitive-types" class="header">Primitive types</a></li>
-    <li><a href="../../../user/lang/java/serialization.html#json" class="header">JSON</a></li>
-  </ul></li>
-</ul>
-</div>
-</div>
-</nav>
 </div>
 </div>
 
