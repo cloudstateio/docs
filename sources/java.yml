@@ -1,0 +1,6 @@
+# Docs for: https://github.com/cloudstateio/cloudstate/commit/5f713c8653457820b15d3537e0e6ba5d55c63cbd
+# Based on: https://github.com/cloudstateio/cloudstate/commit/5370d41b67c14f6d399075fed243ec88eaa2c643
+url: https://github.com/cloudstateio/cloudstate
+branches: [java-support/docs/current]
+start_paths: [java-support/docs/src, java-support/docs/build/src/managed]
+edit_url: https://github.com/cloudstateio/cloudstate/edit/master/{path}
