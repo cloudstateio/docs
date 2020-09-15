@@ -1,0 +1,6 @@
+# Docs for: https://github.com/cloudstateio/cloudstate/commit/5f713c8653457820b15d3537e0e6ba5d55c63cbd
+# Based on: https://github.com/cloudstateio/cloudstate/commit/5a072fe19194377585028a7aedbb6c274eec6b7d
+url: https://github.com/cloudstateio/cloudstate
+branches: [docs/current]
+start_paths: [docs-asciidoc/src, docs-asciidoc/src/shared, docs-asciidoc/build/src/managed]
+edit_url: https://github.com/cloudstateio/cloudstate/edit/master/{path}
