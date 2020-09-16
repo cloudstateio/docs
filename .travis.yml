@@ -1,1 +1,18 @@
 script: make
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  keep_history: true
+  local_dir: build/site
+  target_branch: master
+  github_token: $DEPLOY_DOCS_TOKEN
+  name: Cloudstate Bot
+  email: deploy@cloudstate.io
+  on:
+    branch: current
+
+env:
+  global:
+  # Docs deploy token; encrypted with: travis encrypt --pro -r cloudstateio/docs DEPLOY_DOCS_TOKEN=<cloudstate-bot.github.token>
+  - secure: "z3hwcaVJUnEFAGR7tKLveZ2OQFw2K/e/+PPzOe3bzdMw684BRcqsD4zTyTyTtPybETN86jkqKBleHWxWOXnY3Ltgxxm++MdG0a/heIGJVXtj7g01FsHz3306k9eDXb/A3nBEwIhlcbWTLjFMc7fKRdrvquwygNq1knvPciJJL9D5qjD+gkmyV0+L9JRp2cOQtzhQVvChdSnhC4DdEuXheAZdbUx8hJcU+o9rLVMRS+RYujx8LPegPbeUlraQmHDJzYZNRF2X8EQ53xn80W118SF3u5pEavKBPlLkXXSMc87BK/eLSTsKxUobRTS44Lz0YbHK6VgsxOXhhteV4fV51CKXBBNTY6MU+ioxqBmrBy7hPMriDqzVH5lJ+B4WGS0AzM8CMRhZabrqL79hjzmUd9iifvHljORPYHKbj7XwEjs8HeZ/kmacSNfXvRye/PrNhQD2SEXi5b94Okxf2I6gU5IAR7C/R2ZUOiQU8ldfmhfwrD6ZNeo3JjnrhvF2GrK1GyX+C67MwmoW3unQRwBHNlgW7aHz5lQeoHOuk8aPRESULx1RjAB94966hyiW/dmx+slrh9ojE2x7s+j0FWCgAfcoHu5VWQYV++L4qq40o7PNR9/NeZOhkgP/Jl1628MYD0ad5JXyucSfwW6pH6fP+JZlXCJmU2zq2jC3JXDUMrM="
