@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Implementing in Go :: Cloudstate Documentation</title>
+<title>Autoscaling :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Implementing in Go | Cloudstate Documentation">
-<meta name="twitter:title" content="Implementing in Go | Cloudstate Documentation">
-<meta property="og:title" content="Implementing in Go | Cloudstate Documentation" />
+<meta itemprop="name" content="Autoscaling | Cloudstate Documentation">
+<meta name="twitter:title" content="Autoscaling | Cloudstate Documentation">
+<meta property="og:title" content="Autoscaling | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/go/index.html">
-<meta property="og:url" content="https://cloudstate.io/docs/go/index.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/deploy/autoscaling.html">
+<meta property="og:url" content="https://cloudstate.io/docs/deploy/autoscaling.html" />
 
 
 
@@ -196,8 +196,8 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="index.html">Implementing in Go</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../go/index.html">Implementing in Go</a>
   </li>
 </ul>
   </li>
@@ -289,37 +289,37 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../deploy/index.html">Deploying to production systems</a>
+    <a class="nav-link" href="index.html">Deploying to production systems</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../deploy/install-production.html">Setting up a production cluster</a>
+    <a class="nav-link" href="install-production.html">Setting up a production cluster</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../deploy/deploying.html">Deploying stateful services</a>
+    <a class="nav-link" href="deploying.html">Deploying stateful services</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../deploy/stateful-stores.html">Stateful stores</a>
+    <a class="nav-link" href="stateful-stores.html">Stateful stores</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../deploy/cassandra.html">Cassandra</a>
+    <a class="nav-link" href="cassandra.html">Cassandra</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../deploy/postgresql.html">PostgresSQL</a>
+    <a class="nav-link" href="postgresql.html">PostgresSQL</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../deploy/inmemory.html">In memory store</a>
+    <a class="nav-link" href="inmemory.html">In memory store</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../deploy/monitoring.html">Monitoring</a>
+    <a class="nav-link" href="monitoring.html">Monitoring</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="autoscaling.html">Autoscaling</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../deploy/autoscaling.html">Autoscaling</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../deploy/security.html">Security</a>
+    <a class="nav-link" href="security.html">Security</a>
   </li>
 </ul>
   </li>
@@ -386,28 +386,36 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Implementing in Go</a></li>
+    <li class="crumb"><a href="index.html">Deploying to production systems</a></li>
+    <li class="crumb"><a href="autoscaling.html">Autoscaling</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Implementing in Go</h1>
+			<h1>Autoscaling</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="paragraph">
-<p>Information on implementing Cloudstate services in Go is published at:</p>
-</div>
-<div class="paragraph">
-<p><a href="https://cloudstate.io/old/docs/go/current/" class="bare">https://cloudstate.io/old/docs/go/current/</a></p>
+		<div class="ulist">
+<ul>
+<li>
+<p>Explain how to integrate with the Kubernetes HPA</p>
+</li>
+<li>
+<p>Explain how to use Cloudstate&#8217;s own autoscaler</p>
+</li>
+<li>
+<p>Talk about scaling to zero (not currently possible)</p>
+</li>
+</ul>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="../dart/index.html">Implementing in Dart</a></span>
-  <span class="next"><a href="../java/index.html">Implementing in Java</a></span>
+  <span class="prev"><a href="monitoring.html">Monitoring</a></span>
+  <span class="next"><a href="security.html">Security</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -416,7 +424,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/go/pages/index.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/deploy/pages/autoscaling.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">

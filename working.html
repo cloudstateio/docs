@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction :: Cloudstate Documentation</title>
+<title>Working with Cloudstate :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="./_/css/site.css?v-01">
 <link rel="shortcut icon" href="./_/img/favicon.ico" />
 
-<meta itemprop="name" content="Introduction | Cloudstate Documentation">
-<meta name="twitter:title" content="Introduction | Cloudstate Documentation">
-<meta property="og:title" content="Introduction | Cloudstate Documentation" />
+<meta itemprop="name" content="Working with Cloudstate | Cloudstate Documentation">
+<meta name="twitter:title" content="Working with Cloudstate | Cloudstate Documentation">
+<meta property="og:title" content="Working with Cloudstate | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/index.html">
-<meta property="og:url" content="https://cloudstate.io/docs/index.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/working.html">
+<meta property="og:url" content="https://cloudstate.io/docs/working.html" />
 
 
 
@@ -117,7 +117,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="index.html">Introduction</a>
 <ul class="nav-list">
@@ -130,7 +130,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudstate-solution.html">The Cloudstate solution</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="working.html">Working with Cloudstate</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -387,12 +387,13 @@
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
     <li class="crumb"><a href="index.html">Introduction</a></li>
+    <li class="crumb"><a href="working.html">Working with Cloudstate</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Introduction</h1>
+			<h1>Working with Cloudstate</h1>
 
 		<fieldset class="supergroup-switch">
 
@@ -402,163 +403,105 @@
 		<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloudstate offers a serverless platform for general-purpose application development with <em>stateful</em> services, fast data/streaming, and the power of reactive technologies. With Cloudstate you can build cloud native applications for the Kubernetes ecosystem with true elastic scalability, high resilience, and global deployment.</p>
+<p>Cloudstate provides a good developer experience by implementing the low level details that allow you to focus on your business logic. When using Cloudstate open source, you need to provide your own Kubernetes environment and provision Cloudstate to run in it. Lightbend also provides a <a href="https://www.lightbend.com/akka-serverless">Cloudstate service</a> that manages the Kubernetes environment for you.</p>
 </div>
 <div class="paragraph">
-<p>The Serverless movement today often focuses on automating the underlying infrastructure. However, there are equally complicated requirements at the application layer. The move toward fast data, streaming, and event-driven stateful architectures creates new challenges for operating systems in production.</p>
-</div>
-<div class="paragraph">
-<p>Stateless functions are a great tool that already have their place in the cloud computing toolkit. However, for Serverless to reach the grand vision of a Serverless world of modern data-centric real-time applications, we must address the hardest problem in distributed systems: managing state—your data.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="https://cloudstate.io">Cloudstate</a> project takes on this challenge and paves the way for Serverless 2.0. It consists of two things:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>A standards effort</strong> — defining a specification, a protocol between the user functions and the backend, and a Technology Compatibility Kit (TCK).</p>
-</li>
-<li>
-<p><strong>A reference implementation</strong> — implementing the backend and a set of client API libraries in different languages.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Cloudstate&#8217;s reference implementation leverages <a href="https://cloud.google.com/knative/">Knative</a>, <a href="https://grpc.io/">gRPC</a>, <a href="https://doc.akka.io/docs/akka/current/index-cluster.html">Akka Cluster</a>, and <a href="https://www.graalvm.org/">GraalVM</a> running on <a href="https://kubernetes.io/">Kubernetes</a>. This combination results in applications that not only scale efficiently, but  manage distributed state reliably at scale while maintaining a global or a local level of data consistency, opening up for a whole range of new addressable use-cases.</p>
-</div>
-<div class="paragraph">
-<p>Join us in making this vision a reality!</p>
+<p>This page introduces the basics of working with Cloudstate open source.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="how-to-get-started"><a class="anchor" href="#how-to-get-started"></a>How to get started</h2>
+<h2 id="use-the-programming-language-of-choice"><a class="anchor" href="#use-the-programming-language-of-choice"></a>Use the programming language of choice</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation contains information for developers who want to use Cloudstate to create and deploy stateful services; for administrators who want to configure Kubernetes clusters to run Cloudstate, either for development or in production; and for those who would like to contribute to the Cloudstate open source project. The following table suggests reading paths for these roles for typical use cases.</p>
+<p>Cloudstate uses <a href="https://grpc.io/">gRPC</a>, which is not tied to any programming language, for communication between services. Cloudstate includes connectors to gRPC for a growing number of programming languages.  And, any language with reasonable support for gRPC can have a connector written for it in short order. If you don&#8217;t see your chosen language, don&#8217;t be concerned, just let us know, it may already be in the works!</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Use case</th>
-<th class="tableblock halign-left valign-top">Audience</th>
-<th class="tableblock halign-left valign-top">Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Understand what type of applications require a stateful serverless platform</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>All</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<div class="paragraph">
+<p>Currently, Cloudstate supports:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="stateless-limitations.html" class="page">Current limitations of Serverless platforms</a></p>
+<p>Dart</p>
 </li>
 <li>
-<p><a href="crud-limitations.html" class="page">Rethinking CRUD</a></p>
+<p>Go</p>
 </li>
 <li>
-<p><a href="cloudstate-solution.html" class="page">The Cloudstate solution</a></p>
+<p>Java</p>
+</li>
+<li>
+<p>Javascript</p>
+</li>
+<li>
+<p>Kotlin</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set up development environment</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, contributors, administrators</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+</div>
+<div class="paragraph">
+<p>To write your Cloudstate services, you of course will need to know how to code in your chosen language. However, you will not need to learn a substantially different paradigm for using that language: The API for Cloudstate itself is short and straightfoward. And, you won&#8217;t need anything else to be productive, unlike many other platforms that have a long and steep learning curve. See the  <a href="https://cloudstate.io/docs/core/current/user/lang/java/api/index.html" target="javadoc">Javadoc</a> for the API as an example.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cloudstate-projects"><a class="anchor" href="#cloudstate-projects"></a>Cloudstate projects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Cloudstate project contains one or more <em>services</em> that can be deployed, which can all communicate with each other. Services in different projects cannot directly call each other except through defined ingresses.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cloudstate-services"><a class="anchor" href="#cloudstate-services"></a>Cloudstate services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cloudstate services contain your business logic. Each service is a unit of functionality that (typically) relates to a single entity and can consume and operate on various messages relating to that entity. For instance, a <code>shopping cart</code> entity might have messages that operate on it such as <code>addItem</code>, <code>removeItem</code> and <code>getCart</code>. A Cloudstate project can contain multiple services.</p>
+</div>
+<div class="paragraph">
+<p>A Cloudstate service looks like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/high-level-design.svg" alt="high level design">
+</div>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="develop/prerequisites.html" class="page">Prerequisites</a></p>
+<p><strong>Ingress</strong> - This can be Istio, Knative, or just regular ClusterIP service communication in Kubernetes. Whatever service approach is used, Cloudstate expects traffic to be load balanced across its pods randomly and evenly.</p>
 </li>
 <li>
-<p><a href="develop/install.html" class="page">Installing Cloudstate</a></p>
+<p><strong>Akka Sidecar</strong> - This sidecar is injected by the Cloudstate operator. All requests go through it. The sidecars of a single Cloudstate service form a cluster, communicating directly with each other using Akka remoting. This cluster, and the communication links between the sidecars, allows for sharding and replication of state, along with addressed P2P messaging between pods.</p>
+</li>
+<li>
+<p><strong>Code</strong> - This is the function implemented by the developer. It can be written in any language that supports gRPC. The Akka sidecars communicate with the user functions using a predefined gRPC protocol. This protocol carries both incoming requests and outgoing responses, as well as messages conveying the current state of the system. Typically, Cloudstate will provide support libraries for each language that adapt the gRPC protocol to an idiomatic API for that language.</p>
+</li>
+<li>
+<p><strong>Distributed Datastore</strong> - When a service needs to persist state (such as when implementing Event Sourced entities), this state will be persisted to a distributed datastore. It is important to note, the user code does not interact directly with the datastore - it interacts with the Akka sidecars, and the Akka sidecars communicate with the datastore. This way, all database communication can be directly managed and monitored by the Akka sidecar. And since this is done through the provision of high level patterns, assumptions can be made that allow the sidecars to safely cache, shard, and replicate data across the cluster.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Learn about service development</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, contributors</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="develop/tutorial.html" class="page">The shopping cart tutorial</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Develop Cloudstate services</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="java/index.html">Implementing Cloudstate services in Java</a></p>
-</li>
-<li>
-<p><a href="javascript/index.html">Implementing Cloudstate services in Javascript</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Deploy in production</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, administrators</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="deploy/index.html" class="page">Deploying in production systems</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Contribute to the Cloudstate project</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Contributors</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="contribute/index.html" class="page">Contributing to the Cloudstate project</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-cloudstate-development-process"><a class="anchor" href="#the-cloudstate-development-process"></a>The Cloudstate development process</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TBW.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="whats-next"><a class="anchor" href="#whats-next"></a>What&#8217;s next</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After verifying <a href="develop/prerequisites.html" class="page">Prerequisites</a> and <a href="develop/install.html" class="page">Installing Cloudstate</a>, we recommend that you start with a <a href="develop/tutorial.html" class="page">Tutorial</a> to learn Cloudstate basics.</p>
+</div>
 </div>
 </div>
 		<nav class="pagination">
-  <span class="next"><a href="stateless-limitations.html">Current limitations of Serverless platforms</a></span>
+  <span class="prev"><a href="cloudstate-solution.html">The Cloudstate solution</a></span>
+  <span class="next"><a href="examples.html">Example Applications</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -567,7 +510,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/ROOT/pages/index.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/ROOT/pages/working.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">

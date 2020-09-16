@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction :: Cloudstate Documentation</title>
+<title>Deploying a stateful service :: Cloudstate Documentation</title>
 
-<link rel="stylesheet" href="./_/css/site.css?v-01">
-<link rel="shortcut icon" href="./_/img/favicon.ico" />
+<link rel="stylesheet" href="../_/css/site.css?v-01">
+<link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Introduction | Cloudstate Documentation">
-<meta name="twitter:title" content="Introduction | Cloudstate Documentation">
-<meta property="og:title" content="Introduction | Cloudstate Documentation" />
+<meta itemprop="name" content="Deploying a stateful service | Cloudstate Documentation">
+<meta name="twitter:title" content="Deploying a stateful service | Cloudstate Documentation">
+<meta property="og:title" content="Deploying a stateful service | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/index.html">
-<meta property="og:url" content="https://cloudstate.io/docs/index.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/deploy/deploying.html">
+<meta property="og:url" content="https://cloudstate.io/docs/deploy/deploying.html" />
 
 
 
@@ -54,7 +54,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://cloudstate.io">
-        <img class="header-logo" src="./_/img/cloudstate-reverse.svg">
+        <img class="header-logo" src="../_/img/cloudstate-reverse.svg">
       </a>
       <a href="https://cloudstate.io/docs/" id="site-id" class="site-id">Documentation</a>
     </div>
@@ -65,7 +65,7 @@
     <div class="nav">
       <a class="banner-btn oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Enhance your apps with Lightbend [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">
         <span class="banner-btn-text">Enhance your apps with</span>
-        <img class="lightbend-logo" src="./_/img/lightbend-logos/lightbend-reverse.svg" alt="Lightbend" title="Lightbend">
+        <img class="lightbend-logo" src="../_/img/lightbend-logos/lightbend-reverse.svg" alt="Lightbend" title="Lightbend">
       </a>
       <div class="drop-down">
         <svg class="svg-chevon-circle-down" version="1.1" id="Chevron_circled_down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
@@ -78,22 +78,22 @@
         <div class="drop-down-content">
           <div class="lightbend-family">
             <a href="https://akka.io" class="akka oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Akka - Logo Tag Line - Cloudstate Banner">
-              <img class="akka-full-color-logo" src="./_/img/lightbend-logos/akka-full-color.svg" alt="Akka by Lightbend" title="Akka by Lightbend">
+              <img class="akka-full-color-logo" src="../_/img/lightbend-logos/akka-full-color.svg" alt="Akka by Lightbend" title="Akka by Lightbend">
             </a>
             <a href="https://cloudflow.io" class="cloudflow oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Cloudflow - Logo Tag Line - Cloudstate Banner">
-              <img class="cloudflow-full-color-logo" src="./_/img/lightbend-logos/cloudflow-full-color.svg" alt="Cloudflow by Lightbend" title="Cloudflow by Lightbend">
+              <img class="cloudflow-full-color-logo" src="../_/img/lightbend-logos/cloudflow-full-color.svg" alt="Cloudflow by Lightbend" title="Cloudflow by Lightbend">
             </a>
             <a href="https://www.lagomframework.com" class="lagom oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Lagom - Logo Tag Line - Cloudstate Banner">
-              <img class="lagom-full-color-logo" src="./_/img/lightbend-logos/lagom-full-color.svg" alt="Lagom Framework by Lightbend" title="Lagom Framework by Lightbend">
+              <img class="lagom-full-color-logo" src="../_/img/lightbend-logos/lagom-full-color.svg" alt="Lagom Framework by Lightbend" title="Lagom Framework by Lightbend">
             </a>
             <a href="https://www.playframework.com" class="play oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Play - Logo Tag Line - Cloudstate Banner">
-              <img class="play-full-color-logo" src="./_/img/lightbend-logos/play-full-color.svg" alt="Play Framework by Lightbend" title="Play Framework by Lightbend">
+              <img class="play-full-color-logo" src="../_/img/lightbend-logos/play-full-color.svg" alt="Play Framework by Lightbend" title="Play Framework by Lightbend">
             </a>
             <a href="https://www.scala-lang.org" class="scala oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Scala - Logo Tag Line - Cloudstate Banner">
-              <img class="scala-full-color-logo" src="./_/img/lightbend-logos/scala-full-color.svg" alt="Scala by Lightbend" title="Scala by Lightbend">
+              <img class="scala-full-color-logo" src="../_/img/lightbend-logos/scala-full-color.svg" alt="Scala by Lightbend" title="Scala by Lightbend">
             </a>
             <div class="cloudstate current">
-              <img class="cloudstate-full-color-logo" src="./_/img/lightbend-logos/cloudstate-full-color.svg" alt="Cloudstate by Lightbend" title="Cloudstate by Lightbend">
+              <img class="cloudstate-full-color-logo" src="../_/img/lightbend-logos/cloudstate-full-color.svg" alt="Cloudstate by Lightbend" title="Cloudstate by Lightbend">
               <span>Get developer assistance and expert support from Lightbend.</span>
               <a class="oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Learn More [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">Learn More</a>
             </div>
@@ -117,49 +117,24 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Introduction</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="stateless-limitations.html">Current limitations of Serverless platforms</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="crud-limitations.html">Rethinking CRUD</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloudstate-solution.html">The Cloudstate solution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="working.html">Working with Cloudstate</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="examples.html">Example Applications</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="concepts/index.html">Important concepts</a>
+    <a class="nav-link" href="../index.html">Introduction</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/glossary.html">Glossary</a>
+    <a class="nav-link" href="../stateless-limitations.html">Current limitations of Serverless platforms</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/grpc.html">gRPC</a>
+    <a class="nav-link" href="../crud-limitations.html">Rethinking CRUD</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="../cloudstate-solution.html">The Cloudstate solution</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/crdts.html">Conflict-free replicated data types</a>
+    <a class="nav-link" href="../working.html">Working with Cloudstate</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/effects.html">Forwarding and effects</a>
+    <a class="nav-link" href="../examples.html">Example Applications</a>
   </li>
 </ul>
   </li>
@@ -169,61 +144,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="develop/index.html">Developing Cloudstate services</a>
+    <a class="nav-link" href="../concepts/index.html">Important concepts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/prerequisites.html">Prerequisites</a>
+    <a class="nav-link" href="../concepts/glossary.html">Glossary</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/install.html">Installing Cloudstate</a>
+    <a class="nav-link" href="../concepts/grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/examples.html">Available Cloudstate examples</a>
+    <a class="nav-link" href="../concepts/eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/tutorial.html">The shopping cart tutorial</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="dart/index.html">Implementing in Dart</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="go/index.html">Implementing in Go</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="java/index.html">Implementing in Java</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/getting-started.html">Getting started</a>
+    <a class="nav-link" href="../concepts/crdts.html">Conflict-free replicated data types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/eventsourced.html">Event sourcing</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/crdt.html">Conflict-free Replicated Data Types</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/effects.html">Forwarding and effects</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/serialization.html">Serialization</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/api.html">Java API docs</a>
+    <a class="nav-link" href="../concepts/effects.html">Forwarding and effects</a>
   </li>
 </ul>
   </li>
@@ -233,25 +169,19 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="javascript/index.html">Implementing in JavaScript</a>
+    <a class="nav-link" href="../develop/index.html">Developing Cloudstate services</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/getting-started.html">Getting started</a>
+    <a class="nav-link" href="../develop/prerequisites.html">Prerequisites</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="../develop/install.html">Installing Cloudstate</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="../develop/examples.html">Available Cloudstate examples</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/effects.html">Forwarding and effects</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/serialization.html">Serialization</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/api.html">JavaScript API docs</a>
+    <a class="nav-link" href="../develop/tutorial.html">The shopping cart tutorial</a>
   </li>
 </ul>
   </li>
@@ -260,28 +190,14 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="kotlin/index.html">Implementing in Kotlin</a>
+    <a class="nav-link" href="../dart/index.html">Implementing in Dart</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="python/index.html">Implementing in Python</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="springboot/index.html">Implementing in Spring Boot</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="dotnet/index.html">Implementing in .Net</a>
+    <a class="nav-link" href="../go/index.html">Implementing in Go</a>
   </li>
 </ul>
   </li>
@@ -289,37 +205,121 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="deploy/index.html">Deploying to production systems</a>
+    <a class="nav-link" href="../java/index.html">Implementing in Java</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/install-production.html">Setting up a production cluster</a>
+    <a class="nav-link" href="../java/getting-started.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/deploying.html">Deploying stateful services</a>
+    <a class="nav-link" href="../java/eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/crdt.html">Conflict-free Replicated Data Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/effects.html">Forwarding and effects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/serialization.html">Serialization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/api.html">Java API docs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="../javascript/index.html">Implementing in JavaScript</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/getting-started.html">Getting started</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/crdt.html">Conflict-free Replicated Data Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/effects.html">Forwarding and effects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/serialization.html">Serialization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/api.html">JavaScript API docs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../kotlin/index.html">Implementing in Kotlin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../python/index.html">Implementing in Python</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../springboot/index.html">Implementing in Spring Boot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../dotnet/index.html">Implementing in .Net</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="index.html">Deploying to production systems</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="install-production.html">Setting up a production cluster</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="deploying.html">Deploying stateful services</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="deploy/stateful-stores.html">Stateful stores</a>
+    <a class="nav-link" href="stateful-stores.html">Stateful stores</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy/cassandra.html">Cassandra</a>
+    <a class="nav-link" href="cassandra.html">Cassandra</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy/postgresql.html">PostgresSQL</a>
+    <a class="nav-link" href="postgresql.html">PostgresSQL</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy/inmemory.html">In memory store</a>
+    <a class="nav-link" href="inmemory.html">In memory store</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/monitoring.html">Monitoring</a>
+    <a class="nav-link" href="monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/autoscaling.html">Autoscaling</a>
+    <a class="nav-link" href="autoscaling.html">Autoscaling</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/security.html">Security</a>
+    <a class="nav-link" href="security.html">Security</a>
   </li>
 </ul>
   </li>
@@ -329,31 +329,31 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="contribute/index.html">Contributing to the project</a>
+    <a class="nav-link" href="../contribute/index.html">Contributing to the project</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/architecture.html">Architecture</a>
+    <a class="nav-link" href="../contribute/architecture.html">Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/getting-started.html">Getting started</a>
+    <a class="nav-link" href="../contribute/getting-started.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/build-native.html">Building native images</a>
+    <a class="nav-link" href="../contribute/build-native.html">Building native images</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/serialization.html">Serialization conventions</a>
+    <a class="nav-link" href="../contribute/serialization.html">Serialization conventions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/language-support.html">Language support</a>
+    <a class="nav-link" href="../contribute/language-support.html">Language support</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/knative-integration.html">Knative integration</a>
+    <a class="nav-link" href="../contribute/knative-integration.html">Knative integration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/graalvm-integration.html">GraalVM integration</a>
+    <a class="nav-link" href="../contribute/graalvm-integration.html">GraalVM integration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/testing.html">Testing</a>
+    <a class="nav-link" href="../contribute/testing.html">Testing</a>
   </li>
 </ul>
   </li>
@@ -372,7 +372,7 @@
       <span class="title">Cloudstate</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -386,13 +386,14 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Introduction</a></li>
+    <li class="crumb"><a href="index.html">Deploying to production systems</a></li>
+    <li class="crumb"><a href="deploying.html">Deploying stateful services</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Introduction</h1>
+			<h1>Deploying a stateful service</h1>
 
 		<fieldset class="supergroup-switch">
 
@@ -402,163 +403,84 @@
 		<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloudstate offers a serverless platform for general-purpose application development with <em>stateful</em> services, fast data/streaming, and the power of reactive technologies. With Cloudstate you can build cloud native applications for the Kubernetes ecosystem with true elastic scalability, high resilience, and global deployment.</p>
+<p>Cloudstate services are deployed to Kubernetes using the <code>StatefulService</code> resource. Here is a minimal example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: cloudstate.io/v1alpha1
+kind: StatefulService
+metadata:
+  name: shopping-cart
+spec:
+  containers:
+  - image: my-docker-hub-username/shopping-cart:latest</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The Serverless movement today often focuses on automating the underlying infrastructure. However, there are equally complicated requirements at the application layer. The move toward fast data, streaming, and event-driven stateful architectures creates new challenges for operating systems in production.</p>
-</div>
-<div class="paragraph">
-<p>Stateless functions are a great tool that already have their place in the cloud computing toolkit. However, for Serverless to reach the grand vision of a Serverless world of modern data-centric real-time applications, we must address the hardest problem in distributed systems: managing state—your data.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="https://cloudstate.io">Cloudstate</a> project takes on this challenge and paves the way for Serverless 2.0. It consists of two things:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>A standards effort</strong> — defining a specification, a protocol between the user functions and the backend, and a Technology Compatibility Kit (TCK).</p>
-</li>
-<li>
-<p><strong>A reference implementation</strong> — implementing the backend and a set of client API libraries in different languages.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Cloudstate&#8217;s reference implementation leverages <a href="https://cloud.google.com/knative/">Knative</a>, <a href="https://grpc.io/">gRPC</a>, <a href="https://doc.akka.io/docs/akka/current/index-cluster.html">Akka Cluster</a>, and <a href="https://www.graalvm.org/">GraalVM</a> running on <a href="https://kubernetes.io/">Kubernetes</a>. This combination results in applications that not only scale efficiently, but  manage distributed state reliably at scale while maintaining a global or a local level of data consistency, opening up for a whole range of new addressable use-cases.</p>
-</div>
-<div class="paragraph">
-<p>Join us in making this vision a reality!</p>
+<p>Upon deploying this, the Cloudstate operator will create a Kubernetes <code>Deployment</code> that contains the container configured in the descriptor, along with a sidecar container for the Cloudstate proxy. The operator will also deploy a Kubernetes <code>Service</code> to allow other services to consume the Cloudstate service.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="how-to-get-started"><a class="anchor" href="#how-to-get-started"></a>How to get started</h2>
+<h2 id="customizing-the-container"><a class="anchor" href="#customizing-the-container"></a>Customizing the container</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation contains information for developers who want to use Cloudstate to create and deploy stateful services; for administrators who want to configure Kubernetes clusters to run Cloudstate, either for development or in production; and for those who would like to contribute to the Cloudstate open source project. The following table suggests reading paths for these roles for typical use cases.</p>
+<p>The container specification is modeled off the container specification in the <code>Pod</code> resource. Cloudstate will inject some additional configuration:</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Use case</th>
-<th class="tableblock halign-left valign-top">Audience</th>
-<th class="tableblock halign-left valign-top">Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Understand what type of applications require a stateful serverless platform</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>All</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<div class="ulist">
 <ul>
 <li>
-<p><a href="stateless-limitations.html" class="page">Current limitations of Serverless platforms</a></p>
+<p>If no ports are specified, in the container, a port of <code>8080</code> will be created, otherwise, the first declared port will be taken and assumed to be the port that the proxy should use to communicate with the user function.</p>
 </li>
 <li>
-<p><a href="crud-limitations.html" class="page">Rethinking CRUD</a></p>
+<p>The port that the user function should use will be available in the environment variable <code>PORT</code>.</p>
 </li>
 <li>
-<p><a href="cloudstate-solution.html" class="page">The Cloudstate solution</a></p>
+<p>The name of the container will be ignored, and is hardcoded to <code>user-container</code>.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set up development environment</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, contributors, administrators</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="customizing-the-stateful-service"><a class="anchor" href="#customizing-the-stateful-service"></a>Customizing the stateful service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following additional fields are available to customize the service:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="develop/prerequisites.html" class="page">Prerequisites</a></p>
+<p><code>datastore</code>: Configures the datastore. This is discussed in detail <a href="stateful-stores.html" class="page">Stateful stores</a>. If not configured, no store will be used, and support for any entity types that require a store will not be available on the proxy.</p>
 </li>
 <li>
-<p><a href="develop/install.html" class="page">Installing Cloudstate</a></p>
+<p><code>autoscaling</code>: Configures autoscaling. This is discussed in detail in <a href="autoscaling.html" class="page">Autoscaling</a>. This field is likely to change.</p>
+</li>
+<li>
+<p><code>serviceAccountName</code>: The name of the service account that the pod should run using. Defaults to the default service account.</p>
+</li>
+<li>
+<p><code>volumes</code>: A list of <a href="https://kubernetes.io/docs/concepts/storage/volumes/">volumes to configure for pods</a>.</p>
+</li>
+<li>
+<p><code>sidecarResources</code>: Resource requirements to set for the sidecar. Uses the same structure as a container resources field. This field is likely to change.</p>
+</li>
+<li>
+<p><code>sidecarJvmMemory</code>: Heap space to allocate for the sidecar, using the <code>-Xmx</code> option. This currently has <a href="https://github.com/cloudstateio/cloudstate/issues/112">no effect for native images</a>, and is likely to change.</p>
+</li>
+<li>
+<p><code>nodeSelector</code>: Used to specify the <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector">Pod nodeSelector</a>. This field is likely to change.</p>
+</li>
+<li>
+<p><code>tolerations</code>: Used to specify the <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Pod tolerations</a>. This field is likely to change.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Learn about service development</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, contributors</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="develop/tutorial.html" class="page">The shopping cart tutorial</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Develop Cloudstate services</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="java/index.html">Implementing Cloudstate services in Java</a></p>
-</li>
-<li>
-<p><a href="javascript/index.html">Implementing Cloudstate services in Javascript</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Deploy in production</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, administrators</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="deploy/index.html" class="page">Deploying in production systems</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Contribute to the Cloudstate project</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Contributors</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><a href="contribute/index.html" class="page">Contributing to the Cloudstate project</a></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+</div>
 </div>
 </div>
 		<nav class="pagination">
-  <span class="next"><a href="stateless-limitations.html">Current limitations of Serverless platforms</a></span>
+  <span class="prev"><a href="install-production.html">Setting up a production cluster</a></span>
+  <span class="next"><a href="stateful-stores.html">Stateful stores</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -567,11 +489,11 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/ROOT/pages/index.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/deploy/pages/deploying.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
-      <div class="footer-logo"><a href="https://cloudstate.io"><img src="./_/img/cloudstate-color.svg"></a></div>
+      <div class="footer-logo"><a href="https://cloudstate.io"><img src="../_/img/cloudstate-color.svg"></a></div>
       <div class="footer-content">© Cloudstate <script>document.write(new Date().getFullYear());</script> | <a href="https:///cloudstate.io/privacy/">Privacy Policy</a> | <a class="optanon-toggle-display">Cookie Settings</a></div>
     </footer>
   </div>
@@ -579,13 +501,13 @@ Found an error in this documentation? Please feel free to <a href="https://githu
   </main>
 </div>
 <!--Footer Scripts Global-->
-<script src="./_/js/site.js"></script>
-<script src="./_/js/vendor/highlight.js"></script>
+<script src="../_/js/site.js"></script>
+<script src="../_/js/vendor/highlight.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="./_/js/vendor/groups.js"></script>
+<script src="../_/js/vendor/groups.js"></script>
 <script>hljs.initHighlighting()</script>
-<script src="./_/js/vendor/jquery.waypoints.min.js"></script>
-<script src="./_/js/vendor/inview.min.js"></script>
+<script src="../_/js/vendor/jquery.waypoints.min.js"></script>
+<script src="../_/js/vendor/inview.min.js"></script>
 
 <script>
 (function($) {

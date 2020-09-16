@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction :: Cloudstate Documentation</title>
+<title>Current limitations of Serverless platforms :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="./_/css/site.css?v-01">
 <link rel="shortcut icon" href="./_/img/favicon.ico" />
 
-<meta itemprop="name" content="Introduction | Cloudstate Documentation">
-<meta name="twitter:title" content="Introduction | Cloudstate Documentation">
-<meta property="og:title" content="Introduction | Cloudstate Documentation" />
+<meta itemprop="name" content="Current limitations of Serverless platforms | Cloudstate Documentation">
+<meta name="twitter:title" content="Current limitations of Serverless platforms | Cloudstate Documentation">
+<meta property="og:title" content="Current limitations of Serverless platforms | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/index.html">
-<meta property="og:url" content="https://cloudstate.io/docs/index.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/stateless-limitations.html">
+<meta property="og:url" content="https://cloudstate.io/docs/stateless-limitations.html" />
 
 
 
@@ -117,11 +117,11 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="index.html">Introduction</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="stateless-limitations.html">Current limitations of Serverless platforms</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -387,12 +387,13 @@
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
     <li class="crumb"><a href="index.html">Introduction</a></li>
+    <li class="crumb"><a href="stateless-limitations.html">Current limitations of Serverless platforms</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Introduction</h1>
+			<h1>Current limitations of Serverless platforms</h1>
 
 		<fieldset class="supergroup-switch">
 
@@ -402,163 +403,155 @@
 		<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloudstate offers a serverless platform for general-purpose application development with <em>stateful</em> services, fast data/streaming, and the power of reactive technologies. With Cloudstate you can build cloud native applications for the Kubernetes ecosystem with true elastic scalability, high resilience, and global deployment.</p>
+<p>Serverless today provides a great platform for stateless services. It does an amazing job at scaling from 1-10000 requests and down to zero in a very cost-efficient manner (no events == no cost). It also offers simplicity in operations.</p>
 </div>
 <div class="paragraph">
-<p>The Serverless movement today often focuses on automating the underlying infrastructure. However, there are equally complicated requirements at the application layer. The move toward fast data, streaming, and event-driven stateful architectures creates new challenges for operating systems in production.</p>
+<p>However, Serverless means different things to different people. Many equate it with Function-as-a-Service (FaaS). We see it as much more than that: a new category of PaaS itself, where the focal point is the Developer Experience, as well as supporting the full life-cycle of the application, and not merely the programming API of its latest incarnation. The paper <a href="https://www.doc.ic.ac.uk/~rbc/papers/fse-serverless-17.pdf">Serverless computing: economic and architectural impact</a>, by Adzic et al. agrees with this broader picture:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+ <em>'Serverless' refers to a new generation of platform-as-a-service offerings where the infrastructure provider takes responsibility for receiving client requests and responding to them, capacity planning, task scheduling, and operational monitoring. Developers need to worry only about the logic for processing client requests.</em>
+</div>
 </div>
 <div class="paragraph">
-<p>Stateless functions are a great tool that already have their place in the cloud computing toolkit. However, for Serverless to reach the grand vision of a Serverless world of modern data-centric real-time applications, we must address the hardest problem in distributed systems: managing state—your data.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="https://cloudstate.io">Cloudstate</a> project takes on this challenge and paves the way for Serverless 2.0. It consists of two things:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>A standards effort</strong> — defining a specification, a protocol between the user functions and the backend, and a Technology Compatibility Kit (TCK).</p>
-</li>
-<li>
-<p><strong>A reference implementation</strong> — implementing the backend and a set of client API libraries in different languages.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Cloudstate&#8217;s reference implementation leverages <a href="https://cloud.google.com/knative/">Knative</a>, <a href="https://grpc.io/">gRPC</a>, <a href="https://doc.akka.io/docs/akka/current/index-cluster.html">Akka Cluster</a>, and <a href="https://www.graalvm.org/">GraalVM</a> running on <a href="https://kubernetes.io/">Kubernetes</a>. This combination results in applications that not only scale efficiently, but  manage distributed state reliably at scale while maintaining a global or a local level of data consistency, opening up for a whole range of new addressable use-cases.</p>
-</div>
-<div class="paragraph">
-<p>Join us in making this vision a reality!</p>
+<p>The current incarnation of Serverless, focusing on Function-as-as Service (FaaS), is a classic data-shipping architecture—developers move data to the code, not the other way round. We, however, believe that FaaS is only the first step along the journey. It&#8217;s not about a specific implementation. Instead, it&#8217;s all about the Developer Experience, a new way of building and running applications. And, it is time to expand on its scope and supported use-cases to create a better experience. What are the limitations of FaaS that we can address to start this journey?</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="how-to-get-started"><a class="anchor" href="#how-to-get-started"></a>How to get started</h2>
+<h2 id="limitations-of-faas"><a class="anchor" href="#limitations-of-faas"></a>Limitations of FaaS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation contains information for developers who want to use Cloudstate to create and deploy stateful services; for administrators who want to configure Kubernetes clusters to run Cloudstate, either for development or in production; and for those who would like to contribute to the Cloudstate open source project. The following table suggests reading paths for these roles for typical use cases.</p>
+<p>One limitation of FaaS is that its functions are ephemeral, stateless, and short-lived. For example, Amazon Lambda caps their lifespan to 15 minutes. This makes it problematic to build general-purpose data-centric cloud-native applications. It is simply too costly—in terms of performance, latency, and throughput—to lose the computational context (locality of reference) and be forced to load and store the state from the backend storage over and over again.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Use case</th>
-<th class="tableblock halign-left valign-top">Audience</th>
-<th class="tableblock halign-left valign-top">Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Understand what type of applications require a stateful serverless platform</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>All</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<div class="paragraph">
+<p>Another limitation of FaaS is that, quite often, functions simply have no direct addressability, which means that they can&#8217;t communicate directly with each other using point-to-point communication. This forces developers to resort to publish-subscribe, passing all data over some slow and expensive storage medium. Publish-subscribe provides a model that can work well for event-driven use-cases but yields too high latency for addressing general-purpose distributed computing problems.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+For a detailed discussion on this, and other limitations of FaaS read the paper <a href="https://arxiv.org/abs/1812.03651">"Serverless Computing: One Step Forward, Two Steps Back"</a> by Joe Hellerstein, et al.
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="strengths-of-faas"><a class="anchor" href="#strengths-of-faas"></a>Strengths of FaaS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>However, this does not mean that Serverless 1.0 (FaaS) is not ready for use. As is, it is well suited for parallelizable processing-centric use-cases, where incoming data is pushed downstream through a pipeline of stateless functions doing data enrichment and transformations before pushing it downstream.</p>
+</div>
+<div class="paragraph">
+<p>Examples of use-cases of this are:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="stateless-limitations.html" class="page">Current limitations of Serverless platforms</a></p>
+<p><strong><a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">Embarrassingly parallel tasks</a></strong>—often invoked on-demand and intermittently. For example, resizing images, performing object recognition, and running integer-programming-based optimizations.</p>
 </li>
 <li>
-<p><a href="crud-limitations.html" class="page">Rethinking CRUD</a></p>
+<p><strong>Orchestration functions</strong>, used to coordinate calls to proprietary auto-scaling services, where the back-end services themselves do the real heavy lifting.</p>
 </li>
 <li>
-<p><a href="cloudstate-solution.html" class="page">The Cloudstate solution</a></p>
+<p>Applications that <strong>compose chains of functions</strong>—for example, workflows connected via data dependencies. These use cases often show high end-to-end latencies though.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set up development environment</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, contributors, administrators</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+</div>
+<div class="paragraph">
+<p>As Adzic et al. write in their paper <a href="http://www.doc.ic.ac.uk/~rbc/papers/fse-serverless-17.pdf">Serverless computing: economic and architectural impact</a>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<em>… serverless platforms today are useful for important (but not five-nines mission critical) tasks, where high-throughput is key, rather than very low latency, and where individual requests can be completed in a relatively short time window. The economics of hosting such tasks in a serverless environment make it a compelling way to reduce hosting costs significantly, and to speed up time to market for delivery of new features.</em>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-need-for-stateful-serverless-computing"><a class="anchor" href="#the-need-for-stateful-serverless-computing"></a>The need for Stateful Serverless Computing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If Serverless is conceptually about how to remove humans from the equation and solve developers' hardest problems with reasoning about systems in production, then it needs declarative APIs and high-level abstractions with rich and easily understood semantics (beyond low-level primitives like functions) for working with never-ending streams of data, manage complex distributed data workflows, and managing distributed state in a reliable, resilient, scalable, and performant way.</p>
+</div>
+<div class="paragraph">
+<p>Serverless needs to provide   <em>Stateful long-lived virtual addressable</em> components. All these terms are important:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="develop/prerequisites.html" class="page">Prerequisites</a></p>
+<p>Stateful: in-memory, yet durable and resilient state.</p>
 </li>
 <li>
-<p><a href="develop/install.html" class="page">Installing Cloudstate</a></p>
+<p>Long-lived: life-cycle is not bound to a specific session, the context available until explicitly destroyed.</p>
+</li>
+<li>
+<p>Virtual: location transparent and mobile, not bound to a physical location</p>
+</li>
+<li>
+<p>Addressable: referenced through a stable address, one example of a component with these traits would be Actors.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Learn about service development</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, contributors</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+</div>
+<div class="paragraph">
+<p>As discussed by <a href="https://blog.acolyer.org/2019/01/14/serverless-computing-one-step-forward-two-steps-back/">Hellerstein et al</a>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+ <em>If the platform pays a cost to create an affinity (e.g. moving data), it should recoup that cost across multiple requests. This motivates the ability for programmers to establish software agents— call them functions, actors, services, etc.— that persist over time in the cloud, with known identities.</em>
+</div>
+</div>
+<div class="paragraph">
+<p>To achieve stateful long-lived virtual addressable components, we need:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="develop/tutorial.html" class="page">The shopping cart tutorial</a></p>
+<p>A wider range of options for <em>coordination</em> and <em>communication</em> patterns (beyond event-based pub-sub over a broker), including <em>fine-grained sharing of state</em> using common patterns like point-to-point, broadcast, aggregation, merging, shuffling, etc. As concluded by <a href="https://arxiv.org/pdf/1902.03383.pdf">Jonas et al</a>:</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Develop Cloudstate services</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+</div>
+<div class="sidebarblock">
+<div class="content">
+ <em>This limitation also suggests that new variants of serverless computing may be worth exploring, for example naming function instances and allowing direct addressability for access to their internal state (e.g., Actors as a Service)</em>.
+</div>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="java/index.html">Implementing Cloudstate services in Java</a></p>
-</li>
-<li>
-<p><a href="javascript/index.html">Implementing Cloudstate services in Javascript</a></p>
+<p>Tools for managing <em>distributed state</em> reliably at scale—in a durable or ephemeral fashion—with <em>options for consistency</em> ranging from <em>strong</em> to <em>eventual</em> and <em>causal</em> consistency, and ways to physically co-locate code and data while remaining logically separate. For example, disorderly programming constructs like <a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type">CRDTs</a>. As discussed by <a href="https://blog.acolyer.org/2019/01/14/serverless-computing-one-step-forward-two-steps-back/">Hellerstein et al</a>:</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Deploy in production</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Developers, administrators</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+</div>
+<div class="sidebarblock">
+<div class="content">
+<em>The sequential metaphor of procedural programming will not scale to the cloud. Developers need languages that encourage code that works correctly in small, granular units— of both data and computation— that can be easily moved around across time and space.</em>
+</div>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a href="deploy/index.html" class="page">Deploying in production systems</a></p>
+<p>Intelligent adaptive placement of stateful functions—ways to physically co-locate code and data while remaining logically separate. As discussed in <a href="https://medium.com/riselab/two-missing-links-in-serverless-computing-stateful-computation-and-placement-control-964c3236d18">this article</a> by Stoica and Petersohn.</p>
 </li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Contribute to the Cloudstate project</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Contributors</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
 <li>
-<p><a href="contribute/index.html" class="page">Contributing to the Cloudstate project</a></p>
+<p>End-to-end correctness and consistency—be able to reason about streaming pipelines and the properties (Such as backpressure, windowing, completeness vs correctness, etc.) and guarantees it has as a whole. End-to-end correctness, consistency, and safety mean different things for different services. It&#8217;s totally dependent on the use-case, and can&#8217;t be outsourced completely to the infrastructure. The next-generation serverless implementations need to provide programming models and a holistic Developer Experience working in concert with the underlying infrastructure maintaining these properties, without continuing to ignore the hardest, and most important problem: how to manage your data in the cloud—reliably at scale.</p>
+</li>
+<li>
+<p>Predictable performance, latency, and throughput—in startup time, communication, coordination, and durable storage/access of data.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="whats-next"><a class="anchor" href="#whats-next"></a>What&#8217;s next</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we have established general requirements for a stateful serverless platform, let&#8217;s consider why it also important to <a href="crud-limitations.html" class="page">rethink the use of CRUD</a> in Serverless.</p>
+</div>
 </div>
 </div>
 		<nav class="pagination">
-  <span class="next"><a href="stateless-limitations.html">Current limitations of Serverless platforms</a></span>
+  <span class="prev"><a href="index.html">Introduction</a></span>
+  <span class="next"><a href="crud-limitations.html">Rethinking CRUD</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -567,7 +560,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/ROOT/pages/index.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/ROOT/pages/stateless-limitations.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
