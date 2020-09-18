@@ -1,5 +1,6 @@
-# Docs for: https://github.com/cloudstateio/cloudstate/commit/d7f5f67b6e6b867a636b6a1c393a103ffa70483e
-# Based on: https://github.com/cloudstateio/cloudstate/commit/442b552a8301f2d1b666624f1276dd84b8a8adfe
+# core @ current
+# docs for: https://github.com/cloudstateio/cloudstate/commit/a8f8aae1902055889ae15f0d6564841aba7b0bec
+# based on: https://github.com/cloudstateio/cloudstate/commit/08a0fd50794379050c9e55e86dd8359497108b00
 url: https://github.com/cloudstateio/cloudstate
 branches: [docs/current]
 start_paths: [docs/src, docs/src/shared, docs/build/src/managed]
