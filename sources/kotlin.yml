@@ -1,0 +1,7 @@
+# kotlin @ current
+# docs for: https://github.com/cloudstateio/kotlin-support/commit/43fb2e53f1df83c9f98ea3996bb82e7aee210920
+# based on: https://github.com/cloudstateio/kotlin-support/commit/9062acb48dc615c7f5767f8f73d21871de507943
+url: https://github.com/cloudstateio/kotlin-support
+branches: [docs/current]
+start_paths: [docs/src, docs/build/src/managed]
+edit_url: https://github.com/cloudstateio/kotlin-support/edit/master/{path}
