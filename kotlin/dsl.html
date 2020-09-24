@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rethinking CRUD :: Cloudstate Documentation</title>
+<title>DSL :: Cloudstate Documentation</title>
 
-<link rel="stylesheet" href="./_/css/site.css?v-01">
-<link rel="shortcut icon" href="./_/img/favicon.ico" />
+<link rel="stylesheet" href="../_/css/site.css?v-01">
+<link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Rethinking CRUD | Cloudstate Documentation">
-<meta name="twitter:title" content="Rethinking CRUD | Cloudstate Documentation">
-<meta property="og:title" content="Rethinking CRUD | Cloudstate Documentation" />
+<meta itemprop="name" content="DSL | Cloudstate Documentation">
+<meta name="twitter:title" content="DSL | Cloudstate Documentation">
+<meta property="og:title" content="DSL | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/crud-limitations.html">
-<meta property="og:url" content="https://cloudstate.io/docs/crud-limitations.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/kotlin/dsl.html">
+<meta property="og:url" content="https://cloudstate.io/docs/kotlin/dsl.html" />
 
 
 
@@ -54,7 +54,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://cloudstate.io">
-        <img class="header-logo" src="./_/img/cloudstate-reverse.svg">
+        <img class="header-logo" src="../_/img/cloudstate-reverse.svg">
       </a>
       <a href="https://cloudstate.io/docs/" id="site-id" class="site-id">Documentation</a>
     </div>
@@ -65,7 +65,7 @@
     <div class="nav">
       <a class="banner-btn oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Enhance your apps with Lightbend [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">
         <span class="banner-btn-text">Enhance your apps with</span>
-        <img class="lightbend-logo" src="./_/img/lightbend-logos/lightbend-reverse.svg" alt="Lightbend" title="Lightbend">
+        <img class="lightbend-logo" src="../_/img/lightbend-logos/lightbend-reverse.svg" alt="Lightbend" title="Lightbend">
       </a>
       <div class="drop-down">
         <svg class="svg-chevon-circle-down" version="1.1" id="Chevron_circled_down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
@@ -78,22 +78,22 @@
         <div class="drop-down-content">
           <div class="lightbend-family">
             <a href="https://akka.io" class="akka oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Akka - Logo Tag Line - Cloudstate Banner">
-              <img class="akka-full-color-logo" src="./_/img/lightbend-logos/akka-full-color.svg" alt="Akka by Lightbend" title="Akka by Lightbend">
+              <img class="akka-full-color-logo" src="../_/img/lightbend-logos/akka-full-color.svg" alt="Akka by Lightbend" title="Akka by Lightbend">
             </a>
             <a href="https://cloudflow.io" class="cloudflow oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Cloudflow - Logo Tag Line - Cloudstate Banner">
-              <img class="cloudflow-full-color-logo" src="./_/img/lightbend-logos/cloudflow-full-color.svg" alt="Cloudflow by Lightbend" title="Cloudflow by Lightbend">
+              <img class="cloudflow-full-color-logo" src="../_/img/lightbend-logos/cloudflow-full-color.svg" alt="Cloudflow by Lightbend" title="Cloudflow by Lightbend">
             </a>
             <a href="https://www.lagomframework.com" class="lagom oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Lagom - Logo Tag Line - Cloudstate Banner">
-              <img class="lagom-full-color-logo" src="./_/img/lightbend-logos/lagom-full-color.svg" alt="Lagom Framework by Lightbend" title="Lagom Framework by Lightbend">
+              <img class="lagom-full-color-logo" src="../_/img/lightbend-logos/lagom-full-color.svg" alt="Lagom Framework by Lightbend" title="Lagom Framework by Lightbend">
             </a>
             <a href="https://www.playframework.com" class="play oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Play - Logo Tag Line - Cloudstate Banner">
-              <img class="play-full-color-logo" src="./_/img/lightbend-logos/play-full-color.svg" alt="Play Framework by Lightbend" title="Play Framework by Lightbend">
+              <img class="play-full-color-logo" src="../_/img/lightbend-logos/play-full-color.svg" alt="Play Framework by Lightbend" title="Play Framework by Lightbend">
             </a>
             <a href="https://www.scala-lang.org" class="scala oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Scala - Logo Tag Line - Cloudstate Banner">
-              <img class="scala-full-color-logo" src="./_/img/lightbend-logos/scala-full-color.svg" alt="Scala by Lightbend" title="Scala by Lightbend">
+              <img class="scala-full-color-logo" src="../_/img/lightbend-logos/scala-full-color.svg" alt="Scala by Lightbend" title="Scala by Lightbend">
             </a>
             <div class="cloudstate current">
-              <img class="cloudstate-full-color-logo" src="./_/img/lightbend-logos/cloudstate-full-color.svg" alt="Cloudstate by Lightbend" title="Cloudstate by Lightbend">
+              <img class="cloudstate-full-color-logo" src="../_/img/lightbend-logos/cloudstate-full-color.svg" alt="Cloudstate by Lightbend" title="Cloudstate by Lightbend">
               <span>Get developer assistance and expert support from Lightbend.</span>
               <a class="oss-track-link-label" data-category="OSS Lightbend Banner Clicks" data-label="Learn More [Button] - Cloudstate Banner" href="https://www.lightbend.com/lightbend-subscription?r=oss-banner-cloudstate" target="_blank">Learn More</a>
             </div>
@@ -119,176 +119,176 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Introduction</a>
+    <a class="nav-link" href="../index.html">Introduction</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="stateless-limitations.html">Current limitations of Serverless platforms</a>
+    <a class="nav-link" href="../stateless-limitations.html">Current limitations of Serverless platforms</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../crud-limitations.html">Rethinking CRUD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cloudstate-solution.html">The Cloudstate solution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../working.html">Working with Cloudstate</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../examples.html">Example Applications</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="../concepts/index.html">Important concepts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../concepts/glossary.html">Glossary</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../concepts/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../concepts/eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../concepts/crdts.html">Conflict-free replicated data types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../concepts/effects.html">Forwarding and effects</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="../develop/index.html">Developing Cloudstate services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/prerequisites.html">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/install.html">Installing Cloudstate</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/examples.html">Available Cloudstate examples</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/tutorial.html">The shopping cart tutorial</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../old-dart/index.html">Implementing in Dart</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../old-go/index.html">Implementing in Go</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="../java/index.html">Implementing in Java</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/getting-started.html">Getting started</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/crdt.html">Conflict-free Replicated Data Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/effects.html">Forwarding and effects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/serialization.html">Serialization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../java/api.html">Java API docs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="../javascript/index.html">Implementing in JavaScript</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/getting-started.html">Getting started</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/crdt.html">Conflict-free Replicated Data Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/effects.html">Forwarding and effects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/serialization.html">Serialization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/api.html">JavaScript API docs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="index.html">Implementing in Kotlin</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="crud-limitations.html">Rethinking CRUD</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloudstate-solution.html">The Cloudstate solution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="working.html">Working with Cloudstate</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="examples.html">Example Applications</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="concepts/index.html">Important concepts</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/glossary.html">Glossary</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/grpc.html">gRPC</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/eventsourced.html">Event sourcing</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/crdts.html">Conflict-free replicated data types</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/effects.html">Forwarding and effects</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="develop/index.html">Developing Cloudstate services</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/prerequisites.html">Prerequisites</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/install.html">Installing Cloudstate</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/examples.html">Available Cloudstate examples</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="develop/tutorial.html">The shopping cart tutorial</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="old-dart/index.html">Implementing in Dart</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="old-go/index.html">Implementing in Go</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="java/index.html">Implementing in Java</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/getting-started.html">Getting started</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/eventsourced.html">Event sourcing</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/crdt.html">Conflict-free Replicated Data Types</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/effects.html">Forwarding and effects</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/serialization.html">Serialization</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="java/api.html">Java API docs</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="javascript/index.html">Implementing in JavaScript</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/getting-started.html">Getting started</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/eventsourced.html">Event sourcing</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/crdt.html">Conflict-free Replicated Data Types</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/effects.html">Forwarding and effects</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/serialization.html">Serialization</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="javascript/api.html">JavaScript API docs</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="kotlin/index.html">Implementing in Kotlin</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="kotlin/gettingstarted.html">Getting started</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="kotlin/eventsourced.html">Event sourcing</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="kotlin/crdt.html">Conflict-free Replicated Data Types</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="kotlin/dsl.html">DSL</a>
+    <a class="nav-link" href="dsl.html">DSL</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="kotlin/eventsourceddsl.html">Event sourcing</a>
+    <a class="nav-link" href="eventsourceddsl.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="kotlin/crdtdsl.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="crdtdsl.html">Conflict-free Replicated Data Types</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="kotlin/examples.html">Examples</a>
+    <a class="nav-link" href="examples.html">Examples</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="kotlin/serialization.html">Serialization</a>
+    <a class="nav-link" href="serialization.html">Serialization</a>
   </li>
 </ul>
   </li>
@@ -297,28 +297,28 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="old-kotlin/index.html">Implementing in Kotlin</a>
+    <a class="nav-link" href="../old-kotlin/index.html">Implementing in Kotlin</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="old-python/index.html">Implementing in Python</a>
+    <a class="nav-link" href="../old-python/index.html">Implementing in Python</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="old-springboot/index.html">Implementing in Spring Boot</a>
+    <a class="nav-link" href="../old-springboot/index.html">Implementing in Spring Boot</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="old-dotnet/index.html">Implementing in .Net</a>
+    <a class="nav-link" href="../old-dotnet/index.html">Implementing in .Net</a>
   </li>
 </ul>
   </li>
@@ -326,37 +326,37 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="deploy/index.html">Deploying to production systems</a>
+    <a class="nav-link" href="../deploy/index.html">Deploying to production systems</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/install-production.html">Setting up a production cluster</a>
+    <a class="nav-link" href="../deploy/install-production.html">Setting up a production cluster</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/deploying.html">Deploying stateful services</a>
+    <a class="nav-link" href="../deploy/deploying.html">Deploying stateful services</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="deploy/stateful-stores.html">Stateful stores</a>
+    <a class="nav-link" href="../deploy/stateful-stores.html">Stateful stores</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy/cassandra.html">Cassandra</a>
+    <a class="nav-link" href="../deploy/cassandra.html">Cassandra</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy/postgresql.html">PostgresSQL</a>
+    <a class="nav-link" href="../deploy/postgresql.html">PostgresSQL</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy/inmemory.html">In memory store</a>
+    <a class="nav-link" href="../deploy/inmemory.html">In memory store</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/monitoring.html">Monitoring</a>
+    <a class="nav-link" href="../deploy/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/autoscaling.html">Autoscaling</a>
+    <a class="nav-link" href="../deploy/autoscaling.html">Autoscaling</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy/security.html">Security</a>
+    <a class="nav-link" href="../deploy/security.html">Security</a>
   </li>
 </ul>
   </li>
@@ -366,31 +366,31 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="contribute/index.html">Contributing to the project</a>
+    <a class="nav-link" href="../contribute/index.html">Contributing to the project</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/architecture.html">Architecture</a>
+    <a class="nav-link" href="../contribute/architecture.html">Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/getting-started.html">Getting started</a>
+    <a class="nav-link" href="../contribute/getting-started.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/build-native.html">Building native images</a>
+    <a class="nav-link" href="../contribute/build-native.html">Building native images</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/serialization.html">Serialization conventions</a>
+    <a class="nav-link" href="../contribute/serialization.html">Serialization conventions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/language-support.html">Language support</a>
+    <a class="nav-link" href="../contribute/language-support.html">Language support</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/knative-integration.html">Knative integration</a>
+    <a class="nav-link" href="../contribute/knative-integration.html">Knative integration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/graalvm-integration.html">GraalVM integration</a>
+    <a class="nav-link" href="../contribute/graalvm-integration.html">GraalVM integration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contribute/testing.html">Testing</a>
+    <a class="nav-link" href="../contribute/testing.html">Testing</a>
   </li>
 </ul>
   </li>
@@ -409,7 +409,7 @@
       <span class="title">Cloudstate</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -423,122 +423,26 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Introduction</a></li>
-    <li class="crumb"><a href="crud-limitations.html">Rethinking CRUD</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Kotlin</a></li>
+    <li class="crumb"><a href="dsl.html">DSL</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Rethinking CRUD</h1>
+			<h1>DSL</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>We need to rethink the use of CRUD in Serverless. CRUD, in the general sense, means unconstrained database access, and is too broad and open-ended to be used effectively in Serverless environments (or any general Cloud development for that matter).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/faas-crud.png" alt="FAAS with CRUD">
-</div>
-</div>
-<div class="paragraph">
-<p>Unconstrained database access means that the user function itself needs to manage the nitty-gritty details about data access and storage, and you are thereby moving all the operational concerns from the Serverless framework into the user function. Now it&#8217;s hard for the framework to know the intention of each access. For example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Is the operation a read, or a write?</p>
-</li>
-<li>
-<p>Can it be cached?</p>
-</li>
-<li>
-<p>Can consistency be relaxed, or is strong consistency needed?</p>
-</li>
-<li>
-<p>Can operations proceed during partial failure?</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Instead, if we understand these properties then we can make better decisions automatically. For example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Write ops are fast and read ops are slow: add more memory to DB</p>
-</li>
-<li>
-<p>Reading immutable values: add caching</p>
-</li>
-<li>
-<p>Writes must be serializable: add sharding, single writers per entity.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="abstracting-over-state"><a class="anchor" href="#abstracting-over-state"></a>Abstracting over state</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We all know that constraints can be liberating and this holds true for Serverless as much as anything else. As a fact, one of the reasons for the success of Serverless is that it has such a constrained developer experience, which allows you as a developer to focus on the essence: the business logic for the function. For example, Serverless has a great model for abstracting over communication where all communication is translated to receiving and emitting events.</p>
-</div>
-<div class="paragraph">
-<p>The question we asked ourselves was: can we abstract over state in the same way? Provide a clean and uniform abstraction of <em>state in</em> and <em>state out</em> for the function.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/abstract_over_state.png" alt="Abstracting over state">
-</div>
-</div>
-<div class="paragraph">
-<p>This would allow the framework to manage durable state on behalf of the function, to monitor and manage it holistically across the whole system, and make more intelligent decisions.</p>
-</div>
-<div class="paragraph">
-<p>Unconstrained CRUD does not work in this model since we can&#8217;t pass the entire data set in and out of the function. What we need are data storage patterns that have constrained input/output protocols. Patterns that fall into this category are Key-Value, Event Sourcing, and CRDTs.</p>
-</div>
-<div class="paragraph">
-<p>In <a href="https://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a>, <em>state in</em> is the event log while <em>state out</em> is any newly persisted events as a result of handling a command.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/data_model_event_sourcing.png" alt="Event Sourcing as data model">
-</div>
-</div>
-<div class="paragraph">
-<p>In <a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type">CRDTs</a>, <em>state in</em> is a stream of deltas and/or state updates, and <em>state out</em> is a stream of deltas and/or state updates.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/data_model_crdts.png" alt="CRDTs as data model">
-</div>
-</div>
-<div class="paragraph">
-<p>In Key-Value, the <em>state out</em> is the key and <em>state in</em> the value.</p>
-</div>
-<div class="paragraph">
-<p>While most developers have worked with Key-Value stores, Event Sourcing and CRDTs might be a bit unfamiliar. What&#8217;s interesting is that they fit an event-driven model very well while being on opposite sides of the state consistency spectrum, with the former providing strong (ACID) consistency (through event logging) and the latter providing eventual/causal consistency. Taken together, they give us a truly wide range of options for managing distributed state in a consistent fashion by allowing you to choose the optimal model for your specific use-case and data set. Akka Multi-DC log replication is a great example of combining the two techniques to do amazing things.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="whats-next"><a class="anchor" href="#whats-next"></a>What&#8217;s next</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Next, let&#8217;s see how Cloudstate addresses the needs of a stateful Serverless platform: <a href="cloudstate-solution.html" class="page">The Cloudstate solution</a>.</p>
-</div>
-</div>
+		<div class="paragraph">
+<p>Cloudstate idiomatic Kotlin DSL.</p>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="stateless-limitations.html">Current limitations of Serverless platforms</a></span>
-  <span class="next"><a href="cloudstate-solution.html">The Cloudstate solution</a></span>
+  <span class="prev"><a href="crdt.html">Conflict-free Replicated Data Types</a></span>
+  <span class="next"><a href="eventsourceddsl.html">Event sourcing</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -547,11 +451,11 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/ROOT/pages/crud-limitations.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/kotlin-support/edit/master/docs/src/modules/kotlin/pages/dsl.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
-      <div class="footer-logo"><a href="https://cloudstate.io"><img src="./_/img/cloudstate-color.svg"></a></div>
+      <div class="footer-logo"><a href="https://cloudstate.io"><img src="../_/img/cloudstate-color.svg"></a></div>
       <div class="footer-content">© Cloudstate <script>document.write(new Date().getFullYear());</script> | <a href="https:///cloudstate.io/privacy/">Privacy Policy</a> | <a class="optanon-toggle-display">Cookie Settings</a></div>
     </footer>
   </div>
@@ -559,13 +463,13 @@ Found an error in this documentation? Please feel free to <a href="https://githu
   </main>
 </div>
 <!--Footer Scripts Global-->
-<script src="./_/js/site.js"></script>
-<script src="./_/js/vendor/highlight.js"></script>
+<script src="../_/js/site.js"></script>
+<script src="../_/js/vendor/highlight.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="./_/js/vendor/groups.js"></script>
+<script src="../_/js/vendor/groups.js"></script>
 <script>hljs.initHighlighting()</script>
-<script src="./_/js/vendor/jquery.waypoints.min.js"></script>
-<script src="./_/js/vendor/inview.min.js"></script>
+<script src="../_/js/vendor/jquery.waypoints.min.js"></script>
+<script src="../_/js/vendor/inview.min.js"></script>
 
 <script>
 (function($) {
