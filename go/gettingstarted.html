@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JavaScript API docs :: Cloudstate Documentation</title>
+<title>Getting started with Cloudstate services in Go :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="JavaScript API docs | Cloudstate Documentation">
-<meta name="twitter:title" content="JavaScript API docs | Cloudstate Documentation">
-<meta property="og:title" content="JavaScript API docs | Cloudstate Documentation" />
+<meta itemprop="name" content="Getting started with Cloudstate services in Go | Cloudstate Documentation">
+<meta name="twitter:title" content="Getting started with Cloudstate services in Go | Cloudstate Documentation">
+<meta property="og:title" content="Getting started with Cloudstate services in Go | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/javascript/api.html">
-<meta property="og:url" content="https://cloudstate.io/docs/javascript/api.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/go/gettingstarted.html">
+<meta property="og:url" content="https://cloudstate.io/docs/go/gettingstarted.html" />
 
 
 
@@ -198,25 +198,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../go/index.html">Implementing in Go</a>
+    <a class="nav-link" href="index.html">Implementing in Go</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/gettingstarted.html">Getting started</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/effects.html">Forwarding and effects</a>
+    <a class="nav-link" href="effects.html">Forwarding and effects</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/serialization.html">Serialization</a>
+    <a class="nav-link" href="serialization.html">Serialization</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/api.html">API docs</a>
+    <a class="nav-link" href="api.html">API docs</a>
   </li>
 </ul>
   </li>
@@ -261,25 +261,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Implementing in JavaScript</a>
+    <a class="nav-link" href="../javascript/index.html">Implementing in JavaScript</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started.html">Getting started</a>
+    <a class="nav-link" href="../javascript/getting-started.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="../javascript/eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="../javascript/crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="effects.html">Forwarding and effects</a>
+    <a class="nav-link" href="../javascript/effects.html">Forwarding and effects</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="serialization.html">Serialization</a>
+    <a class="nav-link" href="../javascript/serialization.html">Serialization</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="api.html">JavaScript API docs</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/api.html">JavaScript API docs</a>
   </li>
 </ul>
   </li>
@@ -444,26 +444,180 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Implementing in JavaScript</a></li>
-    <li class="crumb"><a href="api.html">JavaScript API docs</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Go</a></li>
+    <li class="crumb"><a href="gettingstarted.html">Getting started</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>JavaScript API docs</h1>
+			<h1>Getting started with Cloudstate services in Go</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="paragraph">
-<p>The JavaScript API docs can be found <a href="_attachments/api/index.html">here</a>.</p>
+		<div class="sect1">
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Go version</dt>
+<dd>
+<p>Cloudstate Go support requires at least Go 1.14</p>
+</dd>
+<dt class="hdlist1">Build tool</dt>
+<dd>
+<p>Cloudstate does not require any particular build tool, you can select your own.</p>
+</dd>
+<dt class="hdlist1">protoc</dt>
+<dd>
+<p>Since Cloudstate is based on gRPC, you need a protoc compiler to compile gRPC protobuf descriptors.
+This can be done manually through the <a href="https://github.com/protocolbuffers/protobuf#user-content-protocol-compiler-installation">Protocol Buffer Compiler project</a>.</p>
+</dd>
+<dt class="hdlist1">docker</dt>
+<dd>
+<p>Cloudstate runs in Kubernetes with <a href="https://www.docker.com">Docker</a>, hence you will need Docker to build a container that you can deploy to Kubernetes.
+Most popular build tools have plugins that assist in building Docker images.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>In addition to the above, you will need to install the Cloudstate Go support library by issuing <code>go get -u github.com/cloudstateio/go-support/cloudstate</code> or with Go module support let the dependency be downloaded by <code>go [build|run|test]</code>.</p>
+</div>
+<div class="paragraph">
+<p>By using the Go module support your go.mod file will reference the latest version of the support library or you can define which version you like to use.</p>
+</div>
+<div class="dlist tabset">
+<dl>
+<dt class="hdlist1">go get</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell" hljs" data-lang="shell"">go get -u github.com/cloudstateio/go-support/cloudstate</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">import path</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">import "github.com/cloudstateio/go-support/cloudstate"</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">go.mod</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">module example.com/yourpackage
+  require (
+      github.com/cloudstateio/go-support 0.1.1
+  )
+go 1.14</code></pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="protobuf-files"><a class="anchor" href="#protobuf-files"></a>Protobuf files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Cloudstate Go Support Library provides no dedicated tool beside the protoc compiler to build your protobuf files.
+The Cloudstate protocol protobuf files as well as the shopping cart example application protobuf files are provided by the Cloudstate Repository.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the <code>protoc</code> compiler, the gRPC Go plugin is needed to compile the protobuf file to <code>*.pb.go</code> files.
+Please follow the instructions at the <a href="https://github.com/golang/protobuf">Go support for Protocol Buffers</a> project page to install the protoc compiler as well as the <code>protoc-gen-go</code> plugin which also includes the Google standard protobuf types.</p>
+</div>
+<div class="paragraph">
+<p>To build the example shopping cart application shown earlier in <a href="../concepts/grpc.html" class="page">gRPC descriptors</a>, you could simply paste that protobuf into <code>protos/shoppingcart.proto</code>.
+You may wish to also define the Go package using the <code>go_package</code> proto option, to ensure the package name used conforms to Go package naming conventions.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">option go_package = "example/shoppingcart";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now if you place your protobuf files under <code>protobuf/</code> and run <code>protoc --go_out=.
+--proto_path=protobuf ./protobuf/*.proto</code>, you&#8217;ll find your generated protobuf files in <code>example/shoppingcart</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-a-main-package"><a class="anchor" href="#creating-a-main-package"></a>Creating a main package</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your main package will be responsible for creating the Cloudstate gRPC server, registering the entities for it to serve, and starting it.
+To do this, you can use the CloudState server type, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func main() {
+	server, err := cloudstate.New(cloudstate.Config{
+		ServiceName:    "shopping-cart",
+		ServiceVersion: "0.1.1",
+	})
+	if err != nil {
+		log.Fatalf("CloudState.New failed: %v", err)
+	}
+	err = server.RegisterEventSourcedEntity(
+		&amp;cloudstate.EventSourcedEntity{
+			ServiceName:   "com.example.shoppingcart.ShoppingCart",
+			PersistenceID: "ShoppingCart",
+			EntityFunc:    NewShoppingCart,
+		},
+		cloudstate.DescriptorConfig{
+			Service: "shoppingcart/shoppingcart.proto",
+		}.AddDomainDescriptor("domain.proto"),
+	)
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %v", err)
+	}
+	err = server.Run()
+	if err != nil {
+		log.Fatalf("CloudState failed to run: %v", err)
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will see more details on registering entities in the coming pages.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="interfaces-to-be-implemented"><a class="anchor" href="#interfaces-to-be-implemented"></a>Interfaces to be implemented</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cloudstate entities in Go work by implementing interfaces and composing types.</p>
+</div>
+<div class="paragraph">
+<p>To get support for the Cloudstate event emission the Cloudstate entity should embed the <code>cloudstate.EventEmitter</code> type.
+The EventEmitter allows the entity to emit events during the handling of commands.</p>
+</div>
+<div class="paragraph">
+<p>Second, during registration of the entity, an entity factory function has to be provided so Cloudstate gets to know how to create and initialize an event sourced entity.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">EntityFunc func() Entity</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This entity factory function returns a <code>cloudstate.Entity</code> which itself is a composite interface of a <code>cloudstate.CommandHandler</code> and a <code>cloudstate.EventHandler</code>.
+Every event sourced entity has to implement these two interfaces.</p>
+</div>
+</div>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="serialization.html">Serialization</a></span>
-  <span class="next"><a href="../kotlin/index.html">Implementing in Kotlin</a></span>
+  <span class="prev"><a href="index.html">Implementing in Go</a></span>
+  <span class="next"><a href="eventsourced.html">Event sourcing</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -472,7 +626,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/node-support/docs/src/modules/javascript/pages/api.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/go-support/edit/master/docs/src/modules/go/pages/gettingstarted.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">

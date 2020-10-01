@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JavaScript API docs :: Cloudstate Documentation</title>
+<title>Conflict-free Replicated Data Types :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="JavaScript API docs | Cloudstate Documentation">
-<meta name="twitter:title" content="JavaScript API docs | Cloudstate Documentation">
-<meta property="og:title" content="JavaScript API docs | Cloudstate Documentation" />
+<meta itemprop="name" content="Conflict-free Replicated Data Types | Cloudstate Documentation">
+<meta name="twitter:title" content="Conflict-free Replicated Data Types | Cloudstate Documentation">
+<meta property="og:title" content="Conflict-free Replicated Data Types | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/javascript/api.html">
-<meta property="og:url" content="https://cloudstate.io/docs/javascript/api.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/go/crdt.html">
+<meta property="og:url" content="https://cloudstate.io/docs/go/crdt.html" />
 
 
 
@@ -198,25 +198,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../go/index.html">Implementing in Go</a>
+    <a class="nav-link" href="index.html">Implementing in Go</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/gettingstarted.html">Getting started</a>
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="effects.html">Forwarding and effects</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/effects.html">Forwarding and effects</a>
+    <a class="nav-link" href="serialization.html">Serialization</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/serialization.html">Serialization</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../go/api.html">API docs</a>
+    <a class="nav-link" href="api.html">API docs</a>
   </li>
 </ul>
   </li>
@@ -261,25 +261,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Implementing in JavaScript</a>
+    <a class="nav-link" href="../javascript/index.html">Implementing in JavaScript</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started.html">Getting started</a>
+    <a class="nav-link" href="../javascript/getting-started.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="../javascript/eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="../javascript/crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="effects.html">Forwarding and effects</a>
+    <a class="nav-link" href="../javascript/effects.html">Forwarding and effects</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="serialization.html">Serialization</a>
+    <a class="nav-link" href="../javascript/serialization.html">Serialization</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="api.html">JavaScript API docs</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../javascript/api.html">JavaScript API docs</a>
   </li>
 </ul>
   </li>
@@ -444,26 +444,39 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Implementing in JavaScript</a></li>
-    <li class="crumb"><a href="api.html">JavaScript API docs</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Go</a></li>
+    <li class="crumb"><a href="crdt.html">Conflict-free Replicated Data Types</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>JavaScript API docs</h1>
+			<h1>Conflict-free Replicated Data Types</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="paragraph">
-<p>The JavaScript API docs can be found <a href="_attachments/api/index.html">here</a>.</p>
+		<div class="ulist">
+<ul>
+<li>
+<p>Explain how to use the CRDT API</p>
+</li>
+<li>
+<p>Explain how to use CrdtFactory and where it comes from</p>
+</li>
+<li>
+<p>Explain how to handle streamed calls</p>
+</li>
+<li>
+<p>Explain the APIs for each different CRDT</p>
+</li>
+</ul>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="serialization.html">Serialization</a></span>
-  <span class="next"><a href="../kotlin/index.html">Implementing in Kotlin</a></span>
+  <span class="prev"><a href="eventsourced.html">Event sourcing</a></span>
+  <span class="next"><a href="effects.html">Forwarding and effects</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -472,7 +485,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/node-support/docs/src/modules/javascript/pages/api.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/go-support/edit/master/docs/src/modules/go/pages/crdt.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
