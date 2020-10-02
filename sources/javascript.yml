@@ -1,6 +1,6 @@
 # javascript @ current
-# docs for: https://github.com/cloudstateio/cloudstate/commit/a8f8aae1902055889ae15f0d6564841aba7b0bec
-# based on: https://github.com/cloudstateio/cloudstate/commit/beb8d138c1b5407fdc0a98f1c256828c097d64a9
+# docs for: https://github.com/cloudstateio/cloudstate/commit/9196259f123d8cdcbf78800c6079b8de611bdc30
+# based on: https://github.com/cloudstateio/cloudstate/commit/f548f17009a9dfe3fe03a73ae54055e4f0374164
 url: https://github.com/cloudstateio/cloudstate
 branches: [node-support/docs/current]
 start_paths: [node-support/docs/src, node-support/docs/build/src/managed]
