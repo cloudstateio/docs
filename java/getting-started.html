@@ -225,13 +225,6 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../old-go/index.html">Implementing in Go</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="index.html">Implementing in Java</a>
 <ul class="nav-list">
@@ -688,7 +681,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-proto hljs" data-lang="proto">option java_package = "com.example";</code></pre>
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">option java_package = "com.example";</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -756,6 +749,16 @@ public class ShoppingCartMain {
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="_attachments/api/io/cloudstate/javasupport/EntityId.html"><code>@EntityId</code></a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The ID of the entity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="_attachments/api/io/cloudstate/javasupport/Metadata.html"><code>Metadata</code></a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The metadata associated with the command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="_attachments/api/io/cloudstate/javasupport/CloudEvent.html"><code>CloudEvent</code></a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The CloudEvent metadata associated with the command. May be wrapped in <code>java.util.Optional</code>.</p></td>
 </tr>
 </tbody>
 </table>

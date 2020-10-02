@@ -225,13 +225,6 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../old-go/index.html">Implementing in Go</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="../java/index.html">Implementing in Java</a>
 <ul class="nav-list">
@@ -499,7 +492,7 @@
 <p>The second part of the IR is <strong>a pluggable entity type protocol:</strong> Each entity type defines its own gRPC protocol for communicating between the sidecar and the user function. Here is a snippet of the event sourcing protocol:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-proto hljs" data-lang="proto">service EventSourced {
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">service EventSourced {
     rpc handle(stream EventSourcedStreamIn) returns (stream EventSourcedStreamOut) {}
 }
 
@@ -559,7 +552,7 @@ message EventSourcedReply {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-proto hljs" data-lang="proto">message AddLineItem {
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">message AddLineItem {
     string user_id = 1 [(.cloudstate.entity_key) = true];
     string product_id = 2;
     string name = 3;

@@ -225,13 +225,6 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../old-go/index.html">Implementing in Go</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="../java/index.html">Implementing in Java</a>
 <ul class="nav-list">
@@ -461,7 +454,10 @@
 		<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Cloudstate Build uses <code>sbt</code> as its build tool.</p>
+<p>This page describes how to setup a development environment for contributing to and developing Cloudstate itself. If you are after documentation on how to develop Cloudstate services, see <a href="../develop/index.html" class="page">Developing Cloudstate services</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Cloudstate Build uses <code>sbt</code> for building the Cloudstate proxy, and Go for building the Cloudstate operator.</p>
 </div>
 </div>
 </div>
@@ -479,16 +475,19 @@
 <li>
 <p>Install <code>sbt</code>, follow <a href="https://www.scala-sbt.org/download.html">these instructions</a>.</p>
 </li>
+<li>
+<p>Install <a href="https://golang.org/doc/install">Go</a>.</p>
+</li>
+<li>
+<p>Install <a href="https://kubernetes-sigs.github.io/kustomize/installation/">Kustomize</a>.</p>
+</li>
+<li>
+<p>Install <a href="https://book.kubebuilder.io/quick-start.html">Kubebuilder</a>.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>To build Native Images, you&#8217;ll need the GraalVM CE as your JRE and <a href="https://clang.llvm.org/"><code>clang</code></a> as your <code>cc</code>. The GraalVM CE provides the <code>native-image</code> command, which must be on the $PATH when building Native Images. See <a href="graalvm-integration.html" class="page">GraalVM Integration</a> for further info.</p>
-</div>
-<div class="paragraph">
 <p>To build node.js related samples, you&#8217;ll need <code>nvm</code> to install the corresponding node.js version by running command <code>nvm install</code> and <code>nvm use</code>, then run <code>npm install</code> to install required modules.</p>
-</div>
-<div class="paragraph">
-<p>To build the documentation using the <code>paradox</code> target, you&#8217;ll need to use <code>npm</code> to install required modules from the <code>node-support</code> folder with <code>cd node-support &amp;&amp; nvm install &amp;&amp; nvm use &amp;&amp; npm install &amp;&amp; cd ..</code></p>
 </div>
 </div>
 </div>
@@ -601,22 +600,11 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Now, select a tag to deploy, we recommend <code>dev</code>. Do <strong>not</strong> use <code>latest</code>, Kubernetes will default the <code>imagePullPolicy</code> to <code>IfNotPresent</code>, unless the tag of the image you&#8217;re using is <code>latest</code>, then it will use <code>Always</code>. The problem with <code>Always</code> is that it means your locally built docker images will never be used, Kubernetes will always attempt a pull first, which will either overwrite whatever you&#8217;ve built locally, or fail if no image with that tag can be found remotely.</p>
-</div>
-<div class="paragraph">
-<p>Start sbt passing the selected tag as a system property:</p>
+<p>Start sbt:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sbt -Ddocker.tag=dev</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now build the operator image:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">operator/docker:publishLocal</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sbt</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -668,51 +656,44 @@
 <p>To each of these, <code>publishLocal</code> can be passed which will build the image locally, while <code>publish</code> will build and then push the image. If you wish to configure the docker hub username to push to, pass <code>-Ddocker.username=my-username</code> to the sbt command. If you wish to configure the Docker registry to push to, pass <code>-Ddocker.registry=gcr.io</code> for example to publish to the Google Container Registry. However, for most Minikube based development, there should be no need to push the images anywhere.</p>
 </div>
 <div class="paragraph">
-<p>Now compile the Kubernetes deployment descriptor:</p>
+<p>Now, before the operator can be installed, you need to install cert-manager into minikube:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">operator/compileK8sDescriptors</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml
+kubectl wait --for=condition=available --timeout=2m -n cert-manager deployment/cert-manager-webhook</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The task will tell you where it generated the deployment descriptor to. You can now install this in Minikube, first creating a <code>cloudstate</code> namespace for it:</p>
+<p>Now to install the operator. If you wish to use the native proxy images run the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl create namespace cloudstate
-kubectl apply -n cloudstate -f operator/cloudstate-dev.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">make -C cloudstate-operator deploy-native</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This installs Cloudstate locally. You can tail the logs of the operator by running:</p>
+<p>Otherwise run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl logs -n cloudstate -l app=cloudstate-operator -f</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">make -C cloudstate-operator deploy</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>There is one more thing that needs to be done, assuming you did not build the native images, the default configuration for the Cloudstate operator is to use the native images. Update the config map it uses to tell it to use the regular JVM images:</p>
+<p>If you wish to have more control over which proxy images get used, you can configure the config map for that:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl edit -n cloudstate configmap cloudstate-operator-config</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl edit -n cloudstate-system configmap cloudstate-config</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In the config, you should ensure the proxy image configuration looks like this:</p>
+<p>After changing the config map, you&#8217;ll need to restart the operator:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">proxy {
-  image {
-    cassandra = "cloudstateio/cloudstate-proxy-cassandra:dev"
-    postgres =  "cloudstateio/cloudstate-proxy-postgres:dev"
-    no-store = "cloudstateio/cloudstate-proxy-no-store:dev"
-    in-memory = "cloudstateio/cloudstate-proxy-in-memory:dev"
-  }
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl -n cloudstate-system rollout restart deploy/cloudstate-controller-manager</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -725,7 +706,7 @@ kind: StatefulStore
 metadata:
   name: inmemory
 spec:
-  type: InMemory</code></pre>
+  inMemory: true</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -738,18 +719,74 @@ kind: StatefulService
 metadata:
   name: shopping-cart
 spec:
-  datastore:
-    name: inmemory
+  storeConfig:
+    statefulStore:
+      name: inmemory
   containers:
-  - image: cloudstateio/samples-js-shopping-cart:latest</code></pre>
+  - image: cloudstateio/samples-js-shopping-cart:latest
+    name: user-function</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The Cloudstate operator should now create the necessary deployment for the shopping cart. There are a few ways it can be accessed, one is to port forward into the pod, but perhaps the simpler way is to create a <code>NodePort</code> service for it, by running:</p>
+<p>The Cloudstate operator will translate this to a Deployment for you. Alternatively, you can create a deployment manually, yourself, and annotate it with the Cloudstate annotations:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl expose deployment shopping-cart-deployment --port=8013 --type=NodePort</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopping-cart
+  template:
+    metadata:
+      labels:
+        app: shopping-cart
+      annotations:
+        cloudstate.io/enabled: true
+        cloudstate.io/stateful-store: inmemory
+    spec:
+      containers:
+      - image: cloudstateio/samples-js-shopping-cart:latest
+        name: user-function</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using the sidecar injection method, you will also need to deploy a role and role binding for your deployments service account to allow the proxy to use the Kubernetes API to discover and bootstrap pods in an Akka cluster:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+subjects:
+- kind: ServiceAccount
+  name: default
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that you have a deployment, there are a few ways it can be accessed, one is to port forward into the pod, but perhaps the simpler way is to create a <code>NodePort</code> service for it, by running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl expose deployment shopping-cart --name shopping-cart-node-port --port=8013 --type=NodePort</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -757,7 +794,7 @@ spec:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ minikube service shopping-cart-deployment --url
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ minikube service shopping-cart-node-port --url
 http://192.168.39.186:32121</code></pre>
 </div>
 </div>
@@ -828,7 +865,7 @@ res3: com.example.shoppingcart.shoppingcart.Cart = Cart(Vector(LineItem(item-id-
 <div class="sect2">
 <h3 id="development-loops-for-the-operator"><a class="anchor" href="#development-loops-for-the-operator"></a>Development loops for the operator</h3>
 <div class="paragraph">
-<p>The easiest way to iterate on the operator is to run it locally, from an IDE or from sbt, rather than deploying it to Minikube/Kubernetes. The only advantage to deploying to Kubernetes is that it will verify that the RBAC permissions that the operator has are correct. The Cloudstate operator uses <a href="https://github.com/doriordan/skuber">Skuber</a>, and when it runs outside of a Kubernetes container, it will use the credentials configured for <code>kubectl</code>. In the case of using Minikube, this will be the default cluster admin account.</p>
+<p>The easiest way to iterate on the operator is to run it locally, from an IDE or from the command line, rather than deploying it to Minikube/Kubernetes. The only advantage to deploying to Kubernetes is that it will verify that the RBAC permissions that the operator has are correct. The Cloudstate operator uses Kubebuilder, and when it runs outside of a Kubernetes container, it will use the credentials configured for <code>kubectl</code>. In the case of using Minikube, this will be the default cluster admin account.</p>
 </div>
 <div class="paragraph">
 <p>To use a locally running operator, first shutdown the operator running in Kubernetes, by scaling its deployment down to zero:</p>
@@ -839,15 +876,12 @@ res3: com.example.shoppingcart.shoppingcart.Cart = Cart(Vector(LineItem(item-id-
 </div>
 </div>
 <div class="paragraph">
-<p>Now run the operator locally. You need to tell the operator which namespace it should be running in so that it knows which namespace to consume its config map from, this can be done by setting the <code>NAMESPACE</code> environment variable. To run it using sbt, run:</p>
+<p>Now run the operator locally:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">NAMESPACE=cloudstate sbt operator/run</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">make -C cloudstate-operator run</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Alternatively, run it in an IDE, ensuring to configure the <code>NAMESPACE</code> environment variable, by running the <code>io.cloudstate.operator.OperatorMain</code> class in the operator sub project.</p>
 </div>
 </div>
 </div>
