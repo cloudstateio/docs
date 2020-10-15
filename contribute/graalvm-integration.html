@@ -178,6 +178,9 @@
     <a class="nav-link" href="../develop/install.html">Installing Cloudstate</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/gke.html">Run on GKE</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../develop/examples.html">Available Cloudstate examples</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -350,13 +353,6 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../old-springboot/index.html">Implementing in Spring Boot</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../old-dotnet/index.html">Implementing in .Net</a>
   </li>
 </ul>
@@ -494,7 +490,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sbt "dockerBuildDevMode publishLocal"</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sbt "dockerBuildNativeCore publishLocal"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -523,10 +519,10 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The resulting Docker image is <code>cloudstate-proxy-dev-mode:latest</code>.</p>
+<p>The resulting Docker image is <code>cloudstate-proxy-native-core:latest</code>.</p>
 </div>
 <div class="paragraph">
-<p>This image is a dev mode image, it uses an in memory store, and forms a single cluster by itself. You can also run <code>dockerBuildNoStore</code> and <code>dockerBuildInMemory</code>, <code>dockerBuildCassandra</code> to build a production proxy that has no store, an in memory store or Cassandra store respectively. These will attempt the Kubernetes cluster bootstrap process, so can only be used in Kubernetes with appropriate environment variables set to help them discover other pods in the same deployment.</p>
+<p>This image supports running in multiple different modes, depending on the arguments passed to it - it can be run in dev mode, with an in memory store, or with no configured store, <code>-Dconfig.resource=dev-mode.conf</code>, <code>-Dconfig.resource=in-memory.conf</code> or <code>-Dconfig.resource=no-store.conf</code>, respectively. You can also run <code>dockerBuildNativePostrges</code>, <code>dockerBuildNativeCassandra</code> and <code>dockerBuildNativeSpanner</code> to build a production proxy that has a Postgres, Cassandra and Spanner support respectively. These will attempt the Kubernetes cluster bootstrap process, so can only be used in Kubernetes with appropriate environment variables set to help them discover other pods in the same deployment.</p>
 </div>
 <div class="paragraph">
 <p>Substituting <code>publishLocal</code> for <code>publish</code> will push the docker images to a remote Docker registry, to enable this the <code>-Ddocker.registry</code> and <code>-Ddocker.username</code> flags must be specified to the <code>sbt</code> command.</p>
@@ -544,7 +540,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">docker run -it --rm --name cloudstate -p 9000:9000 cloudstate-proxy-dev-mode
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">docker run -it --rm --name cloudstate -p 9000:9000 cloudstate-proxy-core -Dconfig.resource=dev-mode.conf
 docker run -it --rm --network container:cloudstate --name shopping-cart -e "DEBUG=cloudstate*" js-shopping-cart</code></pre>
 </div>
 </div>

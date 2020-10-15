@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Implementing in Spring Boot :: Cloudstate Documentation</title>
+<title>Run on GKE :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Implementing in Spring Boot | Cloudstate Documentation">
-<meta name="twitter:title" content="Implementing in Spring Boot | Cloudstate Documentation">
-<meta property="og:title" content="Implementing in Spring Boot | Cloudstate Documentation" />
+<meta itemprop="name" content="Run on GKE | Cloudstate Documentation">
+<meta name="twitter:title" content="Run on GKE | Cloudstate Documentation">
+<meta property="og:title" content="Run on GKE | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/old-springboot/index.html">
-<meta property="og:url" content="https://cloudstate.io/docs/old-springboot/index.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/develop/gke.html">
+<meta property="og:url" content="https://cloudstate.io/docs/develop/gke.html" />
 
 
 
@@ -169,19 +169,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../develop/index.html">Developing Cloudstate services</a>
+    <a class="nav-link" href="index.html">Developing Cloudstate services</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../develop/prerequisites.html">Prerequisites</a>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../develop/install.html">Installing Cloudstate</a>
+    <a class="nav-link" href="install.html">Installing Cloudstate</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gke.html">Run on GKE</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../develop/examples.html">Available Cloudstate examples</a>
+    <a class="nav-link" href="examples.html">Available Cloudstate examples</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../develop/tutorial.html">The shopping cart tutorial</a>
+    <a class="nav-link" href="tutorial.html">The shopping cart tutorial</a>
   </li>
 </ul>
   </li>
@@ -349,13 +352,6 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="index.html">Implementing in Spring Boot</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../old-dotnet/index.html">Implementing in .Net</a>
   </li>
@@ -462,28 +458,110 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Implementing in Spring Boot</a></li>
+    <li class="crumb"><a href="index.html">Developing Cloudstate services</a></li>
+    <li class="crumb"><a href="gke.html">Run on GKE</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Implementing in Spring Boot</h1>
+			<h1>Run on GKE</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="paragraph">
-<p>Information on implementing Cloudstate services in Spring Boot is published at:</p>
+		<div class="sect1">
+<h2 id="cluster-creation"><a class="anchor" href="#cluster-creation"></a>Cluster creation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a GKE cluster. We recommend at least 6 vCPUs (ie, a node pool of 3 <code>n1-standard-2</code> nodes). Also ensure that the current user is a cluster admin.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://cloudstate.io/old/docs/springboot/current/" class="bare">https://cloudstate.io/old/docs/springboot/current/</a></p>
+<p>Detailed instructions for creating the GKE cluster can be found in the <a href="https://github.com/knative/docs/blob/release-0.12/docs/install/Knative-with-GKE.md">Knative documentation</a>, follow all the steps up to (but not including) installing Knative.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cassandra-set-up"><a class="anchor" href="#cassandra-set-up"></a>Cassandra Set up</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If using an event sourced entity, install Cassandra. This can be done from the Google Marketplace, by visiting the <a href="https://console.cloud.google.com/marketplace/details/google/cassandra">Cassandra Cluster</a>, selecting configure, selecting your GCloud project, and then installing it in the Kubernetes cluster you just created.</p>
+</div>
+<div class="paragraph">
+<p>The defaults should be good enough, in our examples we called the app instance name <strong>cassandra</strong>.</p>
+</div>
+<div class="paragraph">
+<p><em>Note: there is an option to use an in memory store if you just want to test it out, of course, as soon as your pods shut down (or if they are rebalanced), your store will be lost.</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cluster-preparation"><a class="anchor" href="#cluster-preparation"></a>Cluster preparation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create the cloudstate namespace and install the Cloudstate operator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl create namespace cloudstate
+kubectl apply -n cloudstate -f https://raw.githubusercontent.com/cloudstateio/cloudstate/v0.5.1/operator/cloudstate.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploying-function"><a class="anchor" href="#deploying-function"></a>Deploying function</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You are now ready to install an event sourced function. We have a shopping cart example in the <code>samples/js-shopping-cart</code> directory of this project. This can be installed by following these instructions:</p>
+</div>
+<div class="sect2">
+<h3 id="installing-statefulstore"><a class="anchor" href="#installing-statefulstore"></a>Installing StatefulStore</h3>
+<div class="paragraph">
+<p>Configure a Cassandra store. If you called your Cassandra deployment <strong>cassandra</strong> and deployed it to the default namespace, this can be installed by running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl apply -f https://raw.githubusercontent.com/cloudstateio/cloudstate/v0.5.1/samples/js-shopping-cart/cassandra-store.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Otherwise, download the above file and update the service parameter to match the first node of your Cassandra stateful set.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="installing-statefulservice"><a class="anchor" href="#installing-statefulservice"></a>Installing StatefulService</h3>
+<div class="paragraph">
+<p>Install the shopping cart, this can be done by running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kubectl apply -f https://raw.githubusercontent.com/cloudstateio/cloudstate/v0.5.1/samples/js-shopping-cart/js-shopping-cart.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator will install a service, you can then create an ingress for that service. To test, instantiate a gRPC client in your favourite language for this descriptor. You may need to also download the <code>cloudstate/entity.proto</code> and <code>google/protobuf/empty.proto</code> descriptors to compile it in your language.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The shopping cart descriptor is deployed with debug on, so try getting the logs of the shopping-cart container in each of the deployed pods to see what&#8217;s happening when commands are sent.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="../springboot/examples.html">Examples</a></span>
-  <span class="next"><a href="../old-dotnet/index.html">Implementing in .Net</a></span>
+  <span class="prev"><a href="install.html">Installing Cloudstate</a></span>
+  <span class="next"><a href="examples.html">Available Cloudstate examples</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -492,7 +570,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/old-springboot/pages/index.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/develop/pages/gke.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">

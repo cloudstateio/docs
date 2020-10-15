@@ -178,6 +178,9 @@
     <a class="nav-link" href="../develop/install.html">Installing Cloudstate</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/gke.html">Run on GKE</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../develop/examples.html">Available Cloudstate examples</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -344,13 +347,6 @@
     <a class="nav-link" href="../springboot/examples.html">Examples</a>
   </li>
 </ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../old-springboot/index.html">Implementing in Spring Boot</a>
   </li>
 </ul>
   </li>
@@ -633,11 +629,11 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Now build one or more proxy images. Cloudstate has a different image for each database backend, and in most cases, is able to build either a native image, or an image that runs a regular JVM. It takes at least 5 minutes to compile the native images, so for most development purposes, we recommend using the regular JVM images. For example, to compile the <code>InMemory</code> proxy image, run:</p>
+<p>Now build one or more proxy images. Cloudstate has a different image for each database backend, and in most cases, is able to build either a native image, or an image that runs a regular JVM. It takes at least 5 minutes to compile the native images, so for most development purposes, we recommend using the regular JVM images. For example, to compile the core proxy image, run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildInMemory publishLocal</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildCore publishLocal</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -646,22 +642,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>dockerBuildInMemory</code></p>
+<p><code>dockerBuildCore</code></p>
 </li>
 <li>
-<p><code>dockerBuildNativeInMemory</code></p>
+<p><code>dockerBuildNativeCore</code></p>
 </li>
 <li>
 <p><code>dockerBuildCassandra</code></p>
 </li>
 <li>
 <p><code>dockerBuildNativeCassandra</code></p>
-</li>
-<li>
-<p><code>dockerBuildNoStore</code></p>
-</li>
-<li>
-<p><code>dockerBuildNativeNoStore</code></p>
 </li>
 <li>
 <p><code>dockerBuildPostgres</code></p>
@@ -875,7 +865,7 @@ res3: com.example.shoppingcart.shoppingcart.Cart = Cart(Vector(LineItem(item-id-
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sbt:cloudstate&gt; dockerBuildInMemory publishLocal</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sbt:cloudstate&gt; dockerBuildCore publishLocal</code></pre>
 </div>
 </div>
 <div class="paragraph">

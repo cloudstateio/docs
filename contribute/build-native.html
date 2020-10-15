@@ -178,6 +178,9 @@
     <a class="nav-link" href="../develop/install.html">Installing Cloudstate</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../develop/gke.html">Run on GKE</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../develop/examples.html">Available Cloudstate examples</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -344,13 +347,6 @@
     <a class="nav-link" href="../springboot/examples.html">Examples</a>
   </li>
 </ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../old-springboot/index.html">Implementing in Spring Boot</a>
   </li>
 </ul>
   </li>
@@ -543,22 +539,16 @@ proxy-postgres/docker:publish</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><code>dockerBuildInMemory</code></p>
+<p><code>dockerBuildCore</code></p>
 </li>
 <li>
-<p><code>dockerBuildNativeInMemory</code></p>
+<p><code>dockerBuildNativeCore</code></p>
 </li>
 <li>
 <p><code>dockerBuildCassandra</code></p>
 </li>
 <li>
 <p><code>dockerBuildNativeCassandra</code></p>
-</li>
-<li>
-<p><code>dockerBuildNoStore</code></p>
-</li>
-<li>
-<p><code>dockerBuildNativeNoStore</code></p>
 </li>
 <li>
 <p><code>dockerBuildPostgres</code></p>
@@ -581,7 +571,7 @@ proxy-postgres/docker:publish</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildNativeInMemory publishLocal</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildNativeCore publishLocal</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -606,7 +596,7 @@ proxy-postgres/docker:publish</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildNativeInMemory publish</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildNativeCore publish</code></pre>
 </div>
 </div>
 </div>
@@ -665,7 +655,7 @@ proxy-postgres/docker:publish</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildNativeDevMode publishLocalPull
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">dockerBuildNativeCore publishLocalPull
 tck/it:test</code></pre>
 </div>
 </div>
