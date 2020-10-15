@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conflict-free Replicated Data Types :: Cloudstate Documentation</title>
+<title>Getting started :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Conflict-free Replicated Data Types | Cloudstate Documentation">
-<meta name="twitter:title" content="Conflict-free Replicated Data Types | Cloudstate Documentation">
-<meta property="og:title" content="Conflict-free Replicated Data Types | Cloudstate Documentation" />
+<meta itemprop="name" content="Getting started | Cloudstate Documentation">
+<meta name="twitter:title" content="Getting started | Cloudstate Documentation">
+<meta property="og:title" content="Getting started | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/go/crdt.html">
-<meta property="og:url" content="https://cloudstate.io/docs/go/crdt.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/python/gettingstarted.html">
+<meta property="og:url" content="https://cloudstate.io/docs/python/gettingstarted.html" />
 
 
 
@@ -229,25 +229,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Implementing in Go</a>
+    <a class="nav-link" href="../go/index.html">Implementing in Go</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="gettingstarted.html">Getting started</a>
+    <a class="nav-link" href="../go/gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="../go/eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="effects.html">Forwarding and effects</a>
+    <a class="nav-link" href="../go/crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="serialization.html">Serialization</a>
+    <a class="nav-link" href="../go/effects.html">Forwarding and effects</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="api.html">API docs</a>
+    <a class="nav-link" href="../go/serialization.html">Serialization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../go/api.html">API docs</a>
   </li>
 </ul>
   </li>
@@ -350,10 +350,10 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../python/index.html">Implementing in Python</a>
+    <a class="nav-link" href="index.html">Implementing in Python</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../python/gettingstarted.html">Getting started</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
   </li>
 </ul>
   </li>
@@ -527,39 +527,34 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Implementing in Go</a></li>
-    <li class="crumb"><a href="crdt.html">Conflict-free Replicated Data Types</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Python</a></li>
+    <li class="crumb"><a href="gettingstarted.html">Getting started</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Conflict-free Replicated Data Types</h1>
+			<h1>Getting started</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="ulist">
-<ul>
-<li>
-<p>Explain how to use the CRDT API</p>
-</li>
-<li>
-<p>Explain how to use CrdtFactory and where it comes from</p>
-</li>
-<li>
-<p>Explain how to handle streamed calls</p>
-</li>
-<li>
-<p>Explain the APIs for each different CRDT</p>
-</li>
-</ul>
+		<div class="paragraph">
+<p>Install the current version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">pip install cloudstate==0.1.1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://pypi.org/project/cloudstate/">Cloudstate project on PyPI</a> for more information.</p>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="eventsourced.html">Event sourcing</a></span>
-  <span class="next"><a href="effects.html">Forwarding and effects</a></span>
+  <span class="prev"><a href="index.html">Implementing in Python</a></span>
+  <span class="next"><a href="../old-python/index.html">Implementing in Python</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -568,7 +563,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/go-support/edit/master/docs/src/modules/go/pages/crdt.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/python-support/edit/master/docs/src/modules/python/pages/gettingstarted.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
