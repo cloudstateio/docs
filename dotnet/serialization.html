@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Context Injection :: Cloudstate Documentation</title>
+<title>Serialization :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Context Injection | Cloudstate Documentation">
-<meta name="twitter:title" content="Context Injection | Cloudstate Documentation">
-<meta property="og:title" content="Context Injection | Cloudstate Documentation" />
+<meta itemprop="name" content="Serialization | Cloudstate Documentation">
+<meta name="twitter:title" content="Serialization | Cloudstate Documentation">
+<meta property="og:title" content="Serialization | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/springboot/cdi.html">
-<meta property="og:url" content="https://cloudstate.io/docs/springboot/cdi.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/dotnet/serialization.html">
+<meta property="og:url" content="https://cloudstate.io/docs/dotnet/serialization.html" />
 
 
 
@@ -357,22 +357,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Implementing in Spring Boot</a>
+    <a class="nav-link" href="../springboot/index.html">Implementing in Spring Boot</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="gettingstarted.html">Getting started</a>
+    <a class="nav-link" href="../springboot/gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="configuration.html">Configuration</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="cdi.html">Context Injection</a>
+    <a class="nav-link" href="../springboot/configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="conventions.html">Conventions and Restrictions</a>
+    <a class="nav-link" href="../springboot/cdi.html">Context Injection</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="examples.html">Examples</a>
+    <a class="nav-link" href="../springboot/conventions.html">Conventions and Restrictions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../springboot/examples.html">Examples</a>
   </li>
 </ul>
   </li>
@@ -382,25 +382,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../dotnet/index.html">Implementing in .Net</a>
+    <a class="nav-link" href="index.html">Implementing in .Net</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dotnet/gettingstarted.html">Getting started</a>
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dotnet/eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dotnet/crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dotnet/actions.html">Actions</a>
+    <a class="nav-link" href="actions.html">Actions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dotnet/examples.html">Examples</a>
+    <a class="nav-link" href="examples.html">Examples</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dotnet/serialization.html">Serialization</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="serialization.html">Serialization</a>
   </li>
 </ul>
   </li>
@@ -514,123 +514,30 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Implementing in Spring Boot</a></li>
-    <li class="crumb"><a href="cdi.html">Context Injection</a></li>
+    <li class="crumb"><a href="index.html">Implementing in .Net</a></li>
+    <li class="crumb"><a href="serialization.html">Serialization</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Context Injection</h1>
+			<h1>Serialization</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>As we saw in the Getting Started example, it is perfectly possible to inject any Bean available in Spring into a Cloudstate entity class.
-It is also possible to use the annotations present in the javax.inject package (<a href="https://jcp.org/en/jsr/detail?id=330">JSR330</a>).
-The Cloudstate Springboot Support library already includes the necessary dependencies so you don&#8217;t have to worry about it.</p>
+		<div class="paragraph">
+<p>Cloudstate functions serve gRPC interfaces, and naturally the input messages and output messages are protobuf messages that get serialized to the protobuf wire format.
+However, in addition to these messages, there are a number of places where Cloudstate needs to serialize other objects, for persistence and replication.</p>
 </div>
 <div class="paragraph">
-<p>You can annotate your entity classes with Spring <code>@Component</code> or <code>@Service</code> annotations but we have created a convenient  annotation that we call <code>@CloudstateEntityBean</code> that can be used for that too.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="jsr330"><a class="anchor" href="#jsr330"></a>JSR330</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Cloudstate Spring Boot Support library supports JSR330 within the scope of the support provided by Spring itself to this specification.
-Note that the Cloudstate Java Support library on which we depend allows you to bind Cloudstate and any other DI container you want.
-However, no specific module for any of these other containers has yet been made.</p>
-</div>
-<div class="paragraph">
-<p>Feel free to contribute or suggest support for more runtimes.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="injecting-entityid-and-cloudstate-context-objects"><a class="anchor" href="#injecting-entityid-and-cloudstate-context-objects"></a>Injecting EntityId and Cloudstate Context Objects</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You can use the <code>@EntityId</code> annotation to access the managed entity&#8217;s id.
-It is also possible to have access to the EventSourcedEntityCreationContext created during the activation of the object by Cloudstate.
-However for this you will need to annotate the Context property with the annotation @CloudstateContext as in the example below:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@EntityId
-private String entityId;
-
-@CloudstateContext
-private EventSourcedContext context;</code></pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="using-properties-instead-constructors"><a class="anchor" href="#using-properties-instead-constructors"></a>Using properties instead constructors</h3>
-<div class="paragraph">
-<p>It is currently not possible to inject Cloudstate&#8217;s EntityId and Context properties via constructor.
-This is because the life cycles of these properties differ from the life cycle of objects managed directly by Spring.</p>
-</div>
-<div class="paragraph">
-<p>This is obviously only an issue if you want to inject EntityId or EventSourcedEntityCreationContext.
-Otherwise, if you want to inject only other Spring Context Beans, you can use injection via builders as normal.</p>
-</div>
-<div class="paragraph">
-<p>The builders below would be perfectly acceptable:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@EventSourcedEntity
-@CloudstateEntityBean
-public final class ShoppingCartEntity {
-    private final Map&lt;String, Shoppingcart.LineItem&gt; cart = new LinkedHashMap&lt;&gt;();
-
-    @EntityId
-    private String entityId;
-
-    @CloudstateContext
-    private EventSourcedContext context;
-
-    private final RuleService ruleService;
-
-    private final ShoppingCartTypeConverter typeConverter;
-
-    @Autowired
-    public ShoppingCartEntity(RuleService ruleService, ShoppingCartTypeConverter typeConverter){
-        this.ruleService = ruleService;
-        this.typeConverter = typeConverter;
-    }
-
-    //......
-}</code></pre>
-</div>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>As you can see, the constructor injection constraint applies only to EntityId and CreationContext.
-So, as in the example above, you can mix the approaches and get the best of both worlds together</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+<p>See <a href="../contribute/serialization.html" class="page">here</a> for more details.</p>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="configuration.html">Configuration</a></span>
-  <span class="next"><a href="conventions.html">Conventions and Restrictions</a></span>
+  <span class="prev"><a href="examples.html">Examples</a></span>
+  <span class="next"><a href="../old-dotnet/index.html">Implementing in .Net</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -639,7 +546,7 @@ So, as in the example above, you can mix the approaches and get the best of both
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/springboot-support/edit/master/docs/src/modules/springboot/pages/cdi.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/dotnet-support/edit/master/docs/src/modules/dotnet/pages/serialization.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
