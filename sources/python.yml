@@ -1,0 +1,7 @@
+# python @ current
+# docs for: https://github.com/cloudstateio/python-support/commit/97ead7bee88e82ad6fa5c01b2edc7b6f5cc07d33
+# based on: https://github.com/cloudstateio/python-support/commit/c7a4bf99b2e57134ee814e19e7731e46e937c362
+url: https://github.com/cloudstateio/python-support
+branches: [docs/current]
+start_paths: [docs/src, docs/build/src/managed]
+edit_url: https://github.com/cloudstateio/python-support/edit/master/{path}
