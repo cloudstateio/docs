@@ -1,0 +1,7 @@
+# dart @ current
+# docs for: https://github.com/cloudstateio/dart-support/commit/8b59745ba3840881bc667acea6fe3f025248dc68
+# based on: https://github.com/cloudstateio/dart-support/commit/830d6e64bc51fa3a14fc024447f384c73dc3928d
+url: https://github.com/cloudstateio/dart-support
+branches: [docs/current]
+start_paths: [doc/src, doc/build/src/managed]
+edit_url: https://github.com/cloudstateio/dart-support/edit/master/{path}
