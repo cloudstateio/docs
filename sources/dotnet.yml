@@ -1,0 +1,7 @@
+# dotnet @ current
+# docs for: https://github.com/cloudstateio/dotnet-support/commit/4d2cc1dd850c513eebbfc4cf546a0b6c822050ca
+# based on: https://github.com/cloudstateio/dotnet-support/commit/54de9e6be504430c86fdcd351aa5e2cdf30758f3
+url: https://github.com/cloudstateio/dotnet-support
+branches: [docs/current]
+start_paths: [docs/src, docs/build/src/managed]
+edit_url: https://github.com/cloudstateio/dotnet-support/edit/master/{path}
