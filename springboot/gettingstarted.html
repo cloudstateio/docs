@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PostgreSQL :: Cloudstate Documentation</title>
+<title>Getting started with Spring Boot :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="PostgreSQL | Cloudstate Documentation">
-<meta name="twitter:title" content="PostgreSQL | Cloudstate Documentation">
-<meta property="og:title" content="PostgreSQL | Cloudstate Documentation" />
+<meta itemprop="name" content="Getting started with Spring Boot | Cloudstate Documentation">
+<meta name="twitter:title" content="Getting started with Spring Boot | Cloudstate Documentation">
+<meta property="og:title" content="Getting started with Spring Boot | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/deploy/postgresql.html">
-<meta property="og:url" content="https://cloudstate.io/docs/deploy/postgresql.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/springboot/gettingstarted.html">
+<meta property="og:url" content="https://cloudstate.io/docs/springboot/gettingstarted.html" />
 
 
 
@@ -326,22 +326,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../springboot/index.html">Implementing in Spring Boot</a>
+    <a class="nav-link" href="index.html">Implementing in Spring Boot</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/gettingstarted.html">Getting started</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/configuration.html">Configuration</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/cdi.html">Context Injection</a>
+    <a class="nav-link" href="cdi.html">Context Injection</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/conventions.html">Conventions and Restrictions</a>
+    <a class="nav-link" href="conventions.html">Conventions and Restrictions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/examples.html">Examples</a>
+    <a class="nav-link" href="examples.html">Examples</a>
   </li>
 </ul>
   </li>
@@ -365,37 +365,37 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Deploying to production systems</a>
+    <a class="nav-link" href="../deploy/index.html">Deploying to production systems</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-production.html">Setting up a production cluster</a>
+    <a class="nav-link" href="../deploy/install-production.html">Setting up a production cluster</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploying.html">Deploying stateful services</a>
+    <a class="nav-link" href="../deploy/deploying.html">Deploying stateful services</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="stateful-stores.html">Stateful stores</a>
+    <a class="nav-link" href="../deploy/stateful-stores.html">Stateful stores</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="cassandra.html">Cassandra</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="postgresql.html">PostgresSQL</a>
+    <a class="nav-link" href="../deploy/cassandra.html">Cassandra</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="inmemory.html">In memory store</a>
+    <a class="nav-link" href="../deploy/postgresql.html">PostgresSQL</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deploy/inmemory.html">In memory store</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="monitoring.html">Monitoring</a>
+    <a class="nav-link" href="../deploy/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="autoscaling.html">Autoscaling</a>
+    <a class="nav-link" href="../deploy/autoscaling.html">Autoscaling</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="security.html">Security</a>
+    <a class="nav-link" href="../deploy/security.html">Security</a>
   </li>
 </ul>
   </li>
@@ -462,37 +462,466 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Deploying to production systems</a></li>
-    <li class="crumb"><a href="stateful-stores.html">Stateful stores</a></li>
-    <li class="crumb"><a href="postgresql.html">PostgresSQL</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Spring Boot</a></li>
+    <li class="crumb"><a href="gettingstarted.html">Getting started</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>PostgreSQL</h1>
+			<h1>Getting started with Spring Boot</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="ulist">
+		<div class="sect1">
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="spring-boot-version"><a class="anchor" href="#spring-boot-version"></a>Spring Boot version</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cloudstate Spring Boot support requires Spring Boot &gt;= 2.2.4.RELEASE.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="build-configurations"><a class="anchor" href="#build-configurations"></a>Build configurations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You must first add the Cloudstate dependency to your project:</p>
+</div>
+<div class="dlist tabset">
+<dl>
+<dt class="hdlist1">Maven</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.cloudstate&lt;/groupId&gt;
+        &lt;artifactId&gt;cloudstate-springboot-support&lt;/artifactId&gt;
+        &lt;version&gt;0.5.1&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">sbt</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">libraryDependencies += "io.cloudstate" % "cloudstate-springboot-support" % "0.5.1"</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">gradle</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-gradle hljs" data-lang="gradle">compile group: 'io.cloudstate', name: 'cloudstate-springboot-support', version: '0.5.1'</code></pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Cloudstate applications are based on contracts created via gRPC, in the case of Maven-based Spring Boot applications you can use the following plugins to assist in this task:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml"> &lt;build&gt;
+        &lt;extensions&gt;
+            &lt;extension&gt;
+                &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.6.0&lt;/version&gt;
+            &lt;/extension&gt;
+        &lt;/extensions&gt;
+
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;0.6.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;protocExecutable&gt;/usr/local/bin/protoc&lt;/protocExecutable&gt;
+                    &lt;protocArtifact&gt;com.google.protobuf:protoc:3.9.1:exe:${os.detected.classifier}&lt;/protocArtifact&gt;
+                &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;compile&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we have an example of a pom.xml file with all the necessary parts present:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;io.cloudstate&lt;/groupId&gt;
+    &lt;artifactId&gt;cloudstate-springboot-example&lt;/artifactId&gt;
+    &lt;version&gt;0.5.1&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;main.class&gt;io.cloudstate.springboot.example.Main&lt;/main.class&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+                &lt;version&gt;2.2.4.RELEASE&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.cloudstate&lt;/groupId&gt;
+            &lt;artifactId&gt;cloudstate-springboot-support&lt;/artifactId&gt;
+            &lt;version&gt;0.5.1&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;extensions&gt;
+            &lt;extension&gt;
+                &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.6.0&lt;/version&gt;
+            &lt;/extension&gt;
+        &lt;/extensions&gt;
+
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+                &lt;artifactId&gt;build-helper-maven-plugin&lt;/artifactId&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;generate-sources&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;add-source&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;sources&gt;
+                                &lt;source&gt;${project.build.directory}/generated-sources/protobuf/java&lt;/source&gt;
+                            &lt;/sources&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.5.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;1.8&lt;/source&gt;
+                    &lt;target&gt;1.8&lt;/target&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;0.6.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;protocExecutable&gt;/usr/local/bin/protoc&lt;/protocExecutable&gt;
+                    &lt;protocArtifact&gt;com.google.protobuf:protoc:3.9.1:exe:${os.detected.classifier}&lt;/protocArtifact&gt;
+                &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;compile&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+
+            &lt;plugin&gt;
+                &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
+                &lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.7.0&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;build&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+                &lt;configuration&gt;
+                    &lt;from&gt;
+                        &lt;image&gt;adoptopenjdk/openjdk8-openj9:alpine-slim&lt;/image&gt;
+                        &lt;credHelper&gt;&lt;/credHelper&gt;
+                    &lt;/from&gt;
+                    &lt;to&gt;
+                        &lt;image&gt;cloudstateio/samples-springboot-shopping-cart&lt;/image&gt;
+                        &lt;credHelper&gt;&lt;/credHelper&gt;
+                        &lt;tags&gt;
+                            &lt;tag&gt;${project.version}&lt;/tag&gt;
+                        &lt;/tags&gt;
+                    &lt;/to&gt;
+                    &lt;container&gt;
+                        &lt;mainClass&gt;${main.class}&lt;/mainClass&gt;
+                        &lt;jvmFlags&gt;
+                            &lt;jvmFlag&gt;-XshareClasses&lt;/jvmFlag&gt;
+                            &lt;jvmFlag&gt;-Xquickstart&lt;/jvmFlag&gt;
+                            &lt;jvmFlag&gt;-XX:+UseG1GC&lt;/jvmFlag&gt;
+                            &lt;jvmFlag&gt;-XX:+UseStringDeduplication&lt;/jvmFlag&gt;
+                        &lt;/jvmFlags&gt;
+                        &lt;ports&gt;
+                            &lt;port&gt;8080&lt;/port&gt;
+                        &lt;/ports&gt;
+                    &lt;/container&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Remember to change the values of the <code>main.class</code>, <code>repo.name</code>, and <code>version</code> tags to their respective values
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Subsequent source locations and build commands will assume the above Maven project, and may need to be adapted to your particular build tool and setup.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="protobuf-files"><a class="anchor" href="#protobuf-files"></a>Protobuf files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Xolstice Maven plugin assumes a location of <code>src/main/proto</code> for your protobuf files.
+In addition, it includes any protobuf files from your application dependencies in the protoc include path, so there&#8217;s nothing you need to do to pull in either the Cloudstate protobuf types, or any of the Google standard protobuf types, they are all automatically available for import.</p>
+</div>
+<div class="paragraph">
+<p>So, if you were to build the example shopping cart application shown earlier in <a href="../concepts/grpc.html" class="page">gRPC descriptors</a>, you could simply paste that protobuf into <code>src/main/proto/shoppingcart.proto</code>.
+You may wish to also define the java package, to ensure the package name used conforms to Java package naming conventions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">option java_package = "com.example.shoppingcart";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now if you run <code>mvn compile</code>, you&#8217;ll find your generated protobuf files in <code>target/generated-sources/protobuf/java</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="write-your-cloudstate-function"><a class="anchor" href="#write-your-cloudstate-function"></a>Write your Cloudstate function:</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In general you will write your entity functions in the usual way as you would if you were using the version of <a href="../java/index.html" class="page">Java support</a>.
+For more information on how to create entity functions, see the specific documentation for <a href="../java/eventsourced.html" class="page">event sourced</a> and <a href="../java/crdt.html" class="page">CRDT</a> entities.</p>
+</div>
+<div class="paragraph">
+<p>The differences will be explained later in this documentation.
+Below is an example of an EventSourced user entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">/**
+ * An event sourced entity.
+ */
+@EventSourcedEntity
+@CloudstateEntityBean
+public class ShoppingCartEntity {
+    private final Map&lt;String, Shoppingcart.LineItem&gt; cart = new LinkedHashMap&lt;&gt;();
+
+    @EntityId
+    private String entityId;
+
+    @CloudstateContext
+    private EventSourcedContext context;
+
+    @Autowired
+    private RuleService ruleService;
+
+    @Autowired
+    private ShoppingCartTypeConverter typeConverter;
+
+    @Snapshot
+    public Domain.Cart snapshot() {
+        return Domain.Cart.newBuilder()
+                .addAllItems(cart.values().stream().map(typeConverter::convert).collect(Collectors.toList()))
+                .build();
+    }
+
+    @SnapshotHandler
+    public void handleSnapshot(Domain.Cart cart) {
+        this.cart.clear();
+        for (Domain.LineItem item : cart.getItemsList()) {
+            this.cart.put(item.getProductId(), typeConverter.convert(item));
+        }
+    }
+
+    @EventHandler
+    public void itemAdded(Domain.ItemAdded itemAdded) {
+        Shoppingcart.LineItem item = cart.get(itemAdded.getItem().getProductId());
+        if (item == null) {
+            item = typeConverter.convert(itemAdded.getItem());
+        } else {
+            item =
+                    item.toBuilder()
+                            .setQuantity(item.getQuantity() + itemAdded.getItem().getQuantity())
+                            .build();
+        }
+        cart.put(item.getProductId(), item);
+    }
+
+    @EventHandler
+    public void itemRemoved(Domain.ItemRemoved itemRemoved) {
+        cart.remove(itemRemoved.getProductId());
+    }
+
+    @CommandHandler
+    public Shoppingcart.Cart getCart() {
+        return Shoppingcart.Cart.newBuilder().addAllItems(cart.values()).build();
+    }
+
+    @CommandHandler
+    public Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+        if (!ruleService.isValidAmount(item)) {
+            ctx.fail("Cannot add negative quantity of to item" + item.getProductId());
+        }
+        ctx.emit(
+                Domain.ItemAdded.newBuilder()
+                        .setItem(
+                                Domain.LineItem.newBuilder()
+                                        .setProductId(item.getProductId())
+                                        .setName(item.getName())
+                                        .setQuantity(item.getQuantity())
+                                        .build())
+                        .build());
+        return Empty.getDefaultInstance();
+    }
+
+    @CommandHandler
+    public Empty removeItem(Shoppingcart.RemoveLineItem item, CommandContext ctx) {
+        if (!cart.containsKey(item.getProductId())) {
+            ctx.fail("Cannot remove item " + item.getProductId() + " because it is not in the cart.");
+        }
+        ctx.emit(Domain.ItemRemoved.newBuilder().setProductId(item.getProductId()).build());
+        return Empty.getDefaultInstance();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To work Cloudstate requires that the descriptors of the protobuf&#8217;s files are explicitly registered.
+We have two ways to do this:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p>Explain how to configure a PostgreSQL store.</p>
+<p>Via Spring Boot by creating a Spring Boot Configuration class and registering these types accordingly.</p>
 </li>
 <li>
-<p>Explain how to configure credentials.</p>
-</li>
-<li>
-<p>Give some quick links to installing PostgreSQL in different environments.</p>
+<p>Programmatically, which we&#8217;ll explain later in <a href="conventions.html" class="page">Conventions and Restrictions</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Here is an example of a suitable configuration class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import com.example.shoppingcart.Shoppingcart;
+import com.google.protobuf.Descriptors;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class DescriptorsConfiguration {
+
+    @Bean
+    public Descriptors.ServiceDescriptor shoppingCartEntityServiceDescriptor() {
+        return Shoppingcart.getDescriptor().findServiceByName("ShoppingCart");
+    }
+
+    @Bean
+    public Descriptors.FileDescriptor[] shoppingCartEntityFileDescriptors() {
+        return new Descriptors.FileDescriptor[]{com.example.shoppingcart.persistence.Domain.getDescriptor()};
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then write your simple main class in the Spring boot style:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import io.cloudstate.springboot.starter.autoconfigure.EnableCloudstate;
+
+@EnableCloudstate
+@SpringBootApplication
+public class Main {
+    public static void main(String[] args) { SpringApplication.run(Main.class, args); }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+In Cloudstate Spring Boot support it is not necessary to register your entities explicitly, instead you just use the annotation <code>@EnableCloudstate</code> to tell Spring what to do
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then run the application in the same way as you would any other springboot application with <code>mvn spring-boot:run</code> command.</p>
+</div>
+</div>
+</div>
 		<nav class="pagination">
-  <span class="prev"><a href="cassandra.html">Cassandra</a></span>
-  <span class="next"><a href="inmemory.html">In memory store</a></span>
+  <span class="prev"><a href="index.html">Implementing in Spring Boot</a></span>
+  <span class="next"><a href="configuration.html">Configuration</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -501,7 +930,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/deploy/pages/postgresql.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/springboot-support/edit/master/docs/src/modules/springboot/pages/gettingstarted.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">

@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PostgreSQL :: Cloudstate Documentation</title>
+<title>Examples :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="PostgreSQL | Cloudstate Documentation">
-<meta name="twitter:title" content="PostgreSQL | Cloudstate Documentation">
-<meta property="og:title" content="PostgreSQL | Cloudstate Documentation" />
+<meta itemprop="name" content="Examples | Cloudstate Documentation">
+<meta name="twitter:title" content="Examples | Cloudstate Documentation">
+<meta property="og:title" content="Examples | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/deploy/postgresql.html">
-<meta property="og:url" content="https://cloudstate.io/docs/deploy/postgresql.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/springboot/examples.html">
+<meta property="og:url" content="https://cloudstate.io/docs/springboot/examples.html" />
 
 
 
@@ -326,22 +326,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../springboot/index.html">Implementing in Spring Boot</a>
+    <a class="nav-link" href="index.html">Implementing in Spring Boot</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/gettingstarted.html">Getting started</a>
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/configuration.html">Configuration</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/cdi.html">Context Injection</a>
+    <a class="nav-link" href="cdi.html">Context Injection</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/conventions.html">Conventions and Restrictions</a>
+    <a class="nav-link" href="conventions.html">Conventions and Restrictions</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../springboot/examples.html">Examples</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="examples.html">Examples</a>
   </li>
 </ul>
   </li>
@@ -365,37 +365,37 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Deploying to production systems</a>
+    <a class="nav-link" href="../deploy/index.html">Deploying to production systems</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-production.html">Setting up a production cluster</a>
+    <a class="nav-link" href="../deploy/install-production.html">Setting up a production cluster</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploying.html">Deploying stateful services</a>
+    <a class="nav-link" href="../deploy/deploying.html">Deploying stateful services</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="stateful-stores.html">Stateful stores</a>
+    <a class="nav-link" href="../deploy/stateful-stores.html">Stateful stores</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="cassandra.html">Cassandra</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="postgresql.html">PostgresSQL</a>
+    <a class="nav-link" href="../deploy/cassandra.html">Cassandra</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="inmemory.html">In memory store</a>
+    <a class="nav-link" href="../deploy/postgresql.html">PostgresSQL</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deploy/inmemory.html">In memory store</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="monitoring.html">Monitoring</a>
+    <a class="nav-link" href="../deploy/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="autoscaling.html">Autoscaling</a>
+    <a class="nav-link" href="../deploy/autoscaling.html">Autoscaling</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="security.html">Security</a>
+    <a class="nav-link" href="../deploy/security.html">Security</a>
   </li>
 </ul>
   </li>
@@ -462,37 +462,29 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Deploying to production systems</a></li>
-    <li class="crumb"><a href="stateful-stores.html">Stateful stores</a></li>
-    <li class="crumb"><a href="postgresql.html">PostgresSQL</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Spring Boot</a></li>
+    <li class="crumb"><a href="examples.html">Examples</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>PostgreSQL</h1>
+			<h1>Examples</h1>
 
 		<fieldset class="supergroup-switch">
 
 
 		</fieldset>
 
-		<div class="ulist">
-<ul>
-<li>
-<p>Explain how to configure a PostgreSQL store.</p>
-</li>
-<li>
-<p>Explain how to configure credentials.</p>
-</li>
-<li>
-<p>Give some quick links to installing PostgreSQL in different environments.</p>
-</li>
-</ul>
+		<div class="paragraph">
+<p>You can find more usage examples by visiting the <a href="https://github.com/cloudstateio/springboot-support/tree/master/examples">project page</a>.</p>
+</div>
+<div class="paragraph">
+<p>Enjoy.</p>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="cassandra.html">Cassandra</a></span>
-  <span class="next"><a href="inmemory.html">In memory store</a></span>
+  <span class="prev"><a href="conventions.html">Conventions and Restrictions</a></span>
+  <span class="next"><a href="../old-springboot/index.html">Implementing in Spring Boot</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -501,7 +493,7 @@
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/deploy/pages/postgresql.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/springboot-support/edit/master/docs/src/modules/springboot/pages/examples.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
