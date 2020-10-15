@@ -1,0 +1,7 @@
+# springboot @ current
+# docs for: https://github.com/cloudstateio/springboot-support/commit/138b28601e45b851cd06bf641d36d5fb5a41179e
+# based on: https://github.com/cloudstateio/springboot-support/commit/2c7fc025bdf735aec6a4cfbab0726c1036fe35e7
+url: https://github.com/cloudstateio/springboot-support
+branches: [docs/current]
+start_paths: [docs/src, docs/build/src/managed]
+edit_url: https://github.com/cloudstateio/springboot-support/edit/master/{path}
