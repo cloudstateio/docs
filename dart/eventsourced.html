@@ -3,21 +3,21 @@
   <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Language support :: Cloudstate Documentation</title>
+<title>Event sourcing :: Cloudstate Documentation</title>
 
 <link rel="stylesheet" href="../_/css/site.css?v-01">
 <link rel="shortcut icon" href="../_/img/favicon.ico" />
 
-<meta itemprop="name" content="Language support | Cloudstate Documentation">
-<meta name="twitter:title" content="Language support | Cloudstate Documentation">
-<meta property="og:title" content="Language support | Cloudstate Documentation" />
+<meta itemprop="name" content="Event sourcing | Cloudstate Documentation">
+<meta name="twitter:title" content="Event sourcing | Cloudstate Documentation">
+<meta property="og:title" content="Event sourcing | Cloudstate Documentation" />
 
 <meta property="og:type" content="website" />
 
 <meta name="generator" content="Antora 2.3.3">
 
-<link rel="canonical" href="https://cloudstate.io/docs/contribute/language-support.html">
-<meta property="og:url" content="https://cloudstate.io/docs/contribute/language-support.html" />
+<link rel="canonical" href="https://cloudstate.io/docs/dart/eventsourced.html">
+<meta property="og:url" content="https://cloudstate.io/docs/dart/eventsourced.html" />
 
 
 
@@ -194,25 +194,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="../dart/index.html">Implementing in Dart</a>
+    <a class="nav-link" href="index.html">Implementing in Dart</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dart/gettingstarted.html">Getting started</a>
+    <a class="nav-link" href="gettingstarted.html">Getting started</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="eventsourced.html">Event sourcing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dart/eventsourced.html">Event sourcing</a>
+    <a class="nav-link" href="crdt.html">Conflict-free Replicated Data Types</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dart/crdt.html">Conflict-free Replicated Data Types</a>
+    <a class="nav-link" href="actions.html">Actions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dart/actions.html">Actions</a>
+    <a class="nav-link" href="examples.html">Examples</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dart/examples.html">Examples</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dart/serialization.html">Serialization</a>
+    <a class="nav-link" href="serialization.html">Serialization</a>
   </li>
 </ul>
   </li>
@@ -429,31 +429,31 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <a class="nav-link" href="index.html">Contributing to the project</a>
+    <a class="nav-link" href="../contribute/index.html">Contributing to the project</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="architecture.html">Architecture</a>
+    <a class="nav-link" href="../contribute/architecture.html">Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started.html">Getting started</a>
+    <a class="nav-link" href="../contribute/getting-started.html">Getting started</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="build-native.html">Building native images</a>
+    <a class="nav-link" href="../contribute/build-native.html">Building native images</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="serialization.html">Serialization conventions</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="language-support.html">Language support</a>
+    <a class="nav-link" href="../contribute/serialization.html">Serialization conventions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="knative-integration.html">Knative integration</a>
+    <a class="nav-link" href="../contribute/language-support.html">Language support</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="graalvm-integration.html">GraalVM integration</a>
+    <a class="nav-link" href="../contribute/knative-integration.html">Knative integration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="testing.html">Testing</a>
+    <a class="nav-link" href="../contribute/graalvm-integration.html">GraalVM integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contribute/testing.html">Testing</a>
   </li>
 </ul>
   </li>
@@ -486,14 +486,14 @@
   <button class="navigation-toggle"></button>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Contributing to the project</a></li>
-    <li class="crumb"><a href="language-support.html">Language support</a></li>
+    <li class="crumb"><a href="index.html">Implementing in Dart</a></li>
+    <li class="crumb"><a href="eventsourced.html">Event sourcing</a></li>
   </ul>
 </nav>
 </div>
     <div class="col-content">
 <article id="page-content" class="doc">
-			<h1>Language support</h1>
+			<h1>Event sourcing</h1>
 
 		<fieldset class="supergroup-switch">
 
@@ -503,158 +503,416 @@
 		<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloudstate is a polyglot platform for developers.
-This is achieved by having a gRPC based protocol between the Proxy and the User function. Since every language wants to be able to offer a language-idiomatic Application Programming Interface (API) Cloudstate offers Support Libraries for the following languages:</p>
+<p>This page documents how to implement Cloudstate event sourced entities in Dart.
+For information on what Cloudstate event sourced entities are, please read the general <a href="../concepts/eventsourced.html" class="page">Event sourcing</a> documentation first.</p>
+</div>
+<div class="paragraph">
+<p>An event sourced entity can be created by annotating it with the <code>@EventSourcedEntity()</code> annotation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">@EventSourcedEntity()
+class ShoppingCartEntity {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@EventSourcedEntity</code> annotation has two parameters that can be used:</p>
+</div>
+<div class="paragraph">
+<p>The <code>persistenceId</code> is used to namespace events in the journal, useful for when you share the same database between multiple entities.
+It defaults to the simple name for the entity class (in this case, <code>ShoppingCartEntity</code>), it&#8217;s good practice to select one explicitly, this means your database isn&#8217;t dependent on classnames in your code.
+The <code>snapshotEvery</code> parameter controls how often snapshots are taken, so that the entity doesn&#8217;t need to be recovered from the whole journal each time it&#8217;s loaded.
+If left unset, it defaults to 100.
+Setting it to a negative number will result in snapshots never being taken.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="current-language-support-libraries"><a class="anchor" href="#current-language-support-libraries"></a>Current language support libraries</h2>
+<h2 id="persistence-types-and-serialization"><a class="anchor" href="#persistence-types-and-serialization"></a>Persistence types and serialization</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Java</p>
-</li>
-<li>
-<p>JavaScript</p>
-</li>
-<li>
-<p>Go</p>
-</li>
-<li>
-<p>Kotlin</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted.
+The most straight forward way to persist events and snapshots is to use protobufs.
+Cloudstate will automatically detect if an emitted event is a protobuf, and serialize it as such.
+For other serialization options, including JSON, see <a href="serialization.html" class="page">Serialization</a>.</p>
+</div>
+<div class="paragraph">
+<p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your services protobuf messages, rather, you should create new messages, even if they are identical to the services.
+While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the services public interface to evolve independently from its data storage format, which should be private.</p>
+</div>
+<div class="paragraph">
+<p>For our shopping cart example, we&#8217;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my applications domain objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">syntax = "proto3";
+
+package example.shoppingcart.domain;
+
+option java_package = "com.example";
+
+message LineItem {
+    string productId = 1;
+    string name = 2;
+    int32 quantity = 3;
+}
+
+message ItemAdded {
+    LineItem item = 1;
+}
+
+message ItemRemoved {
+    string productId = 1;
+}
+
+message CheckedOut {}
+
+message Cart {
+    repeated LineItem items = 1;
+    bool checkedout = 2;
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating"><a class="anchor" href="#creating"></a>Creating language support libraries</h2>
+<h2 id="state"><a class="anchor" href="#state"></a>State</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to implement a support library for a language, the Cloudstate protocol needs to be implemented as a gRPC server which is started when a Stateful Service is started. This gRPC server will then relay state and commands to the underlying User function.</p>
+<p>Each entity should store its state locally in a mutable variable, either a mutable field or a multiple structure such as a collection.
+For our shopping cart, the state is a map of product ids to products, so we&#8217;ll create a map to contain that:</p>
 </div>
-<div class="paragraph">
-<p>To obtain the necessary Cloudstate Protobuf descriptors that need to be implemented, your build can be set up to fetch the following compressed archives and extract the contents. The archives are available from version <code>v0.6.0</code> and forwards.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The Cloudstate protocols</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code><a href="https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-protocols.zip" class="bare">https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-protocols.zip</a></code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The Cloudstate TCK protocols</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code><a href="https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-tck-protocols.zip" class="bare">https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-tck-protocols.zip</a></code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>It is also possible to take a look at the various protobuf messages available in the <a href="https://github.com/cloudstateio/cloudstate/tree/master/protocols">project&#8217;s <code>protocols</code> folder</a>. In this folder, you will see four sub-folders divided as follows:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>example</code> is for implementing the example application, which is also used by the TCK for third-party language (and proxy implementation) validation.</p>
-</li>
-<li>
-<p><code>frontend</code> is what is used by developers of services when they define their proto interfaces. The <code>cloudstate</code> subfolder in particular contains the definition of two protobuf options:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>.cloudstate.entity_key</code>: used to indicate the String to be used as an entity key in a given protobuf object.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Example of an Event where the entity id is defined</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">message PongSent {
-    string id = 1 [(.cloudstate.entity_key) = true];
-        int32 sequence_number = 2;
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">final Map&lt;String, Shoppingcart.LineItem&gt; _cart = {};</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="constructing"><a class="anchor" href="#constructing"></a>Constructing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The context available for injection into the constructor is a <code>EventSourcedEntityCreationContext</code>.
+While you don&#8217;t necessarily need to define a constructor, you can define one and have that context injected in.
+The constructor below shows having the entity id injected:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">ShoppingCartEntity.create(@EntityId() String entityId, Context context) {
+  this.entityId = entityId;
+  this.context = context;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Constructors can be simple or they can be named constructors. The most important thing is that there can only be one for each class of entity.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="handling-commands"><a class="anchor" href="#handling-commands"></a>Handling commands</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Command handlers can be declared by annotating a method with <code>@EventSourcedCommandHandler()</code>.
+They take a context class of type <code>CommandContext</code>.</p>
+</div>
+<div class="paragraph">
+<p>By default, the name of the command that the method handles will be the name of the method with the first letter capitalized.
+So, a method called <code>getCart</code> will handle gRPC service call command named <code>GetCart</code>.
+This can be overridden by setting the <code>name</code> parameter on the <code>@CommandHandler</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>The command handler also can take the gRPC service call input type as a parameter, to receive the command message.
+This is optional, sometimes it&#8217;s not needed, for example, our <code>GetCart</code> service call doesn&#8217;t need any information from the message, since it&#8217;s just returning the current state as is.
+Meanwhile, the <code>AddItem</code> service call does need information from the message, since it needs to know the product id, description and quantity to add to the cart.</p>
+</div>
+<div class="paragraph">
+<p>The return type of the command handler must be the output type for the gRPC service call, this will be sent as the reply.</p>
+</div>
+<div class="paragraph">
+<p>The following shows the implementation of the <code>GetCart</code> command handler.
+This command handler is a read-only command handler, it doesn&#8217;t emit any events, it just returns some state:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">@EventSourcedCommandHandler()
+Shoppingcart.Cart getCart() {
+    return Shoppingcart.Cart.create()..items.addAll(_cart.values);
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="emitting-events"><a class="anchor" href="#emitting-events"></a>Emitting events</h3>
+<div class="paragraph">
+<p>Commands that modify the state may do so by emitting events.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The <strong>only</strong> way a command handler may modify its state is by emitting an event. Any modifications made directly to the state from the command handler will not be persisted, and when the entity is passivated and next reloaded, those modifications will not be present.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A command handler may emit an event by taking in a <code>CommandContext</code> parameter, and invoking the <code>emit</code> method on it.
+Invoking <code>emit</code> will immediately invoke the associated event handler for that event - this both validates that the event can be applied to the current state, as well as updates the state so that subsequent processing in the command handler can use it.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of a command handler that emits an event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">@EventSourcedCommandHandler()
+Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+    if (item.quantity &lt;= 0) {
+        ctx.fail('Cannot add negative quantity of to item ${item.productId}');
+    }
+
+    var lineIem = Domain.LineItem.create()
+        ..productId = item.productId
+        ..name = item.name
+        ..quantity = item.quantity;
+
+    ctx.emit(Domain.ItemAdded.create()..item = lineIem);
+    return Empty.getDefault();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command handler also validates the command, ensuring the quantity items added is greater than zero.
+Invoking <code>ctx.fail</code> fails the command - this method throws so there&#8217;s no need to explicitly throw an exception.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="handling-events"><a class="anchor" href="#handling-events"></a>Handling events</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Event handlers are invoked at two points, when restoring entities from the journal, before any commands are handled, and each time a new event is emitted.
+An event handlers responsibility is to update the state of the entity according to the event.
+Event handlers are the only place where its safe to mutate the state of the entity at all.</p>
+</div>
+<div class="paragraph">
+<p>Event handlers are declared by annotating a method with <code>@EventHandler()</code>.
+They take a context class of type <code>EventContext</code>.</p>
+</div>
+<div class="paragraph">
+<p>Event handlers are differentiated by the type of event they handle.
+By default, the type of event an event handler handles will be determined by looking for a single non context parameter that the event handler takes.
+If for any reason this needs to be overridden, or if the event handler method doesn&#8217;t take any non context parameter (because the event type may be all that needs to be known to handle the event), the type of event the handler handles can be specified using the <code>eventClass</code> parameter on the <code>@EventHandler()</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example event handler for the <code>ItemAdded</code> event.
+A utility method, <code>convert</code> is also defined to assist it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">@EventHandler()
+void itemAdded(Domain.ItemAdded itemAdded) {
+    var item = _cart[itemAdded.item.productId];
+    if (item == null) {
+        item = convert(itemAdded.item);
+    } else {
+        item = item..quantity = item.quantity + itemAdded.item.quantity;
+    }
+    _cart[item.productId] = item;
+}
+
+Shoppingcart.LineItem convert(Domain.LineItem item) {
+    return Shoppingcart.LineItem.create()
+        ..productId = item.productId
+        ..name = item.name
+        ..quantity = item.quantity;
 }</code></pre>
 </div>
 </div>
 </div>
 </div>
-</li>
-<li>
-<p><code>.cloudstate.eventing</code>: used to indicate the name of the topic/queue to use for data input or output.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Example of topic/queue definition for the function output</div>
+<div class="sect1">
+<h2 id="producing-and-handling-snapshots"><a class="anchor" href="#producing-and-handling-snapshots"></a>Producing and handling snapshots</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Snapshots are an important optimisation for event sourced entities that may contain many events, to ensure that they can be loaded quickly even when they have very long journals.
+To produce a snapshot, a method annotated with <code>@Snapshot()</code> must be declared.
+It takes a context class of type <code>SnapshotContext</code>, and must return a snapshot of the current state in serializable form.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">rpc Ping(PongSent) returns (PingSent) {
-    option (.cloudstate.eventing) =
-              out: "pings",
-  };
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">@Snapshot()
+Domain.Cart snapshot() {
+    return Domain.Cart.create()
+        ..items.addAll(_cart.values.map((e) =&gt; convertShoppingItem(e)).toList());
+}
+
+Domain.LineItem convertShoppingItem(Shoppingcart.LineItem item) {
+    return Domain.LineItem.create()
+        ..productId = item.productId
+        ..name = item.name
+        ..quantity = item.quantity;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the entity is loaded again, the snapshot will first be loaded before any other events are received, and passed to a snapshot handler.
+Snapshot handlers are declare by annotating a method with <code>@SnapshotHandler()</code>, and it can take a context class of type <code>SnapshotContext</code>.</p>
+</div>
+<div class="paragraph">
+<p>Multiple snapshot handlers may be defined to handle multiple different types of snapshots, the type matching is done in the same way as for events.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">@SnapshotHandler()
+void handleSnapshot(Domain.Cart cart) {
+    _cart.clear();
+    for (var item in cart.items) {
+        _cart[item.productId] = convert(item);
+    }
 }</code></pre>
 </div>
 </div>
 </div>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Example of topic/queue definition for the function input</div>
+<div class="sect1">
+<h2 id="registering-the-entity"><a class="anchor" href="#registering-the-entity"></a>Registering the entity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you&#8217;ve created your entity, you can register it with the <code>CloudState</code> server, by invoking the <code>registerEventSourcedEntity</code> method.
+In addition to passing the protobuf qualified package name, and your entity class.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">rpc SeenPing(PingSent) returns (google.protobuf.Empty) {
-    option (.cloudstate.eventing) = {
-      in: "pings",
-  };
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">import 'package:cloudstate/cloudstate.dart';
+import 'package:shopping_cart/src/eventsourced_entity.dart';
+
+void main() {
+    Cloudstate()
+        ..port = 8089
+        ..address = 'localhost'
+        ..registerEventSourcedEntity(
+            'com.example.shoppingcart.ShoppingCart', ShoppingCartEntity)
+        ..start();
 }</code></pre>
 </div>
 </div>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>protocol</code> is the protocol between the <a href="../concepts/glossary.html#proxy" class="page">proxy</a> and what we call language support, i.e. a bridge library which speaks with the proxy and exposes a native API for some programming language.</p>
-</li>
-<li>
-<p><code>proxy</code> contains the protocols which the <a href="../concepts/glossary.html#proxy" class="page">proxy</a> itself speaks with the outside world.</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>When implementing a <a href="../concepts/glossary.html#support-library" class="page">Support Library</a>, the implementation can be verified using the TCK. In order to run the TCK, one must create an implementation of the Shopping Cart application using the newly created support library to be verified.</p>
-</div>
-<div class="paragraph">
-<p>After that, the TCK <a href="https://github.com/cloudstateio/cloudstate/blob/master/tck/src/it/resources/application.conf">application.conf</a> needs to be modified with a new section to instruct what combination of Proxy implementation will be verified against which implementation of the Shopping Cart application.</p>
-</div>
-<div class="paragraph">
-<p>Then in order to run the TCK you need to instruct sbt to run the TCK, but make sure that you have built the Shopping Cart application first.</p>
+<p>The complete code for our entity class would look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh"># This means: "sbt please run the integration tests for the TCK project"
-sbt tck/it:test</code></pre>
+<pre class="highlightjs highlight"><code class="language-dart hljs" data-lang="dart">import 'package:cloudstate/cloudstate.dart';
+import 'generated/google/protobuf/empty.pb.dart';
+import 'generated/persistence/domain.pb.dart' as Domain;
+import 'generated/shoppingcart.pb.dart' as Shoppingcart;
+
+@EventSourcedEntity('ShoppingCart', 1)
+class ShoppingCartEntity {
+  final Map&lt;String, Shoppingcart.LineItem&gt; _cart = {};
+
+  String entityId;
+  Context context;
+
+  ShoppingCartEntity.create(@EntityId() String entityId, Context context) {
+    this.entityId = entityId;
+    this.context = context;
+  }
+
+  @Snapshot()
+  Domain.Cart snapshot() {
+    return Domain.Cart.create()
+      ..items.addAll(_cart.values.map((e) =&gt; convertShoppingItem(e)).toList());
+  }
+
+  @SnapshotHandler()
+  void handleSnapshot(Domain.Cart cart) {
+    _cart.clear();
+    for (var item in cart.items) {
+      _cart[item.productId] = convert(item);
+    }
+  }
+
+  @EventHandler()
+  void itemAdded(Domain.ItemAdded itemAdded) {
+    var item = _cart[itemAdded.item.productId];
+    if (item == null) {
+      item = convert(itemAdded.item);
+    } else {
+      item = item..quantity = item.quantity + itemAdded.item.quantity;
+    }
+    _cart[item.productId] = item;
+  }
+
+  @EventHandler()
+  void itemRemoved(Domain.ItemRemoved itemRemoved) {
+    _cart.remove(itemRemoved.productId);
+  }
+
+  @EventSourcedCommandHandler()
+  Shoppingcart.Cart getCart() {
+    return Shoppingcart.Cart.create()..items.addAll(_cart.values);
+  }
+
+  @EventSourcedCommandHandler()
+  Empty addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
+    if (item.quantity &lt;= 0) {
+      ctx.fail('Cannot add negative quantity of to item ${item.productId}');
+    }
+
+    var lineIem = Domain.LineItem.create()
+      ..productId = item.productId
+      ..name = item.name
+      ..quantity = item.quantity;
+
+    ctx.emit(Domain.ItemAdded.create()..item = lineIem);
+    return Empty.getDefault();
+  }
+
+  @EventSourcedCommandHandler()
+  Empty removeItem(Shoppingcart.RemoveLineItem item, CommandContext ctx) {
+    if (!_cart.containsKey(item.productId)) {
+      ctx.fail(
+          'Cannot remove item ${item.productId} because it is not in the cart.');
+    }
+    ctx.emit(Domain.ItemRemoved.create()..productId = item.productId);
+    return Empty.getDefault();
+  }
+
+  Shoppingcart.LineItem convert(Domain.LineItem item) {
+    return Shoppingcart.LineItem.create()
+      ..productId = item.productId
+      ..name = item.name
+      ..quantity = item.quantity;
+  }
+
+  Domain.LineItem convertShoppingItem(Shoppingcart.LineItem item) {
+    return Domain.LineItem.create()
+      ..productId = item.productId
+      ..name = item.name
+      ..quantity = item.quantity;
+  }
+}</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The output of that indicates if the combination of Proxy and User Support libraries yield the expected results.</p>
 </div>
 </div>
 </div>
 		<nav class="pagination">
-  <span class="prev"><a href="serialization.html">Serialization conventions</a></span>
-  <span class="next"><a href="knative-integration.html">Knative integration</a></span>
+  <span class="prev"><a href="gettingstarted.html">Getting started</a></span>
+  <span class="next"><a href="crdt.html">Conflict-free Replicated Data Types</a></span>
 </nav>
 </article>
 <aside class="toc sidebar">
@@ -663,7 +921,7 @@ sbt tck/it:test</code></pre>
     </div>
 <div class="main-footer">
   <div class="page-source">
-Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/cloudstate/edit/master/docs/src/modules/contribute/pages/language-support.adoc">edit this page</a> and contribute a pull request.
+Found an error in this documentation? Please feel free to <a href="https://github.com/cloudstateio/dart-support/edit/master/doc/src/modules/dart/pages/eventsourced.adoc">edit this page</a> and contribute a pull request.
 </div>
   <div class="footer-box">
     <footer class="footer">
