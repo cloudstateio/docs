@@ -531,7 +531,7 @@
 <h2 id="looking-up-service-call-references"><a class="anchor" href="#looking-up-service-call-references"></a>Looking up service call references</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To forward a command or emit an effect, a reference to the service call that will be invoked needs to be looked up. This can be done using the <a href="_attachments/api/io/cloudstate/javasupport/ServiceCallFactory.html">ServiceCallFactory</a> interface, which is accessible on any context object via the <a href="_attachments/api/io/cloudstate/javasupport/Context.html#serviceCallFactory--"><code>serviceCallFactory()</code></a> method.</p>
+<p>To forward a command or emit an effect, a reference to the service call that will be invoked needs to be looked up. This can be done using the <a href="_attachments/api/io/cloudstate/javasupport/ServiceCallFactory.html">ServiceCallFactory</a> interface, which is accessible on any context object via the <a href="_attachments/api/io/cloudstate/javasupport/Context.html#serviceCallFactory()"><code>serviceCallFactory()</code></a> method.</p>
 </div>
 <div class="paragraph">
 <p>For example, if a user function serves two entity types, a shopping cart, and a CRDT that tracks which items are currently in hot demand, it might want to invoke the <code>ItemAddedToCart</code> command on <code>example.shoppingcart.HotItems</code> as a side effect of the <code>AddItem</code> shopping cart command. This reference can be looked up like so:</p>
@@ -557,7 +557,7 @@ public ShoppingCartEntity(Context ctx) {
 <h2 id="forwarding-command"><a class="anchor" href="#forwarding-command"></a>Forwarding command</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>CommandContext</code> for each entity type implements <code>ClientActionContext</code> to allow forwarding a command by invoking <a href="_attachments/api/io/cloudstate/javasupport/ClientActionContext.html#forward-io.cloudstate.javasupport.ServiceCall-"><code>ClientActionContext.forward()</code></a>. For example, if the item being processed in the <code>addItem</code> command is a "hot" item, we can make the <code>HotItems</code> entity aware of that item by forwarding a command:</p>
+<p>The <code>CommandContext</code> for each entity type implements <code>ClientActionContext</code> to allow forwarding a command by invoking <a href="_attachments/api/io/cloudstate/javasupport/ClientActionContext.html#forward(io.cloudstate.javasupport.ServiceCall)"><code>ClientActionContext.forward()</code></a>. For example, if the item being processed in the <code>addItem</code> command is a "hot" item, we can make the <code>HotItems</code> entity aware of that item by forwarding a command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -581,7 +581,7 @@ public void addItem(Shoppingcart.AddLineItem item, CommandContext ctx) {
 <h2 id="emitting-an-effect"><a class="anchor" href="#emitting-an-effect"></a>Emitting an effect</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>CommandContext</code> for each entity type implements <code>EffectContext</code> to allow emitting an effect by invoking <a href="_attachments/api/io/cloudstate/javasupport/EffectContext.html#effect-io.cloudstate.javasupport.ServiceCall-boolean-"><code>EffectContext.effect()</code></a>. For example, upon successful completion of the <code>addItem</code> command by <code>ShoppingCartEntity</code>, if we also want to emit an effect on the <code>HotItems</code> entity, we would invoke the effectful service call as:</p>
+<p>The <code>CommandContext</code> for each entity type implements <code>EffectContext</code> to allow emitting an effect by invoking <a href="_attachments/api/io/cloudstate/javasupport/EffectContext.html#effect(io.cloudstate.javasupport.ServiceCall,boolean)"><code>EffectContext.effect()</code></a>. For example, upon successful completion of the <code>addItem</code> command by <code>ShoppingCartEntity</code>, if we also want to emit an effect on the <code>HotItems</code> entity, we would invoke the effectful service call as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
