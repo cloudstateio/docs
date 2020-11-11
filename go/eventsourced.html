@@ -527,45 +527,41 @@
 For information on what Cloudstate event sourced entities are, please read the general <a href="../concepts/eventsourced.html" class="page">Event sourcing</a> documentation first.</p>
 </div>
 <div class="paragraph">
-<p>An event sourced entity can be created by embedding the <code>cloudstate.EventEmitter</code> type and also implementing the <code>cloudstate.Entity</code> interface.</p>
+<p>An event sourced entity can be created by implementing the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a> interface.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type ShoppingCart struct {
-	// our domain object
-	cart []*domain.LineItem
-	// as an Emitter we can emit events
-	cloudstate.EventEmitter
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">// An EntityHandler implements methods to handle commands and events.
+type EntityHandler interface {
+	// HandleCommand is the code that handles a command. It
+	// may validate the command using the current state, and
+	// may emit events as part of its processing. A command
+	// handler must not update the state of the entity directly,
+	// only indirectly by emitting events. If a command handler
+	// does update the state, then when the entity is passivated
+	// (removed from memory), those updates will be lost.
+	HandleCommand(ctx *Context, name string, cmd proto.Message) (reply proto.Message, err error)
+	// HandleEvent is the only piece of code that is allowed
+	// to update the state of the entity. It receives events,
+	// and, according to the event, updates the state.
+	HandleEvent(ctx *Context, event interface{}) error
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then by composing the Cloudstate entity with a <code>cloudstate.EventSourcedEntity</code> and register it with <code>CloudState.Register()</code>, your entity gets configured to be an event sourced entity and handled by the Cloudstate instance from now on.</p>
+<p>Then register that entity with <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/cloudstate#RegisterEventSourced"><code>cloudstate.CloudState.RegisterEventSourced</code></a>, your entity gets configured to be an event sourced entity and handled by the Cloudstate instance from now on.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type EventSourcedEntity struct {
-	// ServiceName is the fully qualified name of the service that implements this entities interface.
-	// Setting it is mandatory.
-	ServiceName string
-	// PersistenceID is used to namespace events in the journal, useful for
-	// when you share the same database between multiple entities. It defaults to
-	// the simple name for the entity type.
-	// It’s good practice to select one explicitly, this means your database
-	// isn’t depend on type names in your code.
-	// Setting it is mandatory.
-	PersistenceID string
-	// The snapshotEvery parameter controls how often snapshots are taken,
-	// so that the entity doesn't need to be recovered from the whole journal
-	// each time it’s loaded. If left unset, it defaults to 100.
-	// Setting it to a negative number will result in snapshots never being taken.
-	SnapshotEvery int64
-
-	// EntityFactory is a factory method which generates a new Entity.
-	EntityFunc func() Entity
-
-	// internal
-	registerOnce sync.Once
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">err = server.RegisterEventSourced(&amp;eventsourced.Entity{
+	ServiceName:   "com.example.shoppingcart.ShoppingCart",
+	PersistenceID: "ShoppingCart",
+	EntityFunc:    shoppingcart.NewShoppingCart,
+}, protocol.DescriptorConfig{
+	Service: "shoppingcart.proto",
+}.AddDomainDescriptor("domain.proto"))
+if err != nil {
+	log.Fatalf("CloudState failed to register entity: %s", err)
 }</code></pre>
 </div>
 </div>
@@ -584,7 +580,16 @@ If left unset, it defaults to 100.
 Setting it to a negative number will result in snapshots never being taken.</p>
 </div>
 <div class="paragraph">
-<p>The <code>EntityFunc</code> is a factory method which generates a new Entity whenever Cloudstate has to initialize a new entity.</p>
+<p>The <code>EntityFunc</code> is a factory function which generates a new entity whenever Cloudstate has to initialize one.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func NewShoppingCart(eventsourced.EntityID) eventsourced.EntityHandler {
+	return &amp;ShoppingCart{
+		cart: make([]*domain.LineItem, 0),
+	}
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -593,25 +598,24 @@ Setting it to a negative number will result in snapshots never being taken.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Event sourced entities persist events and snapshots, and these need to be serialized when persisted.
-The most straightforward way to persist events and snapshots is to use protobufs.
+The most straightforward way to persist events and snapshots is to use protocol buffers (protobuf).
 Cloudstate will automatically detect if an emitted event is a protobuf, and serialize it as such.
 For other serialization options, including JSON, see <a href="../contribute/serialization.html" class="page">Serialization</a>.</p>
 </div>
 <div class="paragraph">
 <p>While protobufs are the recommended format for persisting events, it is recommended that you do not persist your service&#8217;s protobuf messages, rather, you should create new messages, even if they are identical to the service&#8217;s.
-While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the service&#8217;s public interface to evolve independently from its data storage format, which should be private.</p>
+While this may introduce some overhead in needing to convert from one type to the other, the reason for doing this is that it will allow the service&#8217;s public interface to evolve independently of its data storage format, which should be private.</p>
 </div>
 <div class="paragraph">
-<p>For our shopping cart example, we&#8217;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are my application&#8217;s domain objects:</p>
+<p>For our shopping cart example, we&#8217;ll create a new file called <code>domain.proto</code>, the name domain is selected to indicate that these are our application&#8217;s domain objects:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">// These are the messages that get persisted - the events, plus the current state (Cart) for snapshots.
-syntax = "proto3";
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">syntax = "proto3";
 
 package com.example.shoppingcart.persistence;
 
-option go_package = "persistence";
+option go_package = "github.com/cloudstateio/go-support/example/shoppingcart/persistence;persistence";
 
 message LineItem {
     string productId = 1;
@@ -642,11 +646,14 @@ message Cart {
 <div class="sectionbody">
 <div class="paragraph">
 <p>Each entity should store its state locally in a mutable variable, either a mutable field or a multiple structure such as an array type or slice.
-For our shopping cart, the state is a slice of products, so we&#8217;ll create a slice of LineItems to contain that:</p>
+For our shopping cart, the state is a slice of products, so we&#8217;ll create a slice of <code>LineItems</code> to contain that:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">cart []*domain.LineItem</code></pre>
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type ShoppingCart struct {
+	// our domain object
+	cart []*domain.LineItem
+}</code></pre>
 </div>
 </div>
 </div>
@@ -660,27 +667,23 @@ For this, an entity has to provide a factory function, <code>EntityFunc</code>, 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">err = server.RegisterEventSourcedEntity(
-	&amp;cloudstate.EventSourcedEntity{
-		ServiceName:   "com.example.shoppingcart.ShoppingCart",
-		PersistenceID: "ShoppingCart",
-		EntityFunc:    NewShoppingCart,
-	},
-	cloudstate.DescriptorConfig{
-		Service: "shoppingcart/shoppingcart.proto",
-	}.AddDomainDescriptor("domain.proto"),
-)</code></pre>
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">err = server.RegisterEventSourced(&amp;eventsourced.Entity{
+	ServiceName:   "com.example.shoppingcart.ShoppingCart",
+	PersistenceID: "ShoppingCart",
+	EntityFunc:    shoppingcart.NewShoppingCart,
+}, protocol.DescriptorConfig{
+	Service: "shoppingcart.proto",
+}.AddDomainDescriptor("domain.proto"))</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The entity factory function returns a <code>cloudstate.Entity</code> which is composed of two interfaces to handle commands and events.</p>
+<p>The entity factory function returns a <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a> which handles commands and events.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func NewShoppingCart() cloudstate.Entity {
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func NewShoppingCart(eventsourced.EntityID) eventsourced.EntityHandler {
 	return &amp;ShoppingCart{
-		cart:         make([]*domain.LineItem, 0),
-		EventEmitter: cloudstate.NewEmitter(), // TODO: the EventEmitter could be provided by the event sourced handler
+		cart: make([]*domain.LineItem, 0),
 	}
 }</code></pre>
 </div>
@@ -691,34 +694,29 @@ For this, an entity has to provide a factory function, <code>EntityFunc</code>, 
 <h2 id="handling-commands"><a class="anchor" href="#handling-commands"></a>Handling commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An event sourced entity implements the composed <code>cloudstate.Entity</code> interface.
-<code>cloudstate.Entity</code> embeds the <code>cloudstate.EventHandler</code> interface and therefore entities implementing it get commands from Cloudstate through the event handler&#8217;s <code>HandleCommand</code> method.</p>
-</div>
-<div class="paragraph">
-<p>The command types received by an event sourced entity are declared by the gRPC Server interface which is generated from the protobuf definitions.
-The Cloudstate Go Support library together with the registered <code>cloudstate.EventSourcedEntity</code> is then able to dispatch commands it gets from the Cloudstate proxy to the event sourced entity.</p>
+<p>An event sourced entity implements the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a> interface and there for command handling the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#HandleCommand"><code>HandleCommand</code></a> method.
+The command types received by an event sourced entity are declared by the gRPC Server interface which is generated from the protobuf definitions.
+The Cloudstate Go Support library together with the registered <code>eventsourced.Entity</code> is then able to dispatch commands it gets from the Cloudstate proxy.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) HandleCommand(ctx context.Context, command interface{}) (handled bool, reply interface{}, err error) {
-	switch cmd := command.(type) {
-	case *shoppingcart.GetShoppingCart:
-		reply, err := sc.GetCart(ctx, cmd)
-		return true, reply, err
-	case *shoppingcart.RemoveLineItem:
-		reply, err := sc.RemoveItem(ctx, cmd)
-		return true, reply, err
-	case *shoppingcart.AddLineItem:
-		reply, err := sc.AddItem(ctx, cmd)
-		return true, reply, err
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) HandleCommand(ctx *eventsourced.Context, name string, cmd proto.Message) (proto.Message, error) {
+	switch c := cmd.(type) {
+	case *GetShoppingCart:
+		return sc.GetCart(ctx, c)
+	case *RemoveLineItem:
+		return sc.RemoveItem(ctx, c)
+	case *AddLineItem:
+		return sc.AddItem(ctx, c)
 	default:
-		return false, reply, err
+		return nil, nil
 	}
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The return type of the command handler is by definition of the service interface, the output type for the gRPC service call, this will be sent as the reply.</p>
+<p>The return type of the command handler is by definition of the service interface, the output type for the gRPC service call.
+This will be sent as the reply.</p>
 </div>
 <div class="paragraph">
 <p>The following shows the implementation of the <code>GetCart</code> command handler.
@@ -726,10 +724,10 @@ This command handler is a read-only command handler, it doesn&#8217;t emit any e
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) GetCart(_ context.Context, _ *shoppingcart.GetShoppingCart) (*shoppingcart.Cart, error) {
-	cart := &amp;shoppingcart.Cart{}
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) GetCart(*eventsourced.Context, *GetShoppingCart) (*Cart, error) {
+	cart := &amp;Cart{}
 	for _, item := range sc.cart {
-		cart.Items = append(cart.Items, &amp;shoppingcart.LineItem{
+		cart.Items = append(cart.Items, &amp;LineItem{
 			ProductId: item.ProductId,
 			Name:      item.Name,
 			Quantity:  item.Quantity,
@@ -758,19 +756,19 @@ Any modifications made directly to the state from the command handler will not b
 </table>
 </div>
 <div class="paragraph">
-<p>A command handler may emit an event by using the embedded <code>cloudstate.EventEmitter</code> and invoking the <code>Emit</code> method on it.
-Calling <code>Emit</code> will immediately invoke the associated event handler for that event - this both validates that the event can be applied to the current state, as well as updates the state so that subsequent processing in the command handler can use it.</p>
+<p>A command handler may emit an event by using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Context"><code>eventsourced.Context</code></a> and invoking the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Emit"><code>Emit</code></a> method on it.
+Calling <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Emit"><code>Emit</code></a> will immediately invoke the associated event handler for that event - this both validates that the event can be applied to the current state, as well as updates the state so that subsequent processing in the command handler can use it.</p>
 </div>
 <div class="paragraph">
 <p>Here&#8217;s an example of a command handler that emits an event:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) AddItem(_ context.Context, li *shoppingcart.AddLineItem) (*empty.Empty, error) {
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) AddItem(ctx *eventsourced.Context, li *AddLineItem) (*empty.Empty, error) {
 	if li.GetQuantity() &lt;= 0 {
-		return nil, fmt.Errorf("cannot add negative quantity of to item %s", li.GetProductId())
+		return nil, fmt.Errorf("cannot add negative quantity of to item %q", li.GetProductId())
 	}
-	sc.Emit(&amp;domain.ItemAdded{
+	ctx.Emit(&amp;domain.ItemAdded{
 		Item: &amp;domain.LineItem{
 			ProductId: li.ProductId,
 			Name:      li.Name,
@@ -782,7 +780,7 @@ Calling <code>Emit</code> will immediately invoke the associated event handler f
 </div>
 <div class="paragraph">
 <p>This command handler also validates the command, ensuring the quantity of items added is greater than zero.
-Returning an <code>error</code> fails the command and the support library takes care of signaling that back to the requesting proxy as a <code>Failure</code> reply.</p>
+Returning an <code>error</code> fails the command and the support library takes care of signaling that back to the requesting proxy as a <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/protocol#Failure"><code>protocol.Failure</code></a> reply.</p>
 </div>
 </div>
 </div>
@@ -796,28 +794,19 @@ An event handler&#8217;s responsibility is to update the state of the entity acc
 Event handlers are the only place where it&#8217;s safe to mutate the state of the entity at all.</p>
 </div>
 <div class="paragraph">
-<p>Event handlers are declared by implementing the <code>cloudstate.EventHandler</code> interface.</p>
+<p>Every event sourced entity implements the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a>s interface <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#HandleEvent"><code>HandleEvent</code></a> method.
+Events emitted by command handlers get dispatched to the implemented event handler which then decides how to proceed with the event.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type EventHandler interface {
-	HandleEvent(ctx context.Context, event interface{}) (handled bool, err error)
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Events emitted by command handlers get dispatched to the implemented event handler which then decides how to proceed with the event.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) HandleEvent(_ context.Context, event interface{}) (handled bool, err error) {
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) HandleEvent(ctx *eventsourced.Context, event interface{}) error {
 	switch e := event.(type) {
 	case *domain.ItemAdded:
-		return true, sc.ItemAdded(e)
+		return sc.ItemAdded(e)
 	case *domain.ItemRemoved:
-		return true, sc.ItemRemoved(e)
+		return sc.ItemRemoved(e)
 	default:
-		return false, nil
+		return nil
 	}
 }</code></pre>
 </div>
@@ -827,16 +816,19 @@ Event handlers are the only place where it&#8217;s safe to mutate the state of t
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) ItemAdded(added *domain.ItemAdded) error { // TODO: enable handling for values
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) ItemAdded(added *domain.ItemAdded) error {
+	if added.Item.GetName() == "FAIL" {
+		return errors.New("boom: forced an unexpected error")
+	}
 	if item, _ := sc.find(added.Item.ProductId); item != nil {
 		item.Quantity += added.Item.Quantity
-	} else {
-		sc.cart = append(sc.cart, &amp;domain.LineItem{
-			ProductId: added.Item.ProductId,
-			Name:      added.Item.Name,
-			Quantity:  added.Item.Quantity,
-		})
+		return nil
 	}
+	sc.cart = append(sc.cart, &amp;domain.LineItem{
+		ProductId: added.Item.ProductId,
+		Name:      added.Item.Name,
+		Quantity:  added.Item.Quantity,
+	})
 	return nil
 }</code></pre>
 </div>
@@ -848,50 +840,50 @@ Event handlers are the only place where it&#8217;s safe to mutate the state of t
 <div class="sectionbody">
 <div class="paragraph">
 <p>Snapshots are an important optimisation for event sourced entities that may contain many events, to ensure that they can be loaded quickly even when they have very long journals.
-To produce a snapshot, the <code>cloudstate.Snapshotter</code> interface has to be implemented that must return a snapshot of the current state in serializable form.</p>
+To produce a snapshot, the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Snapshooter"><code>eventsourced.Snapshooter</code></a> interface has to be implemented that must return a snapshot of the current state in serializable form.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type Snapshotter interface {
-	Snapshot() (snapshot interface{}, err error)
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">// A Snapshooter enables eventsourced snapshots to be taken and as well
+// handling snapshots provided.
+type Snapshooter interface {
+	// Snapshot is a recording of the entire current state of an entity,
+	// persisted periodically (eg, every 100 events), as an optimization.
+	// With snapshots, when the entity is reloaded from the journal, the
+	// entire journal doesn't need to be replayed, just the changes since
+	// the last snapshot.
+	Snapshot(ctx *Context) (snapshot interface{}, err error)
+	// HandleSnapshot is used to apply snapshots provided by the Cloudstate
+	// proxy.
+	HandleSnapshot(ctx *Context, snapshot interface{}) error
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is an example of the TCK shopping cart example creating snapshots for the current <code>domain.Cart</code> state of the shopping cart.</p>
+<p>Here is an example of the shopping cart example creating snapshots for the current <code>domain.Cart</code> state of the shopping cart.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) Snapshot() (snapshot interface{}, err error) {
-	return domain.Cart{
-		Items: append(make([]*domain.LineItem, len(sc.cart)), sc.cart...),
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) Snapshot(*eventsourced.Context) (snapshot interface{}, err error) {
+	return &amp;domain.Cart{
+		Items: append(make([]*domain.LineItem, 0, len(sc.cart)), sc.cart...),
 	}, nil
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When the entity is loaded again, the snapshot will first be loaded before any other events are received, and passed to a snapshot handler.
-Snapshot handlers are declared by implementing the <code>cloudstate.SnapshotHandler</code> interface.</p>
+<p>When the entity is loaded again, the snapshot will first be loaded before any other events are received, and passed to a snapshot handler implementing the <code>eventsourced.Snapshooter`s `HandleSnapshot</code> method.
+A snapshot handler then can type-switch over types the corresponding <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Snapshooter"><code>eventsourced.Snapshooter</code></a> interface has implemented.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type SnapshotHandler interface {
-	HandleSnapshot(snapshot interface{}) (handled bool, err error)
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A snapshot handler then can type-switch over types the corresponding <code>cloudstate.Snapshotter</code> interface has implemented.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) HandleSnapshot(snapshot interface{}) (handled bool, err error) {
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (sc *ShoppingCart) HandleSnapshot(ctx *eventsourced.Context, snapshot interface{}) error {
 	switch value := snapshot.(type) {
-	case domain.Cart:
+	case *domain.Cart:
 		sc.cart = append(sc.cart[:0], value.Items...)
-		return true, nil
+		return nil
 	default:
-		return false, nil
+		return fmt.Errorf("unknown snapshot type: %v", value)
 	}
 }</code></pre>
 </div>
@@ -902,7 +894,7 @@ Snapshot handlers are declared by implementing the <code>cloudstate.SnapshotHand
 <h2 id="registering-the-entity"><a class="anchor" href="#registering-the-entity"></a>Registering the entity</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Once you&#8217;ve created your entity, you can register it with the <code>cloudstate.Cloudstate</code> server, by invoking the <code>Register</code> method of a Cloudstate instance.
+<p>Once you&#8217;ve created your entity, you can register it with the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate#CloudState"><code>cloudstate.CloudState</code></a> server, by invoking the <code>RegisterEventSourced</code> method of a CloudState instance.
 In addition to passing your entity type and service name, you also need to pass any descriptors that you use for persisting events, for example, the <code>domain.proto</code> descriptor.</p>
 </div>
 <div class="paragraph">
@@ -911,16 +903,13 @@ In addition to passing your entity type and service name, you also need to pass 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">err = server.RegisterEventSourcedEntity(
-	&amp;cloudstate.EventSourcedEntity{
-		ServiceName:   "com.example.shoppingcart.ShoppingCart",
-		PersistenceID: "ShoppingCart",
-		EntityFunc:    NewShoppingCart,
-	},
-	cloudstate.DescriptorConfig{
-		Service: "shoppingcart/shoppingcart.proto",
-	}.AddDomainDescriptor("domain.proto"),
-)</code></pre>
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">err = server.RegisterEventSourced(&amp;eventsourced.Entity{
+	ServiceName:   "com.example.shoppingcart.ShoppingCart",
+	PersistenceID: "ShoppingCart",
+	EntityFunc:    shoppingcart.NewShoppingCart,
+}, protocol.DescriptorConfig{
+	Service: "shoppingcart.proto",
+}.AddDomainDescriptor("domain.proto"))</code></pre>
 </div>
 </div>
 </div>

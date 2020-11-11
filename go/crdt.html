@@ -520,21 +520,322 @@
 
 		</fieldset>
 
-		<div class="ulist">
-<ul>
-<li>
-<p>Explain how to use the CRDT API</p>
-</li>
-<li>
-<p>Explain how to use CrdtFactory and where it comes from</p>
-</li>
-<li>
-<p>Explain how to handle streamed calls</p>
-</li>
-<li>
-<p>Explain the APIs for each different CRDT</p>
-</li>
-</ul>
+		<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page documents how to implement Cloudstate CRDT entities in Go.
+For information on what Cloudstate CRDT entities are, please read the general <a href="../concepts/crdts.html" class="page">Conflict-free Replicated Data Type</a> documentation first.</p>
+</div>
+<div class="paragraph">
+<p>A CRDT entity can be created by implementing the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler"><code>crdt.EntityHandler</code></a> interface and registering an entity with a Cloudstate instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type EntityHandler interface {
+	HandleCommand(ctx *CommandContext, name string, msg proto.Message) (*any.Any, error)
+	Default(ctx *Context) (CRDT, error)
+	Set(ctx *Context, state CRDT) error
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="accessing-and-creating-an-entitys-crdt"><a class="anchor" href="#accessing-and-creating-an-entitys-crdt"></a>Accessing and creating an entity&#8217;s CRDT</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each CRDT entity manages one root CRDT. That CRDT will either be supplied to the entity by the proxy when it is started through <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler.Set"><code>crdt.EntityHandler.Set</code></a>, or, if no CRDT exists for the entity when it is started, it has to be created by the entity using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler.Default"><code>crdt.EntityHandler.Default</code></a> factory method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (s *ShoppingCart) Default(ctx *crdt.Context) (crdt.CRDT, error) {
+	return crdt.NewORMap(), nil
+}
+
+func (s *ShoppingCart) Set(ctx *crdt.Context, state crdt.CRDT) error {
+	s.items = state.(*crdt.ORMap)
+	return nil
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The state, the CRDT, supplied with <code>Set</code> by the Cloudstate instance will never be of a different type than what <code>Default</code> returns for a CRDT entity.
+This is because of their symmetric use for the same entities instance and version.
+In this regard, a type assertion check is not necessary.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="handling-commands"><a class="anchor" href="#handling-commands"></a>Handling commands</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Command handlers are implemented with the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler.HandleCommand"><code>crdt.EntityHandler.HandleCommand</code></a> method.
+The command handler provides a <code>CommandContext</code>, a commands <code>name</code>, and the gRPCs message as a protobuf message.
+The matching combination of a commands name and the messages type from the defined gRPC service can be used to handle the command.
+So to handle the shopping cart service method <code>GetCart</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">rpc GetCart (GeShoppingCart) returns (Cart);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>the commands name <code>GetCart</code> together with its message type <code>GetShoppingCart</code> has to be matched.
+A type switch or a type assertion for the protobuf command message is useful to get the commands data, process it, and then return the appropriate return type, <code>Cart</code> in our example.</p>
+</div>
+<div class="paragraph">
+<p>The return type of the command handler must be the output type for the gRPC service call, this will be sent as the reply.</p>
+</div>
+<div class="paragraph">
+<p>The following shows the implementation of the <code>GetCart</code> command.
+This command handler is a read-only command handler, it doesn&#8217;t update the CRDT, it just returns some state:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (s *ShoppingCart) HandleCommand(ctx *crdt.CommandContext, name string, msg proto.Message) (*any.Any, error) {
+	switch m := msg.(type) {
+	case *GetShoppingCart:
+		cart, err := s.getCart()
+		if err != nil {
+			return nil, err
+		}
+		return encoding.MarshalAny(cart)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="updating-a-crdt"><a class="anchor" href="#updating-a-crdt"></a>Updating a CRDT</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Due to Cloudstate&#8217;s <a href="../concepts/crdts.html#approach-to-crdts-in-cloudstate" class="page">take in turns approach</a>, CRDTs may only be updated in command handlers and <a href="#responding-to-stream-cancellation">stream cancellation callbacks</a>.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a snipped for handling of the <code>AddLineItem</code> message that adds the item to the shopping cart.
+If the gRPC service methods message identifies a service unambiguously, there is no need to dispatch the commands name.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (s *ShoppingCart) HandleCommand(ctx *crdt.CommandContext, name string, msg proto.Message) (*any.Any, error) {
+...
+	switch m := msg.(type) {
+	case *AddLineItem:
+		if m.GetQuantity() &lt;= 0 {
+			return nil, errors.New("cannot add a negative quantity of items")
+		}
+
+		item, err := encoding.MarshalAny(&amp;LineItem{
+			ProductId: m.GetProductId(),
+			Name:      m.GetName(),
+			Quantity:  m.GetQuantity(),
+		})
+		if err != nil {
+			return nil, err
+		}
+		key := encoding.String(m.GetProductId())
+		reg, err := s.items.LWWRegister(key)
+		if err != nil {
+			return nil, err
+		}
+		if reg != nil {
+			reg.Set(item)
+		} else {
+			reg = crdt.NewLWWRegister(item)
+		}
+		s.items.Set(key, reg)
+		return encoding.Empty, nil
+...</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It&#8217;s good practice to dispatch commands both using their command name and messages type.
+Unfortunately, the Go gRPC implementation does not provide typesafe service descriptors out of a compiled <code>*.proto</code> file as they are not exported to be user accessible.</p>
+</div>
+<div class="paragraph">
+<p>While the Go runtime function <code>runtime.FuncForPC</code> allows to get a function pointers pointed function name and there are ways to get the <code>shoppingcart.ShoppingCartServiceServer.AddItem</code> command name from the gRPC interface of the shopping cart service at runtime, we do not encourage doing so.
+In general, the Cloudstate Go User Support library does use explicit ways to implement the gRPC service of a Cloudstate entity.
+It could have been implemeted using reflection heavily, although this is non-idiomatic use of Go and would leave this library as a strange citizen in the Go ecosystem.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deleting-a-crdt"><a class="anchor" href="#deleting-a-crdt"></a>Deleting a CRDT</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A CRDT can be deleted by invoking <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Context.Delete"><code>crdt.Context.Delete</code></a>.
+Once a CRDT is deleted, the entity will be shut down, and all subsequent commands for the entity will be rejected.</p>
+</div>
+<div class="paragraph">
+<p>Caution should be taken when deleting CRDTs - the Reference Implementation of the proxy needs to maintain tombstones for each CRDT deleted, so over time, if many CRDTs are created and deleted, this will result in not just running out of memory, but increased network usage as the tombstones still need to be gossipped through the cluster for replication.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="streamed-command-handlers"><a class="anchor" href="#streamed-command-handlers"></a>Streamed command handlers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Streamed commands can be used to receive and publish updates to the state.
+If a gRPC service call has a streamed result type, the handler for that call can use the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext"><code>crdt.CommandContext</code></a>, and use that to register handler functions.</p>
+</div>
+<div class="sect2">
+<h3 id="responding-to-changes"><a class="anchor" href="#responding-to-changes"></a>Responding to changes</h3>
+<div class="paragraph">
+<p>If the command handler wishes to publish changes to the stream it can register a handler function with <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.ChangeFunc"><code>crdt.CommandContext.ChangeFunc</code></a>, which will be invoked every time the CRDT changes.</p>
+</div>
+<div class="paragraph">
+<p>The handler function is then able to return a message to be sent to the client (or <code>empty.Empty</code>, if it wishes to send no message in response to that particular change).
+The handler function may not modify the CRDT itself, but it may emit effects that may modify the CRDT.</p>
+</div>
+<div class="paragraph">
+<p>If the shopping cart service had a <code>WatchCart</code> call, like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-protobuf hljs" data-lang="protobuf">rpc WatchCart (GetShoppingCart) returns (stream Cart);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>that could be implemented like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">switch name {
+case "WatchCart":
+	ctx.ChangeFunc(func(c *crdt.CommandContext) (*any.Any, error) {
+		cart, err := s.getCart()
+		if err != nil {
+			return nil, err
+		}
+		return encoding.MarshalAny(cart)
+	})
+	cart, err := s.getCart()
+	if err != nil {
+		return nil, err
+	}
+	return encoding.MarshalAny(cart)
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ending-the-stream"><a class="anchor" href="#ending-the-stream"></a>Ending the stream</h3>
+<div class="paragraph">
+<p>The <code>ChangeFunc</code> handler function can end the stream by invoking <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.EndStream"><code>crdt.CommandContext.EndStream</code></a> on the <code>CommandCOntext</code> it is passed.
+If it does this, it will not receive an cancellation callback.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="responding-to-stream-cancellation"><a class="anchor" href="#responding-to-stream-cancellation"></a>Responding to stream cancellation</h3>
+<div class="paragraph">
+<p>A command handler may register an <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.CancelFunc"><code>crdt.CommandContext.CancelFunc</code></a> handler function to be notified when the stream is cancelled.
+The cancellation handler function may update the CRDT. This is useful if the CRDT is being used to track connections, for example, when using <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote"><code>crdt.Vote</code></a> CRDTs to track a user&#8217;s online status.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="types-of-crdts"><a class="anchor" href="#types-of-crdts"></a>Types of CRDTs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Cloudstate Go language support library offers Go types for each of the <a href="../concepts/crdts.html#crdts-available-in-cloudstate" class="page">CRDTs available in Cloudstate</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="counters-and-flags"><a class="anchor" href="#counters-and-flags"></a>Counters and flags</h3>
+<div class="paragraph">
+<p><a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#GCounter"><code>crdt.GCounter</code></a>, <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#PNCounter"><code>crdt.PNCounter</code></a> and <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Flag"><code>crdt.Flag</code></a> are available, offering operations relevant to each CRDT.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vote"><a class="anchor" href="#vote"></a>Vote</h3>
+<div class="paragraph">
+<p><a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote"><code>crdt.Vote</code></a> is available for the Vote CRDT. The Vote CRDT allows updating the current node&#8217;s vote using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.Vote"><code>crdt.Vote.Vote</code></a> method, the current nodes vote can be queried using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.SelfVote"><code>crdt.Vote.SelfVote</code></a> method.</p>
+</div>
+<div class="paragraph">
+<p>For determining the result of a vote, <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.Voters"><code>crdt.Vote.Voters</code></a> and for determining the result of a vote, <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.VotesFor"><code>crdt.Vote.VotesFor</code></a> can be used to check the total number of nodes, and the number of nodes that have voted for the condition, respectively.
+In addition, convenience methods are provided for common vote decision approaches, <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.AtLeastOne"><code>crdt.Vote.AtLeastOne</code></a> returns true if there is at least one voter for the condition. <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.Majority"><code>crdt.Vote.Majority</code></a> returns true if the number of votes for is more than half the number of voters, and <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#Vote.All"><code>crdt.Vote.All</code></a> returns <code>true</code> if the number of votes for equals the number of voters.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="registers"><a class="anchor" href="#registers"></a>Registers</h3>
+<div class="paragraph">
+<p><a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#LWWRegister"><code>crdt.LWWRegister</code></a> provides the LWWRegister CRDT. It can be interacted with using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#LWWRegister.Set"><code>crdt.LWWRegister.Set</code></a> and <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#LWWRegister.Value"><code>crdt.LWWRegister.Value</code></a> methods.
+If you wish to use a custom clock, you can use the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#LWWRegister.SetWithClock"><code>crdt.LWWRegister.SetWithClock</code></a> overload that allows passing a custom clock and custom clock value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sets-and-maps"><a class="anchor" href="#sets-and-maps"></a>Sets and Maps</h3>
+<div class="paragraph">
+<p>The Cloudstate Go support provides <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#GSet"><code>crdt.GSet</code></a>, <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#ORSet"><code>crdt.ORSet</code></a> and <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#ORMap"><code>crdt.ORMap</code></a>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>With Cloudstate maps and sets, the map keys and set values serialized form must be stable.
+The Cloudstate proxy uses the serialized form of the values to track changes in the set or map.
+If the same value serializes to two different sets of bytes on different occasions, they will be treated as different elements in the set or map.</p>
+</div>
+<div class="paragraph">
+<p>This is particularly relevant when using protocol buffers.
+The ordering of map entries in a serialized protocol buffers is undefined, and very often will be different for two equal maps.
+Hence, maps should never be used as keys in <code>ORMap</code> or as values in <code>GSet</code>, <code>ORSet</code>.
+For the rest of the protocol buffers specification, while no guarantees are made on the stability by the specification itself, the Go protocol buffer libraries do <a href="https://pkg.go.dev/google.golang.org/protobuf/proto#MarshalOptions">produce stable orderings of fields and stable output of non-map values</a>.</p>
+</div>
+<div class="paragraph">
+<p>Care should be taken when changing the structure of protocol buffers.
+Many changes that are backwards compatible from a protocol buffer standpoint do not necessarily translate into stable serializations.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="registering-the-entity"><a class="anchor" href="#registering-the-entity"></a>Registering the entity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you&#8217;ve created your entity, you can register it with the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate#CloudState"><code>cloudstate.CloudState</code></a> server, by invoking the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate#CloudState.RegisterCRDT"><code>cloudstate.CloudState.RegisterCRDT</code></a> method.
+In addition to passing your entity and service descriptor, if you use protocol buffers for serialization and any protobuf message definitions are missing from your service descriptor (they are not declared directly in the file, nor as dependencies), then you&#8217;ll need to pass those protocol buffer descriptors as well.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">err = server.RegisterCRDT(&amp;crdt.Entity{
+	ServiceName: "example.shoppingcart.ShoppingCartService",
+	EntityFunc:  shoppingcart.NewShoppingCart,
+}, protocol.DescriptorConfig{
+	Service: "shoppingcart.proto",
+}.AddDomainDescriptor("domain.proto", "hotitems.proto"))</code></pre>
+</div>
+</div>
+</div>
 </div>
 		<nav class="pagination">
   <span class="prev"><a href="eventsourced.html">Event sourcing</a></span>

@@ -520,18 +520,95 @@
 
 		</fieldset>
 
-		<div class="ulist">
-<ul>
-<li>
-<p>Explain the ServiceCallFactory interface</p>
-</li>
-<li>
-<p>Explain how to forward replies to another service.</p>
-</li>
-<li>
-<p>Explain how to emit effects.</p>
-</li>
-</ul>
+		<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page documents how to use Cloudstate effects and forwarding in Go.
+For high level information on what Cloudstate effects and forwarding is, please read the general <a href="../concepts/effects.html" class="page">forwarding and effects</a> documentation first.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service-references"><a class="anchor" href="#service-references"></a>Service References</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unlike other language support libraries, the Go Support Library for Cloudstate is quite explicit and direct in the API types used.
+The Forwarding and effects API being no different.</p>
+</div>
+<div class="paragraph">
+<p>The Go gRPC protobuf compiler plugin doesn&#8217;t expose service descriptors.
+As a consequence, command, forward and effect handlers require the user to provide unchecked plain strings to reference a commands gRPC service name or services method names.
+The same applies for service names and command names used with effects and forwards.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="forwarding-command"><a class="anchor" href="#forwarding-command"></a>Forwarding command</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Context</code> for each entity type provides a <code>Forward</code> method to allow forwarding a command by invoking <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.Forward"><code>crdt.CommandContext.Forward</code></a>.
+For example, if the item being processed in the <code>addItem</code> command is a "hot" item, we can make the <code>HotItems</code> entity aware of that item by forwarding a command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">switch cmd {
+case "Forward":
+	switch c := cmd.(type) {
+	case *shoppingcart.AddLineItem:
+		any, err := encoding.MarshalAny(&amp;shoppingcart.Item{
+			ProductId: c.GetProductId(),
+			Name:      c.GetName(),
+			Quantity:  c.GetQuantity(),
+		})
+		if err != nil {
+			return nil, err
+		}
+		ctx.Forward(&amp;protocol.Forward{
+			ServiceName: "example.shoppingcart.HotItemsService",
+			CommandName: "ItemAddedToCart",
+			Payload:     any,
+		})
+	}
+	return encoding.Empty, nil</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="emitting-an-effect"><a class="anchor" href="#emitting-an-effect"></a>Emitting an effect</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Context</code> for each entity type provides a <code>SideEffect</code> method to allow forwarding a command by invoking <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.SideEffect"><code>crdt.CommandContext.SideEffect</code></a>.
+For example, upon successful completion of the <code>addItem</code> command by <code>ShoppingCartEntity</code>, if we also want to emit an effect on the <code>HotItems</code> entity, we would invoke the effectful service call as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">case "Effect":
+	switch c := cmd.(type) {
+	case *shoppingcart.AddLineItem:
+		any, err := encoding.MarshalAny(&amp;shoppingcart.Item{
+			ProductId: c.GetProductId(),
+			Name:      c.GetName(),
+			Quantity:  c.GetQuantity(),
+		})
+		if err != nil {
+			return nil, err
+		}
+		ctx.SideEffect(&amp;protocol.SideEffect{
+			ServiceName: "example.shoppingcart.HotItemsService",
+			CommandName: "ItemAddedToCart",
+			Payload:     any,
+			Synchronous: true,
+		})
+	}
+	return encoding.Empty, nil</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that, contrary to command forwarding, the result of the effect is ignored by the current command <code>addItem</code>.
+More details can be found in the common section <a href="../concepts/effects.html" class="page">Forwarding and effects</a>.</p>
+</div>
+</div>
 </div>
 		<nav class="pagination">
   <span class="prev"><a href="crdt.html">Conflict-free Replicated Data Types</a></span>
