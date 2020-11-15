@@ -549,7 +549,7 @@ type EntityHandler interface {
 </div>
 </div>
 <div class="paragraph">
-<p>Then register that entity with <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/cloudstate#RegisterEventSourced"><code>cloudstate.CloudState.RegisterEventSourced</code></a>, your entity gets configured to be an event sourced entity and handled by the Cloudstate instance from now on.</p>
+<p>Then register that entity with <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate#CloudState.RegisterEventSourced"><code>cloudstate.CloudState.RegisterEventSourced</code></a>, your entity gets configured to be an event sourced entity and handled by the Cloudstate instance from now on.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -694,7 +694,7 @@ For this, an entity has to provide a factory function, <code>EntityFunc</code>, 
 <h2 id="handling-commands"><a class="anchor" href="#handling-commands"></a>Handling commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An event sourced entity implements the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a> interface and there for command handling the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#HandleCommand"><code>HandleCommand</code></a> method.
+<p>An event sourced entity implements the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a> interface and there for command handling the <code>HandleCommand</code> method.
 The command types received by an event sourced entity are declared by the gRPC Server interface which is generated from the protobuf definitions.
 The Cloudstate Go Support library together with the registered <code>eventsourced.Entity</code> is then able to dispatch commands it gets from the Cloudstate proxy.</p>
 </div>
@@ -756,8 +756,8 @@ Any modifications made directly to the state from the command handler will not b
 </table>
 </div>
 <div class="paragraph">
-<p>A command handler may emit an event by using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Context"><code>eventsourced.Context</code></a> and invoking the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Emit"><code>Emit</code></a> method on it.
-Calling <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Emit"><code>Emit</code></a> will immediately invoke the associated event handler for that event - this both validates that the event can be applied to the current state, as well as updates the state so that subsequent processing in the command handler can use it.</p>
+<p>A command handler may emit an event by using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Context"><code>eventsourced.Context</code></a> and invoking the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Context.Emit"><code>Emit</code></a> method on it.
+Calling <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#Context.Emit"><code>Emit</code></a> will immediately invoke the associated event handler for that event - this both validates that the event can be applied to the current state, as well as updates the state so that subsequent processing in the command handler can use it.</p>
 </div>
 <div class="paragraph">
 <p>Here&#8217;s an example of a command handler that emits an event:</p>
@@ -794,7 +794,7 @@ An event handler&#8217;s responsibility is to update the state of the entity acc
 Event handlers are the only place where it&#8217;s safe to mutate the state of the entity at all.</p>
 </div>
 <div class="paragraph">
-<p>Every event sourced entity implements the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a>s interface <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#HandleEvent"><code>HandleEvent</code></a> method.
+<p>Every event sourced entity implements the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/eventsourced#EntityHandler"><code>eventsourced.EntityHandler</code></a>s interface <code>HandleEvent</code> method.
 Events emitted by command handlers get dispatched to the implemented event handler which then decides how to proceed with the event.</p>
 </div>
 <div class="listingblock">

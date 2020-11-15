@@ -544,7 +544,7 @@ For information on what Cloudstate CRDT entities are, please read the general <a
 <h2 id="accessing-and-creating-an-entitys-crdt"><a class="anchor" href="#accessing-and-creating-an-entitys-crdt"></a>Accessing and creating an entity&#8217;s CRDT</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Each CRDT entity manages one root CRDT. That CRDT will either be supplied to the entity by the proxy when it is started through <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler.Set"><code>crdt.EntityHandler.Set</code></a>, or, if no CRDT exists for the entity when it is started, it has to be created by the entity using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler.Default"><code>crdt.EntityHandler.Default</code></a> factory method.</p>
+<p>Each CRDT entity manages one root CRDT. That CRDT will either be supplied to the entity by the proxy when it is started through <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler"><code>crdt.EntityHandler.Set</code></a>, or, if no CRDT exists for the entity when it is started, it has to be created by the entity using the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler"><code>crdt.EntityHandler.Default</code></a> factory method.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -580,7 +580,7 @@ In this regard, a type assertion check is not necessary.</p>
 <h2 id="handling-commands"><a class="anchor" href="#handling-commands"></a>Handling commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Command handlers are implemented with the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler.HandleCommand"><code>crdt.EntityHandler.HandleCommand</code></a> method.
+<p>Command handlers are implemented with the <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#EntityHandler"><code>crdt.EntityHandler.HandleCommand</code></a> method.
 The command handler provides a <code>CommandContext</code>, a commands <code>name</code>, and the gRPCs message as a protobuf message.
 The matching combination of a commands name and the messages type from the defined gRPC service can be used to handle the command.
 So to handle the shopping cart service method <code>GetCart</code>:</p>
@@ -742,7 +742,7 @@ case "WatchCart":
 <div class="sect2">
 <h3 id="ending-the-stream"><a class="anchor" href="#ending-the-stream"></a>Ending the stream</h3>
 <div class="paragraph">
-<p>The <code>ChangeFunc</code> handler function can end the stream by invoking <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.EndStream"><code>crdt.CommandContext.EndStream</code></a> on the <code>CommandCOntext</code> it is passed.
+<p>The <code>ChangeFunc</code> handler function can end the stream by invoking <a href="https://pkg.go.dev/github.com/cloudstateio/go-support/cloudstate/crdt#CommandContext.EndStream"><code>crdt.CommandContext.EndStream</code></a> on the <code>CommandContext</code> it is passed.
 If it does this, it will not receive an cancellation callback.</p>
 </div>
 </div>

@@ -614,7 +614,7 @@ The main reason not to support it is, that an <code>int</code> is not the same t
 <h2 id="json"><a class="anchor" href="#json"></a>JSON</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloudstate uses the standard library package <a href="https://golang.org/pkg/encoding/json/"><code>encoding/json</code></a> to serialize JSON.
+<p>Cloudstate uses the standard library package <a href="https://pkg.go.dev/encoding/json"><code>encoding/json</code></a> to serialize JSON.
 Any type that has a field declared with a string literal tag <code>json:"fieldname"</code> will be serialized to and from JSON using the <a href="https://golang.org/pkg/encoding/json/#Marshal">Marshaller and Unmarshaller</a> from the Go standard library package <code>encoding/json</code>.</p>
 </div>
 <div class="paragraph">
