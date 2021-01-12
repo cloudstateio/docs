@@ -1,6 +1,6 @@
 # go @ current
-# docs for: https://github.com/cloudstateio/go-support/commit/ec5c76d0684b41449d2a80fe67fa641a765eba2d
-# based on: https://github.com/cloudstateio/go-support/commit/0b344386f32926cc55fdf2067b4701d4e34b3b0f
+# docs for: https://github.com/cloudstateio/go-support/commit/11311642a3e694135f901ec0ee64b70b915129aa
+# based on: https://github.com/cloudstateio/go-support/commit/15b0fdab0a4ce421e611069170347284891faa84
 url: https://github.com/cloudstateio/go-support
 branches: [docs/current]
 start_paths: [docs/src, docs/build/src/managed]
