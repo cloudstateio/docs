@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://cloudstate.io/dist/images/cloudstate-distributed-state-management-for-serverless.png" />
 <meta property="og:image:secure_url" content="https://cloudstate.io/dist/images/cloudstate-distributed-state-management-for-serverless.png" />
 <!--Head Scripts -->
-<script src="https://cdn.cookielaw.org/consent/a14b53db-7715-45da-be81-7fd0cafc385d.js" type="text/javascript" charset="UTF-8"></script>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="c3a30abe-4934-45a2-ba48-823fa026fc64" ></script>
 <!--Head Scripts YouTube Embed-->
 <script type="text/javascript">
 	var ytID;
@@ -40,12 +40,12 @@
 			var queryString = anchor[0].search;
 			let params = new URLSearchParams(queryString);
 			ytID = params.get("v");
-			$(this).before('<div class="flex-video-wrapper"><div class="flex-video"><div id="yt-'+ytID+'" class="cookie-warning youtube-warning"><a class="optanon-allow-all">Accept cookies to view video</a><span>Alternatively you can watch the video <a href="'+ytURL+'" target="_blank">here on YouTube</a></span></div></div></div>');
+			$(this).before('<div class="flex-video-wrapper"><div class="flex-video"><div id="yt-'+ytID+'" class="cookie-warning youtube-warning"><a class="optanon-allow-all" onclick="OneTrust.AllowAll();">Accept cookies to view video</a><span>Alternatively you can watch the video <a href="'+ytURL+'" target="_blank">here on YouTube</a></span></div></div></div>');
 			$(this).removeAttr("href").removeClass("yt-widget").addClass("yt-widget-hide");
 		});
 
 		$( ".youtube-warning" ).each(function( index ) {
-			Optanon.InsertHtml('<iframe id="player" class="youtube-embed-player" src="//www.youtube.com/embed/'+ytID+'?rel=0&modestbranding=0" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>', 'yt-'+ytID, null, {deleteSelectorContent: true}, 4);
+			OneTrust.InsertHtml('<iframe id="player" class="youtube-embed-player" src="//www.youtube.com/embed/'+ytID+'?rel=0&modestbranding=0" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>', 'yt-'+ytID, null, {deleteSelectorContent: true}, '4');
 		});
 	}
 </script>  </head>
@@ -849,11 +849,10 @@ Found an error in this documentation? Please feel free to <a href="https://githu
   <div class="footer-box">
     <footer class="footer">
       <div class="footer-logo"><a href="https://cloudstate.io"><img src="../_/img/cloudstate-color.svg"></a></div>
-      <div class="footer-content">© Cloudstate <script>document.write(new Date().getFullYear());</script> | <a href="https:///cloudstate.io/privacy/">Privacy Policy</a> | <a class="optanon-toggle-display">Cookie Settings</a></div>
+      <div class="footer-content">© Cloudstate <script>document.write(new Date().getFullYear());</script> | <a href="https://www.lightbend.com/legal/privacy" target="_blank">Privacy Policy</a> | <a href="https://cloudstate.io/cookie">Cookie Listing</a> | <a class="optanon-toggle-display">Cookie Settings</a></div>
     </footer>
   </div>
-</div>
-  </main>
+</div>  </main>
 </div>
 <!--Footer Scripts Global-->
 <script src="../_/js/site.js"></script>
