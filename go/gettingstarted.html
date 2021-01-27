@@ -574,7 +574,7 @@ Cloudstate runs in Kubernetes with <a href="https://www.docker.com">Docker</a>, 
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">module example.com/yourpackage
   require (
-      github.com/cloudstateio/go-support 0.2.2
+      github.com/cloudstateio/go-support 0.3.0
   )
 go 1.14</code></pre>
 </div>
@@ -653,6 +653,21 @@ To do this, you can use the CloudState server type, for example:</p>
 	if err != nil {
 		log.Fatalf("Cloudstate failed to register entity: %s", err)
 	}
+	err = server.RegisterEventSourced(
+		&amp;eventsourced.Entity{
+			ServiceName:   "cloudstate.tck.model.EventSourcedConfigured",
+			PersistenceID: "event-sourced-configured",
+			SnapshotEvery: 5,
+			EntityFunc:    tck.NewEventSourcedConfiguredEntity,
+		}, protocol.DescriptorConfig{
+			Service: "eventsourced.proto",
+		},
+		eventsourced.WithPassivationStrategyTimeout(100*time.Millisecond),
+	)
+	if err != nil {
+		log.Fatalf("Cloudstate failed to register entity: %s", err)
+	}
+
 	err = server.RegisterEventSourced(&amp;eventsourced.Entity{
 		ServiceName:   "com.example.shoppingcart.ShoppingCart",
 		PersistenceID: "ShoppingCart",
@@ -663,6 +678,124 @@ To do this, you can use the CloudState server type, for example:</p>
 	if err != nil {
 		log.Fatalf("CloudState failed to register entity: %s", err)
 	}
+
+	err = server.RegisterAction(&amp;action.Entity{
+		ServiceName: "cloudstate.tck.model.action.ActionTckModel",
+		EntityFunc:  actionTCK.NewTestModel,
+	}, protocol.DescriptorConfig{
+		Service: "tck_action.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterAction(&amp;action.Entity{
+		ServiceName: "cloudstate.tck.model.action.ActionTwo",
+		EntityFunc:  actionTCK.NewTestModelTwo,
+	}, protocol.DescriptorConfig{
+		Service: "tck_action.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+
+	err = server.RegisterCRDT(&amp;crdt.Entity{
+		ServiceName: "cloudstate.tck.model.crdt.CrdtTckModel",
+		EntityFunc:  crdt2.NewCrdtTckModelEntity,
+	}, protocol.DescriptorConfig{
+		Service: "tck_crdt2.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterCRDT(&amp;crdt.Entity{
+		ServiceName: "cloudstate.tck.model.crdt.CrdtTwo",
+		EntityFunc:  crdt2.NewCrdtTwoEntity,
+	}, protocol.DescriptorConfig{
+		Service: "tck_crdt2.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterCRDT(&amp;crdt.Entity{
+		ServiceName: "cloudstate.tck.model.crdt.CrdtConfigured",
+		EntityFunc:  crdt2.NewCrdtConfiguredEntity,
+	}, protocol.DescriptorConfig{
+		Service: "tck_crdt2.proto",
+	}, crdt.WithPassivationStrategyTimeout(100*time.Millisecond))
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+
+	err = server.RegisterValueEntity(&amp;value.Entity{
+		ServiceName:   "cloudstate.tck.model.valueentity.ValueEntityTckModel",
+		EntityFunc:    valueentity.NewValueEntityTckModelEntity,
+		PersistenceID: "value-entity-tck-model",
+	}, protocol.DescriptorConfig{
+		Service: "tck_valueentity.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterValueEntity(&amp;value.Entity{
+		ServiceName:   "cloudstate.tck.model.valueentity.ValueEntityTwo",
+		EntityFunc:    valueentity.NewValueEntityTckModelEntityTwo,
+		PersistenceID: "value-entity-tck-model-two",
+	}, protocol.DescriptorConfig{
+		Service: "tck_valueentity.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterValueEntity(
+		&amp;value.Entity{
+			ServiceName:   "cloudstate.tck.model.valueentity.ValueEntityConfigured",
+			EntityFunc:    valueentity.NewValueEntityConfiguredEntity,
+			PersistenceID: "value-entity-configured",
+		}, protocol.DescriptorConfig{
+			Service: "tck_valueentity.proto",
+		}, value.WithPassivationStrategyTimeout(100*time.Millisecond),
+	)
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+
+	// event log eventing
+	err = server.RegisterAction(&amp;action.Entity{
+		ServiceName: "cloudstate.tck.model.eventlogeventing.EventLogSubscriberModel",
+		EntityFunc: func() action.EntityHandler {
+			return &amp;eventlogeventing.EventLogSubscriberModel{}
+		},
+	}, protocol.DescriptorConfig{
+		Service: "eventlogeventing.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterEventSourced(&amp;eventsourced.Entity{
+		ServiceName:   "cloudstate.tck.model.eventlogeventing.EventSourcedEntityOne",
+		PersistenceID: "eventlogeventing-one",
+		EntityFunc: func(id eventsourced.EntityID) eventsourced.EntityHandler {
+			return &amp;eventlogeventing.EventSourcedEntityOne{}
+		},
+	}, protocol.DescriptorConfig{
+		Service: "eventlogeventing.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+	err = server.RegisterEventSourced(&amp;eventsourced.Entity{
+		ServiceName:   "cloudstate.tck.model.eventlogeventing.EventSourcedEntityTwo",
+		PersistenceID: "eventlogeventing-two",
+		EntityFunc: func(id eventsourced.EntityID) eventsourced.EntityHandler {
+			return &amp;eventlogeventing.EventSourcedEntityTwo{}
+		},
+	}, protocol.DescriptorConfig{
+		Service: "eventlogeventing.proto",
+	})
+	if err != nil {
+		log.Fatalf("CloudState failed to register entity: %s", err)
+	}
+
 	err = server.Run()
 	if err != nil {
 		log.Fatalf("Cloudstate failed to run: %v", err)
