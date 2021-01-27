@@ -1,6 +1,6 @@
 # java @ current
-# docs for: https://github.com/cloudstateio/cloudstate/commit/c617820aea4330f2ef795bc57dff8cc1da62f9e1
-# based on: https://github.com/cloudstateio/cloudstate/commit/6e164bc249b190dd23a2e35d7b8d9ce9aa2cd50a
+# docs for: https://github.com/cloudstateio/cloudstate/commit/ab607bf37d0410156005a7b75bf606b6ff192026
+# based on: https://github.com/cloudstateio/cloudstate/commit/7e0a16b6315dd0d267cc7ced182c7001cf946052
 url: https://github.com/cloudstateio/cloudstate
 branches: [java-support/docs/current]
 start_paths: [java-support/docs/src, java-support/docs/build/src/managed]
