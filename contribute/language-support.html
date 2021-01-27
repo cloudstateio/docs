@@ -556,29 +556,15 @@ This is achieved by having a gRPC based protocol between the Proxy and the User 
 <p>In order to implement a support library for a language, the Cloudstate protocol needs to be implemented as a gRPC server which is started when a Stateful Service is started. This gRPC server will then relay state and commands to the underlying User function.</p>
 </div>
 <div class="paragraph">
-<p>To obtain the necessary Cloudstate Protobuf descriptors that need to be implemented, your build can be set up to fetch the following compressed archives and extract the contents. The archives are available from version <code>v0.6.0</code> and forwards.</p>
+<p>To obtain the necessary Cloudstate Protobuf descriptors that need to be implemented, your build can be set up to fetch the following compressed archives and extract the contents. The archives are available from version <code>v0.5.1</code> and forwards.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The Cloudstate protocols</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code><a href="https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-protocols.zip" class="bare">https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-protocols.zip</a></code></p>
-</li>
-</ul>
-</div>
+<p><a href="https://github.com/cloudstateio/cloudstate/releases/download/v0.6.0/cloudstate-protocols-0.6.0.zip">The Cloudstate protocols</a> (version 0.6.0)</p>
 </li>
 <li>
-<p>The Cloudstate TCK protocols</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code><a href="https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-tck-protocols.zip" class="bare">https://raw.githubusercontent.com/cloudstateio/cloudstate/&lt;VERSION_TAG&gt;/protocols/cloudstate-tck-protocols.zip</a></code></p>
-</li>
-</ul>
-</div>
+<p><a href="https://github.com/cloudstateio/cloudstate/releases/download/v0.6.0/cloudstate-tck-protocols-0.6.0.zip">The Cloudstate TCK protocols</a> (version 0.6.0)</p>
 </li>
 </ul>
 </div>
@@ -646,9 +632,6 @@ This is achieved by having a gRPC based protocol between the Proxy and the User 
 </li>
 <li>
 <p><code>protocol</code> is the protocol between the <a href="../concepts/glossary.html#proxy" class="page">proxy</a> and what we call language support, i.e. a bridge library which speaks with the proxy and exposes a native API for some programming language.</p>
-</li>
-<li>
-<p><code>proxy</code> contains the protocols which the <a href="../concepts/glossary.html#proxy" class="page">proxy</a> itself speaks with the outside world.</p>
 </li>
 </ul>
 </div>
